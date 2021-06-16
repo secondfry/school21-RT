@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   matrix_utils.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 16:00:22 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 14:47:06 by oadhesiv         ###   ########.fr       */
+/*   Created: 2020/03/15 01:09:34 by oadhesiv          #+#    #+#             */
+/*   Updated: 2020/06/06 21:46:29 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef MATRIX_UTILS_H
+# define MATRIX_UTILS_H
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <mlx.h>
+# include <stdlib.h>
+# include "libft.h"
 # include "defines.h"
-# include "init_mlx.h"
 # include "graceful.h"
+
+t_vector_4	matrix_on_vector(t_const_matrix_4 m, t_const_vector_4 v);
+t_matrix_4	matrix_on_matrix(t_const_matrix_4 a, t_const_matrix_4 b);
 
 #endif

@@ -8,6 +8,17 @@
 		"texture.h": "c",
 		"loop_hook.h": "c",
 		"get_next_line.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"matrix_factory.h": "c",
+		"main.h": "c",
+		"graceful.h": "c",
+		"matrix_utils.h": "c",
+		"__hash_table": "c",
+		"algorithm": "c",
+		"functional": "c",
+		"locale": "c",
+		"string": "c",
+		"quaterion.h": "c",
+		"vector.h": "c"
 	}
 }

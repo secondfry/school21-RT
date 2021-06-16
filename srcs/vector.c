@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 16:00:22 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 14:47:06 by oadhesiv         ###   ########.fr       */
+/*   Created: 2020/05/31 13:57:53 by oadhesiv          #+#    #+#             */
+/*   Updated: 2020/06/06 22:09:01 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include "vector.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <mlx.h>
-# include "defines.h"
-# include "init_mlx.h"
-# include "graceful.h"
+t_vector_4	vector_new(float x, float y, float z, float w)
+{
+	t_vector_4	ret;
 
-#endif
+	ret = (float *)ft_memalloc(sizeof(float) * 4);
+	ft_ptr_check(ret, ERR_MEM_MSG, 0);
+	ret[0] = x;
+	ret[1] = y;
+	ret[2] = z;
+	ret[3] = w;
+	return (ret);
+}

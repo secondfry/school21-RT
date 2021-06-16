@@ -33,6 +33,12 @@
 
 # define EINVAL 22
 
+typedef float		*t_matrix_4;
+typedef float		*t_vector_4;
+typedef float		*t_quaterion;
+typedef const float	*t_const_matrix_4;
+typedef const float	*t_const_vector_4;
+typedef const float	*t_const_quaterion;
 typedef int			(*t_mlx_hook)();
 
 typedef struct s_point

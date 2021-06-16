@@ -6,7 +6,6 @@
 # include <unistd.h>
 # include "defines.h"
 # include "get_next_line.h"
-# include "error.h"
 
 void	parser(t_rtv *rtv, int fd);
 

@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   graceful.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 16:00:22 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 14:47:06 by oadhesiv         ###   ########.fr       */
+/*   Created: 2020/06/01 06:30:54 by oadhesiv          #+#    #+#             */
+/*   Updated: 2020/06/01 06:35:53 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#include "graceful.h"
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <mlx.h>
-# include "defines.h"
-# include "init_mlx.h"
-# include "graceful.h"
+void graceful(size_t reason, const char *msg)
+{
+	ft_putendl_fd(msg, 2);
+	exit(reason);
+}
 
-#endif
+void check(_Bool status, size_t reason, const char *msg)
+{
+	if (!status)
+		return ;
+	graceful(reason, msg);
+}

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 16:00:22 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 14:47:06 by oadhesiv         ###   ########.fr       */
+/*   Created: 2020/05/28 00:20:30 by oadhesiv          #+#    #+#             */
+/*   Updated: 2020/06/06 21:46:32 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAIN_H
-# define MAIN_H
+#ifndef VECTOR_H
+# define VECTOR_H
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <mlx.h>
+# include <stdlib.h>
 # include "defines.h"
-# include "init_mlx.h"
 # include "graceful.h"
+
+t_vector_4	vector_new(float x, float y, float z, float w);
 
 #endif
