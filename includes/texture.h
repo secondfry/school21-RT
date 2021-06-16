@@ -8,6 +8,6 @@
 # include "defines.h"
 # include "error.h"
 
-void	init_textures(t_wolf *wolf);
+void	init_textures(t_rtv *rtv);
 
 #endif

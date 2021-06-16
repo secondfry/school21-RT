@@ -8,6 +8,6 @@
 # include "get_next_line.h"
 # include "error.h"
 
-void	parser(t_wolf *wolf, int fd);
+void	parser(t_rtv *rtv, int fd);
 
 #endif

@@ -12,38 +12,38 @@
 
 #include "loop_hook.h"
 
-int	loop_hook(t_wolf *wolf)
+int	loop_hook(t_rtv *rtv)
 {
-	loop_invalidate_position(wolf);
-	loop_invalidate_rotation(wolf);
-	loop_redraw(wolf);
-	loop_render_debug(wolf);
-	loop_before_next_update(wolf);
+	loop_invalidate_position(rtv);
+	loop_invalidate_rotation(rtv);
+	loop_redraw(rtv);
+	loop_render_debug(rtv);
+	loop_before_next_update(rtv);
 	return (0);
 }
 
 #ifdef MLX_LINUX
 
-int	loop_destroy_hook(t_wolf *wolf)
+int	loop_destroy_hook(t_rtv *rtv)
 {
-	mlx_loop_end(wolf->mlx->mlx);
-	clear_mlx(wolf->mlx);
+	mlx_loop_end(rtv->mlx->mlx);
+	clear_mlx(rtv->mlx);
 	ft_putendl("Goodbye!");
 	exit(0);
 }
 
 #else
 
-int	loop_destroy_hook(t_wolf *wolf)
+int	loop_destroy_hook(t_rtv *rtv)
 {
-	clear_mlx(wolf->mlx);
+	clear_mlx(rtv->mlx);
 	ft_putendl("Goodbye!");
 	exit(0);
 }
 
 #endif
 
-void	loop_before_next_update(t_wolf *wolf)
+void	loop_before_next_update(t_rtv *rtv)
 {
-	mlx_do_sync(wolf->mlx->mlx);
+	mlx_do_sync(rtv->mlx->mlx);
 }

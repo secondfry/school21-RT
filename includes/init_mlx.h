@@ -22,7 +22,7 @@
 void	init_mlx(t_mlx *mlx);
 void	init_mlx_image(t_mlx *mlx);
 void	clear_mlx(t_mlx *mlx);
-void	init_mlx_hooks(t_wolf *wolf);
-void	init_mlx_hooks_platform(t_wolf *wolf);
+void	init_mlx_hooks(t_rtv *rtv);
+void	init_mlx_hooks_platform(t_rtv *rtv);
 
 #endif

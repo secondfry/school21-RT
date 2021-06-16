@@ -1,23 +1,23 @@
 #include "loop_hook.h"
 
-void	loop_invalidate_position(t_wolf *wolf)
+void	loop_invalidate_position(t_rtv *rtv)
 {
-	if (!(wolf->flags & FLAG_INVALIDATE_POSITION))
+	if (!(rtv->flags & FLAG_INVALIDATE_POSITION))
 		return ;
-	wolf->player->wall.prev.x = \
-		(int) wolf->player->pos.x - (int) wolf->player->pos.x % 64;
-	wolf->player->wall.prev.y = \
-		(int) wolf->player->pos.y - (int) wolf->player->pos.y % 64;
-	wolf->player->wall.next.x = wolf->player->wall.prev.x + 64;
-	wolf->player->wall.next.y = wolf->player->wall.prev.y + 64;
-	wolf->flags -= FLAG_INVALIDATE_POSITION;
-	wolf->flags |= FLAG_REDRAW;
+	rtv->player->wall.prev.x = \
+		(int) rtv->player->pos.x - (int) rtv->player->pos.x % 64;
+	rtv->player->wall.prev.y = \
+		(int) rtv->player->pos.y - (int) rtv->player->pos.y % 64;
+	rtv->player->wall.next.x = rtv->player->wall.prev.x + 64;
+	rtv->player->wall.next.y = rtv->player->wall.prev.y + 64;
+	rtv->flags -= FLAG_INVALIDATE_POSITION;
+	rtv->flags |= FLAG_REDRAW;
 }
 
-void	loop_invalidate_rotation(t_wolf *wolf)
+void	loop_invalidate_rotation(t_rtv *rtv)
 {
-	if (!(wolf->flags & FLAG_INVALIDATE_ROTATION))
+	if (!(rtv->flags & FLAG_INVALIDATE_ROTATION))
 		return ;
-	wolf->flags -= FLAG_INVALIDATE_ROTATION;
-	wolf->flags |= FLAG_REDRAW;
+	rtv->flags -= FLAG_INVALIDATE_ROTATION;
+	rtv->flags |= FLAG_REDRAW;
 }

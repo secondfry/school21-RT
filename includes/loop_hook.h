@@ -17,14 +17,14 @@
 # include "init_mlx.h"
 # include "intersection.h"
 
-int		loop_hook(t_wolf *wolf);
-int		loop_destroy_hook(t_wolf *wolf);
-void	loop_before_next_update(t_wolf *wolf);
-void	loop_invalidate_position(t_wolf *wolf);
-void	loop_invalidate_rotation(t_wolf *wolf);
-void	loop_redraw(t_wolf *wolf);
-void	draw(t_wolf *wolf, float angle, t_point dots[2], float distances[2]);
-void	loop_render_debug(t_wolf *wolf);
-int		loop_key_hook(int keycode, t_wolf *wolf);
+int		loop_hook(t_rtv *rtv);
+int		loop_destroy_hook(t_rtv *rtv);
+void	loop_before_next_update(t_rtv *rtv);
+void	loop_invalidate_position(t_rtv *rtv);
+void	loop_invalidate_rotation(t_rtv *rtv);
+void	loop_redraw(t_rtv *rtv);
+void	draw(t_rtv *rtv, float angle, t_point dots[2], float distances[2]);
+void	loop_render_debug(t_rtv *rtv);
+int		loop_key_hook(int keycode, t_rtv *rtv);
 
 #endif

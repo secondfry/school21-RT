@@ -19,7 +19,7 @@
 # define BUF_SIZE_PLUS_ONE 1000001
 # define WIDTH 1024
 # define HEIGHT 768
-# define TITLE "wolf3d"
+# define TITLE "RTv1"
 # define M_LN2_F 0.693147180559945309417232121458176568f
 # define M_PI_F 3.14159265358979323846264338327950288f
 # define M_PI_2F 1.57079632679489661923132169163975144f
@@ -64,7 +64,7 @@ typedef struct s_mlx
 	size_t			size_line_char;
 }					t_mlx;
 
-typedef struct s_wolf
+typedef struct s_rtv
 {
 	t_mlx			*mlx;
 	t_player		*player;
@@ -77,7 +77,7 @@ typedef struct s_wolf
 	int				*texture[9];
 	t_ushort		column;
 	t_ushort		wall_height;
-}					t_wolf;
+}					t_rtv;
 
 enum	e_sizes
 {

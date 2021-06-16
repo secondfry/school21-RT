@@ -20,11 +20,11 @@ void	init_player(t_player *player)
 	player->angle = 135.0f;
 }
 
-void	init_wolf(t_wolf *wolf)
+void	init_rtv(t_rtv *rtv)
 {
-	wolf->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
+	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
-	wolf->projection_distance = WIDTH / 2 / tanf(FOV / 2 * M_PI_F / 180);
+	rtv->projection_distance = WIDTH / 2 / tanf(FOV / 2 * M_PI_F / 180);
 }
 
 void	check_defines(void)
@@ -39,43 +39,23 @@ void	check_defines(void)
 		error_exit(ERR_INVALID_DEFINE);
 }
 
-int	check_args(int argc, char **argv)
-{
-	int	fd;
-	int	res;
-
-	if (argc != 2)
-	{
-		ft_putendl("\nUsage: \n$ ./wolf3d maps/map\n");
-		return (0);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd < 3)
-		error_exit(ERR_OPEN);
-	res = read(fd, NULL, 0);
-	if (res != 0)
-		error_exit(ERR_READ);
-	return (fd);
-}
-
 int	main(int argc, char **argv)
 {
-	t_wolf		wolf;
+	t_rtv		rtv;
 	t_mlx		mlx;
 	t_player	player;
 	int			fd;
 
 	check_defines();
-	fd = check_args(argc, argv);
-	parser(&wolf, fd);
+	parser(&rtv, fd);
 	init_player(&player);
-	wolf.player = &player;
+	rtv.player = &player;
 	init_mlx(&mlx);
 	init_mlx_image(&mlx);
-	wolf.mlx = &mlx;
-	init_wolf(&wolf);
-	init_textures(&wolf);
-	init_mlx_hooks(&wolf);
+	rtv.mlx = &mlx;
+	init_rtv(&rtv);
+	init_textures(&rtv);
+	init_mlx_hooks(&rtv);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

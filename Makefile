@@ -138,7 +138,7 @@ clean_libs:
 	@echo -n $(DEFAULT)
 
 clean_self:
-	@echo $(CYAN) "Cleaning wolf3d" $(DEFAULT)
+	@echo $(CYAN) "Cleaning RTv1" $(DEFAULT)
 	@echo -n $(GREEN)
 	rm -rfv $(OBJS_DIR)
 	@echo -n $(DEFAULT)
@@ -158,7 +158,7 @@ fclean_libs: clean_libs
 	@echo -n $(DEFAULT)
 
 fclean_self: clean_self
-	@echo $(CYAN) "Purging wolf3d" $(DEFAULT)
+	@echo $(CYAN) "Purging RTv1" $(DEFAULT)
 	@echo -n $(GREEN)
 	rm -rfv $(NAME)
 	@echo -n $(DEFAULT)

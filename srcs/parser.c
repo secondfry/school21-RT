@@ -95,7 +95,7 @@ static void	valid(char *map)
 	}
 }
 
-void	parser(t_wolf *wolf, int fd)
+void	parser(t_rtv *rtv, int fd)
 {
 	char	*map;
 	size_t	width;
@@ -107,8 +107,8 @@ void	parser(t_wolf *wolf, int fd)
 		error_exit(ERR_MAP_BLOCKED_PLAYER);
 	if (width < 3 || height < 3)
 		error_exit(ERR_MAP_SMOL);
-	wolf->map_width = width;
-	wolf->map_height = height;
-	wolf->map = map;
+	rtv->map_width = width;
+	rtv->map_height = height;
+	rtv->map = map;
 	ft_putendl(map);
 }

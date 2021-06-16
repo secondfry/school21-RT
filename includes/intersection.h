@@ -16,7 +16,7 @@
 # include <math.h>
 # include "defines.h"
 
-t_point	intersection_horizontal(t_wolf *wolf, float angle, float wall_y);
-t_point	intersection_vertical(t_wolf *wolf, float angle, float wall_x);
+t_point	intersection_horizontal(t_rtv *rtv, float angle, float wall_y);
+t_point	intersection_vertical(t_rtv *rtv, float angle, float wall_x);
 
 #endif

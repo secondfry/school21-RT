@@ -12,57 +12,57 @@
 
 #include "loop_hook.h"
 
-static void	move(t_wolf *wolf, char direction)
+static void	move(t_rtv *rtv, char direction)
 {
-	wolf->player->pos.x += \
-		direction * sinf(wolf->player->angle * M_PI_F / 180) * 5;
-	wolf->player->pos.y -= \
-		direction * cosf(wolf->player->angle * M_PI_F / 180) * 5;
-	wolf->flags |= FLAG_INVALIDATE_POSITION;
+	rtv->player->pos.x += \
+		direction * sinf(rtv->player->angle * M_PI_F / 180) * 5;
+	rtv->player->pos.y -= \
+		direction * cosf(rtv->player->angle * M_PI_F / 180) * 5;
+	rtv->flags |= FLAG_INVALIDATE_POSITION;
 }
 
-static void	strafe(t_wolf *wolf, char direction)
+static void	strafe(t_rtv *rtv, char direction)
 {
-	wolf->player->pos.x += \
-		sinf((direction * 90 + wolf->player->angle) * M_PI_F / 180) * 5;
-	wolf->player->pos.y -= \
-		cosf((direction * 90 + wolf->player->angle) * M_PI_F / 180) * 5;
-	wolf->flags |= FLAG_INVALIDATE_POSITION;
+	rtv->player->pos.x += \
+		sinf((direction * 90 + rtv->player->angle) * M_PI_F / 180) * 5;
+	rtv->player->pos.y -= \
+		cosf((direction * 90 + rtv->player->angle) * M_PI_F / 180) * 5;
+	rtv->flags |= FLAG_INVALIDATE_POSITION;
 }
 
-static void	rotate(t_wolf *wolf, char direction)
+static void	rotate(t_rtv *rtv, char direction)
 {
-	wolf->player->angle += 3 * direction;
-	if (wolf->player->angle > 180)
-		wolf->player->angle -= 360;
-	if (wolf->player->angle < -180)
-		wolf->player->angle += 360;
-	wolf->flags |= FLAG_INVALIDATE_ROTATION;
+	rtv->player->angle += 3 * direction;
+	if (rtv->player->angle > 180)
+		rtv->player->angle -= 360;
+	if (rtv->player->angle < -180)
+		rtv->player->angle += 360;
+	rtv->flags |= FLAG_INVALIDATE_ROTATION;
 }
 
-static void	toggle_art(t_wolf *wolf)
+static void	toggle_art(t_rtv *rtv)
 {
-	wolf->options ^= OPTION_ART;
-	wolf->flags |= FLAG_REDRAW;
+	rtv->options ^= OPTION_ART;
+	rtv->flags |= FLAG_REDRAW;
 }
 
-int	loop_key_hook(int keycode, t_wolf *wolf)
+int	loop_key_hook(int keycode, t_rtv *rtv)
 {
 	if (keycode == KEY_ESC)
-		loop_destroy_hook(wolf);
+		loop_destroy_hook(rtv);
 	if (keycode == KEY_W)
-		move(wolf, 1);
+		move(rtv, 1);
 	if (keycode == KEY_S)
-		move(wolf, -1);
+		move(rtv, -1);
 	if (keycode == KEY_Q)
-		strafe(wolf, -1);
+		strafe(rtv, -1);
 	if (keycode == KEY_E)
-		strafe(wolf, 1);
+		strafe(rtv, 1);
 	if (keycode == KEY_A)
-		rotate(wolf, -1);
+		rotate(rtv, -1);
 	if (keycode == KEY_D)
-		rotate(wolf, 1);
+		rotate(rtv, 1);
 	if (keycode == KEY_F)
-		toggle_art(wolf);
+		toggle_art(rtv);
 	return (0);
 }

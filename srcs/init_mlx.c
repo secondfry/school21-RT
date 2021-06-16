@@ -51,10 +51,10 @@ void	clear_mlx(t_mlx *mlx)
 	ft_memdel(&(mlx->mlx));
 }
 
-void	init_mlx_hooks(t_wolf *wolf)
+void	init_mlx_hooks(t_rtv *rtv)
 {
 	mlx_hook(\
-		wolf->mlx->win, EVENT_KEY_PRESS, KEY_PRESS_MASK, loop_key_hook, wolf);
-	mlx_loop_hook(wolf->mlx->mlx, loop_hook, wolf);
-	init_mlx_hooks_platform(wolf);
+		rtv->mlx->win, EVENT_KEY_PRESS, KEY_PRESS_MASK, loop_key_hook, rtv);
+	mlx_loop_hook(rtv->mlx->mlx, loop_hook, rtv);
+	init_mlx_hooks_platform(rtv);
 }
