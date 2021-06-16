@@ -47,19 +47,6 @@ typedef struct s_point
 	float			y;
 }					t_point;
 
-typedef struct s_wall
-{
-	t_point			prev;
-	t_point			next;
-}					t_wall;
-
-typedef struct s_player
-{
-	t_point			pos;
-	float			angle;
-	t_wall			wall;
-}					t_player;
-
 typedef struct s_mlx
 {
 	void			*mlx;
@@ -73,13 +60,11 @@ typedef struct s_mlx
 typedef struct s_rtv
 {
 	t_mlx			*mlx;
-	t_player		*player;
 	t_byte			options;
 	t_byte			flags;
 	t_byte			map_width;
 	t_byte			map_height;
 	char			*map;
-	float			projection_distance;
 	int				*texture[9];
 	t_ushort		column;
 	t_ushort		wall_height;

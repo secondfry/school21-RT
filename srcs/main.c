@@ -16,7 +16,6 @@ void	init_rtv(t_rtv *rtv)
 {
 	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
-	rtv->projection_distance = WIDTH / 2 / tanf(FOV / 2 * M_PI_F / 180);
 }
 
 void	check_defines(void)
@@ -32,11 +31,9 @@ int	main(void)
 {
 	t_rtv		rtv;
 	t_mlx		mlx;
-	t_player	player;
 
 	check_defines();
 	// parser(&rtv, fd);
-	rtv.player = &player;
 	init_mlx(&mlx);
 	init_mlx_image(&mlx);
 	rtv.mlx = &mlx;

@@ -14,29 +14,32 @@
 
 static void	move(t_rtv *rtv, char direction)
 {
-	rtv->player->pos.x += \
-		direction * sinf(rtv->player->angle * M_PI_F / 180) * 5;
-	rtv->player->pos.y -= \
-		direction * cosf(rtv->player->angle * M_PI_F / 180) * 5;
+	(void)direction;
+	// rtv->player->pos.x += \
+	// 	direction * sinf(rtv->player->angle * M_PI_F / 180) * 5;
+	// rtv->player->pos.y -= \
+	// 	direction * cosf(rtv->player->angle * M_PI_F / 180) * 5;
 	rtv->flags |= FLAG_INVALIDATE_POSITION;
 }
 
 static void	strafe(t_rtv *rtv, char direction)
 {
-	rtv->player->pos.x += \
-		sinf((direction * 90 + rtv->player->angle) * M_PI_F / 180) * 5;
-	rtv->player->pos.y -= \
-		cosf((direction * 90 + rtv->player->angle) * M_PI_F / 180) * 5;
+	(void)direction;
+	// rtv->player->pos.x += \
+	// 	sinf((direction * 90 + rtv->player->angle) * M_PI_F / 180) * 5;
+	// rtv->player->pos.y -= \
+	// 	cosf((direction * 90 + rtv->player->angle) * M_PI_F / 180) * 5;
 	rtv->flags |= FLAG_INVALIDATE_POSITION;
 }
 
 static void	rotate(t_rtv *rtv, char direction)
 {
-	rtv->player->angle += 3 * direction;
-	if (rtv->player->angle > 180)
-		rtv->player->angle -= 360;
-	if (rtv->player->angle < -180)
-		rtv->player->angle += 360;
+	(void)direction;
+	// rtv->player->angle += 3 * direction;
+	// if (rtv->player->angle > 180)
+	// 	rtv->player->angle -= 360;
+	// if (rtv->player->angle < -180)
+	// 	rtv->player->angle += 360;
 	rtv->flags |= FLAG_INVALIDATE_ROTATION;
 }
 
