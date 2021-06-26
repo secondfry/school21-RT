@@ -19,6 +19,9 @@ static void	intersection_sphere(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte i
 	float a = vector_dot(D, D);
 	float b = 2 * vector_dot(D, CO);
 	float c = vector_dot(CO, CO) - rtv->spheres[idx].radius_squared; // float is not enough here
+
+	free(CO);
+
 	float sqrt = b * b - 4 * a * c;
 	if (sqrt < 0) {
 		t[0] = 1.0 / 0.0;
@@ -27,8 +30,6 @@ static void	intersection_sphere(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte i
 	}
 	t[0] = (-1 * b + sqrtf(sqrt)) / (2 * a);
 	t[1] = (-1 * b - sqrtf(sqrt)) / (2 * a);
-
-	free(CO);
 }
 
 typedef struct	s_intersection_sphere_closest
