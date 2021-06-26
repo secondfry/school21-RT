@@ -15,59 +15,62 @@
 
 # include "libft.h"
 
-# define BUF_SIZE 1000000
-# define BUF_SIZE_PLUS_ONE 1000001
 # define WIDTH 1024
 # define HEIGHT 768
 # define TITLE "RTv1"
+
 # define M_LN2_F 0.693147180559945309417232121458176568f
 # define M_PI_F 3.14159265358979323846264338327950288f
 # define M_PI_2F 1.57079632679489661923132169163975144f
 # define M_PI_4F 0.785398163397448309615660845819875721f
 # define M_SQRT2_F 1.41421356237309504880168872420969808f
 # define M_SQRT1_2_F 0.707106781186547524400844362104849039f
+
 # define EPSILON 0.001f
-# define WALL_HEIGHT 64
-# define FOV 60
-# define HEIGHT_COEF 1.5
 
-# define EINVAL 22
+typedef float				*t_matrix_4;
+typedef float				*t_vector_4;
+typedef float				*t_quaterion;
+typedef const float	* const t_const_matrix_4;
+typedef const float	* const t_const_vector_4;
+typedef const float	* const t_const_quaterion;
+typedef int					(*t_mlx_hook)();
+typedef t_byte				*t_color;
 
-typedef float		*t_matrix_4;
-typedef float		*t_vector_4;
-typedef float		*t_quaterion;
-typedef const float	*t_const_matrix_4;
-typedef const float	*t_const_vector_4;
-typedef const float	*t_const_quaterion;
-typedef int			(*t_mlx_hook)();
+# define TCRED		0
+# define TCGREEN	1
+# define TCBLUE		2
 
-typedef struct s_point
-{
-	float			x;
-	float			y;
-}					t_point;
+# define ERR_MEM							35
+# define ERR_READ							25
+# define ERR_MAP_INVALID_CHARACTERS			1
+# define ERR_OPEN							2
+# define ERR_MAP_EMPTY						3
+# define ERR_MAP_HAS_EMPTY_LINE				4
+# define ERR_MAP_HAS_DIFFERENT_WIDTH_LINES	5
+# define ERR_MAP_INVALID_WIDTH				6
+# define ERR_MAP_INVALID_HEIGHT				7
+# define ERR_MAP_BLOCKED_PLAYER				8
+# define ERR_MAP_SMOL						9
+# define ERR_INVALID_DEFINE					10
 
 typedef struct s_mlx
 {
-	void			*mlx;
-	void			*win;
-	void			*img;
-	int				*img_data;
-	size_t			size_line_int;
-	size_t			size_line_char;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	int			*img_data;
+	size_t		size_line_int;
+	size_t		size_line_char;
 }					t_mlx;
 
 typedef struct s_rtv
 {
-	t_mlx			*mlx;
-	t_byte			options;
-	t_byte			flags;
-	t_byte			map_width;
-	t_byte			map_height;
-	char			*map;
-	int				*texture[9];
-	t_ushort		column;
-	t_ushort		wall_height;
+	t_mlx		*mlx;
+	t_byte		options;
+	t_byte		flags;
+	t_vector_4	camera_position;
+	t_vector_4	camera_rotation;
 }					t_rtv;
 
 enum	e_sizes
@@ -199,43 +202,5 @@ enum			e_masks
 # define MOUSE_2			2
 # define MOUSE_WHEEL_OUT	5
 # define MOUSE_WHEEL_IN		4
-
-# define TEX_NORTH	0
-# define TEX_EAST	1
-# define TEX_SOUTH	2
-# define TEX_WEST	3
-
-# define TEX_ISAAC_NORTH	0
-# define TEX_ISAAC_EAST		1
-# define TEX_ISAAC_SOUTH	2
-# define TEX_ISAAC_WEST		3
-# define TEX_ERROR			4
-# define TEX_ART_NORTH		5
-# define TEX_ART_EAST		6
-# define TEX_ART_SOUTH		7
-# define TEX_ART_WEST		8
-
-# define TEX_ISAAC_NORTH_FILENAME	"./textures/n_basement.bmp"
-# define TEX_ISAAC_EAST_FILENAME	"./textures/e_caves.bmp"
-# define TEX_ISAAC_SOUTH_FILENAME	"./textures/s_chest.bmp"
-# define TEX_ISAAC_WEST_FILENAME	"./textures/w_cellar.bmp"
-# define TEX_ART_NORTH_FILENAME		"./textures/n_cat.bmp"
-# define TEX_ART_EAST_FILENAME		"./textures/e_cat.bmp"
-# define TEX_ART_SOUTH_FILENAME		"./textures/s_kus.bmp"
-# define TEX_ART_WEST_FILENAME		"./textures/w_fish.bmp"
-# define TEX_ERROR_FILENAME			"./textures/error.bmp"
-
-# define ERR_MEM							35
-# define ERR_READ							25
-# define ERR_MAP_INVALID_CHARACTERS			1
-# define ERR_OPEN							2
-# define ERR_MAP_EMPTY						3
-# define ERR_MAP_HAS_EMPTY_LINE				4
-# define ERR_MAP_HAS_DIFFERENT_WIDTH_LINES	5
-# define ERR_MAP_INVALID_WIDTH				6
-# define ERR_MAP_INVALID_HEIGHT				7
-# define ERR_MAP_BLOCKED_PLAYER				8
-# define ERR_MAP_SMOL						9
-# define ERR_INVALID_DEFINE					10
 
 #endif

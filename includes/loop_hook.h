@@ -15,7 +15,7 @@
 
 # include "defines.h"
 # include "init_mlx.h"
-# include "intersection.h"
+# include "color.h"
 
 int		loop_hook(t_rtv *rtv);
 int		loop_destroy_hook(t_rtv *rtv);
@@ -23,7 +23,7 @@ void	loop_before_next_update(t_rtv *rtv);
 void	loop_invalidate_position(t_rtv *rtv);
 void	loop_invalidate_rotation(t_rtv *rtv);
 void	loop_redraw(t_rtv *rtv);
-void	draw(t_rtv *rtv, float angle, t_point dots[2], float distances[2]);
+void	draw(t_rtv *rtv);
 void	loop_render_debug(t_rtv *rtv);
 int		loop_key_hook(int keycode, t_rtv *rtv);
 

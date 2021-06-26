@@ -19,6 +19,7 @@
 		"locale": "c",
 		"string": "c",
 		"quaterion.h": "c",
-		"vector.h": "c"
+		"vector.h": "c",
+		"color.h": "c"
 	}
 }

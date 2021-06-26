@@ -19,5 +19,6 @@
 # include "defines.h"
 # include "init_mlx.h"
 # include "graceful.h"
+# include "vector.h"
 
 #endif

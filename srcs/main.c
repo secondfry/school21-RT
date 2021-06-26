@@ -16,14 +16,14 @@ void	init_rtv(t_rtv *rtv)
 {
 	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
+	rtv->camera_position = vector_new(0.f, 0.f, 0.f, 1);
+	rtv->camera_rotation = vector_new(0.f, 0.f, 0.f, 1);
 }
 
 void	check_defines(void)
 {
-	if ((FOV < 1 || FOV > 360) ||
-		(WIDTH < 240 || WIDTH > 1920) ||
-		(HEIGHT < 240 || HEIGHT > 1080) ||
-		(HEIGHT_COEF < 0.1 || HEIGHT_COEF > 4))
+	if ((WIDTH < 240 || WIDTH > 1920) ||
+		(HEIGHT < 240 || HEIGHT > 1080))
 		graceful(ERR_INVALID_DEFINE, ERR_INVALID_DEFINE_MSG);
 }
 
