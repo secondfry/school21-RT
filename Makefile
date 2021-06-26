@@ -28,7 +28,7 @@ SRC_FILES =	main.c \
 			clear_mlx.c init_mlx.c init_mlx_2.c \
 			loop_hook_flow.c \
 			loop_hook_invalidate.c loop_hook_events.c loop_hook_render_debug.c \
-			loop_hook_redraw.c loop_hook_draw.c \
+			loop_hook_redraw.c \
 			color.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
