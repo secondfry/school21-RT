@@ -24,3 +24,8 @@ t_vector_4	vector_new(float x, float y, float z, float w)
 	ret[3] = w;
 	return (ret);
 }
+
+float	dot(t_vector_4 a, t_vector_4 b)
+{
+	return a[0]*b[0] + a[1]*b[1] + a[2]*b[2] + a[3]*b[3];
+}

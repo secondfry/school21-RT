@@ -28,6 +28,8 @@
 
 # define EPSILON 0.001f
 
+# define DOHUYA 100000
+
 typedef float				*t_matrix_4;
 typedef float				*t_vector_4;
 typedef float				*t_quaterion;
