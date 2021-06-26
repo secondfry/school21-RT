@@ -70,7 +70,7 @@ else
 	endif
 endif
 
-CFLAGS_ERRORS = -Wall -Wextra # -Werror
+CFLAGS_ERRORS = -Wall -Wextra -Werror
 
 ifeq ($(DEBUG),1)
 	CFLAGS_OPTIMIZATIONS = -funroll-loops

@@ -35,13 +35,13 @@ static void	intersection_sphere(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte i
 typedef struct	s_intersection_sphere_closest
 {
 	float	distance;
-	char	sphere_idx;
+	t_byte	sphere_idx;
 }				t_intersection_sphere_closest;
 
 static t_intersection_sphere_closest	intersection_sphere_closest(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
 {
 	float t_closest = 1.0 / 0.0;
-	char idx = -1;
+	t_byte idx = -1;
 	float t[2];
 
 	for (t_byte i = 0; i < MAX_SPHERES; i++) {
@@ -72,7 +72,7 @@ static float	light_point(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, f
 			continue;
 		t_vector_4 L = vector_sub(rtv->plights[i].position, P);
 		t_intersection_sphere_closest res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.f);
-		if (res.sphere_idx != -1) {
+		if (res.distance != 1.0 / 0.0) {
 			free(L);
 			continue;
 		}
@@ -113,7 +113,7 @@ static float	light_directional(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_
 			continue;
 		t_vector_4 L = rtv->dlights[i].direction;
 		t_intersection_sphere_closest res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.0 / 0.0);
-		if (res.sphere_idx != -1)
+		if (res.distance != 1.0 / 0.0)
 			continue;
 		dot = vector_dot(N, L);
 		if (dot > 0) {
@@ -152,7 +152,7 @@ static t_color	raytrace(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, flo
 	t_vector_4	tmp;
 
 	t_intersection_sphere_closest res = intersection_sphere_closest(rtv, O, D, t_min, t_max);
-	if (res.sphere_idx == -1)
+	if (res.distance == 1.0 / 0.0)
 		return color_new(255, 255, 255);
 	tmp = vector_mult(D, res.distance);
 	t_vector_4 P = vector_add(O, tmp);
