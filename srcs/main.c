@@ -32,24 +32,14 @@ int	main(void)
 	t_rtv		rtv;
 	t_mlx		mlx;
 
-	// rtv.spheres[0] = (t_sphere) {
-	// 	vector_new(1, 1, 5, 1),
-	// 	color_new(255, 0, 0),
-	// 	1.0f,
-	// 	TRAIT_EXISTS
-	// };
-	// rtv.spheres[1] = (t_sphere) {
-	// 	vector_new(-1, 1, 5, 1),
-	// 	color_new(0, 255, 0),
-	// 	1.0f,
-	// 	TRAIT_EXISTS
-	// };
-	// rtv.spheres[2] = (t_sphere) {
-	// 	vector_new(0, 0, 5, 1),
-	// 	color_new(0, 0, 255),
-	// 	1.0f,
-	// 	TRAIT_EXISTS
-	// };
+	for (t_byte i = 0; i < MAX_SPHERES; i++) {
+		rtv.spheres[i] = (t_sphere) {
+			0,
+			0,
+			0,
+			0
+		};
+	}
 	rtv.spheres[0] = (t_sphere) {
 		vector_new(0, -1.f, 3, 1),
 		color_new(255, 0, 0),
@@ -79,22 +69,31 @@ int	main(void)
 		TRAIT_EXISTS
 	};
 
+	for (t_byte i = 0; i < MAX_PLIGHTS; i++) {
+		rtv.plights[i] = (t_plight) {
+			0,
+			0,
+			0
+		};
+	}
 	rtv.plights[0] = (t_plight) {
 		vector_new(2, 1, 0, 1),
 		0.6f,
 		TRAIT_EXISTS
 	};
 
+	for (t_byte i = 0; i < MAX_DLIGHTS; i++) {
+		rtv.dlights[i] = (t_dlight) {
+			0,
+			0,
+			0
+		};
+	}
 	rtv.dlights[0] = (t_dlight) {
 		vector_new(1, 4, 4, 0),
 		0.2f,
 		TRAIT_EXISTS
 	};
-	// rtv.dlights[0] = (t_dlight) {
-	// 	vector_new(4, 0, 5, 0),
-	// 	0.4f,
-	// 	TRAIT_EXISTS
-	// };
 
 	rtv.ambient = 0.2f;
 

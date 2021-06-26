@@ -90,4 +90,7 @@ Temporary Items
 .apdisk
 
 # Personal
-rtv1
+RTv1
+*.supp
+vgcore.*
+minilibx-linux/test/mlx-test

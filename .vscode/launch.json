@@ -10,7 +10,10 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [
-        { "name": "DISPLAY", "value": "127.0.0.1:0.0" }
+        {
+          "name": "DISPLAY",
+          "value": "127.0.0.1:0.0"
+        }
       ],
       "MIMode": "gdb",
       "setupCommands": [
@@ -27,11 +30,39 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/RTv1",
-      "args": ["maps/map_without_lf"],
+      "args": [
+        "maps/map_without_lf"
+      ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
       "MIMode": "lldb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "make debug"
+    },
+    {
+      "name": "(gdb) Launch (virtualbox)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/RTv1",
+      "args": [
+        "maps/map_without_lf"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        {
+          "name": "DISPLAY",
+          "value": "archlinux:10.0"
+        }
+      ],
+      "MIMode": "gdb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",

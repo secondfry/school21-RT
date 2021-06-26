@@ -47,7 +47,7 @@ else
 		MLX = libmlx.a
 		MLX_DIR = ./minilibx-linux
 		CFLAGS_PLATFORM = -D MLX_LINUX
-		LDFLAGS += -lX11 -lXext -lm
+		LDFLAGS += -lX11 -lXext -lm -pthread
 	endif
 	ifeq ($(UNAME_S),Darwin)
 		ifeq ($(origin CC), default)

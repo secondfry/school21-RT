@@ -26,5 +26,6 @@
 		"string_view": "c",
 		"__node_handle": "c",
 		"quaternion.h": "c"
-	}
+	},
+	"editor.formatOnSave": false
 }
