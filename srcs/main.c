@@ -32,6 +32,28 @@ int	main(void)
 	t_rtv		rtv;
 	t_mlx		mlx;
 
+	t_sphere	s1 = {
+		vector_new(1, 1, 5, 1),
+		color_new(255, 0, 0),
+		1.0f,
+		TRAIT_EXISTS
+	};
+	rtv.spheres[0] = s1;
+	t_sphere	s2 = {
+		vector_new(-1, 1, 5, 1),
+		color_new(0, 255, 0),
+		1.0f,
+		TRAIT_EXISTS
+	};
+	rtv.spheres[1] = s2;
+	t_sphere	s3 = {
+		vector_new(0, 0, 5, 1),
+		color_new(0, 0, 255),
+		1.0f,
+		TRAIT_EXISTS
+	};
+	rtv.spheres[2] = s3;
+
 	check_defines();
 	// parser(&rtv, fd);
 	init_mlx(&mlx);

@@ -18,6 +18,8 @@
 # include "graceful.h"
 
 t_vector_4	vector_new(float x, float y, float z, float w);
+t_vector_4	vector_sub(t_vector_4 a, t_vector_4 b);
+
 float	dot(t_vector_4 a, t_vector_4 b);
 
 #endif

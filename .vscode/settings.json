@@ -20,6 +20,10 @@
 		"string": "c",
 		"quaterion.h": "c",
 		"vector.h": "c",
-		"color.h": "c"
+		"color.h": "c",
+		"bitset": "c",
+		"cstdio": "c",
+		"string_view": "c",
+		"__node_handle": "c"
 	}
 }

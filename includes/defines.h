@@ -56,7 +56,7 @@ typedef t_byte				*t_color;
 # define ERR_MAP_SMOL						9
 # define ERR_INVALID_DEFINE					10
 
-typedef struct s_mlx
+typedef struct	s_mlx
 {
 	void		*mlx;
 	void		*win;
@@ -64,7 +64,17 @@ typedef struct s_mlx
 	int			*img_data;
 	size_t		size_line_int;
 	size_t		size_line_char;
-}					t_mlx;
+}				t_mlx;
+
+# define MAX_SPHERES 10
+
+typedef struct	s_sphere
+{
+	t_vector_4	position;
+	t_color		color;
+	float		radius;
+	t_byte		traits;
+}				t_sphere;
 
 typedef struct s_rtv
 {
@@ -73,6 +83,7 @@ typedef struct s_rtv
 	t_byte		flags;
 	t_vector_4	camera_position;
 	t_vector_4	camera_rotation;
+	t_sphere	spheres[MAX_SPHERES];
 }					t_rtv;
 
 enum	e_sizes
@@ -86,6 +97,11 @@ enum	e_flags
 	FLAG_REDRAW = (1u << 0u),
 	FLAG_INVALIDATE_POSITION = (1u << 1u),
 	FLAG_INVALIDATE_ROTATION = (1u << 2u),
+};
+
+enum	e_traits
+{
+	TRAIT_EXISTS = (1u << 0u),
 };
 
 enum	e_options
