@@ -190,17 +190,69 @@ static void	process_pixel(t_rtv *rtv, short xc, short yc)
 	free(color);
 }
 
+#include <pthread.h>
+
+typedef struct	s_params {
+	t_rtv *rtv;
+	short ya;
+	short yb;
+	short xa;
+	short xb;
+}				t_params;
+
+#define THREAD_COUNT 8
+
+void	*hello(void *params) {
+    for (short yc = ((t_params *)params)->ya; yc <= ((t_params *)params)->yb; yc++) {
+		for (short xc = ((t_params *)params)->xa; xc < ((t_params *)params)->xb; xc++) {
+			process_pixel(((t_params *)params)->rtv, xc, yc);
+		}
+	}
+	
+    pthread_exit(NULL);
+}
+
 void	loop_redraw(t_rtv *rtv)
 {
 	if (!(rtv->flags & FLAG_REDRAW))
 		return ;
 	ft_bzero(rtv->mlx->img_data, rtv->mlx->size_line_char * HEIGHT);
 	rtv->flags -= FLAG_REDRAW;
-	for (short yc = -1 * HEIGHT / 2 + 1; yc <= HEIGHT / 2; yc++) {
-		for (short xc = -1 * WIDTH / 2; xc < WIDTH / 2; xc++) {
-			process_pixel(rtv, xc, yc);
+
+	pthread_t	tid[THREAD_COUNT];
+	t_params	param[THREAD_COUNT];
+	short		ya = -1 * HEIGHT / 2;
+	short		xa = -1 * WIDTH / 2;
+	for (t_byte y = 0; y < 2; y++) {
+		for (t_byte x = 0; x < 4; x++) {
+			param[y * 4 + x] = (t_params) {
+				rtv,
+				ya + y * HEIGHT / 2,
+				ya + (y + 1) * HEIGHT / 2,
+				xa + x * WIDTH / 4,
+				xa + (x + 1) * WIDTH / 4
+			};
 		}
 	}
+	param[0] = (t_params) {
+		rtv,
+		ya + 1,
+		ya + HEIGHT / 2,
+		xa,
+		xa + WIDTH / 4
+	};
+	for (t_byte i = 0; i < THREAD_COUNT; i++) {
+    	pthread_create(&tid[i], NULL, hello, &param[i]);
+	}
+	for (t_byte i = 0; i < THREAD_COUNT; i++) {
+    	pthread_join(tid[i], NULL);
+	}
+
+	// for (short yc = -1 * HEIGHT / 2 + 1; yc <= HEIGHT / 2; yc++) {
+	// 	for (short xc = -1 * WIDTH / 2; xc < WIDTH / 2; xc++) {
+	// 		process_pixel(rtv, xc, yc);
+	// 	}
+	// }
 	mlx_put_image_to_window(\
 		rtv->mlx->mlx, rtv->mlx->win, rtv->mlx->img, 0, 0);
 }
