@@ -24,6 +24,7 @@
 		"bitset": "c",
 		"cstdio": "c",
 		"string_view": "c",
-		"__node_handle": "c"
+		"__node_handle": "c",
+		"quaternion.h": "c"
 	}
 }

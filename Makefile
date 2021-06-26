@@ -24,7 +24,7 @@ SRC_FILES =	main.c \
 			matrix_factory_1.c matrix_factory_2.c \
 			matrix_utils.c \
 			vector.c \
-			quaterion.c \
+			quaternion.c \
 			clear_mlx.c init_mlx.c init_mlx_2.c \
 			loop_hook_flow.c \
 			loop_hook_invalidate.c loop_hook_events.c loop_hook_render_debug.c \

@@ -20,5 +20,6 @@
 # include "init_mlx.h"
 # include "graceful.h"
 # include "vector.h"
+# include "matrix_factory.h"
 
 #endif

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "quaterion.h"
+#include "quaternion.h"
 
 /*
 ** http://www.opengl-tutorial.org/assets/faq_quaternions/index.html

@@ -161,7 +161,8 @@ static void	process_pixel(t_rtv *rtv, short xc, short yc)
 	t_color	color;
 
 	t_vector_4 O = rtv->camera_position;
-	t_vector_4 D = vector_new((float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0);
+	t_vector_4 D = matrix_on_vector(rtv->camera_rotation, \
+		vector_new((float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0));
 	color = raytrace(rtv, O, D, 1.0f, 1.0 / 0.0);
 	canvas_to_screen(rtv, xc, yc, color);
 }

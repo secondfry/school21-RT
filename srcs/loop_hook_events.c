@@ -18,5 +18,15 @@ int	loop_key_hook(int keycode, t_rtv *rtv)
 		loop_destroy_hook(rtv);
 	if (keycode == KEY_R)
 		rtv->flags |= FLAG_REDRAW;
+	if (keycode == KEY_A)
+	{
+		rtv->camera_angles[AYAW] += M_PI_4F;
+		rtv->flags |= FLAG_INVALIDATE_ROTATION;
+	}
+	if (keycode == KEY_D)
+	{
+		rtv->camera_angles[AYAW] -= M_PI_4F;
+		rtv->flags |= FLAG_INVALIDATE_ROTATION;
+	}
 	return (0);
 }

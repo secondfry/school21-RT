@@ -17,7 +17,7 @@ void	init_rtv(t_rtv *rtv)
 	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
 	rtv->camera_position = vector_new(0.f, 0.f, 0.f, 1.f);
-	rtv->camera_rotation = vector_new(0.f, 0.f, 0.f, 1.f);
+	rtv->camera_rotation = matrix_new_identity();
 }
 
 void	check_defines(void)

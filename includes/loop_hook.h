@@ -18,6 +18,8 @@
 # include "init_mlx.h"
 # include "color.h"
 # include "vector.h"
+# include "quaternion.h"
+# include "matrix_utils.h"
 
 int		loop_hook(t_rtv *rtv);
 int		loop_destroy_hook(t_rtv *rtv);

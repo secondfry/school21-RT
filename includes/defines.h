@@ -43,6 +43,10 @@ typedef t_byte				*t_color;
 # define TCGREEN	1
 # define TCBLUE		2
 
+# define AROLL	0
+# define APITCH	1
+# define AYAW	2
+
 # define ERR_MEM							35
 # define ERR_READ							25
 # define ERR_MAP_INVALID_CHARACTERS			1
@@ -99,7 +103,8 @@ typedef struct s_rtv
 	t_byte		options;
 	t_byte		flags;
 	t_vector_4	camera_position;
-	t_vector_4	camera_rotation;
+	float		camera_angles[3];
+	t_matrix_4	camera_rotation;
 	t_sphere	spheres[MAX_SPHERES];
 	float		ambient;
 	t_plight	plights[MAX_PLIGHTS];
