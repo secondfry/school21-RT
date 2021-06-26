@@ -54,24 +54,28 @@ int	main(void)
 		vector_new(0, -1.f, 3, 1),
 		color_new(255, 0, 0),
 		1.0f,
+		500.f,
 		TRAIT_EXISTS
 	};
 	rtv.spheres[1] = (t_sphere) {
 		vector_new(-2, 0, 4, 1),
 		color_new(0, 255, 0),
 		1.0f,
+		10.f,
 		TRAIT_EXISTS
 	};
 	rtv.spheres[2] = (t_sphere) {
 		vector_new(2, 0, 4, 1),
 		color_new(0, 0, 255),
 		1.0f,
+		500.f,
 		TRAIT_EXISTS
 	};
 	rtv.spheres[3] = (t_sphere) {
 		vector_new(0, -5001, 0, 1),
 		color_new(255, 255, 0),
 		5000.0f,
+		1000.f,
 		TRAIT_EXISTS
 	};
 
