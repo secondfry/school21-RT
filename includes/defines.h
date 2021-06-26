@@ -78,7 +78,7 @@ typedef struct	s_sphere
 {
 	t_vector_4	position;
 	t_color		color;
-	float		radius;
+	float		radius_squared;
 	float		specular;
 	t_byte		traits;
 }				t_sphere;

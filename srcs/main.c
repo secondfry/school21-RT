@@ -74,7 +74,7 @@ int	main(void)
 	rtv.spheres[3] = (t_sphere) {
 		vector_new(0, -5001, 0, 1),
 		color_new(255, 255, 0),
-		5000.0f,
+		5000.0f * 5000.0f,
 		1000.f,
 		TRAIT_EXISTS
 	};

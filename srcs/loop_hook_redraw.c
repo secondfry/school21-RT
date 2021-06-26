@@ -14,12 +14,11 @@
 
 static void	intersection_sphere(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte idx, float t[2])
 {
-	float r = rtv->spheres[idx].radius;
 	t_vector_4 C = rtv->spheres[idx].position;
 	t_vector_4 CO = vector_sub(O, C);
 	float a = vector_dot(D, D);
 	float b = 2 * vector_dot(D, CO);
-	float c = vector_dot(CO, CO) - r * r; // float is not enough here
+	float c = vector_dot(CO, CO) - rtv->spheres[idx].radius_squared; // float is not enough here
 	float sqrt = b * b - 4 * a * c;
 	if (sqrt < 0) {
 		t[0] = 1.0 / 0.0;
@@ -28,6 +27,8 @@ static void	intersection_sphere(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte i
 	}
 	t[0] = (-1 * b + sqrtf(sqrt)) / (2 * a);
 	t[1] = (-1 * b - sqrtf(sqrt)) / (2 * a);
+
+	free(CO);
 }
 
 typedef struct	s_intersection_sphere_closest
@@ -60,8 +61,9 @@ static t_intersection_sphere_closest	intersection_sphere_closest(t_rtv *rtv, t_v
 
 static float	light_point(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, float specular)
 {
-	float	intensity;
-	float	dot;
+	float		intensity;
+	float		dot;
+	t_vector_4	tmp;
 
 	intensity = 0;
 	for (t_byte i = 0; i < MAX_PLIGHTS; i++) {
@@ -79,21 +81,26 @@ static float	light_point(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, f
 		}
 		if (specular == -1)
 			continue;
-		t_vector_4 R = vector_sub(vector_mult(N, 2 * vector_dot(N, L)), L);
+		tmp = vector_mult(N, 2 * vector_dot(N, L));
+		t_vector_4 R = vector_sub(tmp, L);
+		free(tmp);
 		dot = vector_dot(R, V);
 		if (dot > 0) {
 			float delta = rtv->plights[i].intensity *
 				powf(dot / vector_length(R) / vector_length(V), specular);
 			intensity += delta;
 		}
+		free(L);
+		free(R);
 	}
 	return intensity;
 }
 
 static float	light_directional(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, float specular)
 {
-	float	intensity;
-	float	dot;
+	float		intensity;
+	float		dot;
+	t_vector_4	tmp;
 
 	intensity = 0;
 	for (t_byte i = 0; i < MAX_DLIGHTS; i++) {
@@ -111,13 +118,16 @@ static float	light_directional(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_
 		}
 		if (specular == -1)
 			continue;
-		t_vector_4 R = vector_sub(vector_mult(N, 2 * vector_dot(N, L)), L);
+		tmp = vector_mult(N, 2 * vector_dot(N, L));
+		t_vector_4 R = vector_sub(tmp, L);
+		free(tmp);
 		dot = vector_dot(R, V);
 		if (dot > 0) {
 			float delta = rtv->dlights[i].intensity *
 				powf(dot / vector_length(R) / vector_length(V), specular);
 			intensity += delta;
 		}
+		free(R);
 	}
 	return intensity;
 }
@@ -134,14 +144,22 @@ static float	light(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, float s
 
 static t_color	raytrace(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
 {
+	t_vector_4	tmp;
+
 	t_intersection_sphere_closest res = intersection_sphere_closest(rtv, O, D, t_min, t_max);
 	if (res.sphere_idx == -1)
 		return color_new(255, 255, 255);
-	t_vector_4 P = vector_add(O, vector_mult(D, res.distance));
+	tmp = vector_mult(D, res.distance);
+	t_vector_4 P = vector_add(O, tmp);
+	free(tmp);
 	t_vector_4 N = vector_sub(P, rtv->spheres[res.sphere_idx].position);
 	vector_normalize(N);
+	t_vector_4 V = vector_mult(D, -1);
+	float intensity = light(rtv, P, N, V, rtv->spheres[res.sphere_idx].specular);
 
-	float intensity = light(rtv, P, N, vector_mult(D, -1), rtv->spheres[res.sphere_idx].specular);
+	free(P);
+	free(N);
+	free(V);
 
 	return color_mult(rtv->spheres[res.sphere_idx].color, intensity);
 }
@@ -158,13 +176,18 @@ static void canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
 
 static void	process_pixel(t_rtv *rtv, short xc, short yc)
 {
-	t_color	color;
+	t_color 	color;
+	t_vector_4	tmp;
 
 	t_vector_4 O = rtv->camera_position;
-	t_vector_4 D = matrix_on_vector(rtv->camera_rotation, \
-		vector_new((float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0));
+	tmp = vector_new((float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0);
+	t_vector_4 D = matrix_on_vector(rtv->camera_rotation, tmp);
+	free(tmp);
 	color = raytrace(rtv, O, D, 1.0f, 1.0 / 0.0);
 	canvas_to_screen(rtv, xc, yc, color);
+	
+	free(D);
+	free(color);
 }
 
 void	loop_redraw(t_rtv *rtv)
