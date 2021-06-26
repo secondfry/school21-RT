@@ -95,3 +95,5 @@ RTv1
 vgcore.*
 minilibx-linux/test/mlx-test
 *.swiftmodule
+*.swiftdoc
+*.swiftsourceinfo
