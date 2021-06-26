@@ -33,25 +33,25 @@ t_color	color_add(t_color a, t_color b)
 	return (ret);
 }
 
-t_color	color_multiply(t_color a, float k)
+t_color	color_mult(t_color a, float k)
 {
-	t_color	ret;
 	t_byte	colors[3];
 
-	if (255 / k > a[TCRED])
+	if (k < 0)
+		return color_new(0, 0, 0);
+	if (255 / k < a[TCRED])
 		colors[TCRED] = 255;
 	else
 		colors[TCRED] = a[TCRED] * k;
-	if (255 / k > a[TCGREEN])
+	if (255 / k < a[TCGREEN])
 		colors[TCGREEN] = 255;
 	else
 		colors[TCGREEN] = a[TCGREEN] * k;
-	if (255 / k > a[TCBLUE])
+	if (255 / k < a[TCBLUE])
 		colors[TCBLUE] = 255;
 	else
 		colors[TCBLUE] = a[TCBLUE] * k;
-	ret = color_new(colors[TCRED], colors[TCGREEN], colors[TCBLUE]);
-	return (ret);
+	return color_new(colors[TCRED], colors[TCGREEN], colors[TCBLUE]);
 }
 
 int	color_to_int(t_color a)

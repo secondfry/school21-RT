@@ -25,7 +25,7 @@ t_vector_4	vector_new(float x, float y, float z, float w)
 	return (ret);
 }
 
-float	dot(t_vector_4 a, t_vector_4 b)
+float	vector_dot(t_vector_4 a, t_vector_4 b)
 {
 	return a[0]*b[0] + a[1]*b[1] + a[2]*b[2] + a[3]*b[3];
 }
@@ -33,4 +33,30 @@ float	dot(t_vector_4 a, t_vector_4 b)
 t_vector_4	vector_sub(t_vector_4 a, t_vector_4 b)
 {
 	return vector_new(a[0] - b[0], a[1] - b[1], a[2] - b[2], a[3] - b[3]);
+}
+
+t_vector_4	vector_add(t_vector_4 a, t_vector_4 b)
+{
+	return vector_new(a[0] + b[0], a[1] + b[1], a[2] + b[2], a[3] + b[3]);
+}
+
+t_vector_4	vector_mult(t_vector_4 a, float k)
+{
+	return vector_new(a[0] * k, a[1] * k, a[2] * k, a[3] * k);
+}
+
+float	vector_length(t_vector_4 a)
+{
+	return sqrtf(vector_dot(a, a));
+}
+
+void	vector_normalize(t_vector_4 a)
+{
+	float	length;
+
+	length = vector_length(a);
+	a[0] /= length;
+	a[1] /= length;
+	a[2] /= length;
+	a[3] /= length;
 }

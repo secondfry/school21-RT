@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-# define WIDTH 1024
+# define WIDTH 768
 # define HEIGHT 768
 # define TITLE "RTv1"
 
@@ -67,6 +67,8 @@ typedef struct	s_mlx
 }				t_mlx;
 
 # define MAX_SPHERES 10
+# define MAX_PLIGHTS 5
+# define MAX_DLIGHTS 5
 
 typedef struct	s_sphere
 {
@@ -76,6 +78,20 @@ typedef struct	s_sphere
 	t_byte		traits;
 }				t_sphere;
 
+typedef struct	s_plight
+{
+	t_vector_4	position;
+	float		intensity;
+	t_byte		traits;
+}				t_plight;
+
+typedef struct	s_dlight
+{
+	t_vector_4	direction;
+	float		intensity;
+	t_byte		traits;
+}				t_dlight;
+
 typedef struct s_rtv
 {
 	t_mlx		*mlx;
@@ -84,6 +100,9 @@ typedef struct s_rtv
 	t_vector_4	camera_position;
 	t_vector_4	camera_rotation;
 	t_sphere	spheres[MAX_SPHERES];
+	float		ambient;
+	t_plight	plights[MAX_PLIGHTS];
+	t_dlight	dlights[MAX_DLIGHTS];
 }					t_rtv;
 
 enum	e_sizes

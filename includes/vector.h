@@ -14,12 +14,18 @@
 # define VECTOR_H
 
 # include <stdlib.h>
+# include <math.h>
 # include "defines.h"
 # include "graceful.h"
 
 t_vector_4	vector_new(float x, float y, float z, float w);
 t_vector_4	vector_sub(t_vector_4 a, t_vector_4 b);
+t_vector_4	vector_add(t_vector_4 a, t_vector_4 b);
+t_vector_4	vector_mult(t_vector_4 a, float k);
 
-float	dot(t_vector_4 a, t_vector_4 b);
+float	vector_dot(t_vector_4 a, t_vector_4 b);
+float	vector_length(t_vector_4 a);
+
+void	vector_normalize(t_vector_4 a);
 
 #endif
