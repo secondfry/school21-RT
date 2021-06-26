@@ -48,7 +48,7 @@ void	clear_mlx(t_mlx *mlx)
 	mlx_destroy_image(mlx->mlx, mlx->img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	ft_mlx_destroy_display(mlx->mlx);
-	ft_memdel(&(mlx->mlx));
+	ft_mlx_destroy(mlx->mlx);
 }
 
 void	init_mlx_hooks(t_rtv *rtv)

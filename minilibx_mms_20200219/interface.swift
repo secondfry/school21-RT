@@ -30,6 +30,11 @@ public func mlx_init_swift() -> UnsafeRawPointer {
   return (_mlx_bridge_retained(obj: mm))
 }
 
+@_cdecl("mlx_destroy")
+public func mlx_destroy_swift(_ mlxptr: UnsafeRawPointer) {
+  unowned let mlx: MlxMain = _mlx_bridge_transfer(ptr: mlxptr)
+}
+
 @_cdecl("mlx_loop")
 public func mlx_loop_swift(_ mlxptr: UnsafeRawPointer) {
   let mlx: MlxMain = _mlx_bridge(ptr: mlxptr)
@@ -135,7 +140,6 @@ public func mlx_new_image(_ mlxptr: UnsafeRawPointer, _ width: Int32, _ height: 
   mlx.addImgToList(img)
   // print(CFGetRetainCount(img))
   return (_mlx_bridge_retained(obj: img))
-
 }
 
 @_cdecl("mlx_get_data_addr")

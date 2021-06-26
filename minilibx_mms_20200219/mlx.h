@@ -37,11 +37,12 @@
 
 #define MLX_H
 
-void *mlx_init();
 /*
 **  needed before everything else.
 **  return (void *)0 if failed
 */
+void *mlx_init();
+void mlx_destroy(void *);
 
 /*
 ** Basic actions

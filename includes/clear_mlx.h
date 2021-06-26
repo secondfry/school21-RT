@@ -4,6 +4,6 @@
 # include "mlx.h"
 
 void	ft_mlx_destroy_display(void *mlx);
-void	ft_mlx_destroy_window(void *mlx, void *win);
+void	ft_mlx_destroy(void *mlx);
 
 #endif
