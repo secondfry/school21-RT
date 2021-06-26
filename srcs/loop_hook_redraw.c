@@ -72,16 +72,20 @@ static float	light_point(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, f
 			continue;
 		t_vector_4 L = vector_sub(rtv->plights[i].position, P);
 		t_intersection_sphere_closest res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.f);
-		if (res.sphere_idx != -1)
+		if (res.sphere_idx != -1) {
+			free(L);
 			continue;
+		}
 		dot = vector_dot(N, L);
 		if (dot > 0) {
 			float delta = rtv->plights[i].intensity *
 				dot / vector_length(L);
 			intensity += delta;
 		}
-		if (specular == -1)
+		if (specular == -1) {
+			free(L);
 			continue;
+		}
 		tmp = vector_mult(N, 2 * vector_dot(N, L));
 		t_vector_4 R = vector_sub(tmp, L);
 		free(tmp);
