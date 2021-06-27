@@ -6,14 +6,15 @@ static float	intersection_plane(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte i
 {
 	// (C - O) dot normal / D dot normal
 	t_vector_4 C = rtv->planes[idx].position;
-	t_vector_4 CO = vector_sub(C, O);
 	float b = vector_dot(rtv->planes[idx].normal, D);
 
 	if (b < EPSILON) {
 		return 1.0 / 0.0;
 	}
 
+	t_vector_4 CO = vector_sub(C, O);
 	float a = vector_dot(rtv->planes[idx].normal, CO);
+	free(CO);
 	return a / b;
 }
 
