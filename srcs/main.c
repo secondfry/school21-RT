@@ -16,7 +16,7 @@ void	init_rtv(t_rtv *rtv)
 {
 	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
-	rtv->camera_position = vector_new(0.f, 0.f, 0.f, 1.f);
+	ft_memcpy((void *) &rtv->camera_position, &((t_vector_4) { 0.f, 0.f, 0.f, 1.f }), sizeof(t_vector_4));
 	rtv->camera_angles[AROLL] = 0;
 	rtv->camera_angles[AYAW] = 0;
 	rtv->camera_angles[APITCH] = 0;
@@ -32,89 +32,89 @@ void	check_defines(void)
 
 int	main(void)
 {
-	t_rtv		rtv;
-	t_mlx		mlx;
+	t_rtv	rtv;
+	t_mlx	mlx;
 
 	for (t_byte i = 0; i < MAX_SPHERES; i++) {
-		rtv.spheres[i] = (t_sphere) {
-			0,
+		ft_memcpy(rtv.spheres + i, &((t_sphere) {
+			{ 0, 0, 0, 0 },
 			0,
 			0,
 			0,
 			0
-		};
+		}), sizeof(t_sphere));
 	}
-	rtv.spheres[0] = (t_sphere) {
-		vector_new(0, -1.f, 3, 1),
+	ft_memcpy(rtv.spheres + 0, &((t_sphere) {
+		{ 0, -1.f, 3, 1 },
 		color_new(255, 0, 0),
 		1.0f,
 		500.f,
 		TRAIT_EXISTS
-	};
-	rtv.spheres[1] = (t_sphere) {
-		vector_new(-2, 0, 4, 1),
+	}), sizeof(t_sphere));
+	ft_memcpy(rtv.spheres + 1, &((t_sphere) {
+		{ -2, 0, 4, 1 },
 		color_new(0, 255, 0),
 		1.0f,
 		10.f,
 		TRAIT_EXISTS
-	};
-	rtv.spheres[2] = (t_sphere) {
-		vector_new(2, 0, 4, 1),
+	}), sizeof(t_sphere));
+	ft_memcpy(rtv.spheres + 2, &((t_sphere) {
+		{ 2, 0, 4, 1 },
 		color_new(0, 0, 255),
 		1.0f,
 		500.f,
 		TRAIT_EXISTS
-	};
-	rtv.spheres[3] = (t_sphere) {
-		vector_new(0, -5001, 0, 1),
+	}), sizeof(t_sphere));
+	ft_memcpy(rtv.spheres + 3, &((t_sphere) {
+		{ 0, -5001, 0, 1 },
 		color_new(255, 255, 0),
 		5000.0f * 5000.0f,
 		1000.f,
 		TRAIT_EXISTS
-	};
+	}), sizeof(t_sphere));
 
 	for (t_byte i = 0; i < MAX_PLANES; i++) {
-		rtv.planes[i] = (t_plane) {
-			0,
-			0,
+		ft_memcpy(rtv.planes + i, &((t_plane) {
+			{ 0, 0, 0, 0 },
+			{ 0, 0, 0, 0 },
 			0,
 			0,
 			0
-		};
+		}), sizeof(t_plane));
 	}
-	rtv.planes[0] = (t_plane) {
-		vector_new(0, -1.f, 0, 1),
-		vector_new(0, 1.f, 0, 1),
-		color_new(255, 255, 0),
-		1000.0f,
-		TRAIT_EXISTS
-	};
+	// rtv.planes[0] = (t_plane) {
+	// 	vector_new(0, -1.f, 0, 1),
+	// 	vector_new(0, 1.f, 0, 1),
+	// 	color_new(255, 255, 0),
+	// 	1000.0f,
+	// 	TRAIT_EXISTS
+	// };
 
 	for (t_byte i = 0; i < MAX_PLIGHTS; i++) {
-		rtv.plights[i] = (t_plight) {
-			0,
+		ft_memcpy(rtv.plights + i, &((t_plight) {
+			{ 0, 0, 0, 0 },
 			0,
 			0
-		};
+		}), sizeof(t_plight));
 	}
-	rtv.plights[0] = (t_plight) {
-		vector_new(2, 1, 0, 1),
+	ft_memcpy(rtv.plights + 0, &((t_plight) {
+		{ 2, 1, 0, 1 },
 		0.6f,
 		TRAIT_EXISTS
-	};
+	}), sizeof(t_plight));
 
 	for (t_byte i = 0; i < MAX_DLIGHTS; i++) {
-		rtv.dlights[i] = (t_dlight) {
-			0,
+		ft_memcpy(rtv.dlights + i, &((t_dlight) {
+			{ 0, 0, 0, 0 },
 			0,
 			0
-		};
+		}), sizeof(t_dlight));
 	}
-	rtv.dlights[0] = (t_dlight) {
+	ft_memcpy(rtv.dlights + 0, &((t_dlight) {
 		vector_new(1, 4, 4, 0),
 		0.2f,
 		TRAIT_EXISTS
-	};
+	}), sizeof(t_dlight));
 
 	rtv.ambient = 0.2f;
 

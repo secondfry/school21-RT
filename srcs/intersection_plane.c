@@ -14,7 +14,6 @@ static float	intersection_plane(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte i
 
 	t_vector_4 CO = vector_sub(C, O);
 	float a = vector_dot(rtv->planes[idx].normal, CO);
-	free(CO);
 	return a / b;
 }
 

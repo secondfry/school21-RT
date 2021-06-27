@@ -12,17 +12,14 @@
 
 #include "matrix_utils.h"
 
-t_vector_4	matrix_on_vector(t_const_matrix_4 m, t_const_vector_4 v)
+t_vector_4	matrix_on_vector(t_const_matrix_4 m, const t_vector_4 v)
 {
-	t_vector_4	ret;
-
-	ret = (float *)ft_memalloc(sizeof(float) * 4);
-	ft_ptr_check(ret, ERR_MEM_MSG, 0);
-	ret[0] = m[0] * v[0] + m[1] * v[1] + m[2] * v[2] + m[3] * v[3];
-	ret[1] = m[4] * v[0] + m[5] * v[1] + m[6] * v[2] + m[7] * v[3];
-	ret[2] = m[8] * v[0] + m[9] * v[1] + m[10] * v[2] + m[11] * v[3];
-	ret[3] = m[12] * v[0] + m[13] * v[1] + m[14] * v[2] + m[15] * v[3];
-	return (ret);
+	return ((t_vector_4) {
+		m[0] * v.x + m[1] * v.y + m[2] * v.z + m[3] * v.w,
+		m[4] * v.x + m[5] * v.y + m[6] * v.z + m[7] * v.w,
+		m[8] * v.x + m[9] * v.y + m[10] * v.z + m[11] * v.w,
+		m[12] * v.x + m[13] * v.y + m[14] * v.z + m[15] * v.w
+	});
 }
 
 t_matrix_4	matrix_on_matrix(t_const_matrix_4 a, t_const_matrix_4 b)

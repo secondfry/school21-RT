@@ -30,11 +30,17 @@
 
 # define DOHUYA 100000
 
+typedef const struct	s_vector_4
+{
+	float	x;
+	float	y;
+	float	z;
+	float	w;
+}						t_vector_4;
+
 typedef float				*t_matrix_4;
-typedef float				*t_vector_4;
 typedef float				*t_quaterion;
 typedef const float	* const t_const_matrix_4;
-typedef const float	* const t_const_vector_4;
 typedef const float	* const t_const_quaterion;
 typedef int					(*t_mlx_hook)();
 typedef t_byte				*t_color;
@@ -131,7 +137,7 @@ typedef struct s_rtv
 	float		ambient;
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
-}					t_rtv;
+} t_rtv;
 
 # define VCTR_O	0
 # define VCTR_D	1
@@ -140,6 +146,11 @@ typedef struct s_rtv
 # define VCTR_V	4
 # define VCTR_L	5
 # define VCTR_R	6
+
+typedef struct	s_worker_data
+{
+	t_vector_4	vectors[MAX_VECTORS];
+}				t_worker_data;
 
 enum	e_sizes
 {

@@ -26,6 +26,6 @@ t_vector_4	vector_mult(t_vector_4 a, float k);
 float	vector_dot(t_vector_4 a, t_vector_4 b);
 float	vector_length(t_vector_4 a);
 
-void	vector_normalize(t_vector_4 a);
+t_vector_4	vector_normalize(t_vector_4 a);
 
 #endif
