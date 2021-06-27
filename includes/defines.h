@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:19:19 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:35:42 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct	s_intersection
 # define MAX_PLIGHTS	5
 # define MAX_DLIGHTS	5
 # define MAX_VECTORS_WORKER	7
+# define MAX_FLOATS_WORKER 3
 # define MAX_VECTORS_SPHERE 2
 
 typedef struct	s_sphere
@@ -151,10 +152,21 @@ typedef struct s_rtv
 # define VCTR_L	5
 # define VCTR_R	6
 
+# define D_DOT_D 0
+
 typedef struct	s_worker_data
 {
 	t_vector_4	vectors[MAX_VECTORS_WORKER];
+	float		floats[MAX_FLOATS_WORKER];
 }				t_worker_data;
+
+typedef struct	s_intersect_params
+{
+	t_vector_4	O;
+	t_vector_4	D;
+	float		t_min;
+	float		t_max;
+}				t_intersect_params;
 
 enum	e_sizes
 {

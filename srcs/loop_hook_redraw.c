@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:23:25 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:38:50 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static float	light_point(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, f
 		if (!(rtv->plights[i].traits & TRAIT_EXISTS))
 			continue ;
 		t_vector_4 L = vector_sub(rtv->plights[i].position, P);
-		t_intersection res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.f);
+		t_intersection res = intersection_sphere_closest(rtv, &((t_intersect_params) { P, L, EPSILON, 1.f }));
 		if (res.distance != 1.0 / 0.0)
 			continue ;
 		dot = vector_dot(N, L);
@@ -54,7 +54,7 @@ static float	light_directional(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_
 		if (!(rtv->dlights[i].traits & TRAIT_EXISTS))
 			continue;
 		t_vector_4 L = rtv->dlights[i].direction;
-		t_intersection res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.0 / 0.0);
+		t_intersection res = intersection_sphere_closest(rtv, &((t_intersect_params) { P, L, EPSILON, 1.0 / 0.0 }));
 		if (res.distance != 1.0 / 0.0)
 			continue;
 		dot = vector_dot(N, L);
@@ -86,16 +86,16 @@ static float	light(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, float s
 	return intensity;
 }
 
-static t_intersection	intersect_closest(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
+static t_intersection	intersect_closest(t_rtv *rtv, t_intersect_params *params)
 {
 	t_intersection	results[2];
 	t_intersection	res;
 
 	res.distance = 1.0 / 0.0;
-	results[ISPHERE] = intersection_sphere_closest(rtv, O, D, t_min, t_max);
+	results[ISPHERE] = intersection_sphere_closest(rtv, params);
 	if (results[ISPHERE].distance < res.distance)
 		res = results[ISPHERE];
-	results[IPLANE] = intersection_plane_closest(rtv, O, D, t_min, t_max);
+	results[IPLANE] = intersection_plane_closest(rtv, params);
 	if (results[IPLANE].distance < res.distance)
 		res = results[IPLANE];
 	return res;
@@ -105,7 +105,7 @@ static t_color	raytrace(t_rtv *rtv, t_worker_data *data, float t_min, float t_ma
 {
 	t_intersection	res;
 
-	res = intersect_closest(rtv, data->vectors[VCTR_O], data->vectors[VCTR_D], t_min, t_max);
+	res = intersect_closest(rtv, &((t_intersect_params) { data->vectors[VCTR_O], data->vectors[VCTR_D], t_min, t_max }));
 	if (res.distance == 1.0 / 0.0)
 		return color_new(0, 0, 0);
 	t_vector_4 P = vector_add(data->vectors[VCTR_O], vector_mult(data->vectors[VCTR_D], res.distance));
@@ -135,6 +135,7 @@ static void	process_pixel(t_rtv *rtv, short xc, short yc)
 
 	vector_set(data.vectors + VCTR_O, &rtv->camera_position);
 	vector_set(data.vectors + VCTR_D, &Drot);
+	data.floats[D_DOT_D] = vector_dot(data.vectors[VCTR_D], data.vectors[VCTR_D]);
 	color = raytrace(rtv, &data, 1.0f, 1.0 / 0.0);
 	canvas_to_screen(rtv, xc, yc, color);
 	free(color);
