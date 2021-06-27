@@ -134,11 +134,13 @@ typedef struct s_rtv
 	t_vector_4	vectors[MAX_VECTORS];
 }					t_rtv;
 
-# define VECTOR_P	0
-# define VECTOR_N	1
-# define VECTOR_R	2
-# define VECTOR_L	3
-# define VECTOR_V	4
+# define VCTR_O	0
+# define VCTR_D	1
+# define VCTR_P	2
+# define VCTR_N	3
+# define VCTR_V	4
+# define VCTR_L	5
+# define VCTR_R	6
 
 enum	e_sizes
 {
