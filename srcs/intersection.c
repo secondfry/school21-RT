@@ -1,6 +1,6 @@
 #include "intersection.h"
 
-t_intersection	intersect_closest(t_rtv *rtv, t_intersect_params *params)
+t_intersection intersection_closest(t_rtv *rtv, t_intersect_params *params)
 {
 	t_intersection	results[2];
 	t_intersection	res;

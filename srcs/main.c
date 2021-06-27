@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:20:10 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:56:33 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ int	main(void)
 		500.f,
 		TRAIT_EXISTS
 	}), sizeof(t_sphere));
-	ft_memcpy(rtv.spheres + 3, &((t_sphere) {
-		{{ 0, -5001, 0, 1 }},
-		color_new(255, 255, 0),
-		5000.0f * 5000.0f,
-		1000.f,
-		TRAIT_EXISTS
-	}), sizeof(t_sphere));
+	// ft_memcpy(rtv.spheres + 3, &((t_sphere) {
+	// 	{{ 0, -5001, 0, 1 }},
+	// 	color_new(255, 255, 0),
+	// 	5000.0f * 5000.0f,
+	// 	1000.f,
+	// 	TRAIT_EXISTS
+	// }), sizeof(t_sphere));
 
 	for (t_byte i = 0; i < MAX_PLANES; i++) {
 		ft_memcpy(rtv.planes + i, &((t_plane) {
@@ -82,13 +82,13 @@ int	main(void)
 			0
 		}), sizeof(t_plane));
 	}
-	// rtv.planes[0] = (t_plane) {
-	// 	vector_new(0, -1.f, 0, 1),
-	// 	vector_new(0, 1.f, 0, 1),
-	// 	color_new(255, 255, 0),
-	// 	1000.0f,
-	// 	TRAIT_EXISTS
-	// };
+	ft_memcpy(rtv.planes + 0, &((t_plane) {
+		vector_new(0, -1.f, 0, 1),
+		vector_new(0, -1.f, 0, 1),
+		color_new(255, 255, 0),
+		1000.0f,
+		TRAIT_EXISTS
+	}), sizeof(t_plane));
 
 	for (t_byte i = 0; i < MAX_PLIGHTS; i++) {
 		ft_memcpy(rtv.plights + i, &((t_plight) {

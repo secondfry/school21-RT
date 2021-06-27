@@ -1,11 +1,5 @@
 #include "intersection_sphere.h"
 
-typedef struct	s_COD
-{
-	t_vector_4 CO;
-	t_vector_4 D;
-}				t_COD;
-
 static void	intersection_sphere(t_rtv *rtv, t_intersect_params *params, t_byte idx, float t[2])
 {
 	t_vector_4 C = rtv->spheres[idx].vectors[VCTR_C];

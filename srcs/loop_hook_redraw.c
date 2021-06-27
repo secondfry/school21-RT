@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:41:06 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:45:04 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static float	light_point(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, f
 		if (!(rtv->plights[i].traits & TRAIT_EXISTS))
 			continue ;
 		t_vector_4 L = vector_sub(rtv->plights[i].position, P);
-		t_intersection res = intersection_sphere_closest(rtv, &((t_intersect_params) { P, L, EPSILON, 1.f }));
+		t_intersection res = intersection_closest(rtv, &((t_intersect_params) { P, L, EPSILON, 1.f }));
 		if (res.distance != 1.0 / 0.0)
 			continue ;
 		dot = vector_dot(N, L);
@@ -54,7 +54,7 @@ static float	light_directional(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_
 		if (!(rtv->dlights[i].traits & TRAIT_EXISTS))
 			continue;
 		t_vector_4 L = rtv->dlights[i].direction;
-		t_intersection res = intersection_sphere_closest(rtv, &((t_intersect_params) { P, L, EPSILON, 1.0 / 0.0 }));
+		t_intersection res = intersection_closest(rtv, &((t_intersect_params) { P, L, EPSILON, 1.0 / 0.0 }));
 		if (res.distance != 1.0 / 0.0)
 			continue;
 		dot = vector_dot(N, L);
@@ -90,7 +90,7 @@ static t_color	raytrace(t_rtv *rtv, t_worker_data *data, float t_min, float t_ma
 {
 	t_intersection	res;
 
-	res = intersect_closest(rtv, &((t_intersect_params) { data->vectors[VCTR_O], data->vectors[VCTR_D], t_min, t_max }));
+	res = intersection_closest(rtv, &((t_intersect_params) { data->vectors[VCTR_O], data->vectors[VCTR_D], t_min, t_max }));
 	if (res.distance == 1.0 / 0.0)
 		return color_new(0, 0, 0);
 	t_vector_4 P = vector_add(data->vectors[VCTR_O], vector_mult(data->vectors[VCTR_D], res.distance));
