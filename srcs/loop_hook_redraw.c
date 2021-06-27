@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:38:50 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:41:06 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,21 +84,6 @@ static float	light(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, float s
 		light_point(rtv, P, N, V, specular) +\
 		light_directional(rtv, P, N, V, specular);
 	return intensity;
-}
-
-static t_intersection	intersect_closest(t_rtv *rtv, t_intersect_params *params)
-{
-	t_intersection	results[2];
-	t_intersection	res;
-
-	res.distance = 1.0 / 0.0;
-	results[ISPHERE] = intersection_sphere_closest(rtv, params);
-	if (results[ISPHERE].distance < res.distance)
-		res = results[ISPHERE];
-	results[IPLANE] = intersection_plane_closest(rtv, params);
-	if (results[IPLANE].distance < res.distance)
-		res = results[IPLANE];
-	return res;
 }
 
 static t_color	raytrace(t_rtv *rtv, t_worker_data *data, float t_min, float t_max)

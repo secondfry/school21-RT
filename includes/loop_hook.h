@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:50:14 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:22:05 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:43:02 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include "color.h"
 # include "quaternion.h"
 # include "matrix_utils.h"
-# include "intersection_sphere.h"
-# include "intersection_plane.h"
+# include "intersection.h"
 # include "vector.h"
 
 int		loop_hook(t_rtv *rtv);
