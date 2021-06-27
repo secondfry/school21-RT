@@ -131,7 +131,6 @@ typedef struct s_rtv
 	float		ambient;
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
-	t_vector_4	vectors[MAX_VECTORS];
 }					t_rtv;
 
 # define VCTR_O	0

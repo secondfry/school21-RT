@@ -114,20 +114,20 @@ static t_intersection	intersect_closest(t_rtv *rtv, t_vector_4 O, t_vector_4 D, 
 	return res;
 }
 
-static t_color	raytrace(t_rtv *rtv, t_vector_4 D, float t_min, float t_max)
+static t_color	raytrace(t_rtv *rtv, t_vector_4 vectors[MAX_VECTORS], float t_min, float t_max)
 {
 	t_vector_4		tmp;
 	t_intersection	res;
 
-	res = intersect_closest(rtv, rtv->vectors[VCTR_O], D, t_min, t_max);
+	res = intersect_closest(rtv, vectors[VCTR_O], vectors[VCTR_D], t_min, t_max);
 	if (res.distance == 1.0 / 0.0)
 		return color_new(255, 255, 255);
-	tmp = vector_mult(D, res.distance);
-	t_vector_4 P = vector_add(rtv->vectors[VCTR_O], tmp);
+	tmp = vector_mult(vectors[VCTR_D], res.distance);
+	t_vector_4 P = vector_add(vectors[VCTR_O], tmp);
 	free(tmp);
 	t_vector_4 N = vector_sub(P, rtv->spheres[res.idx].position);
 	vector_normalize(N);
-	t_vector_4 V = vector_mult(D, -1);
+	t_vector_4 V = vector_mult(vectors[VCTR_D], -1);
 	float intensity = light(rtv, P, N, V, rtv->spheres[res.idx].specular);
 
 	free(P);
@@ -151,15 +151,16 @@ static void	process_pixel(t_rtv *rtv, short xc, short yc)
 {
 	t_color 	color;
 	t_vector_4	tmp;
+	t_vector_4	vectors[MAX_VECTORS];
 
-	rtv->vectors[VCTR_O] = rtv->camera_position;
+	vectors[VCTR_O] = rtv->camera_position;
 	tmp = vector_new((float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0);
-	t_vector_4 D = matrix_on_vector(rtv->camera_rotation, tmp);
+	vectors[VCTR_D] = matrix_on_vector(rtv->camera_rotation, tmp);
 	free(tmp);
-	color = raytrace(rtv, D, 1.0f, 1.0 / 0.0);
+	color = raytrace(rtv, vectors, 1.0f, 1.0 / 0.0);
 	canvas_to_screen(rtv, xc, yc, color);
 	
-	free(D);
+	free(vectors[VCTR_D]);
 	free(color);
 }
 
