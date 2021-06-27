@@ -70,9 +70,10 @@ typedef struct	s_mlx
 	size_t		size_line_char;
 }				t_mlx;
 
-# define MAX_SPHERES 10
-# define MAX_PLIGHTS 5
-# define MAX_DLIGHTS 5
+# define MAX_SPHERES	10
+# define MAX_PLANES		10
+# define MAX_PLIGHTS	5
+# define MAX_DLIGHTS	5
 
 typedef struct	s_sphere
 {
@@ -82,6 +83,15 @@ typedef struct	s_sphere
 	float		specular;
 	t_byte		traits;
 }				t_sphere;
+
+typedef struct	s_plane
+{
+	t_vector_4	position;
+	t_vector_4	normal;
+	t_color		color;
+	float		specular;
+	t_byte		traits;
+}				t_plane;
 
 typedef struct	s_plight
 {
@@ -106,6 +116,7 @@ typedef struct s_rtv
 	float		camera_angles[3];
 	t_matrix_4	camera_rotation;
 	t_sphere	spheres[MAX_SPHERES];
+	t_plane		planes[MAX_PLANES];
 	float		ambient;
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];

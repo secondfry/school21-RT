@@ -14,12 +14,12 @@
 # define LOOP_HOOK_H
 
 # include <math.h>
-# include "defines.h"
 # include "init_mlx.h"
 # include "color.h"
-# include "vector.h"
 # include "quaternion.h"
 # include "matrix_utils.h"
+# include "intersection_sphere.h"
+# include "intersection_plane.h"
 
 int		loop_hook(t_rtv *rtv);
 int		loop_destroy_hook(t_rtv *rtv);

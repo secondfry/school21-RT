@@ -25,7 +25,8 @@
 		"cstdio": "c",
 		"string_view": "c",
 		"__node_handle": "c",
-		"quaternion.h": "c"
+		"quaternion.h": "c",
+		"intersection_sphere.h": "c"
 	},
 	"editor.formatOnSave": false
 }

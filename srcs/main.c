@@ -73,6 +73,23 @@ int	main(void)
 		TRAIT_EXISTS
 	};
 
+	for (t_byte i = 0; i < MAX_PLANES; i++) {
+		rtv.planes[i] = (t_plane) {
+			0,
+			0,
+			0,
+			0,
+			0
+		};
+	}
+	rtv.planes[0] = (t_plane) {
+		vector_new(0, -1.f, 0, 1),
+		vector_new(0, 1.f, 0, 1),
+		color_new(255, 255, 0),
+		1000.0f,
+		TRAIT_EXISTS
+	};
+
 	for (t_byte i = 0; i < MAX_PLIGHTS; i++) {
 		rtv.plights[i] = (t_plight) {
 			0,
