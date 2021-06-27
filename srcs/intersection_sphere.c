@@ -1,5 +1,7 @@
 #include "intersection_sphere.h"
 
+// https://www.gabrielgambetta.com/computer-graphics-from-scratch/04-shadows-and-reflections.html
+
 static void	intersection_sphere(t_rtv *rtv, t_intersect_params *params, t_byte idx, float t[2])
 {
 	t_vector_4 C = rtv->spheres[idx].vectors[VCTR_C];

@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:45:04 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 18:36:23 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,19 +86,49 @@ static float	light(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, float s
 	return intensity;
 }
 
+typedef struct	s_light_params
+{
+	t_vector_4	C;
+	t_color		color;
+	float		specular;
+}				t_light_params;
+
+static t_light_params get_light_params(t_rtv *rtv, t_intersection *intr)
+{
+	if (intr->type == ISPHERE)
+		return ((t_light_params) {
+			rtv->spheres[intr->idx].vectors[VCTR_C],
+			rtv->spheres[intr->idx].color,
+			rtv->spheres[intr->idx].specular
+		});
+	if (intr->type == IPLANE)
+		return ((t_light_params) {
+			rtv->planes[intr->idx].position,
+			rtv->planes[intr->idx].color,
+			rtv->planes[intr->idx].specular
+		});
+	return ((t_light_params) {});
+}
+
+static t_color pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
+{
+	const t_light_params params = get_light_params(rtv, intr);
+	const t_vector_4 P = vector_add(data->vectors[VCTR_O], vector_mult(data->vectors[VCTR_D], intr->distance));
+	const t_vector_4 N = intr->type == ISPHERE ? vector_sub(P, params.C) : rtv->planes[intr->idx].normal;
+	const t_vector_4 NN = vector_normalize(N);
+	const t_vector_4 V = vector_mult(data->vectors[VCTR_D], -1);
+	float intensity = light(rtv, P, NN, V, params.specular);
+	return color_mult(params.color, intensity);
+}
+
 static t_color	raytrace(t_rtv *rtv, t_worker_data *data, float t_min, float t_max)
 {
-	t_intersection	res;
+	t_intersection	intr;
 
-	res = intersection_closest(rtv, &((t_intersect_params) { data->vectors[VCTR_O], data->vectors[VCTR_D], t_min, t_max }));
-	if (res.distance == 1.0 / 0.0)
+	intr = intersection_closest(rtv, &((t_intersect_params) { data->vectors[VCTR_O], data->vectors[VCTR_D], t_min, t_max }));
+	if (intr.distance == 1.0 / 0.0)
 		return color_new(0, 0, 0);
-	t_vector_4 P = vector_add(data->vectors[VCTR_O], vector_mult(data->vectors[VCTR_D], res.distance));
-	t_vector_4 N = vector_sub(P, rtv->spheres[res.idx].vectors[VCTR_C]);
-	t_vector_4 NN = vector_normalize(N);
-	t_vector_4 V = vector_mult(data->vectors[VCTR_D], -1);
-	float intensity = light(rtv, P, NN, V, rtv->spheres[res.idx].specular);
-	return color_mult(rtv->spheres[res.idx].color, intensity);
+	return (pre_light(rtv, data, &intr));
 }
 
 static void canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
@@ -114,12 +144,11 @@ static void canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
 static void	process_pixel(t_rtv *rtv, short xc, short yc)
 {
 	t_color 			color;
-	const t_vector_4	D = { (float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0 };
-	const t_vector_4	Drot = matrix_on_vector(rtv->camera_rotation, D);
+	const t_vector_4	D = matrix_on_vector(rtv->camera_rotation, (t_vector_4) { (float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0 });
 	t_worker_data		data;
 
 	vector_set(data.vectors + VCTR_O, &rtv->camera_position);
-	vector_set(data.vectors + VCTR_D, &Drot);
+	vector_set(data.vectors + VCTR_D, &D);
 	data.floats[D_DOT_D] = vector_dot(data.vectors[VCTR_D], data.vectors[VCTR_D]);
 	color = raytrace(rtv, &data, 1.0f, 1.0 / 0.0);
 	canvas_to_screen(rtv, xc, yc, color);
