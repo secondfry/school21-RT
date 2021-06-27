@@ -2,7 +2,7 @@
 
 static void	intersection_sphere(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte idx, float t[2])
 {
-	t_vector_4 C = rtv->spheres[idx].position;
+	t_vector_4 C = rtv->spheres[idx].vectors[VCTR_C];
 	t_vector_4 CO = vector_sub(O, C);
 	float a = vector_dot(D, D);
 	float b = 2 * vector_dot(D, CO);

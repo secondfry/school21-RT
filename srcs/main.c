@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 18:18:51 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:20:10 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(void)
 
 	for (t_byte i = 0; i < MAX_SPHERES; i++) {
 		ft_memcpy(rtv.spheres + i, &((t_sphere) {
-			{ 0, 0, 0, 0 },
+			{{ 0, 0, 0, 0 }},
 			0,
 			0,
 			0,
@@ -45,28 +45,28 @@ int	main(void)
 		}), sizeof(t_sphere));
 	}
 	ft_memcpy(rtv.spheres + 0, &((t_sphere) {
-		{ 0, -1.f, 3, 1 },
+		{{ 0, -1.f, 3, 1 }},
 		color_new(255, 0, 0),
 		1.0f,
 		500.f,
 		TRAIT_EXISTS
 	}), sizeof(t_sphere));
 	ft_memcpy(rtv.spheres + 1, &((t_sphere) {
-		{ -2, 0, 4, 1 },
+		{{ -2, 0, 4, 1 }},
 		color_new(0, 255, 0),
 		1.0f,
 		10.f,
 		TRAIT_EXISTS
 	}), sizeof(t_sphere));
 	ft_memcpy(rtv.spheres + 2, &((t_sphere) {
-		{ 2, 0, 4, 1 },
+		{{ 2, 0, 4, 1 }},
 		color_new(0, 0, 255),
 		1.0f,
 		500.f,
 		TRAIT_EXISTS
 	}), sizeof(t_sphere));
 	ft_memcpy(rtv.spheres + 3, &((t_sphere) {
-		{ 0, -5001, 0, 1 },
+		{{ 0, -5001, 0, 1 }},
 		color_new(255, 255, 0),
 		5000.0f * 5000.0f,
 		1000.f,

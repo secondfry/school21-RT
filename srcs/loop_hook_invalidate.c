@@ -1,10 +1,26 @@
 #include "loop_hook.h"
 
+static void invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
+{
+	const t_vector_4 tmp = vector_sub(rtv->camera_position, sphere.vectors[VCTR_C]);
+
+	vector_set(sphere.vectors + VCTR_CO, &tmp);
+}
+
+static void invalidate_spheres_vectors(t_rtv *rtv)
+{
+	for (t_byte i = 0; i < MAX_SPHERES; i++)
+	{
+		invalidate_sphere_vectors(rtv, rtv->spheres[i]);
+	}
+}
+
 void	loop_invalidate_position(t_rtv *rtv)
 {
 	if (!(rtv->flags & FLAG_INVALIDATE_POSITION))
 		return ;
 	rtv->flags -= FLAG_INVALIDATE_POSITION;
+	invalidate_spheres_vectors(rtv);
 	rtv->flags |= FLAG_REDRAW;
 }
 

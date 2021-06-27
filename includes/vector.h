@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 00:20:30 by oadhesiv          #+#    #+#             */
-/*   Updated: 2020/06/06 21:46:32 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:22:40 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ float	vector_dot(t_vector_4 a, t_vector_4 b);
 float	vector_length(t_vector_4 a);
 
 t_vector_4	vector_normalize(t_vector_4 a);
+
+void	vector_set(t_vector_4 *dst, t_vector_4 *src);
 
 #endif

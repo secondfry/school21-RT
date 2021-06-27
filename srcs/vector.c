@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/31 13:57:53 by oadhesiv          #+#    #+#             */
-/*   Updated: 2020/06/06 22:09:01 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:22:31 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,9 @@ t_vector_4	vector_normalize(t_vector_4 a)
 
 	length = vector_length(a);
 	return ((t_vector_4) { a.x / length, a.y / length, a.z / length, a.w / length });
+}
+
+void	vector_set(t_vector_4 *dst, t_vector_4 *src)
+{
+	ft_memcpy((void *) dst, src, sizeof(t_vector_4));
 }

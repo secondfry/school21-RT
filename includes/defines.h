@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/22 19:27:18 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:19:19 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,20 @@ typedef struct	s_intersection
 # define MAX_PLANES		10
 # define MAX_PLIGHTS	5
 # define MAX_DLIGHTS	5
-# define MAX_VECTORS	10
+# define MAX_VECTORS_WORKER	7
+# define MAX_VECTORS_SPHERE 2
 
 typedef struct	s_sphere
 {
-	t_vector_4	position;
+	t_vector_4	vectors[MAX_VECTORS_SPHERE];
 	t_color		color;
 	float		radius_squared;
 	float		specular;
 	t_byte		traits;
 }				t_sphere;
+
+# define VCTR_C 0
+# define VCTR_CO 1
 
 typedef struct	s_plane
 {
@@ -149,7 +153,7 @@ typedef struct s_rtv
 
 typedef struct	s_worker_data
 {
-	t_vector_4	vectors[MAX_VECTORS];
+	t_vector_4	vectors[MAX_VECTORS_WORKER];
 }				t_worker_data;
 
 enum	e_sizes

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hook.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:50:14 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 18:19:22 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:22:05 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "matrix_utils.h"
 # include "intersection_sphere.h"
 # include "intersection_plane.h"
+# include "vector.h"
 
 int		loop_hook(t_rtv *rtv);
 int		loop_destroy_hook(t_rtv *rtv);

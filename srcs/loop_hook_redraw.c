@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:14:12 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/27 16:23:25 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static t_color	raytrace(t_rtv *rtv, t_worker_data *data, float t_min, float t_ma
 	if (res.distance == 1.0 / 0.0)
 		return color_new(0, 0, 0);
 	t_vector_4 P = vector_add(data->vectors[VCTR_O], vector_mult(data->vectors[VCTR_D], res.distance));
-	t_vector_4 N = vector_sub(P, rtv->spheres[res.idx].position);
+	t_vector_4 N = vector_sub(P, rtv->spheres[res.idx].vectors[VCTR_C]);
 	t_vector_4 NN = vector_normalize(N);
 	t_vector_4 V = vector_mult(data->vectors[VCTR_D], -1);
 	float intensity = light(rtv, P, NN, V, rtv->spheres[res.idx].specular);
@@ -124,11 +124,6 @@ static void canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
 	xs = WIDTH / 2 + xc;
 	ys = HEIGHT / 2 - yc;
 	rtv->mlx->img_data[ys * rtv->mlx->size_line_int + xs] = color_to_int(color);
-}
-
-void	vector_set(t_vector_4 *dst, t_vector_4 *src)
-{
-	ft_memcpy((void *) dst, src, sizeof(t_vector_4));
 }
 
 static void	process_pixel(t_rtv *rtv, short xc, short yc)
