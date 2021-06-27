@@ -23,7 +23,7 @@ static float	light_point(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, f
 		if (!(rtv->plights[i].traits & TRAIT_EXISTS))
 			continue;
 		t_vector_4 L = vector_sub(rtv->plights[i].position, P);
-		t_intersection_sphere_closest res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.f);
+		t_intersection res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.f);
 		if (res.distance != 1.0 / 0.0) {
 			free(L);
 			continue;
@@ -64,7 +64,7 @@ static float	light_directional(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_
 		if (!(rtv->dlights[i].traits & TRAIT_EXISTS))
 			continue;
 		t_vector_4 L = rtv->dlights[i].direction;
-		t_intersection_sphere_closest res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.0 / 0.0);
+		t_intersection res = intersection_sphere_closest(rtv, P, L, EPSILON, 1.0 / 0.0);
 		if (res.distance != 1.0 / 0.0)
 			continue;
 		dot = vector_dot(N, L);
@@ -99,28 +99,42 @@ static float	light(t_rtv *rtv, t_vector_4 P, t_vector_4 N, t_vector_4 V, float s
 	return intensity;
 }
 
+static t_intersection	intersect_closest(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
+{
+	t_intersection	results[2];
+	t_intersection	res;
+
+	res.distance = 1.0 / 0.0;
+	results[ISPHERE] = intersection_sphere_closest(rtv, O, D, t_min, t_max);
+	if (results[ISPHERE].distance < res.distance)
+		res = results[ISPHERE];
+	results[IPLANE] = intersection_plane_closest(rtv, O, D, t_min, t_max);
+	if (results[IPLANE].distance < res.distance)
+		res = results[IPLANE];
+	return res;
+}
+
 static t_color	raytrace(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
 {
-	t_vector_4	tmp;
+	t_vector_4		tmp;
+	t_intersection	res;
 
-	t_intersection_sphere_closest res = intersection_sphere_closest(rtv, O, D, t_min, t_max);
-	t_intersection_plane_closest resP = intersection_plane_closest(rtv, O, D, t_min, t_max);
-	(void)resP;
+	res = intersect_closest(rtv, O, D, t_min, t_max);
 	if (res.distance == 1.0 / 0.0)
 		return color_new(255, 255, 255);
 	tmp = vector_mult(D, res.distance);
 	t_vector_4 P = vector_add(O, tmp);
 	free(tmp);
-	t_vector_4 N = vector_sub(P, rtv->spheres[res.sphere_idx].position);
+	t_vector_4 N = vector_sub(P, rtv->spheres[res.idx].position);
 	vector_normalize(N);
 	t_vector_4 V = vector_mult(D, -1);
-	float intensity = light(rtv, P, N, V, rtv->spheres[res.sphere_idx].specular);
+	float intensity = light(rtv, P, N, V, rtv->spheres[res.idx].specular);
 
 	free(P);
 	free(N);
 	free(V);
 
-	return color_mult(rtv->spheres[res.sphere_idx].color, intensity);
+	return color_mult(rtv->spheres[res.idx].color, intensity);
 }
 
 static void canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)

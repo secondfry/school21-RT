@@ -20,7 +20,7 @@ static void	intersection_sphere(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte i
 	t[1] = (-1 * b - sqrtf(sqrt)) / (2 * a);
 }
 
-t_intersection_sphere_closest	intersection_sphere_closest(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
+t_intersection	intersection_sphere_closest(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
 {
 	float t_closest = 1.0 / 0.0;
 	t_byte idx = -1;
@@ -39,5 +39,5 @@ t_intersection_sphere_closest	intersection_sphere_closest(t_rtv *rtv, t_vector_4
 			idx = i;
 		}
 	}
-	return ((t_intersection_sphere_closest) { t_closest, idx });
+	return ((t_intersection) { t_closest, idx, ISPHERE });
 }

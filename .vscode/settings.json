@@ -26,7 +26,8 @@
 		"string_view": "c",
 		"__node_handle": "c",
 		"quaternion.h": "c",
-		"intersection_sphere.h": "c"
+		"intersection_sphere.h": "c",
+		"intersection_plane.h": "c"
 	},
 	"editor.formatOnSave": false
 }

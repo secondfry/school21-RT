@@ -17,7 +17,7 @@ static float	intersection_plane(t_rtv *rtv, t_vector_4 O, t_vector_4 D, t_byte i
 	return a / b;
 }
 
-t_intersection_plane_closest	intersection_plane_closest(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
+t_intersection	intersection_plane_closest(t_rtv *rtv, t_vector_4 O, t_vector_4 D, float t_min, float t_max)
 {
 	float t_closest = 1.0 / 0.0;
 	t_byte idx = -1;
@@ -32,5 +32,5 @@ t_intersection_plane_closest	intersection_plane_closest(t_rtv *rtv, t_vector_4 O
 			idx = i;
 		}
 	}
-	return ((t_intersection_plane_closest) { t_closest, idx });
+	return ((t_intersection) { t_closest, idx, IPLANE });
 }
