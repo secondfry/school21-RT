@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/28 22:37:27 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/28 22:54:11 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,12 @@ static t_light_params get_light_params(t_rtv *rtv, t_intersection *intr)
 			rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0],
 			rtv->cylinders[intr->idx].color,
 			rtv->cylinders[intr->idx].specular
+		});
+	if (intr->type == ICONE)
+		return ((t_light_params) {
+			rtv->cones[intr->idx].vectors[VCTR_CONE_C0],
+			rtv->cones[intr->idx].color,
+			rtv->cones[intr->idx].specular
 		});
 	return ((t_light_params) {});
 }

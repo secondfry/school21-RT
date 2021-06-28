@@ -29,7 +29,8 @@
 		"intersection_sphere.h": "c",
 		"intersection_plane.h": "c",
 		"intersection.h": "c",
-		"intersection_cylinder.h": "c"
+		"intersection_cylinder.h": "c",
+		"intersection_cone.h": "c"
 	},
 	"editor.formatOnSave": false
 }

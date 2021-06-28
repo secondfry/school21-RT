@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/28 22:37:13 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/28 23:08:07 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	init_rtv(t_rtv *rtv)
 {
 	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
-	ft_memcpy((void *) &rtv->camera_position, &((t_vector_4) { 0.f, 0.f, 0.f, 1.f }), sizeof(t_vector_4));
+	ft_memcpy((void *) &rtv->camera_position, &((t_vector_4) { 0.f, 0.f, -10.f, 1.f }), sizeof(t_vector_4));
 	rtv->camera_angles[AROLL] = 0;
 	rtv->camera_angles[AYAW] = 0;
 	rtv->camera_angles[APITCH] = 0;
@@ -75,13 +75,13 @@ int	main(void)
 			0
 		}), sizeof(t_plane));
 	}
-	ft_memcpy(rtv.planes + 0, &((t_plane) {
-		vector_new(0, -1.f, 0, 1),
-		vector_new(0, 1.f, 0, 0),
-		color_new(255, 255, 0),
-		1000.0f,
-		TRAIT_EXISTS
-	}), sizeof(t_plane));
+	// ft_memcpy(rtv.planes + 0, &((t_plane) {
+	// 	vector_new(0, -1.f, 0, 1),
+	// 	vector_new(0, 1.f, 0, 0),
+	// 	color_new(255, 255, 0),
+	// 	1000.0f,
+	// 	TRAIT_EXISTS
+	// }), sizeof(t_plane));
 
 	for (t_byte i = 0; i < MAX_CYLINDERS; i++) {
 		ft_memcpy(rtv.cylinders + i, &((t_cylinder) {
@@ -95,24 +95,39 @@ int	main(void)
 			0
 		}), sizeof(t_cylinder));
 	}
-	// ft_memcpy(rtv.cylinders + 0, &((t_cylinder) {
-	// 	vector_new(0.f, 0.f, 10.f, 1),
-	// 	vector_new(5.f, 10.f, 10.f, 1),
-	// 	color_new(255, 255, 255),
-	// 	1.f,
-	// 	1000.0f,
-	// 	TRAIT_EXISTS
-	// }), sizeof(t_cylinder));
 	ft_memcpy(rtv.cylinders + 0, &((t_cylinder) {
 		{
-			vector_new(0.f, 0.f, 10.f, 1.f),
-			vector_new(5.f, 10.f, 10.f, 1.f),
+			vector_new(1.f, 0.f, 10.f, 1.f),
+			vector_new(2.f, 10.f, 10.f, 1.f),
 		},
 		color_new(255, 255, 255),
 		1.f,
 		1000.0f,
 		TRAIT_EXISTS
 	}), sizeof(t_cylinder));
+
+	for (t_byte i = 0; i < MAX_CONES; i++) {
+		ft_memcpy(rtv.cones + i, &((t_cone) {
+			{
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+			},
+			0,
+			0,
+			0,
+			0
+		}), sizeof(t_cone));
+	}
+	ft_memcpy(rtv.cones + 0, &((t_cone) {
+		{
+			vector_new(-1.f, 0.f, 10.f, 1.f),
+			vector_new(-2.f, 10.f, 10.f, 1.f),
+		},
+		color_new(255, 0, 255),
+		10.f * M_PI_F / 180.f,
+		1000.0f,
+		TRAIT_EXISTS
+	}), sizeof(t_cone));
 
 	for (t_byte i = 0; i < MAX_PLIGHTS; i++) {
 		ft_memcpy(rtv.plights + i, &((t_plight) {

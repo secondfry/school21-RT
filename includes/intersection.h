@@ -5,6 +5,7 @@
 # include "intersection_plane.h"
 # include "intersection_sphere.h"
 # include "intersection_cylinder.h"
+# include "intersection_cone.h"
 
 t_intersection	intersection_closest(t_rtv *rtv, t_intersect_params *params);
 

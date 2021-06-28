@@ -15,5 +15,8 @@ t_intersection intersection_closest(t_rtv *rtv, t_intersect_params *params)
 	results[ICYLINDER] = intersection_cylinder_closest(rtv, params);
 	if (results[ICYLINDER].distance < res.distance)
 		res = results[ICYLINDER];
+	results[ICONE] = intersection_cone_closest(rtv, params);
+	if (results[ICONE].distance < res.distance)
+		res = results[ICONE];
 	return res;
 }
