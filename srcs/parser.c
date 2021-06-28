@@ -1,114 +1,127 @@
 #include "parser.h"
 
-static void	check_size(char *line, t_byte gnl_res)
-{
-	static size_t	width;
-	size_t			len;
+#define LTYPE_NODE	0
+#define LTYPE_LEAF	1
 
-	len = ft_strlen(line);
-	if (gnl_res == 0)
-	{
-		if (width == 0)
-			error_exit(ERR_MAP_EMPTY);
-		else
-			return ;
-	}
-	if (!len)
-		error_exit(ERR_MAP_HAS_EMPTY_LINE);
-	if (width == 0)
-	{
-		width = len;
-		return ;
-	}
-	if (width != len)
-		error_exit(ERR_MAP_HAS_DIFFERENT_WIDTH_LINES);
+typedef struct s_level {
+	char		*key;
+	char		*value;
+	t_ptr_array	*data;
+	t_byte		type;
+	t_level		*parent;
+}				t_level;
+
+static t_byte	count_offset(char *line) {
+	t_byte i = 0;
+	while (line[i] == ' ')
+		i++;
+	return (i);
 }
 
-static void	reader_dimensions(int fd, size_t *width, size_t *height)
-{
-	char	*line;
-	char	*tmp;
-	char	gnl_res;
-
-	gnl_res = get_next_line(fd, &line);
-	if (gnl_res < 1)
-		error_exit(ERR_MAP_INVALID_WIDTH);
-	*width = ft_atoi(line);
-	tmp = ft_itoa(*width);
-	if (ft_strcmp(line, tmp))
-		error_exit(ERR_MAP_INVALID_WIDTH);
-	ft_memdel((void **)&line);
-	ft_memdel((void **)&tmp);
-	gnl_res = get_next_line(fd, &line);
-	if (gnl_res < 1)
-		error_exit(ERR_MAP_INVALID_HEIGHT);
-	*height = ft_atoi(line);
-	tmp = ft_itoa(*height);
-	if (ft_strcmp(line, tmp))
-		error_exit(ERR_MAP_INVALID_HEIGHT);
-	ft_memdel((void **)&line);
-	ft_memdel((void **)&tmp);
-}
-
-static char	*reader(int fd, size_t *width, size_t *height)
-{
-	char	*line;
-	char	*str;
-	char	*tmp;
-	t_byte	gnl_res;
-
-	reader_dimensions(fd, width, height);
-	str = (void *)0;
-	while (1)
-	{
-		gnl_res = get_next_line(fd, &line);
-		check_size(line, gnl_res);
-		if (gnl_res < 0)
-			error_exit(ERR_READ);
-		tmp = ft_strnew(ft_strlen(str) + ft_strlen(line));
-		if (!tmp)
-			error_exit(ERR_MEM);
-		ft_strcat(tmp, str);
-		ft_memdel((void **)&str);
-		ft_strcat(tmp, line);
-		ft_memdel((void **)&line);
-		str = tmp;
-		if (gnl_res == 0)
-			break ;
-	}
-	return (str);
-}
-
-static void	valid(char *map)
-{
-	size_t	i;
-
-	i = 0;
-	while (map[i])
-	{
-		if (map[i] != '0' && map[i] != '1')
-		{
-			ft_memdel((void **)&map);
-			error_exit(ERR_MAP_INVALID_CHARACTERS);
-		}
+static t_byte	get_type(char *line) {
+	char **data = ft_strsplit(line, ':');
+	t_byte i = 0;
+	while (data[i]) {
+		free(data[i]);
 		i++;
 	}
+	free(data);
+	if (i == 1) return LTYPE_NODE;
+	if (i == 2) return LTYPE_LEAF;
+	ft_putendl_fd("kurarek mnogo :::::::: bratan", 2);
+	exit(0);
 }
 
-void	parser(t_rtv *rtv, int fd)
-{
-	char	*map;
-	size_t	width;
-	size_t	height;
+static char *get_key(char *line) {
+	char **data = ft_strsplit(line, ':');
+	char *ret = data[0];
+	t_byte i = 1;
+	while (data[i]) {
+		free(data[i]);
+		i++;
+	}
+	free(data);
+	if (ft_strlen(ret) == 0 || ret[0] != '"' || ret[ft_strlen(ret) - 1] != '"') {
+		ft_putendl_fd("key must start and end with \"", 2);
+		exit(0);
+	}
+	return (ret);
+}
 
-	map = reader(fd, &width, &height);
-	valid(map);
-	if (map[width + 1] == '1')
-		error_exit(ERR_MAP_BLOCKED_PLAYER);
-	if (width < 3 || height < 3)
-		error_exit(ERR_MAP_SMOL);
-	rtv->map_width = width;
-	rtv->map_height = height;
-	rtv->map = map;
-	ft_putendl(map);
+static char *get_value(char *line) {
+	char **data = ft_strsplit(line, ':');
+	char *ret = data[1];
+	free(data[0]);
+	free(data);
+	return (ret);
+}
+
+t_level	*level_new(t_level *parent, t_byte type) {
+	t_level *ret;
+
+	ret = (t_level *)malloc(sizeof(t_level));
+	ft_ptr_check(ret, ERR_MEM_MSG, 0);
+	ret->key = (void *)0;
+	ret->data = ptr_array_new(10);
+	ret->type = type;
+	ret->parent = parent;
+	return (ret);
+}
+
+static void read_lights(int fd)
+{
+	static t_byte status;
+	char *line;
+
+	if (status == 1) {
+		ft_putendl_fd("kurlyk lights already read", 2);
+		exit(1);
+	}
+	while (1) {
+		int gnl_status = get_next_line(fd, &line);
+		if (gnl_status == -1) {
+			ft_putendl_fd("kurlyk gnl failed", 2);
+			exit(1);
+		}
+		if (ft_strcmp(line, "lights:") == 0)
+		 	read_lights(fd);
+	}
+}
+
+void	parse(t_rtv *rtv, int argc, char **argv)
+{
+	(void)rtv;
+	if (argc != 2) {
+		ft_putendl_fd("kurlyk 2 argumenta", 2);
+		exit(1);
+	}
+	int fd = open(argv[argc - 1], O_RDONLY);
+	if (fd < 0) {
+		ft_putendl_fd("kurlyk open failed", 2);
+		exit(1);
+	}
+	int read_status = read(fd, 0, 0);
+	if (read_status < 0) {
+		ft_putendl_fd("kurlyk read failed", 2);
+		exit(1);
+	}
+	char *line;
+	t_level	root = { 0, ptr_array_new(10), LTYPE_NODE, 0 };
+	t_level *current = &root;
+	t_byte offset_prev = 0;
+	while (1) {
+		int gnl_status = get_next_line(fd, &line);
+		if (gnl_status == -1) {
+			ft_putendl_fd("kurlyk gnl failed", 2);
+			exit(1);
+		}
+		t_byte offset = count_offset(line);
+		t_byte type = get_type(line);
+		if (offset == offset_prev) {
+			level_new(current, )
+		}
+
+		if (ft_strcmp(line, "lights:") == 0)
+		 	read_lights(fd);
+	}
 }
