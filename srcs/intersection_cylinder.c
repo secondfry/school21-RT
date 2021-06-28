@@ -23,70 +23,23 @@
 
 static void	intersection_cylinder(t_rtv *rtv, t_intersect_params *params, t_byte idx, float t[2])
 {
-	// t_vector_4 C = rtv->cylinders[idx].position;
-	// t_vector_4 CO = vector_sub(params->O, C);
-
-	// t_vector_4 X = vector_normalize(vector_cross(rtv->cylinders[idx].normal, params->D));
-	// t_vector_4 Y = vector_normalize(params->D);
-	// t_vector_4 Z = vector_normalize(vector_cross(Y, X));
-	// t_vector_4 QR = vector_mult(X, vector_dot(CO, X));
-
-	// float d = vector_dot(QR, X);
-	// float b = vector_dot(params->D, Z);
-	// float y = vector_dot(params->D, Y);
-
-	// float sqrt = (rtv->cylinders[idx].radius_squared - d * d) / b / b;
-	// if (sqrt < 0) {
-	// 	t[0] = 1.0 / 0.0;
-	// 	t[1] = 1.0 / 0.0;
-	// 	return;
-	// }
-
-	// float k = sqrtf(sqrt);
-	// t_vector_4 P = vector_add(vector_add(vector_mult(X, d), vector_mult(Z, k * b)), vector_mult(Y, k * y));
-
-
-	t_vector_4  pdp = vector_sub(rtv->cylinders[idx].normal, rtv->cylinders[idx].position);
-	ft_memcpy((void*)&pdp, &((t_vector_4) { pdp.x, pdp.y, pdp.z, 0 }), sizeof(t_vector_4));
-    t_vector_4  eyexpdp = vector_cross(vector_sub(params->O, rtv->cylinders[idx].position), pdp);
-    t_vector_4  rdxpdp = vector_cross(params->D, pdp);
-    float   a = vector_dot(rdxpdp, rdxpdp);
-    float   b = 2 * vector_dot(rdxpdp, eyexpdp);
-    float   c = vector_dot(eyexpdp, eyexpdp) - (rtv->cylinders[idx].radius_squared * vector_dot(pdp, pdp));
-    float	delta;
-    delta = sqrtf((b * b) - (4.0 * a * c));
-    if (delta < 0) {
+	t_vector_4 C = rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0];
+	t_vector_4 CO = vector_sub(params->O, C);
+	t_vector_4 CQ = vector_sub(rtv->cylinders[idx].vectors[VCTR_CYLINDER_C1], rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0]);
+    t_vector_4 X = vector_cross(CO, CQ);
+    t_vector_4 Z = vector_cross(params->D, CQ);
+    float   a = vector_dot(Z, Z);
+    float   b = 2 * vector_dot(Z, X);
+    float   c = vector_dot(X, X) - (rtv->cylinders[idx].radius_squared * vector_dot(CQ, CQ));
+    float	sqrt;
+    sqrt = sqrtf((b * b) - (4.0 * a * c));
+    if (sqrt < 0) {
 		t[0] = 1.0 / 0.0;
 		t[1] = 1.0 / 0.0;
 		return;
 	}
-    t[0] = (-b - (delta)) / (2.0 * a);
-    t[1] = (-b + (delta)) / (2.0 * a);
-	return;
-
-
-
-	// t_vector_4 C = rtv->cylinders[idx].position;
-	// t_vector_4 CO = vector_sub(params->O, C);
-
-	// t_vector_4 X = vector_cross(CO, rtv->cylinders[idx].normal);
-	// // t_vector_4 Y = vector_normalize(params->D);
-	// // t_vector_4 Z = vector_normalize(vector_cross(Y, rtv->cylinders[idx].normal));
-	// t_vector_4 Z = vector_cross(params->D, rtv->cylinders[idx].normal);
-
-	// float a = vector_dot(Z, Z);
-	// float b = 2 * vector_dot(Z, X);
-	// float c = vector_dot(X, X) - rtv->cylinders[idx].radius_squared * vector_dot(CO, CO);
-
-	// float sqrt = b * b - 4 * a * c;
-	// if (sqrt < 0) {
-	// 	t[0] = 1.0 / 0.0;
-	// 	t[1] = 1.0 / 0.0;
-	// 	return;
-	// }
-
-	// t[0] = (-1 * b + sqrtf(sqrt)) / (2 * a);
-	// t[1] = (-1 * b - sqrtf(sqrt)) / (2 * a);
+    t[0] = (-1 * b - sqrt) / (2.0 * a);
+    t[1] = (-1 * b + sqrt) / (2.0 * a);
 }
 
 t_intersection	intersection_cylinder_closest(t_rtv *rtv, t_intersect_params *params)

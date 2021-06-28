@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/28 22:08:18 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/28 22:37:13 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,17 +85,29 @@ int	main(void)
 
 	for (t_byte i = 0; i < MAX_CYLINDERS; i++) {
 		ft_memcpy(rtv.cylinders + i, &((t_cylinder) {
-			{ 0, 0, 0, 0 },
-			{ 0, 0, 0, 0 },
+			{
+				{ 0, 0, 0, 0 },
+				{ 0, 0, 0, 0 },
+			},
 			0,
 			0,
 			0,
 			0
 		}), sizeof(t_cylinder));
 	}
+	// ft_memcpy(rtv.cylinders + 0, &((t_cylinder) {
+	// 	vector_new(0.f, 0.f, 10.f, 1),
+	// 	vector_new(5.f, 10.f, 10.f, 1),
+	// 	color_new(255, 255, 255),
+	// 	1.f,
+	// 	1000.0f,
+	// 	TRAIT_EXISTS
+	// }), sizeof(t_cylinder));
 	ft_memcpy(rtv.cylinders + 0, &((t_cylinder) {
-		vector_new(0.f, 0.f, 10.f, 1),
-		vector_new(5.f, 10.f, 10.f, 1),
+		{
+			vector_new(0.f, 0.f, 10.f, 1.f),
+			vector_new(5.f, 10.f, 10.f, 1.f),
+		},
 		color_new(255, 255, 255),
 		1.f,
 		1000.0f,

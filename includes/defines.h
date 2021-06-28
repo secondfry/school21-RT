@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/28 22:02:21 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/28 22:36:22 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct	s_intersection
 # define MAX_VECTORS_WORKER	7
 # define MAX_FLOATS_WORKER 3
 # define MAX_VECTORS_SPHERE 2
+# define MAX_VECTORS_CYLINDER 3
 
 # define FIGURES 3
 
@@ -119,10 +120,13 @@ typedef struct	s_plane
 	t_byte		traits;
 }				t_plane;
 
+# define VCTR_CYLINDER_C0 0
+# define VCTR_CYLINDER_C1 1
+# define VCTR_CYLINDER_C0C1 2
+
 typedef struct	s_cylinder
 {
-	t_vector_4	position;
-	t_vector_4	normal;
+	t_vector_4	vectors[MAX_VECTORS_CYLINDER];
 	t_color		color;
 	float		radius_squared;
 	float		specular;
