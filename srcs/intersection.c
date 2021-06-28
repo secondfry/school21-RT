@@ -2,7 +2,7 @@
 
 t_intersection intersection_closest(t_rtv *rtv, t_intersect_params *params)
 {
-	t_intersection	results[2];
+	t_intersection	results[FIGURES];
 	t_intersection	res;
 
 	res.distance = 1.0 / 0.0;
@@ -12,5 +12,8 @@ t_intersection intersection_closest(t_rtv *rtv, t_intersect_params *params)
 	results[IPLANE] = intersection_plane_closest(rtv, params);
 	if (results[IPLANE].distance < res.distance)
 		res = results[IPLANE];
+	results[ICYLINDER] = intersection_cylinder_closest(rtv, params);
+	if (results[ICYLINDER].distance < res.distance)
+		res = results[ICYLINDER];
 	return res;
 }

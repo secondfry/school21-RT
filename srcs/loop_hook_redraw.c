@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 18:36:23 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/28 21:57:36 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,12 @@ static t_light_params get_light_params(t_rtv *rtv, t_intersection *intr)
 			rtv->planes[intr->idx].color,
 			rtv->planes[intr->idx].specular
 		});
+	if (intr->type == ICYLINDER)
+		return ((t_light_params) {
+			rtv->cylinders[intr->idx].position,
+			rtv->cylinders[intr->idx].color,
+			rtv->cylinders[intr->idx].specular
+		});
 	return ((t_light_params) {});
 }
 
@@ -114,7 +120,7 @@ static t_color pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 {
 	const t_light_params params = get_light_params(rtv, intr);
 	const t_vector_4 P = vector_add(data->vectors[VCTR_O], vector_mult(data->vectors[VCTR_D], intr->distance));
-	const t_vector_4 N = intr->type == ISPHERE ? vector_sub(P, params.C) : rtv->planes[intr->idx].normal;
+	const t_vector_4 N = intr->type == IPLANE ? rtv->planes[intr->idx].normal : vector_sub(P, params.C);
 	const t_vector_4 NN = vector_normalize(N);
 	const t_vector_4 V = vector_mult(data->vectors[VCTR_D], -1);
 	float intensity = light(rtv, P, NN, V, params.specular);

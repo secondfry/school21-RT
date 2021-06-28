@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/31 13:57:53 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:22:31 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/28 21:06:09 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ t_vector_4	vector_normalize(t_vector_4 a)
 
 	length = vector_length(a);
 	return ((t_vector_4) { a.x / length, a.y / length, a.z / length, a.w / length });
+}
+
+t_vector_4	vector_cross(t_vector_4 a, t_vector_4 b)
+{
+	return ((t_vector_4) {
+		a.y * b.z - a.z * b.y,
+		a.z * b.x - a.x * b.z,
+		a.x * b.y - a.y * b.x,
+		0
+	});
 }
 
 void	vector_set(t_vector_4 *dst, t_vector_4 *src)

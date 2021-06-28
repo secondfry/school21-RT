@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/27 16:53:46 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/28 22:02:21 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,18 @@ typedef struct	s_intersection
 
 # define ISPHERE	0
 # define IPLANE		1
+# define ICYLINDER	2
 
 # define MAX_SPHERES	10
 # define MAX_PLANES		10
+# define MAX_CYLINDERS	10
 # define MAX_PLIGHTS	5
 # define MAX_DLIGHTS	5
 # define MAX_VECTORS_WORKER	7
 # define MAX_FLOATS_WORKER 3
 # define MAX_VECTORS_SPHERE 2
+
+# define FIGURES 3
 
 typedef struct	s_sphere
 {
@@ -114,6 +118,16 @@ typedef struct	s_plane
 	float		specular;
 	t_byte		traits;
 }				t_plane;
+
+typedef struct	s_cylinder
+{
+	t_vector_4	position;
+	t_vector_4	normal;
+	t_color		color;
+	float		radius_squared;
+	float		specular;
+	t_byte		traits;
+}				t_cylinder;
 
 typedef struct	s_plight
 {
@@ -139,6 +153,7 @@ typedef struct s_rtv
 	t_matrix_4	camera_rotation;
 	t_sphere	spheres[MAX_SPHERES];
 	t_plane		planes[MAX_PLANES];
+	t_cylinder	cylinders[MAX_CYLINDERS];
 	float		ambient;
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
