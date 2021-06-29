@@ -33,7 +33,11 @@ t_level	*level_from_line(const char *line) {
 		i++;
 	if (line[i] == 0)
 		check(1, 1, ERR_PARSER_NO_COLON);
-	t_byte key_len = i - offset;
+	t_byte q = i - 1;
+	while (line[q] == ' ')
+		q--;
+	q++;
+	t_byte key_len = q - offset;
 	char *key = ft_strsub(line, offset, key_len);
 	i++;
 	while (line[i] && line[i] == ' ')

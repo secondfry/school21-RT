@@ -31,8 +31,30 @@ TEST(ParserTestLevelFromLine, RootLineNode) {
   EXPECT_EQ(level->data->used, 0);
 }
 
+TEST(ParserTestLevelFromLine, RootLineNodeWithKeySuffixSpaces) {
+  std::string line("hello     :");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_STREQ(level->key, "hello");
+  EXPECT_EQ(level->type, LTYPE_NODE);
+  EXPECT_EQ(level->offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_EQ(level->value, (void *)0);
+  EXPECT_EQ(level->data->used, 0);
+}
+
 TEST(ParserTestLevelFromLine, RootLineNodeWithSuffixSpaces) {
   std::string line("hello:    ");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_STREQ(level->key, "hello");
+  EXPECT_EQ(level->type, LTYPE_NODE);
+  EXPECT_EQ(level->offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_EQ(level->value, (void *)0);
+  EXPECT_EQ(level->data->used, 0);
+}
+
+TEST(ParserTestLevelFromLine, RootLineNodeWithSpaces) {
+  std::string line("hello    :    ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
@@ -53,8 +75,30 @@ TEST(ParserTestLevelFromLine, LineNode) {
   EXPECT_EQ(level->data->used, 0);
 }
 
+TEST(ParserTestLevelFromLine, LineNodeWithKeySuffixSpaces) {
+  std::string line("  hello      :");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_STREQ(level->key, "hello");
+  EXPECT_EQ(level->type, LTYPE_NODE);
+  EXPECT_EQ(level->offset, 2);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_EQ(level->value, (void *)0);
+  EXPECT_EQ(level->data->used, 0);
+}
+
 TEST(ParserTestLevelFromLine, LineNodeWithSuffixSpaces) {
   std::string line("  hello:   ");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_STREQ(level->key, "hello");
+  EXPECT_EQ(level->type, LTYPE_NODE);
+  EXPECT_EQ(level->offset, 2);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_EQ(level->value, (void *)0);
+  EXPECT_EQ(level->data->used, 0);
+}
+
+TEST(ParserTestLevelFromLine, LineNodeWithSpaces) {
+  std::string line("  hello  :   ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
@@ -97,8 +141,30 @@ TEST(ParserTestLevelFromLine, LineLeaf) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
+TEST(ParserTestLevelFromLine, LineLeafWithKeySuffixSpaces) {
+  std::string line("  hello          : world");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_STREQ(level->key, "hello");
+  EXPECT_EQ(level->type, LTYPE_LEAF);
+  EXPECT_EQ(level->offset, 2);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_STREQ(level->value, "world");
+  EXPECT_EQ(level->data, (void *)0);
+}
+
 TEST(ParserTestLevelFromLine, LineLeafWithSuffixSpaces) {
   std::string line("  hello: world  ");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_STREQ(level->key, "hello");
+  EXPECT_EQ(level->type, LTYPE_LEAF);
+  EXPECT_EQ(level->offset, 2);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_STREQ(level->value, "world");
+  EXPECT_EQ(level->data, (void *)0);
+}
+
+TEST(ParserTestLevelFromLine, LineLeafWithSpaces) {
+  std::string line("  hello : world  ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_LEAF);
