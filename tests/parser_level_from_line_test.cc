@@ -82,7 +82,7 @@ TEST(ParserTestLevelFromLine, RootLineLeafWithSuffixSpaces) {
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 0);
   EXPECT_EQ(level->parent, (void *)0);
-  EXPECT_STREQ(level->value, "world  ");
+  EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
 }
 
@@ -104,7 +104,7 @@ TEST(ParserTestLevelFromLine, LineLeafWithSuffixSpaces) {
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 2);
   EXPECT_EQ(level->parent, (void *)0);
-  EXPECT_STREQ(level->value, "world  ");
+  EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
 }
 
@@ -117,7 +117,7 @@ TEST(ParserTestLevelFromLine, RootLineLeafWithInbetweenSpaces) {
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 0);
   EXPECT_EQ(level->parent, (void *)0);
-  EXPECT_STREQ(level->value, "w o r l d  ");
+  EXPECT_STREQ(level->value, "w o r l d");
   EXPECT_EQ(level->data, (void *)0);
 }
 
@@ -128,7 +128,7 @@ TEST(ParserTestLevelFromLine, LineLeafWithInbetweenSpaces) {
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 2);
   EXPECT_EQ(level->parent, (void *)0);
-  EXPECT_STREQ(level->value, "w o r l d  ");
+  EXPECT_STREQ(level->value, "w o r l d");
   EXPECT_EQ(level->data, (void *)0);
 }
 

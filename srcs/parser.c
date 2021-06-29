@@ -49,7 +49,11 @@ t_level	*level_from_line(const char *line) {
 	else
 	{
 		ret->type = LTYPE_LEAF;
-		ret->value = ft_strsub(line, i, ft_strlen(line) - i);
+		t_byte q = ft_strlen(line) - 1;
+		while (line[q] == ' ')
+			q--;
+		q++;
+		ret->value = ft_strsub(line, i, q - i);
 	}
 
 	return ret;
