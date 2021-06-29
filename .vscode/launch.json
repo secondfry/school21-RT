@@ -2,20 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "(gdb) Launch (WSL)",
+      "name": "(gtest) Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/RTv1",
-      "args": [],
-      "stopAtEntry": false,
+      "program": "${workspaceFolder}/build/parser_test",
+      "stopAtEntry": true,
       "cwd": "${workspaceFolder}",
-      "environment": [
-        {
-          "name": "DISPLAY",
-          "value": "127.0.0.1:0.0"
-        }
-      ],
-      "MIMode": "gdb",
+      "environment": [],
+      "MIMode": "lldb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
@@ -23,7 +17,7 @@
           "ignoreFailures": true
         }
       ],
-      "preLaunchTask": "make debug_wsl"
+      "preLaunchTask": "CMake Test Build"
     },
     {
       "name": "(gdb) Launch (local)",
@@ -71,6 +65,30 @@
         }
       ],
       "preLaunchTask": "make debug"
+    },
+    {
+      "name": "(gdb) Launch (WSL)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/RTv1",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [
+        {
+          "name": "DISPLAY",
+          "value": "127.0.0.1:0.0"
+        }
+      ],
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "make debug_wsl"
     }
   ]
 }

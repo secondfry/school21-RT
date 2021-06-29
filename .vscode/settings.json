@@ -45,7 +45,8 @@
 		"system_error": "c",
 		"tuple": "c",
 		"type_traits": "c",
-		"vector": "c"
+		"vector": "c",
+		"__config": "cpp"
 	},
 	"editor.formatOnSave": false
 }

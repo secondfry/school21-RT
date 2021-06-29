@@ -15,13 +15,24 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
+include_directories(
+  includes
+  libft
+)
+link_directories(
+  libft
+)
 add_executable(
   parser_test
-  tests/parser_test.cc
+  tests/parser_level_from_line_test.cc
+  includes/parser.h
+  srcs/parser.c
+  srcs/graceful.c
 )
 target_link_libraries(
   parser_test
   gtest_main
+  ft
 )
 
 include(GoogleTest)
