@@ -31,7 +31,21 @@
 		"intersection.h": "c",
 		"intersection_cylinder.h": "c",
 		"intersection_cone.h": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"__bit_reference": "c",
+		"__functional_base": "c",
+		"atomic": "c",
+		"chrono": "c",
+		"__memory": "c",
+		"iterator": "c",
+		"limits": "c",
+		"memory": "c",
+		"optional": "c",
+		"ratio": "c",
+		"system_error": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"vector": "c"
 	},
 	"editor.formatOnSave": false
 }

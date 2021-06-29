@@ -1,7 +1,8 @@
 #include "parser.h"
 
-#define LTYPE_NODE	0
-#define LTYPE_LEAF	1
+#define LTYPE_UNSET	0
+#define LTYPE_NODE	1
+#define LTYPE_LEAF	2
 
 typedef struct s_level {
 	char		*key;
@@ -9,6 +10,7 @@ typedef struct s_level {
 	t_ptr_array	*data;
 	t_byte		type;
 	t_level		*parent;
+	t_byte		offset;
 }				t_level;
 
 static t_byte	count_offset(char *line) {
@@ -18,54 +20,55 @@ static t_byte	count_offset(char *line) {
 	return (i);
 }
 
-static t_byte	get_type(char *line) {
-	char **data = ft_strsplit(line, ':');
-	t_byte i = 0;
-	while (data[i]) {
-		free(data[i]);
-		i++;
-	}
-	free(data);
-	if (i == 1) return LTYPE_NODE;
-	if (i == 2) return LTYPE_LEAF;
-	ft_putendl_fd("kurarek mnogo :::::::: bratan", 2);
-	exit(0);
-}
-
-static char *get_key(char *line) {
-	char **data = ft_strsplit(line, ':');
-	char *ret = data[0];
-	t_byte i = 1;
-	while (data[i]) {
-		free(data[i]);
-		i++;
-	}
-	free(data);
-	if (ft_strlen(ret) == 0 || ret[0] != '"' || ret[ft_strlen(ret) - 1] != '"') {
-		ft_putendl_fd("key must start and end with \"", 2);
-		exit(0);
-	}
-	return (ret);
-}
-
-static char *get_value(char *line) {
-	char **data = ft_strsplit(line, ':');
-	char *ret = data[1];
-	free(data[0]);
-	free(data);
-	return (ret);
-}
-
-t_level	*level_new(t_level *parent, t_byte type) {
+t_level	*level_new() {
 	t_level *ret;
 
 	ret = (t_level *)malloc(sizeof(t_level));
 	ft_ptr_check(ret, ERR_MEM_MSG, 0);
 	ret->key = (void *)0;
 	ret->data = ptr_array_new(10);
-	ret->type = type;
-	ret->parent = parent;
+	ret->type = LTYPE_UNSET;
+	ret->parent = (void *)0;
 	return (ret);
+}
+
+t_level	*level_from_line(char *line) {
+	t_level	*ret;
+
+	t_byte i = 0;
+	while (line[i] && line[i] == ' ')
+		i++;
+	if (line[i] == 0)
+		return (0);
+	t_byte offset = i;
+	while (line[i] && line[i] != ':')
+		i++;
+	if (line[i] == 0)
+		check(1, 1, "Line must either be filled with spaces which I disgrace because you should really not fill your configuration files with extra unneeded spaces but for some reason I have to workaround this exact\n or have colon in it.");
+	t_byte key_len = i - offset;
+	char *key = ft_strsub(line, offset, key_len);
+	i++;
+	while (line[i] && line[i] == ' ')
+		i++;
+	ret = level_new();
+	ret->key = key;
+	if (line[i] == 0)
+		ret->type = LTYPE_NODE;
+	else
+	{
+		ret->type = LTYPE_LEAF;
+		ret->value = ft_strsub(line, offset + key_len + 1, i - offset - key_len - 1);
+	}
+		
+	
+	char *colon = ft_strchr(line, ':');
+	check(!colon, 1, "Line must either be filled with spaces which I disgrace because you should really not fill your configuration files with extra unneeded spaces but for some reason I have to workaround this exact\n or have colon in it.");
+
+	
+
+	char **data = ft_strsplit(line, ':');
+	t_byte i = 0;
+	
 }
 
 static void read_lights(int fd)
