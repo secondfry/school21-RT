@@ -108,6 +108,30 @@ TEST(ParserTestLevelFromLine, LineLeafWithSuffixSpaces) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
+// Questionable cases
+
+TEST(ParserTestLevelFromLine, RootLineLeafWithInbetweenSpaces) {
+  std::string line("h e l l o: w o r l d  ");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_STREQ(level->key, "h e l l o");
+  EXPECT_EQ(level->type, LTYPE_LEAF);
+  EXPECT_EQ(level->offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_STREQ(level->value, "w o r l d  ");
+  EXPECT_EQ(level->data, (void *)0);
+}
+
+TEST(ParserTestLevelFromLine, LineLeafWithInbetweenSpaces) {
+  std::string line("  h e l l o: w o r l d  ");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_STREQ(level->key, "h e l l o");
+  EXPECT_EQ(level->type, LTYPE_LEAF);
+  EXPECT_EQ(level->offset, 2);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_STREQ(level->value, "w o r l d  ");
+  EXPECT_EQ(level->data, (void *)0);
+}
+
 // Invalid cases
 
 TEST(ParserTestLevelFromLine, RootLineNoColon) {
