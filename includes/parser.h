@@ -20,11 +20,22 @@ typedef struct s_level {
 	t_byte			type;
 	struct s_level	*parent;
 	t_byte			offset;
+	t_byte			child_offset;
 }				t_level;
 
 # define ERR_PARSER_NO_COLON "Line must either be filled with spaces which I disgrace because you should really not fill your configuration files with extra unneeded spaces but for some reason I have to workaround this exact condition...\n or have colon in it."
+# define ERR_PARSER_ARGC "Provide scene argument, please. Must be an accesible oadYAML file."
+# define ERR_PARSER_OPEN "Can't open provided argument as file."
+# define ERR_PARSER_READ "Can't read from file. Is it a file?"
+# define ERR_PARSER_GNL "Could read from file, but can't anymore. Strange..."
+# define ERR_PARSER_INVALID_OFFSETS "Your oadYAML has wrong line offsets."
+# define ERR_PARSER_EMPTY_NODE "Your oadYAML has empty nodes."
 
+void	parser(t_rtv *rtv, int argc, char **argv);
+
+int		check_arguments(int argc, char **argv);
+
+t_level	*parse(int fd);
 t_level	*level_from_line(const char *line);
-void	parser(t_rtv *rtv, int fd);
 
 #endif

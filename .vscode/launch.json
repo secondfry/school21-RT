@@ -6,6 +6,9 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/build/parser_test",
+      "args": [
+        "--gtest_filter=ParserParseTest.*"
+      ],
       "stopAtEntry": true,
       "cwd": "${workspaceFolder}",
       "environment": [],

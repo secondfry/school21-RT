@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/28 22:48:59 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/06/30 22:01:36 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,11 @@ typedef struct	s_sphere
 	float		radius_squared;
 	float		specular;
 	t_byte		traits;
+
+# ifdef __cplusplus
+	s_sphere() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 0.f, 0.f, 0.f }} {}
+# endif
+
 }				t_sphere;
 
 # define VCTR_C 0
@@ -121,6 +126,11 @@ typedef struct	s_plane
 	t_color		color;
 	float		specular;
 	t_byte		traits;
+
+# ifdef __cplusplus
+	s_plane() : position{ 0.f, 0.f, 0.f, 1.f }, normal{ 0.f, 1.f, 0.f, 0.f } {}
+# endif
+
 }				t_plane;
 
 # define VCTR_CYLINDER_C0 0
@@ -134,6 +144,11 @@ typedef struct	s_cylinder
 	float		radius_squared;
 	float		specular;
 	t_byte		traits;
+
+# ifdef __cplusplus
+	s_cylinder() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 0.f }} {}
+# endif
+
 }				t_cylinder;
 
 # define VCTR_CONE_C0	0
@@ -147,6 +162,11 @@ typedef struct	s_cone
 	float		angle;
 	float		specular;
 	t_byte		traits;
+
+# ifdef __cplusplus
+	s_cone() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 0.f }} {}
+# endif
+
 }				t_cone;
 
 typedef struct	s_plight
@@ -154,6 +174,11 @@ typedef struct	s_plight
 	t_vector_4	position;
 	float		intensity;
 	t_byte		traits;
+
+# ifdef __cplusplus
+	s_plight() : position{ 0.f, 0.f, 0.f, 1.f } {}
+# endif
+
 }				t_plight;
 
 typedef struct	s_dlight
@@ -161,6 +186,11 @@ typedef struct	s_dlight
 	t_vector_4	direction;
 	float		intensity;
 	t_byte		traits;
+
+# ifdef __cplusplus
+	s_dlight() : direction{ -1.f, -1.f, -1.f, 0.f } {}
+# endif
+
 }				t_dlight;
 
 typedef struct s_rtv
@@ -178,6 +208,11 @@ typedef struct s_rtv
 	float		ambient;
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
+
+# ifdef __cplusplus
+	s_rtv() : camera_position{ 0.f, 0.f, 0.f, 1.f } {}
+# endif
+
 } t_rtv;
 
 # define VCTR_O	0

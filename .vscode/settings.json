@@ -95,7 +95,8 @@
 		"unordered_map": "cpp",
 		"unordered_set": "cpp",
 		"utility": "cpp",
-		"variant": "cpp"
+		"variant": "cpp",
+		"array.h": "c"
 	},
 	"editor.formatOnSave": false
 }

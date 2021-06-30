@@ -1,13 +1,7 @@
 #include "parser.h"
 
-static t_byte	count_offset(char *line) {
-	t_byte i = 0;
-	while (line[i] == ' ')
-		i++;
-	return (i);
-}
-
-t_level	*level_new() {
+t_level	*level_new()
+{
 	t_level *ret;
 
 	ret = (t_level *)malloc(sizeof(t_level));
@@ -17,7 +11,15 @@ t_level	*level_new() {
 	ret->parent = (void *)0;
 	ret->value = (void *)0;
 	ret->data = (void *)0;
+	ret->offset = 0;
+	ret->child_offset = 0;
 	return (ret);
+}
+
+void validate(t_rtv *rtv, t_level *root)
+{
+	(void)rtv;
+	(void)root;
 }
 
 t_level	*level_from_line(const char *line) {
@@ -63,59 +65,73 @@ t_level	*level_from_line(const char *line) {
 	return ret;
 }
 
-static void read_lights(int fd)
+int check_arguments(int argc, char **argv)
 {
-	static t_byte status;
-	char *line;
+	int	fd;
+	int	len;
 
-	if (status == 1) {
-		ft_putendl_fd("kurlyk lights already read", 2);
-		exit(1);
-	}
-	while (1) {
-		int gnl_status = get_next_line(fd, &line);
-		if (gnl_status == -1) {
-			ft_putendl_fd("kurlyk gnl failed", 2);
-			exit(1);
-		}
-		if (ft_strcmp(line, "lights:") == 0)
-		 	read_lights(fd);
-	}
+	check(argc != 2, 1, ERR_PARSER_ARGC);
+	fd = open(argv[argc - 1], O_RDONLY);
+	check(fd < 0, 1, ERR_PARSER_OPEN);
+	len = read(fd, 0, 0);
+	check(len < 0, 1, ERR_PARSER_READ);
+	return (fd);
 }
 
-void	parse(t_rtv *rtv, int argc, char **argv)
+t_level *parse(int fd)
 {
-	(void)rtv;
-	if (argc != 2) {
-		ft_putendl_fd("kurlyk 2 argumenta", 2);
-		exit(1);
-	}
-	int fd = open(argv[argc - 1], O_RDONLY);
-	if (fd < 0) {
-		ft_putendl_fd("kurlyk open failed", 2);
-		exit(1);
-	}
-	int read_status = read(fd, 0, 0);
-	if (read_status < 0) {
-		ft_putendl_fd("kurlyk read failed", 2);
-		exit(1);
-	}
-	char *line;
-	t_level	*root = level_new();
-	root->type = LTYPE_NODE;
-	t_level *current = root;
-	t_byte offset_prev = 0;
-	while (1) {
-		int gnl_status = get_next_line(fd, &line);
-		if (gnl_status == -1) {
-			ft_putendl_fd("kurlyk gnl failed", 2);
-			exit(1);
-		}
-		// if (offset == offset_prev) {
-		// 	level_new(current, )
-		// }
+	char	*line;
+	t_level	*root;
+	t_level	*parent;
+	t_level	*child;
+	int		gnl_status;
 
-		if (ft_strcmp(line, "lights:") == 0)
-		 	read_lights(fd);
+	root = level_new();
+	root->type = LTYPE_NODE;
+	parent = root;
+	while (1)
+	{
+		gnl_status = get_next_line(fd, &line);
+		check(gnl_status == -1, 1, ERR_PARSER_GNL);
+		if (gnl_status == 0)
+			break;
+		
+		child = level_from_line(line);
+		if (!child)
+		{
+			free(line);
+			continue;
+		}
+
+		if (parent->data->used == 0)
+		{
+			check(child->offset <= parent->child_offset, 1, ERR_PARSER_EMPTY_NODE);
+			parent->child_offset = child->offset;
+		}
+		else
+		{
+			while (parent->parent && child->offset <= parent->child_offset)
+				parent = parent->parent;
+			check(parent->child_offset != child->offset, 1, ERR_PARSER_INVALID_OFFSETS);
+		}
+		ptr_array_add(parent->data, child);
+		child->parent = parent;
+		if (child->type == LTYPE_NODE)
+			parent = child;
+		
+		free(line);
 	}
+	ft_putendl(line);
+	free(line);
+	return (root);
+}
+
+void parser(t_rtv *rtv, int argc, char **argv)
+{
+	int		fd;
+	t_level	*root;
+
+	fd = check_arguments(argc, argv);
+	root = parse(fd);
+	validate(rtv, root);
 }

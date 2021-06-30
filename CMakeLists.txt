@@ -25,6 +25,8 @@ link_directories(
 add_executable(
   parser_test
   tests/parser_level_from_line_test.cc
+  tests/parser_parse_test.cc
+  tests/parser_check_arguments_test.cc
   includes/parser.h
   srcs/parser.c
   srcs/graceful.c

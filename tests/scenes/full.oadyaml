@@ -1,0 +1,93 @@
+light:
+  point:
+    - position:
+        x: 2
+        y: 1
+        z: 0
+      intensity: 60
+  directional:
+    - direction:
+        x: 1
+        y: 4
+        z: 4
+      intensity: 20
+  ambient: 20
+
+sphere:
+  - position:
+      x: 0
+      y: -1
+      z: 3
+    color:
+      red: 255
+      green: 0
+      blue: 0
+    radius: 1
+    specular: 500
+  - position:
+      x: -2
+      y: 0
+      z: 4
+    color:
+      red: 0
+      green: 255
+      blue: 0
+    radius: 1
+    specular: 10
+  - position:
+      x: 2
+      y: 0
+      z: 4
+    color:
+      red: 0
+      green: 0
+      blue: 255
+    radius: 1
+    specular: 500
+
+plane:
+  - position:
+      x: 0
+      y: -1
+      z: 0
+    normal:
+      x: 0
+      y: 1
+      z: 0
+    color:
+      red: 255
+      green: 255
+      blue: 0
+    specular: 1000
+
+cylinder:
+  - position:
+      x: 1
+      y: 0
+      z: 10
+    direction:
+      x: 1
+      y: 10
+      z: 0
+    color:
+      red: 255
+      green: 255
+      blue: 255
+    radius: 1
+    specular: 1000
+
+cone:
+  - position:
+      x: -1
+      y: 0
+      z: 10
+    direction:
+      x: -1
+      y: 10
+      z: 0
+    color:
+      red: 255
+      green: 0
+      blue: 255
+    angle: 10
+    specular: 1000
