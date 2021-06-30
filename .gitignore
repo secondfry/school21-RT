@@ -98,6 +98,7 @@ minilibx-linux/test/mlx-test
 *.swiftdoc
 *.swiftsourceinfo
 build/parser_test
+build/.cmake/api
 
 # CMake
 CMakeLists.txt.user

@@ -8,19 +8,19 @@ extern "C" {
 
 // Valid cases
 
-TEST(ParserTestLevelFromLine, EmptyLine) {
+TEST(ParserLevelFromLineTest, EmptyLine) {
   std::string line("");
   t_level *level = level_from_line(line.c_str());
   EXPECT_EQ(level, (void *)0);
 }
 
-TEST(ParserTestLevelFromLine, LineWithSpaces) {
+TEST(ParserLevelFromLineTest, LineWithSpaces) {
   std::string line("    ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_EQ(level, (void *)0);
 }
 
-TEST(ParserTestLevelFromLine, RootLineNode) {
+TEST(ParserLevelFromLineTest, RootLineNode) {
   std::string line("hello:");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -31,7 +31,7 @@ TEST(ParserTestLevelFromLine, RootLineNode) {
   EXPECT_EQ(level->data->used, 0);
 }
 
-TEST(ParserTestLevelFromLine, RootLineNodeWithKeySuffixSpaces) {
+TEST(ParserLevelFromLineTest, RootLineNodeWithKeySuffixSpaces) {
   std::string line("hello     :");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -42,7 +42,7 @@ TEST(ParserTestLevelFromLine, RootLineNodeWithKeySuffixSpaces) {
   EXPECT_EQ(level->data->used, 0);
 }
 
-TEST(ParserTestLevelFromLine, RootLineNodeWithSuffixSpaces) {
+TEST(ParserLevelFromLineTest, RootLineNodeWithSuffixSpaces) {
   std::string line("hello:    ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -53,7 +53,7 @@ TEST(ParserTestLevelFromLine, RootLineNodeWithSuffixSpaces) {
   EXPECT_EQ(level->data->used, 0);
 }
 
-TEST(ParserTestLevelFromLine, RootLineNodeWithSpaces) {
+TEST(ParserLevelFromLineTest, RootLineNodeWithSpaces) {
   std::string line("hello    :    ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -64,7 +64,7 @@ TEST(ParserTestLevelFromLine, RootLineNodeWithSpaces) {
   EXPECT_EQ(level->data->used, 0);
 }
 
-TEST(ParserTestLevelFromLine, LineNode) {
+TEST(ParserLevelFromLineTest, LineNode) {
   std::string line("  hello:");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -75,7 +75,7 @@ TEST(ParserTestLevelFromLine, LineNode) {
   EXPECT_EQ(level->data->used, 0);
 }
 
-TEST(ParserTestLevelFromLine, LineNodeWithKeySuffixSpaces) {
+TEST(ParserLevelFromLineTest, LineNodeWithKeySuffixSpaces) {
   std::string line("  hello      :");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -86,7 +86,7 @@ TEST(ParserTestLevelFromLine, LineNodeWithKeySuffixSpaces) {
   EXPECT_EQ(level->data->used, 0);
 }
 
-TEST(ParserTestLevelFromLine, LineNodeWithSuffixSpaces) {
+TEST(ParserLevelFromLineTest, LineNodeWithSuffixSpaces) {
   std::string line("  hello:   ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -97,7 +97,7 @@ TEST(ParserTestLevelFromLine, LineNodeWithSuffixSpaces) {
   EXPECT_EQ(level->data->used, 0);
 }
 
-TEST(ParserTestLevelFromLine, LineNodeWithSpaces) {
+TEST(ParserLevelFromLineTest, LineNodeWithSpaces) {
   std::string line("  hello  :   ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -108,7 +108,7 @@ TEST(ParserTestLevelFromLine, LineNodeWithSpaces) {
   EXPECT_EQ(level->data->used, 0);
 }
 
-TEST(ParserTestLevelFromLine, RootLineLeaf) {
+TEST(ParserLevelFromLineTest, RootLineLeaf) {
   std::string line("hello: world");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -119,7 +119,7 @@ TEST(ParserTestLevelFromLine, RootLineLeaf) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
-TEST(ParserTestLevelFromLine, RootLineLeafWithSuffixSpaces) {
+TEST(ParserLevelFromLineTest, RootLineLeafWithSuffixSpaces) {
   std::string line("hello: world  ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -130,7 +130,7 @@ TEST(ParserTestLevelFromLine, RootLineLeafWithSuffixSpaces) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
-TEST(ParserTestLevelFromLine, LineLeaf) {
+TEST(ParserLevelFromLineTest, LineLeaf) {
   std::string line("  hello: world");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -141,7 +141,7 @@ TEST(ParserTestLevelFromLine, LineLeaf) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
-TEST(ParserTestLevelFromLine, LineLeafWithKeySuffixSpaces) {
+TEST(ParserLevelFromLineTest, LineLeafWithKeySuffixSpaces) {
   std::string line("  hello          : world");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -152,7 +152,7 @@ TEST(ParserTestLevelFromLine, LineLeafWithKeySuffixSpaces) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
-TEST(ParserTestLevelFromLine, LineLeafWithSuffixSpaces) {
+TEST(ParserLevelFromLineTest, LineLeafWithSuffixSpaces) {
   std::string line("  hello: world  ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -163,7 +163,7 @@ TEST(ParserTestLevelFromLine, LineLeafWithSuffixSpaces) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
-TEST(ParserTestLevelFromLine, LineLeafWithSpaces) {
+TEST(ParserLevelFromLineTest, LineLeafWithSpaces) {
   std::string line("  hello : world  ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "hello");
@@ -176,7 +176,7 @@ TEST(ParserTestLevelFromLine, LineLeafWithSpaces) {
 
 // Questionable cases
 
-TEST(ParserTestLevelFromLine, RootLineLeafWithInbetweenSpaces) {
+TEST(ParserLevelFromLineTest, RootLineLeafWithInbetweenSpaces) {
   std::string line("h e l l o: w o r l d  ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "h e l l o");
@@ -187,7 +187,7 @@ TEST(ParserTestLevelFromLine, RootLineLeafWithInbetweenSpaces) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
-TEST(ParserTestLevelFromLine, LineLeafWithInbetweenSpaces) {
+TEST(ParserLevelFromLineTest, LineLeafWithInbetweenSpaces) {
   std::string line("  h e l l o: w o r l d  ");
   t_level *level = level_from_line(line.c_str());
   EXPECT_STREQ(level->key, "h e l l o");
@@ -200,32 +200,32 @@ TEST(ParserTestLevelFromLine, LineLeafWithInbetweenSpaces) {
 
 // Invalid cases
 
-TEST(ParserTestLevelFromLine, RootLineNoColon) {
+TEST(ParserLevelFromLineTest, RootLineNoColon) {
   std::string line("hello");
-  ASSERT_DEATH( { level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
 }
 
-TEST(ParserTestLevelFromLine, LineNoColon) {
+TEST(ParserLevelFromLineTest, LineNoColon) {
   std::string line("   hello");
-  ASSERT_DEATH( { level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
 }
 
-TEST(ParserTestLevelFromLine, RootLineNoColonWithSuffixSpaces) {
+TEST(ParserLevelFromLineTest, RootLineNoColonWithSuffixSpaces) {
   std::string line("hello   ");
-  ASSERT_DEATH( { level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
 }
 
-TEST(ParserTestLevelFromLine, RootLineNoColonWithInsideSpaces) {
+TEST(ParserLevelFromLineTest, RootLineNoColonWithInsideSpaces) {
   std::string line("h e l l o");
-  ASSERT_DEATH( { level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
 }
 
-TEST(ParserTestLevelFromLine, RootLineNoColonWithSpaces) {
+TEST(ParserLevelFromLineTest, RootLineNoColonWithSpaces) {
   std::string line("h e l l o   ");
-  ASSERT_DEATH( { level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
 }
 
-TEST(ParserTestLevelFromLine, LineNoColonWithSpaces) {
+TEST(ParserLevelFromLineTest, LineNoColonWithSpaces) {
   std::string line("   h e l l o   ");
-  ASSERT_DEATH( { level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
 }
