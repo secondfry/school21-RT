@@ -97,11 +97,7 @@ t_level *parse(int fd)
 		gnl_status = get_next_line(fd, &line);
 		check(gnl_status == -1, 1, ERR_PARSER_GNL);
 		if (gnl_status == 0)
-		{
-			if (root != parent && parent->data->used == 0)
-				check(child->offset <= parent->child_offset, 1, ERR_PARSER_EMPTY_NODE);
 			break;
-		}
 		
 		child = level_from_line(line);
 		if (!child)
@@ -110,17 +106,12 @@ t_level *parse(int fd)
 			continue;
 		}
 
+		while (parent->parent && child->offset <= parent->child_offset)
+			parent = parent->parent;
 		if (parent->data->used == 0)
-		{
-			check(child->offset <= parent->child_offset, 1, ERR_PARSER_EMPTY_NODE);
 			parent->child_offset = child->offset;
-		}
 		else
-		{
-			while (parent->parent && child->offset <= parent->child_offset)
-				parent = parent->parent;
 			check(parent->child_offset != child->offset, 1, ERR_PARSER_INVALID_OFFSET);
-		}
 		ptr_array_add(parent->data, child);
 		child->parent = parent;
 		if (child->type == LTYPE_NODE)
