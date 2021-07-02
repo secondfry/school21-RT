@@ -16,7 +16,7 @@ TEST(ParserParseTest, ValidEmpty) {
     argv.push_back(const_cast<char*>(args[i].c_str()));
 
   int fd = check_arguments(args.size(), &argv[0]);
-  t_level *root = parse(fd);
+  t_level *root = parse(fd, (char *)0);
   EXPECT_EQ(root->offset, -2);
   EXPECT_EQ(root->child_offset, -2);
   EXPECT_EQ(root->data->used, 0);
@@ -35,7 +35,7 @@ TEST(ParserParseTest, ValidFull) {
     argv.push_back(const_cast<char*>(args[i].c_str()));
 
   int fd = check_arguments(args.size(), &argv[0]);
-  t_level *root = parse(fd);
+  t_level *root = parse(fd, (char *)0);
   EXPECT_EQ(root->offset, -2);
   EXPECT_EQ(root->child_offset, 0);
   EXPECT_EQ(root->data->used, 5);
@@ -55,7 +55,7 @@ TEST(ParserParseTest, ValidEmptyNode_0) {
     argv.push_back(const_cast<char*>(args[i].c_str()));
 
   int fd = check_arguments(args.size(), &argv[0]);
-  t_level *root = parse(fd);
+  t_level *root = parse(fd, (char *)0);
   EXPECT_EQ(root->offset, -2);
   EXPECT_EQ(root->child_offset, 0);
   EXPECT_EQ(root->data->used, 1);
@@ -83,7 +83,7 @@ TEST(ParserParseTest, ValidEmptyNode_1) {
     argv.push_back(const_cast<char*>(args[i].c_str()));
 
   int fd = check_arguments(args.size(), &argv[0]);
-  t_level *root = parse(fd);
+  t_level *root = parse(fd, (char *)0);
   EXPECT_EQ(root->offset, -2);
   EXPECT_EQ(root->child_offset, 0);
   EXPECT_EQ(root->data->used, 2);
@@ -122,7 +122,7 @@ TEST(ParserParseTest, ValidEmptyNode_2) {
     argv.push_back(const_cast<char*>(args[i].c_str()));
 
   int fd = check_arguments(args.size(), &argv[0]);
-  t_level *root = parse(fd);
+  t_level *root = parse(fd, (char *)0);
   EXPECT_EQ(root->offset, -2);
   EXPECT_EQ(root->child_offset, 0);
   EXPECT_EQ(root->data->used, 2);
@@ -162,7 +162,7 @@ TEST(ParserParseTest, ValidEmptyNode_3) {
     argv.push_back(const_cast<char*>(args[i].c_str()));
 
   int fd = check_arguments(args.size(), &argv[0]);
-  t_level *root = parse(fd);
+  t_level *root = parse(fd, (char *)0);
   EXPECT_EQ(root->offset, -2);
   EXPECT_EQ(root->child_offset, 0);
   EXPECT_EQ(root->data->used, 2);
@@ -218,7 +218,7 @@ TEST(ParserParseTest, InvalidOffset) {
       argv.push_back(const_cast<char*>(args[i].c_str()));
 
     int fd = check_arguments(args.size(), &argv[0]);
-    ASSERT_DEATH({ t_level *root = parse(fd); }, ERR_PARSER_INVALID_OFFSET);
+    ASSERT_DEATH({ t_level *root = parse(fd, (char *)0); }, ERR_PARSER_INVALID_OFFSET);
     close(fd);
   }
 }

@@ -1,6 +1,6 @@
 #include "parser.h"
 
-t_level	*level_new()
+t_level *level_new()
 {
 	t_level *ret;
 
@@ -22,8 +22,9 @@ void validate(t_rtv *rtv, t_level *root)
 	(void)root;
 }
 
-t_level	*level_from_line(const char *line) {
-	t_level	*ret;
+t_level *level_from_line(const char *line)
+{
+	t_level *ret;
 
 	t_byte i = 0;
 	while (line[i] && line[i] == ' ')
@@ -31,10 +32,45 @@ t_level	*level_from_line(const char *line) {
 	if (line[i] == 0)
 		return (0);
 	t_byte offset = i;
+
+	check(line[i] == '-' && line[i + 1] == 0, 1, ERR_PARSER_OADYAML_LIST_NAN);
+
+	if (line[i] == '-' && line[i + 1] == ' ')
+	{
+		ret = level_new();
+		ret->offset = offset;
+
+		i += 2;
+		while (line[i] && line[i] == ' ')
+			i++;
+
+		check(line[i] == 0, 1, ERR_PARSER_OADYAML_LIST_NAN);
+
+		offset = i;
+		while (line[i] && line[i] != ':')
+			i++;
+
+		if (line[i] == 0)
+		{
+			t_byte q = ft_strlen(line) - 1;
+			while (line[q] == ' ')
+				q--;
+			q++;
+			ret->value = ft_strsub(line, offset, q - offset);
+			ret->type = LTYPE_LIST_LEAF;
+		}
+		else
+		{
+			ret->data = ptr_array_new(10);
+			ret->type = LTYPE_LIST_NODE;
+		}
+
+		return ret;
+	}
+
 	while (line[i] && line[i] != ':')
 		i++;
-	if (line[i] == 0)
-		check(1, 1, ERR_PARSER_NO_COLON);
+	check(line[i] == 0, 1, ERR_PARSER_NO_COLON);
 	t_byte q = i - 1;
 	while (line[q] == ' ')
 		q--;
@@ -67,8 +103,8 @@ t_level	*level_from_line(const char *line) {
 
 int check_arguments(int argc, char **argv)
 {
-	int	fd;
-	int	len;
+	int fd;
+	int len;
 
 	check(argc != 2, 1, ERR_PARSER_ARGC);
 	fd = open(argv[argc - 1], O_RDONLY);
@@ -78,13 +114,13 @@ int check_arguments(int argc, char **argv)
 	return (fd);
 }
 
-t_level *parse(int fd)
+t_level *parse(int fd, char *initial)
 {
-	char	*line;
-	t_level	*root;
-	t_level	*parent;
-	t_level	*child;
-	int		gnl_status;
+	char *line;
+	t_level *root;
+	t_level *parent;
+	t_level *child;
+	int gnl_status;
 
 	root = level_new();
 	root->type = LTYPE_NODE;
@@ -92,13 +128,21 @@ t_level *parse(int fd)
 	root->child_offset = -2;
 	root->data = ptr_array_new(10);
 	parent = root;
+
 	while (1)
 	{
-		gnl_status = get_next_line(fd, &line);
-		check(gnl_status == -1, 1, ERR_PARSER_GNL);
-		if (gnl_status == 0)
-			break;
-		
+		if (initial)
+		{
+			line = initial;
+		}
+		else
+		{
+			gnl_status = get_next_line(fd, &line);
+			check(gnl_status == -1, 1, ERR_PARSER_GNL);
+			if (gnl_status == 0)
+				break;
+		}
+
 		child = level_from_line(line);
 		if (!child)
 		{
@@ -116,7 +160,7 @@ t_level *parse(int fd)
 		child->parent = parent;
 		if (child->type == LTYPE_NODE)
 			parent = child;
-		
+
 		free(line);
 	}
 	ft_putendl(line);
@@ -126,10 +170,10 @@ t_level *parse(int fd)
 
 void parser(t_rtv *rtv, int argc, char **argv)
 {
-	int		fd;
-	t_level	*root;
+	int fd;
+	t_level *root;
 
 	fd = check_arguments(argc, argv);
-	root = parse(fd);
+	root = parse(fd, (void *)0);
 	validate(rtv, root);
 }

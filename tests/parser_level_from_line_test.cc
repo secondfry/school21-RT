@@ -214,6 +214,78 @@ TEST(ParserLevelFromLineTest, LineLeafWithInbetweenSpaces) {
   EXPECT_EQ(level->data, (void *)0);
 }
 
+TEST(ParserLevelFromLineTest, RootLineListLeaf) {
+  std::string line("- world");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_EQ(level->key, (void *)0);
+  EXPECT_EQ(level->type, LTYPE_LIST_LEAF);
+  EXPECT_EQ(level->offset, 0);
+  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_STREQ(level->value, "world");
+  EXPECT_EQ(level->data, (void *)0);
+}
+
+TEST(ParserLevelFromLineTest, RootLineListLeafWithSpaces) {
+  std::string line("-         w o r l d   ");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_EQ(level->key, (void *)0);
+  EXPECT_EQ(level->type, LTYPE_LIST_LEAF);
+  EXPECT_EQ(level->offset, 0);
+  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_STREQ(level->value, "w o r l d");
+  EXPECT_EQ(level->data, (void *)0);
+}
+
+TEST(ParserLevelFromLineTest, LineListLeaf) {
+  std::string line("    - world");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_EQ(level->key, (void *)0);
+  EXPECT_EQ(level->type, LTYPE_LIST_LEAF);
+  EXPECT_EQ(level->offset, 4);
+  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_STREQ(level->value, "world");
+  EXPECT_EQ(level->data, (void *)0);
+}
+
+TEST(ParserLevelFromLineTest, LineListLeafWithSpaces) {
+  std::string line("    -       w o r l d   ");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_EQ(level->key, (void *)0);
+  EXPECT_EQ(level->type, LTYPE_LIST_LEAF);
+  EXPECT_EQ(level->offset, 4);
+  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_STREQ(level->value, "w o r l d");
+  EXPECT_EQ(level->data, (void *)0);
+}
+
+TEST(ParserLevelFromLineTest, RootLineListNode) {
+  std::string line("- skip: kripp");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_EQ(level->key, (void *)0);
+  EXPECT_EQ(level->type, LTYPE_LIST_NODE);
+  EXPECT_EQ(level->offset, 0);
+  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_EQ(level->value, (void *)0);
+  EXPECT_EQ(level->data->used, 0);
+}
+
+TEST(ParserLevelFromLineTest, LineListNode) {
+  std::string line("                - skip: kripp");
+  t_level *level = level_from_line(line.c_str());
+  EXPECT_EQ(level->key, (void *)0);
+  EXPECT_EQ(level->type, LTYPE_LIST_NODE);
+  EXPECT_EQ(level->offset, 16);
+  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->parent, (void *)0);
+  EXPECT_EQ(level->value, (void *)0);
+  EXPECT_EQ(level->data->used, 0);
+}
+
 // Invalid cases
 
 TEST(ParserLevelFromLineTest, RootLineNoColon) {
@@ -244,4 +316,24 @@ TEST(ParserLevelFromLineTest, RootLineNoColonWithSpaces) {
 TEST(ParserLevelFromLineTest, LineNoColonWithSpaces) {
   std::string line("   h e l l o   ");
   ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_NO_COLON);
+}
+
+TEST(ParserLevelFromLineTest, RootLineListNothingness) {
+  std::string line("-");
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_OADYAML_LIST_NAN);
+}
+
+TEST(ParserLevelFromLineTest, RootLineListNothingnessWithSpaces) {
+  std::string line("-       ");
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_OADYAML_LIST_NAN);
+}
+
+TEST(ParserLevelFromLineTest, LineListNothingness) {
+  std::string line("           -");
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_OADYAML_LIST_NAN);
+}
+
+TEST(ParserLevelFromLineTest, LineListNothingnessWithSpaces) {
+  std::string line("           -  ");
+  ASSERT_DEATH({ level_from_line(line.c_str()); }, ERR_PARSER_OADYAML_LIST_NAN);
 }

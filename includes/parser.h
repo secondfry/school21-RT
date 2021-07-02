@@ -9,9 +9,11 @@
 # include "get_next_line.h"
 # include "graceful.h"
 
-# define LTYPE_UNSET	0
-# define LTYPE_NODE	1
-# define LTYPE_LEAF	2
+# define LTYPE_UNSET		0
+# define LTYPE_NODE			1
+# define LTYPE_LEAF			2
+# define LTYPE_LIST_NODE	3
+# define LTYPE_LIST_LEAF	4
 
 typedef struct s_level {
 	char			*key;
@@ -30,12 +32,13 @@ typedef struct s_level {
 # define ERR_PARSER_GNL "Could read from file, but can't anymore. Strange..."
 # define ERR_PARSER_INVALID_OFFSET "Your oadYAML has wrong line offsets."
 # define ERR_PARSER_EMPTY_NODE "Your oadYAML has empty nodes."
+# define ERR_PARSER_OADYAML_LIST_NAN "Your oadYAML has empty list entry definition."
 
 void	parser(t_rtv *rtv, int argc, char **argv);
 
 int		check_arguments(int argc, char **argv);
 
-t_level	*parse(int fd);
+t_level *parse(int fd, char *initial);
 t_level	*level_from_line(const char *line);
 
 #endif
