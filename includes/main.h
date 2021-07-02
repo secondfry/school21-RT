@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:00:22 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 14:47:06 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/03 00:05:56 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@
 # include "graceful.h"
 # include "vector.h"
 # include "matrix_factory.h"
+# include "parser.h"
 
 #endif

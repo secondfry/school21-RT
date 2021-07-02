@@ -33,6 +33,12 @@ typedef struct s_level {
 # define ERR_PARSER_INVALID_OFFSET "Your oadYAML has wrong line offsets."
 # define ERR_PARSER_EMPTY_NODE "Your oadYAML has empty nodes."
 # define ERR_PARSER_OADYAML_LIST_NAN "Your oadYAML has empty list entry definition."
+# define ERR_VALIDATOR_ROOT_NODES "[validator] Root parts of configuration expected to be nodes."
+# define ERR_VALIDATOR_LIGHT_INCOMPLETE "[validator] Light configuration is incomplete."
+# define ERR_VALIDATOR_LIGHT_POINT_LIST "[validator] Point lights configuration members expected to list nodes."
+# define ERR_VALIDATOR_LIGHT_POINT_INVALID "[validator] Point light configuration is invalid."
+# define ERR_VALIDATOR_LIGHT_DIRECTIONAL_LIST "[validator] Directional lights configuration members expected to list nodes."
+# define ERR_VALIDATOR_LIGHT_DIRECTIONAL_INVALID "[validator] Directional light configuration is invalid."
 
 void	parser(t_rtv *rtv, int argc, char **argv);
 

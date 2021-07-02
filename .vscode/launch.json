@@ -28,7 +28,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/RTv1",
       "args": [
-        "maps/map_without_lf"
+        "tests/scenes/full.oadyaml"
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",

@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/28 23:08:07 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/03 00:16:08 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_defines(void)
 		graceful(ERR_INVALID_DEFINE, ERR_INVALID_DEFINE_MSG);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_rtv	rtv;
 	t_mlx	mlx;
@@ -136,11 +136,6 @@ int	main(void)
 			0
 		}), sizeof(t_plight));
 	}
-	ft_memcpy(rtv.plights + 0, &((t_plight) {
-		{ 2, 1, 0, 1 },
-		0.6f,
-		TRAIT_EXISTS
-	}), sizeof(t_plight));
 
 	for (t_byte i = 0; i < MAX_DLIGHTS; i++) {
 		ft_memcpy(rtv.dlights + i, &((t_dlight) {
@@ -149,16 +144,11 @@ int	main(void)
 			0
 		}), sizeof(t_dlight));
 	}
-	ft_memcpy(rtv.dlights + 0, &((t_dlight) {
-		vector_new(1, 4, 4, 0),
-		0.2f,
-		TRAIT_EXISTS
-	}), sizeof(t_dlight));
 
 	rtv.ambient = 0.2f;
 
 	check_defines();
-	// parser(&rtv, fd);
+	parser(&rtv, argc, argv);
 	init_mlx(&mlx);
 	init_mlx_image(&mlx);
 	rtv.mlx = &mlx;

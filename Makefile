@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/06/28 23:39:24 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/03 00:05:03 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC_FILES =	main.c \
 			loop_hook_redraw.c \
 			color.c \
 			intersection.c intersection_sphere.c intersection_plane.c intersection_cylinder.c intersection_cone.c \
-			parser.c
+			parser.c \
+			graceful.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o, $(SRCS))
