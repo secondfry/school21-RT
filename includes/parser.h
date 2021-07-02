@@ -38,7 +38,7 @@ void	parser(t_rtv *rtv, int argc, char **argv);
 
 int		check_arguments(int argc, char **argv);
 
-t_level *parse(int fd, char *initial);
+t_level *parse(int fd, char **memory);
 t_level	*level_from_line(const char *line);
 
 #endif

@@ -26,7 +26,7 @@ TEST(ParserLevelFromLineTest, RootLineNode) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -38,7 +38,7 @@ TEST(ParserLevelFromLineTest, RootLineNodeWithKeySuffixSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -50,7 +50,7 @@ TEST(ParserLevelFromLineTest, RootLineNodeWithSuffixSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -62,7 +62,7 @@ TEST(ParserLevelFromLineTest, RootLineNodeWithSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -74,7 +74,7 @@ TEST(ParserLevelFromLineTest, LineNode) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -86,7 +86,7 @@ TEST(ParserLevelFromLineTest, LineNodeWithKeySuffixSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -98,7 +98,7 @@ TEST(ParserLevelFromLineTest, LineNodeWithSuffixSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -110,7 +110,7 @@ TEST(ParserLevelFromLineTest, LineNodeWithSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_NODE);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -122,7 +122,7 @@ TEST(ParserLevelFromLineTest, RootLineLeaf) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
@@ -134,7 +134,7 @@ TEST(ParserLevelFromLineTest, RootLineLeafWithSuffixSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
@@ -146,7 +146,7 @@ TEST(ParserLevelFromLineTest, LineLeaf) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
@@ -158,7 +158,7 @@ TEST(ParserLevelFromLineTest, LineLeafWithKeySuffixSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
@@ -170,7 +170,7 @@ TEST(ParserLevelFromLineTest, LineLeafWithSuffixSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
@@ -182,7 +182,7 @@ TEST(ParserLevelFromLineTest, LineLeafWithSpaces) {
   EXPECT_STREQ(level->key, "hello");
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
@@ -196,7 +196,7 @@ TEST(ParserLevelFromLineTest, RootLineLeafWithInbetweenSpaces) {
   EXPECT_STREQ(level->key, "h e l l o");
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "w o r l d");
   EXPECT_EQ(level->data, (void *)0);
@@ -208,7 +208,7 @@ TEST(ParserLevelFromLineTest, LineLeafWithInbetweenSpaces) {
   EXPECT_STREQ(level->key, "h e l l o");
   EXPECT_EQ(level->type, LTYPE_LEAF);
   EXPECT_EQ(level->offset, 2);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "w o r l d");
   EXPECT_EQ(level->data, (void *)0);
@@ -220,7 +220,7 @@ TEST(ParserLevelFromLineTest, RootLineListLeaf) {
   EXPECT_EQ(level->key, (void *)0);
   EXPECT_EQ(level->type, LTYPE_LIST_LEAF);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
@@ -232,7 +232,7 @@ TEST(ParserLevelFromLineTest, RootLineListLeafWithSpaces) {
   EXPECT_EQ(level->key, (void *)0);
   EXPECT_EQ(level->type, LTYPE_LIST_LEAF);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "w o r l d");
   EXPECT_EQ(level->data, (void *)0);
@@ -244,7 +244,7 @@ TEST(ParserLevelFromLineTest, LineListLeaf) {
   EXPECT_EQ(level->key, (void *)0);
   EXPECT_EQ(level->type, LTYPE_LIST_LEAF);
   EXPECT_EQ(level->offset, 4);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "world");
   EXPECT_EQ(level->data, (void *)0);
@@ -256,7 +256,7 @@ TEST(ParserLevelFromLineTest, LineListLeafWithSpaces) {
   EXPECT_EQ(level->key, (void *)0);
   EXPECT_EQ(level->type, LTYPE_LIST_LEAF);
   EXPECT_EQ(level->offset, 4);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_STREQ(level->value, "w o r l d");
   EXPECT_EQ(level->data, (void *)0);
@@ -268,7 +268,7 @@ TEST(ParserLevelFromLineTest, RootLineListNode) {
   EXPECT_EQ(level->key, (void *)0);
   EXPECT_EQ(level->type, LTYPE_LIST_NODE);
   EXPECT_EQ(level->offset, 0);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);
@@ -280,7 +280,7 @@ TEST(ParserLevelFromLineTest, LineListNode) {
   EXPECT_EQ(level->key, (void *)0);
   EXPECT_EQ(level->type, LTYPE_LIST_NODE);
   EXPECT_EQ(level->offset, 16);
-  EXPECT_EQ(level->child_offset, 0);
+  EXPECT_EQ(level->child_offset, -1);
   EXPECT_EQ(level->parent, (void *)0);
   EXPECT_EQ(level->value, (void *)0);
   EXPECT_EQ(level->data->used, 0);

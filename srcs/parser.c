@@ -11,8 +11,8 @@ t_level *level_new()
 	ret->parent = (void *)0;
 	ret->value = (void *)0;
 	ret->data = (void *)0;
-	ret->offset = 0;
-	ret->child_offset = 0;
+	ret->offset = -1;
+	ret->child_offset = -1;
 	return (ret);
 }
 
@@ -114,7 +114,19 @@ int check_arguments(int argc, char **argv)
 	return (fd);
 }
 
-t_level *parse(int fd, char *initial)
+short get_offset(char *line)
+{
+	short i;
+
+	if (!line)
+		return (-2);
+	i = 0;
+	while (line[i] && line[i] == ' ')
+		i++;
+	return (i);
+}
+
+t_level *parse(int fd, char **memory)
 {
 	char *line;
 	t_level *root;
@@ -124,16 +136,17 @@ t_level *parse(int fd, char *initial)
 
 	root = level_new();
 	root->type = LTYPE_NODE;
-	root->offset = -2;
+	root->offset = get_offset(*memory);
 	root->child_offset = -2;
 	root->data = ptr_array_new(10);
 	parent = root;
 
 	while (1)
 	{
-		if (initial)
+		if (*memory)
 		{
-			line = initial;
+			line = *memory;
+			*memory = (void *)0;
 		}
 		else
 		{
@@ -143,6 +156,13 @@ t_level *parse(int fd, char *initial)
 				break;
 		}
 
+		short offset = get_offset(line);
+		if (offset < root->offset)
+		{
+			*memory = line;
+			return (root);
+		}
+
 		child = level_from_line(line);
 		if (!child)
 		{
@@ -150,7 +170,13 @@ t_level *parse(int fd, char *initial)
 			continue;
 		}
 
-		while (parent->parent && child->offset <= parent->child_offset)
+		while (
+			parent->parent
+			&& (
+				child->offset < parent->child_offset
+				|| (parent->child_offset == -1 && child->offset <= parent->offset)
+			)
+		)
 			parent = parent->parent;
 		if (parent->data->used == 0)
 			parent->child_offset = child->offset;
@@ -160,6 +186,16 @@ t_level *parse(int fd, char *initial)
 		child->parent = parent;
 		if (child->type == LTYPE_NODE)
 			parent = child;
+		
+		if (child->type == LTYPE_LIST_NODE)
+		{
+			*memory = ft_strdup(line);
+			(*memory)[child->offset] = ' ';
+			t_level *inner_child = parse(fd, memory);
+			child->child_offset = inner_child->offset;
+			inner_child->parent = child;
+			ptr_array_add(child->data, inner_child);
+		}
 
 		free(line);
 	}
@@ -172,8 +208,10 @@ void parser(t_rtv *rtv, int argc, char **argv)
 {
 	int fd;
 	t_level *root;
+	char *memory;
 
 	fd = check_arguments(argc, argv);
-	root = parse(fd, (void *)0);
+	memory = 0;
+	root = parse(fd, &memory);
 	validate(rtv, root);
 }
