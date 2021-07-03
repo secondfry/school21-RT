@@ -163,6 +163,7 @@ t_byte validate_light(t_rtv *rtv, t_level *root)
 	return (1);
 }
 
+//	TODO: дописать валидатор
 void validate(t_rtv *rtv, t_level *root)
 {
 	for (t_byte i = 0; i < root->data->used; i++)
@@ -171,6 +172,7 @@ void validate(t_rtv *rtv, t_level *root)
 		check(level->type != LTYPE_NODE, 1, ERR_VALIDATOR_ROOT_NODES);
 		if (!ft_strcmp(level->key, "light"))
 			validate_light(rtv, level);
+		// Добавить валидацию сферы, конуса, цилиндра, плоскости
 	}
 }
 

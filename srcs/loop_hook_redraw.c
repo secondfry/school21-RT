@@ -126,6 +126,7 @@ static t_color pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 {
 	const t_light_params params = get_light_params(rtv, intr);
 	const t_vector_4 P = vector_add(data->vectors[VCTR_O], vector_mult(data->vectors[VCTR_D], intr->distance));
+	//	TODO:	Поправить формулу рассчета нормали для конуса и цилиндра
 	const t_vector_4 N = intr->type == IPLANE ? rtv->planes[intr->idx].normal : vector_sub(P, params.C);
 	const t_vector_4 NN = vector_normalize(N);
 	const t_vector_4 V = vector_mult(data->vectors[VCTR_D], -1);

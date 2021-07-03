@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 		{{ 0, -1.f, 3, 1 }},
 		color_new(255, 0, 0),
 		1.0f,
-		500.f,
+		10000.f,
 		TRAIT_EXISTS
 	}), sizeof(t_sphere));
 	ft_memcpy(rtv.spheres + 1, &((t_sphere) {
