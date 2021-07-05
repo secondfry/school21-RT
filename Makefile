@@ -26,6 +26,7 @@ SRC_FILES =	main.c \
 			vector.c \
 			quaternion.c \
 			clear_mlx.c init_mlx.c init_mlx_2.c \
+			init_rtv.c \
 			loop_hook_flow.c \
 			loop_hook_invalidate.c loop_hook_events.c loop_hook_render_debug.c \
 			loop_hook_redraw.c \

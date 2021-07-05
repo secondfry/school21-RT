@@ -18,6 +18,7 @@
 # include <mlx.h>
 # include "defines.h"
 # include "init_mlx.h"
+# include "init_rtv.h"
 # include "graceful.h"
 # include "vector.h"
 # include "matrix_factory.h"
