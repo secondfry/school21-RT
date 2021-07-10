@@ -122,12 +122,38 @@ static t_light_params get_light_params(t_rtv *rtv, t_intersection *intr)
 	return ((t_light_params) {});
 }
 
+static t_vector_4 find_normal(t_rtv *rtv, t_intersection *intr, const t_light_params *params, t_vector_4 P)
+{
+	if (intr->type == IPLANE)
+		return (rtv->planes[intr->idx].normal);
+	if (intr->type == ISPHERE)
+		return (vector_sub(P, params->C));
+	if (intr->type == ICONE)
+	{
+		t_vector_4 CP = vector_normalize(vector_sub(P, rtv->cones[intr->idx].vectors[VCTR_CONE_C0]));
+		t_vector_4 C1C0 = vector_normalize(vector_sub(rtv->cones[intr->idx].vectors[VCTR_CONE_C1], rtv->cones[intr->idx].vectors[VCTR_CONE_C0]));
+		float k = vector_dot(CP, C1C0);
+		t_vector_4 Q = vector_mult(C1C0, k);
+		return (vector_normalize(vector_sub(C1C0, Q)));
+	}
+		
+	if (intr->type == ICYLINDER)
+	{
+		t_vector_4 CP = vector_normalize(vector_sub(P, rtv->cones[intr->idx].vectors[VCTR_CONE_C0]));
+		t_vector_4 C1C0 = vector_normalize(vector_sub(rtv->cones[intr->idx].vectors[VCTR_CONE_C1], rtv->cones[intr->idx].vectors[VCTR_CONE_C0]));
+		float k = vector_dot(CP, C1C0);
+		t_vector_4 Q = vector_mult(C1C0, k);
+		return (vector_normalize(vector_sub(C1C0, Q)));
+	}
+
+	return ((t_vector_4) {0, 0, 0, 0});
+}
+
 static t_color pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 {
 	const t_light_params params = get_light_params(rtv, intr);
 	const t_vector_4 P = vector_add(data->vectors[VCTR_O], vector_mult(data->vectors[VCTR_D], intr->distance));
-	//	TODO:	Поправить формулу рассчета нормали для конуса и цилиндра
-	const t_vector_4 N = intr->type == IPLANE ? rtv->planes[intr->idx].normal : vector_sub(P, params.C);
+	const t_vector_4 N = find_normal(rtv, intr, &params, P);
 	const t_vector_4 NN = vector_normalize(N);
 	const t_vector_4 V = vector_mult(data->vectors[VCTR_D], -1);
 	float intensity = light(rtv, P, NN, V, params.specular);
