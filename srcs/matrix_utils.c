@@ -14,7 +14,7 @@
 
 t_vector_4	matrix_on_vector(t_const_matrix_4 m, const t_vector_4 v)
 {
-	return ((t_vector_4) {
+	return ((t_vector_4){
 		m[0] * v.x + m[1] * v.y + m[2] * v.z + m[3] * v.w,
 		m[4] * v.x + m[5] * v.y + m[6] * v.z + m[7] * v.w,
 		m[8] * v.x + m[9] * v.y + m[10] * v.z + m[11] * v.w,
