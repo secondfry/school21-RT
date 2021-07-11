@@ -12,13 +12,13 @@
 
 #include "graceful.h"
 
-void graceful(size_t reason, const char *msg)
+void	graceful(size_t reason, const char *msg)
 {
 	ft_putendl_fd(msg, 2);
 	exit(reason);
 }
 
-void check(_Bool status, size_t reason, const char *msg)
+void	check(_Bool status, size_t reason, const char *msg)
 {
 	if (!status)
 		return ;
