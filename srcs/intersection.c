@@ -1,6 +1,6 @@
 #include "intersection.h"
 
-t_intersection intersection_closest(t_rtv *rtv, t_intersect_params *params)
+t_intersection	intersection_closest(t_rtv *rtv, t_intersect_params *params)
 {
 	t_intersection	results[FIGURES];
 	t_intersection	res;
@@ -18,5 +18,5 @@ t_intersection intersection_closest(t_rtv *rtv, t_intersect_params *params)
 	results[ICONE] = intersection_cone_closest(rtv, params);
 	if (results[ICONE].distance < res.distance)
 		res = results[ICONE];
-	return res;
+	return (res);
 }
