@@ -13,41 +13,29 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+# ifdef __cplusplus
+#  include "figures.hpp"
+#  include "lights.hpp"
+#  include "rtv.hpp"
+# else
+#  include "figures.h"
+#  include "lights.h"
+#  include "rtv.h"
+# endif
+
 # include "libft.h"
 
 # define WIDTH 768
 # define HEIGHT 768
 # define TITLE "RTv1"
 
-# define M_LN2_F 0.693147180559945309417232121458176568f
 # define M_PI_F 3.14159265358979323846264338327950288f
 # define M_PI_2F 1.57079632679489661923132169163975144f
 # define M_PI_4F 0.785398163397448309615660845819875721f
-# define M_SQRT2_F 1.41421356237309504880168872420969808f
-# define M_SQRT1_2_F 0.707106781186547524400844362104849039f
 
 # define EPSILON 0.001f
 
-# define DOHUYA 100000
-
-typedef const struct	s_vector_4
-{
-	float	x;
-	float	y;
-	float	z;
-	float	w;
-}						t_vector_4;
-
-typedef float				*t_matrix_4;
-typedef float				*t_quaterion;
-typedef const float	* const t_const_matrix_4;
-typedef const float	* const t_const_quaterion;
-typedef int					(*t_mlx_hook)();
-typedef t_byte				*t_color;
-
-# define TCRED		0
-# define TCGREEN	1
-# define TCBLUE		2
+typedef int			(*t_mlx_hook)();
 
 # define AROLL	0
 # define APITCH	1
@@ -66,17 +54,7 @@ typedef t_byte				*t_color;
 # define ERR_MAP_SMOL						9
 # define ERR_INVALID_DEFINE					10
 
-typedef struct	s_mlx
-{
-	void		*mlx;
-	void		*win;
-	void		*img;
-	int			*img_data;
-	size_t		size_line_int;
-	size_t		size_line_char;
-}				t_mlx;
-
-typedef struct	s_intersection
+typedef struct s_intersection
 {
 	float	distance;
 	t_byte	idx;
@@ -88,133 +66,8 @@ typedef struct	s_intersection
 # define ICYLINDER	2
 # define ICONE		3
 
-# define MAX_SPHERES	10
-# define MAX_PLANES		10
-# define MAX_CYLINDERS	10
-# define MAX_CONES		10
-# define MAX_PLIGHTS	5
-# define MAX_DLIGHTS	5
 # define MAX_VECTORS_WORKER	7
-# define MAX_FLOATS_WORKER 3
-# define MAX_VECTORS_SPHERE 2
-# define MAX_VECTORS_CYLINDER 3
-# define MAX_VECTORS_CONE 3
-
-# define FIGURES 4
-
-typedef struct	s_sphere
-{
-	t_vector_4	vectors[MAX_VECTORS_SPHERE];
-	t_color		color;
-	float		radius_squared;
-	float		specular;
-	t_byte		traits;
-
-# ifdef __cplusplus
-	s_sphere() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 0.f, 0.f, 0.f }} {}
-# endif
-
-}				t_sphere;
-
-# define VCTR_C 0
-# define VCTR_CO 1
-
-typedef struct	s_plane
-{
-	t_vector_4	position;
-	t_vector_4	normal;
-	t_color		color;
-	float		specular;
-	t_byte		traits;
-
-# ifdef __cplusplus
-	s_plane() : position{ 0.f, 0.f, 0.f, 1.f }, normal{ 0.f, 1.f, 0.f, 0.f } {}
-# endif
-
-}				t_plane;
-
-# define VCTR_CYLINDER_C0 0
-# define VCTR_CYLINDER_C1 1
-# define VCTR_CYLINDER_C0C1 2
-
-typedef struct	s_cylinder
-{
-	t_vector_4	vectors[MAX_VECTORS_CYLINDER];
-	t_color		color;
-	float		radius2;
-	float		specular;
-	t_byte		traits;
-
-# ifdef __cplusplus
-	s_cylinder() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 0.f }} {}
-# endif
-
-}				t_cylinder;
-
-# define VCTR_CONE_C0	0
-# define VCTR_CONE_C1	1
-# define VCTR_CONE_C0C1	2
-
-typedef struct	s_cone
-{
-	t_vector_4	vectors[MAX_VECTORS_CONE];
-	t_color		color;
-	float		angle;
-	float		cos2;
-	float		specular;
-	t_byte		traits;
-
-# ifdef __cplusplus
-	s_cone() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 0.f }} {}
-# endif
-
-}				t_cone;
-
-typedef struct	s_plight
-{
-	t_vector_4	position;
-	float		intensity;
-	t_byte		traits;
-
-# ifdef __cplusplus
-	s_plight() : position{ 0.f, 0.f, 0.f, 1.f } {}
-# endif
-
-}				t_plight;
-
-typedef struct	s_dlight
-{
-	t_vector_4	direction;
-	float		intensity;
-	t_byte		traits;
-
-# ifdef __cplusplus
-	s_dlight() : direction{ -1.f, -1.f, -1.f, 0.f } {}
-# endif
-
-}				t_dlight;
-
-typedef struct s_rtv
-{
-	t_mlx		*mlx;
-	t_byte		options;
-	t_byte		flags;
-	t_vector_4	camera_position;
-	float		camera_angles[3];
-	t_matrix_4	camera_rotation;
-	t_sphere	spheres[MAX_SPHERES];
-	t_plane		planes[MAX_PLANES];
-	t_cylinder	cylinders[MAX_CYLINDERS];
-	t_cone		cones[MAX_CONES];
-	float		ambient;
-	t_plight	plights[MAX_PLIGHTS];
-	t_dlight	dlights[MAX_DLIGHTS];
-
-# ifdef __cplusplus
-	s_rtv() : camera_position{ 0.f, 0.f, 0.f, 1.f } {}
-# endif
-
-} t_rtv;
+# define MAX_FLOATS_WORKER	3
 
 # define VCTR_O	0
 # define VCTR_D	1
@@ -226,13 +79,13 @@ typedef struct s_rtv
 
 # define D_DOT_D 0
 
-typedef struct	s_worker_data
+typedef struct s_worker_data
 {
 	t_vector_4	vectors[MAX_VECTORS_WORKER];
 	float		floats[MAX_FLOATS_WORKER];
 }				t_worker_data;
 
-typedef struct	s_intersect_params
+typedef struct s_intersect_params
 {
 	t_vector_4	O;
 	t_vector_4	D;

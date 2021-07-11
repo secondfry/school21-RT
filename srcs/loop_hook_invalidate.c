@@ -4,10 +4,10 @@ static void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
 {
 	const t_vector_4	CO = vector_sub(
 		rtv->camera_position,
-		sphere.vectors[VCTR_C]
+		sphere.vectors[VCTR_SPHERE_C]
 	);
 
-	vector_set(sphere.vectors + VCTR_CO, &CO);
+	vector_set(sphere.vectors + VCTR_SPHERE_CO, &CO);
 }
 
 static void	invalidate_spheres_vectors(t_rtv *rtv)

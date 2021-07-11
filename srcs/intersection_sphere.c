@@ -11,7 +11,7 @@ static void	intersection_sphere(
 )
 {
 	const t_intersection_sphere	data = {
-		rtv->spheres[idx].vectors[VCTR_C],
+		rtv->spheres[idx].vectors[VCTR_SPHERE_C],
 		vector_sub(params->O, data.C),
 		vector_dot(params->D, params->D),
 		2 * vector_dot(params->D, data.CO),

@@ -99,6 +99,8 @@ minilibx-linux/test/mlx-test
 *.swiftsourceinfo
 build/parser_test
 build/.cmake/api
+build/parser_test[1]_include.cmake
+build/parser_test[1]_tests.cmake
 
 # CMake
 CMakeLists.txt.user

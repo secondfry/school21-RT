@@ -21,7 +21,7 @@
 # define ERR_MEM_MSG			"Memory error."
 # define ERR_INVALID_DEFINE_MSG	"Invalid defines."
 
-void graceful(size_t reason, const char *msg);
-void check(_Bool status, size_t reason, const char *msg);
+void	graceful(size_t reason, const char *msg);
+void	check(_Bool status, size_t reason, const char *msg);
 
 #endif

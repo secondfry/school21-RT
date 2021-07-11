@@ -16,6 +16,9 @@ typedef struct s_intersection_sphere
 	float		sqrt;
 }				t_intersection_sphere;
 
-t_intersection	intersection_sphere_closest(t_rtv *rtv, t_intersect_params *params);
+t_intersection	intersection_sphere_closest(\
+	t_rtv *rtv, \
+	t_intersect_params *params \
+);
 
 #endif

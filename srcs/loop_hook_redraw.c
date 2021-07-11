@@ -97,7 +97,7 @@ static t_light_params get_light_params(t_rtv *rtv, t_intersection *intr)
 {
 	if (intr->type == ISPHERE)
 		return ((t_light_params) {
-			rtv->spheres[intr->idx].vectors[VCTR_C],
+			rtv->spheres[intr->idx].vectors[VCTR_SPHERE_C],
 			rtv->spheres[intr->idx].color,
 			rtv->spheres[intr->idx].specular
 		});
