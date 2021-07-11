@@ -1,6 +1,7 @@
 #include "intersection_cone.h"
 
-// lousodrome.net/blog/light/2017/01/03/intersection-of-a-ray-and-a-cone/
+// https://lousodrome.net/
+// blog/light/2017/01/03/intersection-of-a-ray-and-a-cone/
 
 static void	intersection_cone(
 	t_rtv *rtv,
