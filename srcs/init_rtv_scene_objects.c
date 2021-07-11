@@ -44,7 +44,7 @@ static void	init_rtv_cylinders(t_rtv *rtv)
 	while (i < MAX_CYLINDERS)
 	{
 		ft_memcpy(rtv->cylinders + i, &((t_cylinder){
-			{{0, 0, 0, 0}, {0, 0, 0, 0}}, \
+			{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, \
 			0, \
 			0, \
 			0, \
@@ -93,6 +93,21 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		1000.0f,
 		TRAIT_EXISTS
 	}), sizeof(t_cone));
+
+	const t_vector_4 cylinder_C0 = vector_new(1.f, 0.f, 10.f, 1.f);
+	const t_vector_4 cylinder_C1 = vector_new(2.f, 10.f, 10.f, 1.f);
+
+	ft_memcpy(rtv->cylinders + 0, &((t_cylinder) {
+		{
+			cylinder_C0,
+			cylinder_C1,
+			vector_sub(cylinder_C1, cylinder_C0)
+		},
+		color_new(255, 255, 255),
+		1.f,
+		1000.0f,
+		TRAIT_EXISTS
+	}), sizeof(t_cylinder));
 }
 
 void	init_rtv_objects(t_rtv *rtv)
