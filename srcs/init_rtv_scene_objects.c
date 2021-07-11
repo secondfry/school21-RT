@@ -62,7 +62,7 @@ static void	init_rtv_cones(t_rtv *rtv)
 	while (i < MAX_CONES)
 	{
 		ft_memcpy(rtv->cones + i, &((t_cone){
-			{{0, 0, 0, 0}, {0, 0, 0, 0}}, \
+			{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, \
 			0, \
 			0, \
 			0, \
@@ -73,10 +73,33 @@ static void	init_rtv_cones(t_rtv *rtv)
 	}
 }
 
+static void	init_rtv_unnormed(t_rtv *rtv)
+{
+	const float angle10 = 10.f * M_PI_F / 180.f;
+	const float cos = cosf(angle10);
+	const float cos2 = cos * cos;
+	const t_vector_4 cone_C0 = vector_new(-1.f, 0.f, 10.f, 1.f);
+	const t_vector_4 cone_C1 = vector_new(-2.f, 10.f, 10.f, 1.f);
+
+	ft_memcpy(rtv->cones + 0, &((t_cone) {
+		{
+			cone_C0,
+			cone_C1,
+			vector_sub(cone_C1, cone_C0)
+		},
+		color_new(255, 0, 255),
+		angle10,
+		cos2,
+		1000.0f,
+		TRAIT_EXISTS
+	}), sizeof(t_cone));
+}
+
 void	init_rtv_objects(t_rtv *rtv)
 {
 	init_rtv_spheres(rtv);
 	init_rtv_planes(rtv);
 	init_rtv_cylinders(rtv);
 	init_rtv_cones(rtv);
+	init_rtv_unnormed(rtv);
 }

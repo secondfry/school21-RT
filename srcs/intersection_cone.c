@@ -12,12 +12,7 @@ static void	intersection_cone(
 	const t_intersection_cone	data = {
 		rtv->cones[idx].vectors[VCTR_CONE_C0],
 		vector_sub(params->O, data.C),
-		vector_normalize(
-			vector_sub(
-				rtv->cones[idx].vectors[VCTR_CONE_C1],
-				rtv->cones[idx].vectors[VCTR_CONE_C0]
-			)
-		),
+		vector_normalize(rtv->cones[idx].vectors[VCTR_CONE_C0C1]),
 		vector_dot(vector_normalize(params->D), data.CQ),
 		vector_dot(data.CO, data.CQ),
 		vector_dot(vector_normalize(params->D), data.CO),
