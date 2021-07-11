@@ -1,42 +1,66 @@
 #include "intersection_sphere.h"
 
-// https://www.gabrielgambetta.com/computer-graphics-from-scratch/04-shadows-and-reflections.html
+// https://www.gabrielgambetta.com/
+// computer-graphics-from-scratch/04-shadows-and-reflections.html
 
-static void	intersection_sphere(t_rtv *rtv, t_intersect_params *params, t_byte idx, float t[2])
+static void	intersection_sphere(
+	t_rtv *rtv,
+	t_intersect_params *params,
+	t_byte idx,
+	float t[2]
+)
 {
-	t_vector_4 C = rtv->spheres[idx].vectors[VCTR_C];
-	t_vector_4 CO = vector_sub(params->O, C);
-	float a = vector_dot(params->D, params->D);
-	float b = 2 * vector_dot(params->D, CO);
-	float c = vector_dot(CO, CO) - rtv->spheres[idx].radius_squared; // float is not enough here
-	float sqrt = b * b - 4 * a * c;
-	if (sqrt < 0) {
+	const t_intersection_sphere	data = {
+		rtv->spheres[idx].vectors[VCTR_C],
+		vector_sub(params->O, data.C),
+		vector_dot(params->D, params->D),
+		2 * vector_dot(params->D, data.CO),
+		vector_dot(data.CO, data.CO) - rtv->spheres[idx].radius_squared,
+		sqrtf(data.b * data.b - 4 * data.a * data.c)
+	};
+
+	if (data.sqrt < 0)
+	{
 		t[0] = 1.0 / 0.0;
 		t[1] = 1.0 / 0.0;
-		return;
+		return ;
 	}
-	t[0] = (-1 * b + sqrtf(sqrt)) / (2 * a);
-	t[1] = (-1 * b - sqrtf(sqrt)) / (2 * a);
+	t[0] = (-1 * data.b + sqrtf(data.sqrt)) / (2 * data.a);
+	t[1] = (-1 * data.b - sqrtf(data.sqrt)) / (2 * data.a);
 }
 
-t_intersection	intersection_sphere_closest(t_rtv *rtv, t_intersect_params *params)
+t_intersection	intersection_sphere_closest(
+	t_rtv *rtv,
+	t_intersect_params *params
+)
 {
-	float t_closest = 1.0 / 0.0;
-	t_byte idx = -1;
-	float t[2];
+	float	t_closest;
+	t_byte	idx;
+	t_byte	i;
+	float	t[2];
 
-	for (t_byte i = 0; i < MAX_SPHERES; i++) {
+	t_closest = 1.0 / 0.0;
+	idx = -1;
+	i = 0;
+	while (i < MAX_SPHERES)
+	{
 		if (!(rtv->spheres[i].traits & TRAIT_EXISTS))
-			continue;
+		{
+			i++;
+			continue ;
+		}
 		intersection_sphere(rtv, params, i, t);
-		if (t[0] > params->t_min && t[0] < params->t_max && t[0] < t_closest) {
+		if (t[0] > params->t_min && t[0] < params->t_max && t[0] < t_closest)
+		{
 			t_closest = t[0];
 			idx = i;
 		}
-		if (t[1] > params->t_min && t[1] < params->t_max && t[1] < t_closest) {
+		if (t[1] > params->t_min && t[1] < params->t_max && t[1] < t_closest)
+		{
 			t_closest = t[1];
 			idx = i;
 		}
+		i++;
 	}
-	return ((t_intersection) { t_closest, idx, ISPHERE });
+	return ((t_intersection){t_closest, idx, ISPHERE});
 }
