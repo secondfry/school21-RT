@@ -66,6 +66,7 @@ static void	init_rtv_cones(t_rtv *rtv)
 			0, \
 			0, \
 			0, \
+			0, \
 			0 \
 		}), sizeof(t_cone));
 		i++;

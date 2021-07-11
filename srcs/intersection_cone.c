@@ -1,50 +1,76 @@
 #include "intersection_cone.h"
 
-// https://lousodrome.net/blog/light/2017/01/03/intersection-of-a-ray-and-a-cone/
+// lousodrome.net/blog/light/2017/01/03/intersection-of-a-ray-and-a-cone/
 
-static void	intersection_cone(t_rtv *rtv, t_intersect_params *params, t_byte idx, float t[2])
+static void	intersection_cone(
+	t_rtv *rtv,
+	t_intersect_params *params,
+	t_byte idx,
+	float	t[2]
+)
 {
-	t_vector_4 C = rtv->cones[idx].vectors[VCTR_CONE_C0];
-	t_vector_4 CO = vector_sub(params->O, C);
-	t_vector_4 CQ = vector_normalize(vector_sub(rtv->cones[idx].vectors[VCTR_CONE_C1], rtv->cones[idx].vectors[VCTR_CONE_C0]));
-	float DdotCQ = vector_dot(vector_normalize(params->D), CQ);
-	float COdotCQ = vector_dot(CO, CQ);
-	float DdotCO = vector_dot(vector_normalize(params->D), CO);
-	float COdotCO = vector_dot(CO, CO);
-	float cos = cosf(rtv->cones[idx].angle);
-	float cos2 = cos * cos;
-    float a = DdotCQ * DdotCQ - cos2;
-    float b = 2 * (DdotCQ * COdotCQ - DdotCO * cos2);
-    float c = COdotCQ * COdotCQ - COdotCO * cos2;
-    float sqrt;
-    sqrt = sqrtf((b * b) - (4.0 * a * c));
-    if (sqrt < 0) {
+	const t_intersection_cone	data = {
+		rtv->cones[idx].vectors[VCTR_CONE_C0],
+		vector_sub(params->O, data.C),
+		vector_normalize(
+			vector_sub(
+				rtv->cones[idx].vectors[VCTR_CONE_C1],
+				rtv->cones[idx].vectors[VCTR_CONE_C0]
+			)
+		),
+		vector_dot(vector_normalize(params->D), data.CQ),
+		vector_dot(data.CO, data.CQ),
+		vector_dot(vector_normalize(params->D), data.CO),
+		vector_dot(data.CO, data.CO),
+		rtv->cones[idx].cos2,
+		data.DdotCQ * data.DdotCQ - data.cos2,
+		2 * (data.DdotCQ * data.COdotCQ - data.DdotCO * data.cos2),
+		data.COdotCQ * data.COdotCQ - data.COdotCO * data.cos2,
+		sqrtf((data.b * data.b) - (4.0 * data.a * data.c))
+	};
+
+	if (data.sqrt < 0)
+	{
 		t[0] = 1.0 / 0.0;
 		t[1] = 1.0 / 0.0;
-		return;
+		return ;
 	}
-    t[0] = (-1 * b - sqrt) / (2.0 * a);
-    t[1] = (-1 * b + sqrt) / (2.0 * a);
+	t[0] = (-1 * data.b - data.sqrt) / (2.0 * data.a);
+	t[1] = (-1 * data.b + data.sqrt) / (2.0 * data.a);
 }
 
-t_intersection	intersection_cone_closest(t_rtv *rtv, t_intersect_params *params)
+t_intersection	intersection_cone_closest(
+	t_rtv *rtv,
+	t_intersect_params *params
+)
 {
-	float t_closest = 1.0 / 0.0;
-	t_byte idx = -1;
-	float t[2];
+	float	t_closest;
+	t_byte	idx;
+	t_byte	i;
+	float	t[2];
 
-	for (t_byte i = 0; i < MAX_CONES; i++) {
+	t_closest = 1.0 / 0.0;
+	idx = -1;
+	i = 0;
+	while (i < MAX_CONES)
+	{
 		if (!(rtv->cones[i].traits & TRAIT_EXISTS))
-			continue;
+		{
+			i++;
+			continue ;
+		}
 		intersection_cone(rtv, params, i, t);
-		if (t[0] > params->t_min && t[0] < params->t_max && t[0] < t_closest) {
+		if (t[0] > params->t_min && t[0] < params->t_max && t[0] < t_closest)
+		{
 			t_closest = t[0];
 			idx = i;
 		}
-		if (t[1] > params->t_min && t[1] < params->t_max && t[1] < t_closest) {
+		if (t[1] > params->t_min && t[1] < params->t_max && t[1] < t_closest)
+		{
 			t_closest = t[1];
 			idx = i;
 		}
+		i++;
 	}
-	return ((t_intersection) { t_closest, idx, ICONE });
+	return ((t_intersection){t_closest, idx, ICONE});
 }

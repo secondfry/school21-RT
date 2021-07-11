@@ -160,6 +160,7 @@ typedef struct	s_cone
 	t_vector_4	vectors[MAX_VECTORS_CONE];
 	t_color		color;
 	float		angle;
+	float		cos2;
 	float		specular;
 	t_byte		traits;
 
