@@ -1,17 +1,24 @@
 #include "loop_hook.h"
 
-static void invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
+static void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
 {
-	const t_vector_4 tmp = vector_sub(rtv->camera_position, sphere.vectors[VCTR_C]);
+	const t_vector_4	CO = vector_sub(
+		rtv->camera_position,
+		sphere.vectors[VCTR_C]
+	);
 
-	vector_set(sphere.vectors + VCTR_CO, &tmp);
+	vector_set(sphere.vectors + VCTR_CO, &CO);
 }
 
-static void invalidate_spheres_vectors(t_rtv *rtv)
+static void	invalidate_spheres_vectors(t_rtv *rtv)
 {
-	for (t_byte i = 0; i < MAX_SPHERES; i++)
+	t_byte	i;
+
+	i = 0;
+	while (i < MAX_SPHERES)
 	{
 		invalidate_sphere_vectors(rtv, rtv->spheres[i]);
+		i++;
 	}
 }
 
@@ -26,12 +33,16 @@ void	loop_invalidate_position(t_rtv *rtv)
 
 void	loop_invalidate_rotation(t_rtv *rtv)
 {
-	t_quaterion rotator;
+	t_quaterion	rotator;
 
 	if (!(rtv->flags & FLAG_INVALIDATE_ROTATION))
 		return ;
 	rtv->flags -= FLAG_INVALIDATE_ROTATION;
-	rotator = quaternion_new(rtv->camera_angles[AYAW], rtv->camera_angles[AROLL], rtv->camera_angles[APITCH]);
+	rotator = quaternion_new(\
+		rtv->camera_angles[AYAW], \
+		rtv->camera_angles[AROLL], \
+		rtv->camera_angles[APITCH] \
+	);
 	free(rtv->camera_rotation);
 	rtv->camera_rotation = quaternion_to_matrix(rotator);
 	free(rotator);
