@@ -17,7 +17,7 @@ int	loop_hook(t_rtv *rtv)
 	loop_invalidate_position(rtv);
 	loop_invalidate_rotation(rtv);
 	loop_redraw(rtv);
-	// loop_render_debug(rtv);
+	loop_render_debug(rtv);
 	loop_before_next_update(rtv);
 	return (0);
 }
