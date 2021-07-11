@@ -141,7 +141,7 @@ typedef struct	s_cylinder
 {
 	t_vector_4	vectors[MAX_VECTORS_CYLINDER];
 	t_color		color;
-	float		radius_squared;
+	float		radius2;
 	float		specular;
 	t_byte		traits;
 
