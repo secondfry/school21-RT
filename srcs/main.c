@@ -14,8 +14,9 @@
 
 void	check_defines(void)
 {
-	if ((WIDTH < 1 || WIDTH > 1920) ||
-		(HEIGHT < 1 || HEIGHT > 1080))
+	if ((WIDTH < 1 || WIDTH > 1920)
+		|| (HEIGHT < 1 || HEIGHT > 1080)
+	)
 		graceful(ERR_INVALID_DEFINE, ERR_INVALID_DEFINE_MSG);
 }
 
