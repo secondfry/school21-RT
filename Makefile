@@ -23,7 +23,7 @@ LIB_DIR = ./libft
 SRC_FILES =	main.c \
 			matrix_factory_1.c matrix_factory_2.c \
 			matrix_utils.c \
-			vector.c \
+			vector_1.c vector_2.c \
 			quaternion.c \
 			clear_mlx.c init_mlx.c init_mlx_2.c \
 			init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c \
