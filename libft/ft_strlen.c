@@ -68,7 +68,7 @@ static void	*check_ulong(t_ulong *data)
 
 	cell_one = make_memory_cell(0x01);
 	cell_eighties = make_memory_cell(0x80);
-	if (((*data - cell_one) & ~*data & cell_eighties) != 0)
+	if (((*data - cell_one) & ~ *data & cell_eighties) != 0)
 	{
 		ptr = check_bytes((t_byte *)data);
 		if (ptr)
