@@ -7,8 +7,7 @@
 t_vector_4	find_normal(\
 	t_rtv *rtv, \
 	t_intersection *intr, \
-	const t_light_params *params, \
-	t_vector_4 P \
+	const t_light_params *params \
 );
 
 #endif

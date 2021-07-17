@@ -133,7 +133,7 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		1.f,
 		100.0f,
 		TRAIT_EXISTS
-	}), sizeof(t_cylinder));
+	}), sizeof(t_sphere));
 
 	ft_memcpy(rtv->spheres + 1, &((t_sphere) {
 		{
@@ -143,7 +143,7 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		1.f,
 		10.0f,
 		TRAIT_EXISTS
-	}), sizeof(t_cylinder));
+	}), sizeof(t_sphere));
 
 	ft_memcpy(rtv->spheres + 2, &((t_sphere) {
 		{
@@ -153,7 +153,7 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		1.f,
 		1000.0f,
 		TRAIT_EXISTS
-	}), sizeof(t_cylinder));
+	}), sizeof(t_sphere));
 
 	ft_memcpy(rtv->planes + 0, &((t_plane) {
 		vector_new(2.f, -10.f, 4.f, 1.f),
@@ -161,15 +161,15 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		color_new(255, 255, 0),
 		1.0f,
 		TRAIT_EXISTS
-	}), sizeof(t_cylinder));
+	}), sizeof(t_plane));
 
-	ft_memcpy(rtv->planes + 1, &((t_plane) {
-		vector_new(2.f, 10.f, 4.f, 1.f),
-		vector_normalize(vector_new(0.f, -1.f, 0.f, 0.f)),
-		color_new(0, 255, 255),
-		1.0f,
-		TRAIT_EXISTS
-	}), sizeof(t_cylinder));
+	// ft_memcpy(rtv->planes + 1, &((t_plane) {
+	// 	vector_new(2.f, 10.f, 4.f, 1.f),
+	// 	vector_normalize(vector_new(0.f, -1.f, 0.f, 0.f)),
+	// 	color_new(0, 255, 255),
+	// 	1.0f,
+	// 	TRAIT_EXISTS
+	// }), sizeof(t_plane));
 
 	ft_memcpy(rtv->planes + 2, &((t_plane) {
 		vector_new(2.f, 10.f, 20.f, 1.f),
@@ -177,7 +177,7 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		color_new(0, 127, 255),
 		1.0f,
 		TRAIT_EXISTS
-	}), sizeof(t_cylinder));
+	}), sizeof(t_plane));
 }
 
 void	init_rtv_objects(t_rtv *rtv)

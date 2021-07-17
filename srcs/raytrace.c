@@ -1,88 +1,103 @@
 #include "raytrace.h"
 
+static float	light_one(
+	t_rtv *rtv,
+	const t_light_params *params,
+	float cutoff,
+	float light_intensity
+)
+{
+	const t_vector_4		R = vector_new(0, 0, 0, 0);
+	const t_intersection	res = intersection_closest(\
+		rtv, &((t_intersect_params){params->P, params->L, EPSILON, cutoff}));
+	float					dot;
+	float					intensity;
+
+	intensity = 0;
+	if (res.distance != 1.0 / 0.0)
+		return (intensity);
+	dot = vector_dot(params->N, params->L);
+	if (dot > 0)
+		intensity += light_intensity * dot / vector_length(params->L);
+	if (params->specular == -1)
+		return (intensity);
+	vector_set_by_value(&R, vector_sub(\
+		vector_mult(params->N, 2 * vector_dot(params->N, params->L)), \
+		params->L) \
+	);
+	dot = vector_dot(R, params->V);
+	if (dot > 0)
+		intensity += light_intensity * powf(\
+			dot / vector_length(R) / vector_length(params->V), \
+			params->specular \
+		);
+	return (intensity);
+}
+
 static float	light_point(
 	t_rtv *rtv,
-	t_vector_4 P,
-	t_vector_4 N,
-	t_vector_4 V,
-	float specular
+	const t_light_params *params
 )
 {
 	float	intensity;
-	float	dot;
+	t_byte	i;
 
 	intensity = 0;
-	for (t_byte i = 0; i < MAX_PLIGHTS; i++) {
+	i = 0;
+	while (i < MAX_PLIGHTS)
+	{
 		if (!(rtv->plights[i].traits & TRAIT_EXISTS))
+		{
+			i++;
 			continue ;
-		t_vector_4 L = vector_normalize(vector_sub(rtv->plights[i].position, P));
-		t_intersection res = intersection_closest(\
-			rtv, &((t_intersect_params){P, L, EPSILON, 1.f}));
-		if (res.distance != 1.0 / 0.0)
-			continue ;
-		dot = vector_dot(N, L);
-		if (dot > 0)
-			intensity += rtv->plights[i].intensity * \
-				dot / vector_length(L);
-		if (specular == -1)
-			continue ;
-		t_vector_4 R = vector_sub(vector_mult(N, 2 * vector_dot(N, L)), L);
-		dot = vector_dot(R, V);
-		if (dot > 0)
-			intensity += rtv->plights[i].intensity * \
-				powf(dot / vector_length(R) / vector_length(V), specular);
+		}
+		vector_set_by_value(&params->L, \
+			vector_normalize(vector_sub(rtv->plights[i].position, params->P)));
+		intensity += light_one(rtv, params, 1.f, rtv->plights[i].intensity);
+		i++;
 	}
 	return (intensity);
 }
 
 static float	light_directional(
 	t_rtv *rtv,
-	t_vector_4 P,
-	t_vector_4 N,
-	t_vector_4 V,
-	float specular
+	const t_light_params *params
 )
 {
 	float	intensity;
-	float	dot;
+	t_byte	i;
 
 	intensity = 0;
-	for (t_byte i = 0; i < MAX_DLIGHTS; i++) {
+	i = 0;
+	while (i < MAX_DLIGHTS)
+	{
 		if (!(rtv->dlights[i].traits & TRAIT_EXISTS))
+		{
+			i++;
 			continue ;
-		t_vector_4 L = rtv->dlights[i].direction;
-		t_intersection res = intersection_closest(\
-			rtv, &((t_intersect_params){P, L, EPSILON, 1.0 / 0.0}));
-		if (res.distance != 1.0 / 0.0)
-			continue ;
-		dot = vector_dot(N, L);
-		if (dot > 0)
-			intensity += rtv->dlights[i].intensity * \
-				dot / vector_length(L);
-		if (specular == -1)
-			continue ;
-		t_vector_4 R = vector_sub(vector_mult(N, 2 * vector_dot(N, L)), L);
-		dot = vector_dot(R, V);
-		if (dot > 0)
-			intensity += rtv->dlights[i].intensity * \
-				powf(dot / vector_length(R) / vector_length(V), specular);
+		}
+		vector_set_by_value(&params->L, rtv->dlights[i].direction);
+		intensity += light_one(\
+			rtv, \
+			params, \
+			1.0 / 0.0, \
+			rtv->dlights[i].intensity \
+		);
+		i++;
 	}
 	return (intensity);
 }
 
 static float	light(
 	t_rtv *rtv,
-	t_vector_4 P,
-	t_vector_4 N,
-	t_vector_4 V,
-	float specular
+	const t_light_params *params
 )
 {
 	float	intensity;
 
 	intensity = rtv->ambient + \
-		light_point(rtv, P, N, V, specular) + \
-		light_directional(rtv, P, N, V, specular);
+		light_point(rtv, params) + \
+		light_directional(rtv, params);
 	return (intensity);
 }
 
@@ -90,45 +105,45 @@ static t_light_params	get_light_params(t_rtv *rtv, t_intersection *intr)
 {
 	if (intr->type == ISPHERE)
 		return ((t_light_params){\
-			rtv->spheres[intr->idx].vectors[VCTR_SPHERE_C], \
-			rtv->spheres[intr->idx].color, \
-			rtv->spheres[intr->idx].specular \
+			.C = rtv->spheres[intr->idx].vectors[VCTR_SPHERE_C], \
+			.color = rtv->spheres[intr->idx].color, \
+			.specular = rtv->spheres[intr->idx].specular \
 		});
 	if (intr->type == IPLANE)
 		return ((t_light_params){\
-			rtv->planes[intr->idx].position, \
-			rtv->planes[intr->idx].color, \
-			rtv->planes[intr->idx].specular \
+			.C = rtv->planes[intr->idx].position, \
+			.color = rtv->planes[intr->idx].color, \
+			.specular = rtv->planes[intr->idx].specular \
 		});
 	if (intr->type == ICYLINDER)
 		return ((t_light_params){\
-			rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0], \
-			rtv->cylinders[intr->idx].color, \
-			rtv->cylinders[intr->idx].specular \
+			.C = rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0], \
+			.color = rtv->cylinders[intr->idx].color, \
+			.specular = rtv->cylinders[intr->idx].specular \
 		});
 	if (intr->type == ICONE)
 		return ((t_light_params){\
-			rtv->cones[intr->idx].vectors[VCTR_CONE_C0], \
-			rtv->cones[intr->idx].color, \
-			rtv->cones[intr->idx].specular \
+			.C = rtv->cones[intr->idx].vectors[VCTR_CONE_C0], \
+			.color = rtv->cones[intr->idx].color, \
+			.specular = rtv->cones[intr->idx].specular \
 		});
 	return ((t_light_params){});
 }
 
 static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 {
-	const t_pre_light	args = {
-		get_light_params(rtv, intr),
-		vector_add(
-			data->vectors[VCTR_O],
-			vector_mult(data->vectors[VCTR_D], intr->distance)
-		),
-		find_normal(rtv, intr, &args.params, args.P),
-		vector_mult(data->vectors[VCTR_D], -1),
-		light(rtv, args.P, args.N, args.V, args.params.specular)
-	};
+	const t_light_params	params = get_light_params(rtv, intr);
+	float					intensity;
 
-	return (color_mult(args.params.color, args.intensity));
+	vector_set_by_value(&params.P, vector_add(\
+		data->vectors[VCTR_O], \
+		vector_mult(data->vectors[VCTR_D], intr->distance) \
+	));
+	vector_set_by_value(\
+		&params.N, find_normal(rtv, intr, &params));
+	vector_set_by_value(&params.V, vector_mult(data->vectors[VCTR_D], -1));
+	intensity = light(rtv, &params);
+	return (color_mult(params.color, intensity));
 }
 
 static t_color	raytrace(

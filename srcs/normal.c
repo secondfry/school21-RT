@@ -38,17 +38,16 @@ static t_vector_4	find_normal_cylinder(
 t_vector_4	find_normal(
 	t_rtv *rtv,
 	t_intersection *intr,
-	const t_light_params *params,
-	t_vector_4 P
+	const t_light_params *params
 )
 {
 	if (intr->type == IPLANE)
 		return (rtv->planes[intr->idx].normal);
 	if (intr->type == ISPHERE)
-		return (vector_normalize(vector_sub(P, params->C)));
+		return (vector_normalize(vector_sub(params->P, params->C)));
 	if (intr->type == ICONE)
-		return (find_normal_cone(rtv, intr, P));
+		return (find_normal_cone(rtv, intr, params->P));
 	if (intr->type == ICYLINDER)
-		return (find_normal_cylinder(rtv, intr, P));
+		return (find_normal_cylinder(rtv, intr, params->P));
 	return ((t_vector_4){0, 0, 0, 0});
 }

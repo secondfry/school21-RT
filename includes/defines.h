@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/17 18:43:02 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/17 19:31:33 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,14 @@ typedef struct s_intersect_params
 
 typedef struct s_light_params
 {
-	t_vector_4	C;
-	t_color		color;
-	float		specular;
+	t_vector_4		C;
+	t_color			color;
+	float			specular;
+	t_vector_4		P;
+	t_vector_4		N;
+	t_vector_4		V;
+	t_vector_4		L;
+	t_intersection	intr;
 }				t_light_params;
 
 enum	e_sizes
