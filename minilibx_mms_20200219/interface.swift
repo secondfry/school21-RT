@@ -32,7 +32,7 @@ public func mlx_init_swift() -> UnsafeRawPointer {
 
 @_cdecl("mlx_destroy")
 public func mlx_destroy_swift(_ mlxptr: UnsafeRawPointer) {
-  unowned let mlx: MlxMain = _mlx_bridge_transfer(ptr: mlxptr)
+  unowned let _: MlxMain = _mlx_bridge_transfer(ptr: mlxptr)
 }
 
 @_cdecl("mlx_loop")
