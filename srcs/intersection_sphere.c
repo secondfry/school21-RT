@@ -25,8 +25,8 @@ static void	intersection_sphere(
 		t[1] = 1.0 / 0.0;
 		return ;
 	}
-	t[0] = (-1 * data.b + sqrtf(data.sqrt)) / (2 * data.a);
-	t[1] = (-1 * data.b - sqrtf(data.sqrt)) / (2 * data.a);
+	t[0] = (-1 * data.b + data.sqrt) / (2 * data.a);
+	t[1] = (-1 * data.b - data.sqrt) / (2 * data.a);
 }
 
 t_intersection	intersection_sphere_closest(
