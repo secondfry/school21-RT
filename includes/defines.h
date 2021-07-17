@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/30 22:01:36 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/17 18:43:02 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,13 @@ typedef struct s_intersect_params
 	float		t_min;
 	float		t_max;
 }				t_intersect_params;
+
+typedef struct s_light_params
+{
+	t_vector_4	C;
+	t_color		color;
+	float		specular;
+}				t_light_params;
 
 enum	e_sizes
 {

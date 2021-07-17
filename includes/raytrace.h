@@ -7,13 +7,7 @@
 # include "color.h"
 # include "intersection.h"
 # include "matrix_utils.h"
-
-typedef struct s_light_params
-{
-	t_vector_4	C;
-	t_color		color;
-	float		specular;
-}				t_light_params;
+# include "normal.h"
 
 typedef struct s_pre_light
 {
