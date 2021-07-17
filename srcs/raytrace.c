@@ -34,13 +34,16 @@ static float	light_one(
 	return (intensity);
 }
 
+// NOTE(secondfry): should really optimize getting cutoff and vector math...
 static float	light_point(
 	t_rtv *rtv,
 	const t_light_params *params
 )
 {
-	float	intensity;
-	t_byte	i;
+	const t_vector_4	L = vector_new(0, 0, 0, 0);
+	float				intensity;
+	t_byte				i;
+	float				cutoff;
 
 	intensity = 0;
 	i = 0;
@@ -51,9 +54,11 @@ static float	light_point(
 			i++;
 			continue ;
 		}
-		vector_set_by_value(&params->L, \
-			vector_normalize(vector_sub(rtv->plights[i].position, params->P)));
-		intensity += light_one(rtv, params, 1.f, rtv->plights[i].intensity);
+		vector_set_by_value(&L, \
+			vector_sub(rtv->plights[i].position, params->P));
+		cutoff = vector_length(L);
+		vector_set_by_value(&params->L, vector_normalize(L));
+		intensity += light_one(rtv, params, cutoff, rtv->plights[i].intensity);
 		i++;
 	}
 	return (intensity);
