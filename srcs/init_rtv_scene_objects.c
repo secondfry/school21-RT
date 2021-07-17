@@ -108,6 +108,18 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		1000.0f,
 		TRAIT_EXISTS
 	}), sizeof(t_cylinder));
+
+	const t_vector_4 sphere_C = vector_new(0.f, -1.f, 3.f, 1.f);
+
+	ft_memcpy(rtv->spheres + 0, &((t_sphere) {
+		{
+			sphere_C
+		},
+		color_new(255, 0, 0),
+		1.f,
+		500.0f,
+		TRAIT_EXISTS
+	}), sizeof(t_cylinder));
 }
 
 void	init_rtv_objects(t_rtv *rtv)
