@@ -40,13 +40,13 @@ t_intersection	intersection_cone_closest(
 	t_intersect_params *params
 )
 {
-	float	t_closest;
-	t_byte	idx;
-	t_byte	i;
-	float	t[2];
+	t_intersection	ret;
+	t_byte			i;
+	float			t[2];
 
-	t_closest = 1.0 / 0.0;
-	idx = -1;
+	ret.distance = 1.0 / 0.0;
+	ret.idx = -1;
+	ret.type = ICONE;
 	i = 0;
 	while (i < MAX_CONES)
 	{
@@ -56,17 +56,9 @@ t_intersection	intersection_cone_closest(
 			continue ;
 		}
 		intersection_cone(rtv, params, i, t);
-		if (t[0] > params->t_min && t[0] < params->t_max && t[0] < t_closest)
-		{
-			t_closest = t[0];
-			idx = i;
-		}
-		if (t[1] > params->t_min && t[1] < params->t_max && t[1] < t_closest)
-		{
-			t_closest = t[1];
-			idx = i;
-		}
+		check_intersection(&ret, params, t[0], i);
+		check_intersection(&ret, params, t[1], i);
 		i++;
 	}
-	return ((t_intersection){t_closest, idx, ICONE});
+	return (ret);
 }

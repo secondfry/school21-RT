@@ -5,6 +5,7 @@
 # include "libft.h"
 # include "vector.h"
 # include "defines.h"
+# include "intersection_common.h"
 
 typedef struct s_intersection_cylinder
 {

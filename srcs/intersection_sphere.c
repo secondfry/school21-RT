@@ -29,20 +29,6 @@ static void	intersection_sphere(
 	t[1] = (-1 * data.b - data.sqrt) / (2 * data.a);
 }
 
-static void	check_intersection(
-	t_intersection *ret,
-	t_intersect_params *params,
-	float t,
-	t_byte i
-)
-{
-	if (t > params->t_min && t < params->t_max && t < ret->distance)
-	{
-		ret->distance = t;
-		ret->idx = i;
-	}
-}
-
 t_intersection	intersection_sphere_closest(
 	t_rtv *rtv,
 	t_intersect_params *params

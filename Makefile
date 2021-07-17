@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/17 15:20:32 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/17 17:30:58 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC_FILES =	main.c \
 			raytrace.c \
 			color.c \
 			intersection.c intersection_sphere.c intersection_plane.c intersection_cylinder.c intersection_cone.c \
+			intersection_common.c \
 			parser.c \
 			graceful.c
 
