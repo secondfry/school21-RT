@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/03 00:05:03 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/17 14:26:27 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRC_FILES =	main.c \
 			loop_hook_flow.c \
 			loop_hook_invalidate.c loop_hook_events.c loop_hook_render_debug.c \
 			loop_hook_redraw.c \
+			raytrace.c \
 			color.c \
 			intersection.c intersection_sphere.c intersection_plane.c intersection_cylinder.c intersection_cone.c \
 			parser.c \
