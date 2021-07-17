@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 17:41:01 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/06/28 23:38:21 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/17 15:20:48 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ ifeq ($(DEBUG),1)
 	CFLAGS_OPTIMIZATIONS = -funroll-loops
 	CFLAGS_DEBUG = -O0 -pg -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer
 else
-	CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops
+	CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops -march=native
 	CFLAGS_DEBUG =
 endif
 
