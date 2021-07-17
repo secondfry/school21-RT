@@ -67,6 +67,7 @@ static void	init_rtv_cones(t_rtv *rtv)
 			0, \
 			0, \
 			0, \
+			0, \
 			0 \
 		}), sizeof(t_cone));
 		i++;
@@ -85,10 +86,11 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		{
 			cone_C0,
 			cone_C1,
-			vector_sub(cone_C1, cone_C0)
+			vector_normalize(vector_sub(cone_C1, cone_C0))
 		},
 		color_new(255, 0, 255),
 		angle10,
+		cos,
 		cos2,
 		1000.0f,
 		TRAIT_EXISTS
@@ -101,10 +103,22 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		{
 			cylinder_C0,
 			cylinder_C1,
-			vector_sub(cylinder_C1, cylinder_C0)
+			vector_normalize(vector_sub(cylinder_C1, cylinder_C0))
 		},
 		color_new(255, 255, 255),
 		1.f,
+		1000.0f,
+		TRAIT_EXISTS
+	}), sizeof(t_cylinder));
+
+	ft_memcpy(rtv->cylinders + 1, &((t_cylinder) {
+		{
+			cone_C0,
+			cone_C1,
+			vector_normalize(vector_sub(cone_C1, cone_C0))
+		},
+		color_new(255, 0, 255),
+		0.1f,
 		1000.0f,
 		TRAIT_EXISTS
 	}), sizeof(t_cylinder));
@@ -143,7 +157,7 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 
 	ft_memcpy(rtv->planes + 0, &((t_plane) {
 		vector_new(2.f, -10.f, 4.f, 1.f),
-		vector_new(0.f, 1.f, 0.f, 0.f),
+		vector_normalize(vector_new(0.f, 1.f, 0.f, 0.f)),
 		color_new(255, 255, 0),
 		1.0f,
 		TRAIT_EXISTS
@@ -151,7 +165,7 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 
 	ft_memcpy(rtv->planes + 1, &((t_plane) {
 		vector_new(2.f, 10.f, 4.f, 1.f),
-		vector_new(0.f, -1.f, 0.f, 0.f),
+		vector_normalize(vector_new(0.f, -1.f, 0.f, 0.f)),
 		color_new(0, 255, 255),
 		1.0f,
 		TRAIT_EXISTS
@@ -159,7 +173,7 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 
 	ft_memcpy(rtv->planes + 2, &((t_plane) {
 		vector_new(2.f, 10.f, 20.f, 1.f),
-		vector_new(0.f, 0.f, -1.f, 0.f),
+		vector_normalize(vector_new(0.f, 0.f, -1.f, 0.f)),
 		color_new(0, 127, 255),
 		1.0f,
 		TRAIT_EXISTS

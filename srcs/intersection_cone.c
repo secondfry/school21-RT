@@ -13,19 +13,20 @@ static void	intersection_cone(
 	const t_intersection_cone	data = {
 		rtv->cones[idx].vectors[VCTR_CONE_C0],
 		vector_sub(params->O, data.C),
-		vector_normalize(rtv->cones[idx].vectors[VCTR_CONE_C0C1]),
-		vector_dot(vector_normalize(params->D), data.CQ),
+		rtv->cones[idx].vectors[VCTR_CONE_C0C1],
+		vector_dot(params->D, data.CQ),
 		vector_dot(data.CO, data.CQ),
-		vector_dot(vector_normalize(params->D), data.CO),
+		vector_dot(params->D, data.CO),
 		vector_dot(data.CO, data.CO),
 		rtv->cones[idx].cos2,
 		data.DdotCQ * data.DdotCQ - data.cos2,
 		2 * (data.DdotCQ * data.COdotCQ - data.DdotCO * data.cos2),
 		data.COdotCQ * data.COdotCQ - data.COdotCO * data.cos2,
-		sqrtf((data.b * data.b) - (4.0 * data.a * data.c))
+		(data.b * data.b) - (4.0 * data.a * data.c),
+		sqrtf(data.cubed)
 	};
 
-	if (data.sqrt < 0)
+	if (data.cubed < 0)
 	{
 		t[0] = 1.0 / 0.0;
 		t[1] = 1.0 / 0.0;

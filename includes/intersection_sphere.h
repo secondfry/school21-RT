@@ -14,6 +14,7 @@ typedef struct s_intersection_sphere
 	float		a;
 	float		b;
 	float		c;
+	float		cubed;
 	float		sqrt;
 }				t_intersection_sphere;
 

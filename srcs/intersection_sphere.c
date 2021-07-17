@@ -16,10 +16,11 @@ static void	intersection_sphere(
 		vector_dot(params->D, params->D),
 		2 * vector_dot(params->D, data.CO),
 		vector_dot(data.CO, data.CO) - rtv->spheres[idx].radius_squared,
-		sqrtf(data.b * data.b - 4 * data.a * data.c)
+		data.b * data.b - 4 * data.a * data.c,
+		sqrtf(data.cubed)
 	};
 
-	if (data.sqrt < 0)
+	if (data.cubed < 0)
 	{
 		t[0] = 1.0 / 0.0;
 		t[1] = 1.0 / 0.0;

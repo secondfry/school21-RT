@@ -8,6 +8,7 @@
 # include "defines.h"
 # include "get_next_line.h"
 # include "graceful.h"
+# include "vector.h"
 
 # define LTYPE_UNSET		0
 # define LTYPE_NODE			1

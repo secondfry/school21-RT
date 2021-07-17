@@ -38,10 +38,11 @@ static void	intersection_cylinder(
 		2 * vector_dot(data.Z, data.X),
 		vector_dot(data.X, data.X) \
 			- (rtv->cylinders[idx].radius2 * vector_dot(data.CQ, data.CQ)),
-		sqrtf((data.b * data.b) - (4.0 * data.a * data.c))
+		(data.b * data.b) - (4.0 * data.a * data.c),
+		sqrtf(data.cubed)
 	};
 
-	if (data.sqrt < 0)
+	if (data.cubed < 0)
 	{
 		t[0] = 1.0 / 0.0;
 		t[1] = 1.0 / 0.0;

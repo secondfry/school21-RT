@@ -94,7 +94,7 @@ t_byte validate_light_point(t_rtv *rtv, t_level *root)
 
 t_byte validate_light_directional_one_directional(t_rtv *rtv, t_level *root, t_byte idx)
 {
-	const t_vector_4 direction = get_vector(root);
+	const t_vector_4 direction = vector_normalize(get_vector(root));
 	const float w = 0.f;
 
 	ft_memcpy((void *)&direction.w, (void *)&w, sizeof(float));

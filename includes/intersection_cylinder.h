@@ -17,6 +17,7 @@ typedef struct s_intersection_cylinder
 	float		a;
 	float		b;
 	float		c;
+	float		cubed;
 	float		sqrt;
 }				t_intersection_cylinder;
 

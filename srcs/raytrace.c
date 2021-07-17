@@ -15,7 +15,7 @@ static float	light_point(
 	for (t_byte i = 0; i < MAX_PLIGHTS; i++) {
 		if (!(rtv->plights[i].traits & TRAIT_EXISTS))
 			continue ;
-		t_vector_4 L = vector_sub(rtv->plights[i].position, P);
+		t_vector_4 L = vector_normalize(vector_sub(rtv->plights[i].position, P));
 		t_intersection res = intersection_closest(\
 			rtv, &((t_intersect_params){P, L, EPSILON, 1.f}));
 		if (res.distance != 1.0 / 0.0)
@@ -125,21 +125,21 @@ static t_vector_4	find_normal(
 	if (intr->type == IPLANE)
 		return (rtv->planes[intr->idx].normal);
 	if (intr->type == ISPHERE)
-		return (vector_sub(P, params->C));
+		return (vector_normalize(vector_sub(P, params->C)));
 	if (intr->type == ICONE)
 	{
-		t_vector_4 CP = vector_normalize(vector_sub(P, rtv->cones[intr->idx].vectors[VCTR_CONE_C0]));
-		t_vector_4 C1C0 = vector_normalize(vector_sub(rtv->cones[intr->idx].vectors[VCTR_CONE_C1], rtv->cones[intr->idx].vectors[VCTR_CONE_C0]));
-		float k = vector_dot(CP, C1C0);
-		t_vector_4 Q = vector_mult(C1C0, k);
-		return (vector_normalize(vector_sub(C1C0, Q)));
+		t_vector_4 CP = vector_sub(P, rtv->cones[intr->idx].vectors[VCTR_CONE_C0]);
+		t_vector_4 C0C1 = rtv->cones[intr->idx].vectors[VCTR_CONE_C0C1];
+		float k = vector_length(CP) / rtv->cones[intr->idx].cos;
+		t_vector_4 CQ = vector_mult(C0C1, k);
+		return (vector_normalize(vector_sub(CP, CQ)));
 	}
 	if (intr->type == ICYLINDER)
 	{
 		t_vector_4 CP = vector_sub(P, rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0]);
-		t_vector_4 C1C0 = vector_normalize(vector_sub(rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C1], rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0]));
-		float k = vector_dot(CP, C1C0);
-		t_vector_4 CQ = vector_mult(C1C0, k);
+		t_vector_4 C0C1 = rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0C1];
+		float k = vector_dot(CP, C0C1);
+		t_vector_4 CQ = vector_mult(C0C1, k);
 		return (vector_normalize(vector_sub(CP, CQ)));
 	}
 	return ((t_vector_4){0, 0, 0, 0});
@@ -154,9 +154,8 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 			vector_mult(data->vectors[VCTR_D], intr->distance)
 		),
 		find_normal(rtv, intr, &args.params, args.P),
-		vector_normalize(args.N),
 		vector_mult(data->vectors[VCTR_D], -1),
-		light(rtv, args.P, args.NN, args.V, args.params.specular)
+		light(rtv, args.P, args.N, args.V, args.params.specular)
 	};
 
 	return (color_mult(args.params.color, args.intensity));
@@ -198,10 +197,10 @@ static void	canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
 void	process_pixel(t_rtv *rtv, short xc, short yc)
 {
 	t_color				color;
-	const t_vector_4	D = matrix_on_vector(
+	const t_vector_4	D = vector_normalize(matrix_on_vector(
 		rtv->camera_rotation,
 		(t_vector_4){(float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0}
-	);
+	));
 	t_worker_data		data;
 
 	vector_set(data.vectors + VCTR_O, &rtv->camera_position);

@@ -20,7 +20,6 @@ typedef struct s_pre_light
 	t_light_params	params;
 	t_vector_4		P;
 	t_vector_4		N;
-	t_vector_4		NN;
 	t_vector_4		V;
 	float			intensity;
 }				t_pre_light;
