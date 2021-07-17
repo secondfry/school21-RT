@@ -136,11 +136,11 @@ static t_vector_4	find_normal(
 	}
 	if (intr->type == ICYLINDER)
 	{
-		t_vector_4 CP = vector_normalize(vector_sub(P, rtv->cones[intr->idx].vectors[VCTR_CONE_C0]));
-		t_vector_4 C1C0 = vector_normalize(vector_sub(rtv->cones[intr->idx].vectors[VCTR_CONE_C1], rtv->cones[intr->idx].vectors[VCTR_CONE_C0]));
+		t_vector_4 CP = vector_sub(P, rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0]);
+		t_vector_4 C1C0 = vector_normalize(vector_sub(rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C1], rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0]));
 		float k = vector_dot(CP, C1C0);
-		t_vector_4 Q = vector_mult(C1C0, k);
-		return (vector_normalize(vector_sub(C1C0, Q)));
+		t_vector_4 CQ = vector_mult(C1C0, k);
+		return (vector_normalize(vector_sub(CP, CQ)));
 	}
 	return ((t_vector_4){0, 0, 0, 0});
 }
