@@ -19,3 +19,8 @@ t_vector_4	vector_mult(t_vector_4 a, float k)
 {
 	return ((t_vector_4){a.x * k, a.y * k, a.z * k, a.w * k});
 }
+
+void	vector_set_by_value(t_vector_4 *dst, t_vector_4 src)
+{
+	ft_memcpy((void *) dst, &src, sizeof(t_vector_4));
+}
