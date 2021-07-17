@@ -8,6 +8,7 @@
 # include "intersection.h"
 # include "matrix_utils.h"
 # include "normal.h"
+# include "raytrace_light.h"
 
 typedef struct s_pre_light
 {
