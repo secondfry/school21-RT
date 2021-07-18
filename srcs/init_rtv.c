@@ -12,7 +12,7 @@ static void	init_rtv_common(t_rtv *rtv)
 		| FLAG_REDRAW;
 	ft_memcpy(
 		(void *)&rtv->camera_position, \
-		&((t_vector_4){0.f, 0.f, -10.f, 1.f}), \
+		&((t_vector_4){0.f, 0.f, -21.f, 1.f}), \
 		sizeof(t_vector_4) \
 	);
 	rtv->camera_angles[AROLL] = 0;

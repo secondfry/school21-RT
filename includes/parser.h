@@ -93,6 +93,7 @@ t_color		validate_color(t_level *root);
 float		validate_radius(t_level *root);
 float		validate_specular(t_level *root);
 float		validate_angle(t_level *root);
+t_byte		validate_camera(t_rtv *rtv, t_level *root);
 
 int			check_arguments(int argc, char **argv);
 

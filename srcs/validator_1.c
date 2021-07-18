@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/18 19:35:21 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 20:04:53 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ void	validate(t_rtv *rtv, t_level *root)
 			validate_object(rtv, level, ICYLINDER);
 		if (!ft_strcmp(level->key, "cone"))
 			validate_object(rtv, level, ICONE);
+		if (!ft_strcmp(level->key, "camera"))
+			validate_camera(rtv, level);
 		i++;
 	}
 }

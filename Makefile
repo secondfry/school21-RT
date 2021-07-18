@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 19:58:54 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/18 20:08:16 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRC_FILES =	main.c \
 			validator_1.c validator_2.c validator_light.c \
 			validator_light_directional.c validator_light_point.c \
 			validator_cone.c validator_cylinder.c validator_plane.c \
-			validator_sphere.c \
+			validator_sphere.c validator_camera.c \
 			graceful.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
