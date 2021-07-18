@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 17:50:53 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/18 18:04:39 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_FILES =	main.c \
 			intersection.c intersection_sphere.c intersection_plane.c intersection_cylinder.c intersection_cone.c \
 			intersection_common.c \
 			parser.c parser_level.c parser_level_process.c \
+			parser_parse_1.c parser_parse_2.c \
 			validator.c \
 			graceful.c
 
