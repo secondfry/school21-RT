@@ -27,6 +27,13 @@ typedef struct s_level
 	short			child_offset;
 }				t_level;
 
+typedef struct s_process_type_args
+{
+	int			fd;
+	char		**memory;
+	const char	*line;
+}				t_process_type_args;
+
 # define ERR_PARSER_NO_COLON "Line must either be filled with spaces which I \
 disgrace because you should really not fill your configuration files with \
 extra unneeded spaces but for some reason I have to workaround this exact \
@@ -103,11 +110,12 @@ void		parser(t_rtv *rtv, int argc, char **argv);
 int			check_arguments(int argc, char **argv);
 
 t_level		*level_new(void);
-t_vector_4	get_vector(t_level *root);
 t_level		*level_from_line(const char *line);
-int			check_arguments(int argc, char **argv);
-short		get_offset(char *line);
 t_level		*parse(int fd, char **memory);
 void		parser(t_rtv *rtv, int argc, char **argv);
+
+short		get_offset(char *line);
+void		init_root(t_level **root, char **memory);
+void		process_parent_child(t_level **parent, t_level *child);
 
 #endif

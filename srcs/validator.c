@@ -16,6 +16,30 @@
 //	 TODO: DELETE!!!
 #include <stdio.h>
 
+static t_vector_4	get_vector(t_level *root)
+{
+	float	coord[3];
+	t_byte	i;
+	t_level	*level;
+
+	coord[0] = 0;
+	coord[1] = 0;
+	coord[2] = 0;
+	i = 0;
+	while (i < root->data->used)
+	{
+		level = root->data->data[i];
+		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "x"))
+			coord[0] = ft_atoi(level->value);
+		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "y"))
+			coord[1] = ft_atoi(level->value);
+		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "z"))
+			coord[2] = ft_atoi(level->value);
+		i++;
+	}
+	return ((t_vector_4){coord[0], coord[1], coord[2], 1.f});
+}
+
 //	TODO: дописать валидатор
 void		validate(t_rtv *rtv, t_level *root)
 {

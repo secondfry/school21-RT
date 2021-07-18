@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+         #
+#    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 13:39:38 by pcarolei         ###   ########.fr        #
+#    Updated: 2021/07/18 17:50:53 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ SRC_FILES =	main.c \
 			color.c \
 			intersection.c intersection_sphere.c intersection_plane.c intersection_cylinder.c intersection_cone.c \
 			intersection_common.c \
-			parser.c \
+			parser.c parser_level.c parser_level_process.c \
 			validator.c \
 			graceful.c
 
@@ -77,7 +77,7 @@ else
 	endif
 endif
 
-CFLAGS_ERRORS = #-Wall -Wextra -Werror
+CFLAGS_ERRORS = -Wall -Wextra -Werror -Wno-incompatible-pointer-types-discards-qualifiers
 
 ifeq ($(DEBUG),1)
 	CFLAGS_OPTIMIZATIONS = -funroll-loops

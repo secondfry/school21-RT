@@ -30,6 +30,10 @@ add_executable(
   tests/mocks.cc
   includes/parser.h
   srcs/parser.c
+  srcs/parser_level.c
+  srcs/parser_level_process.c
+  srcs/parser_parse_1.c
+  srcs/parser_parse_2.c
   srcs/graceful.c
 )
 target_link_libraries(
