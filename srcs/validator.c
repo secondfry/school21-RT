@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/18 19:20:15 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 19:25:45 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,48 +102,6 @@ t_byte	validate_object(t_rtv *rtv, t_level *root, t_byte obj_type)
 			validate_cone(rtv, level->data->data[0], i);
 		i++;
 	}
-	return (1);
-}
-
-/**
- *	Функция для валидации параметров плоскости
- */
-t_byte	validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	t_byte		res;
-	t_vector_4	*dest;
-	t_byte		i;
-	t_level		*level;
-
-	res = 0;
-	i = 0;
-	while (i < root->data->used)
-	{
-		level = root->data->data[i];
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
-		{
-			dest = &rtv->planes[idx].position;
-			res += validate_vector(dest, level);
-		}
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "normal"))
-		{
-			dest = &rtv->planes[idx].normal;
-			res += validate_vector(dest, level);
-		}
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "color"))
-		{
-			rtv->planes[idx].color = validate_color(level);
-			res++;
-		}
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "specular"))
-		{
-			rtv->planes[idx].specular = validate_specular(level);
-			res++;
-		}
-		i++;
-	}
-	check(res != 4, 1, "[ERR] PLANE IS INVALID\n");
-	rtv->planes[idx].traits = TRAIT_EXISTS;
 	return (1);
 }
 
