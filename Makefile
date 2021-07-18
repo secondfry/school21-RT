@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 19:33:25 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/18 19:35:03 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRC_FILES =	main.c \
 			intersection_common.c \
 			parser.c parser_level.c parser_level_process.c \
 			parser_parse_1.c parser_parse_2.c \
-			validator.c validator_light.c \
+			validator_1.c validator_2.c validator_light.c \
 			validator_light_directional.c validator_light_point.c \
 			validator_cone.c validator_cylinder.c validator_plane.c \
 			validator_sphere.c \

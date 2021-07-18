@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validator.c                                        :+:      :+:    :+:   */
+/*   validator_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/18 19:31:48 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 19:35:21 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,73 +132,4 @@ t_byte	validate_vector(t_vector_4 *dest, t_level *root)
 	check(res != 3, 1, "[ERR] VECTOR PARAMETERS ERROR\n");
 	vector_set_by_value(dest, get_vector(root));
 	return (1);
-}
-
-/**
- *	Функция для валидации компонента цвета
- *	(представленного целым числом от нуля до 255)
- */
-static t_byte	validate_color_component(char *value)
-{
-	t_byte	component;
-
-	component = ft_atoi(value);
-	return (component);
-}
-
-/**
- *	Функция для валидации цвета
- */
-t_color	validate_color(t_level *root)
-{
-	t_color	color;
-	t_byte	i;
-	t_level	*level;
-
-	check(root->data->used != 3, \
-		1, "[ERR] COLOR HAVE WRONG AMOUNT OF PARAMETERS\n");
-	color = color_new(0, 0, 0);
-	i = 0;
-	while (i < root->data->used)
-	{
-		level = root->data->data[i];
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "red"))
-			color[TCRED] = validate_color_component(level->value);
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "green"))
-			color[TCGREEN] = validate_color_component(level->value);
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "blue"))
-			color[TCBLUE] = validate_color_component(level->value);
-		i++;
-	}
-	return (color);
-}
-
-/**
- *	Функция для валидации радиуса
- *	@returns Квадрат радиуса
- */
-float	validate_radius(t_level *root)
-{
-	int	radius;
-
-	radius = -1;
-	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "radius"))
-	{
-		radius = ft_atoi(root->value);
-	}
-	check(radius < 0, 1, "[ERR] INVALID RADIUS INPUT\n");
-	return (radius * radius);
-}
-
-/**
- *	Функция для валидации зеркальности
- */
-float	validate_specular(t_level *root)
-{
-	int	specular;
-
-	specular = -1;
-	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "specular"))
-		specular = ft_atoi(root->value);
-	return (specular);
 }
