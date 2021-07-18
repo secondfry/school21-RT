@@ -42,7 +42,7 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 		&params.N, find_normal(rtv, intr, &params));
 	vector_set_by_value(&params.V, vector_mult(data->vectors[VCTR_D], -1));
 	intensity = light(rtv, &params);
-	return (*color_mult(&params.color, intensity));
+	return (*color_mult((void *)&params.color, intensity));
 }
 
 static t_color	raytrace(

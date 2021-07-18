@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 19:35:03 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/18 19:58:54 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ else
 	endif
 endif
 
-CFLAGS_ERRORS = -Wall -Wextra -Werror -Wno-incompatible-pointer-types-discards-qualifiers
+CFLAGS_ERRORS = -Wall -Wextra -Werror
 
 ifeq ($(DEBUG),1)
 	CFLAGS_OPTIMIZATIONS = -funroll-loops

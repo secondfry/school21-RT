@@ -41,7 +41,7 @@ t_color	*color_mult(t_color *a, float k)
 	t_color	ret;
 
 	if (k < 0)
-		color_zero(a);
+		return (color_zero(&ret));
 	if (255 / k < a->red)
 		ret.red = 255;
 	else
