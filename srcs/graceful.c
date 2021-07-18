@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graceful.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 06:30:54 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/18 09:03:10 by pcarolei         ###   ########.fr       */
+/*   Updated: 2021/07/18 16:31:07 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  *	@param reason Код ошибки
  *	@param msg Сообщение об ошибке
  */
-void graceful(size_t reason, const char *msg)
+void	graceful(size_t reason, const char *msg)
 {
 	ft_putendl_fd(msg, 2);
 	exit(reason);
