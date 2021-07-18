@@ -223,18 +223,24 @@ void		free_parsed_struct(t_level *root)
 {
 	size_t	i;
 
-	if (root->child_offset == -1)
+	if (root->type == LTYPE_LEAF || root->type == LTYPE_LIST_LEAF)
 	{
 		free(root->key);
 		free(root->value);
 		free(root);
 		return ;
 	}
-	i = 0;
-	while (i < root->data->used)
+	if (root->type == LTYPE_NODE || root->type == LTYPE_LIST_NODE)
 	{
-		free_parsed_struct(root->data->data[i]);
-		i++;
+		free(root->key);
+		i = 0;
+		while (i < root->data->used)
+		{
+			free_parsed_struct(root->data->data[i]);
+			i++;
+		}
+		byte_array_destroy(root->data);
+		free(root);
 	}
 }
 

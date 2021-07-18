@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 17:23:19 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/06/28 23:40:05 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 15:54:09 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_byte_array
 }				t_byte_array;
 
 t_byte_array	*byte_array_new(size_t len);
+void			byte_array_destroy(t_byte_array *arr);
 t_byte_array	*byte_array_resize(t_byte_array *arr, size_t len);
 t_byte_array	*byte_array_add(t_byte_array *arr, t_byte data);
 t_byte			byte_array_has(t_byte_array *arr, t_byte data);
