@@ -1,5 +1,6 @@
 {
 	"files.associations": {
+		"*.oadyaml": "yaml",
 		"parser.h": "c",
 		"defines.h": "c",
 		"init_mlx.h": "c",
@@ -96,7 +97,8 @@
 		"unordered_set": "cpp",
 		"utility": "cpp",
 		"variant": "cpp",
-		"array.h": "c"
+		"array.h": "c",
+		"filesystem": "cpp"
 	},
 	"editor.formatOnSave": false
 }
