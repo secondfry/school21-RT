@@ -169,7 +169,7 @@ TEST(ParserParseTest, ValidFull) {
   EXPECT_EQ(directional_0_position_x->child_offset, -1);
   EXPECT_EQ(directional_0_position_x->data, (void *)0);
   EXPECT_STREQ(directional_0_position_x->key, "x");
-  EXPECT_STREQ(directional_0_position_x->value, "1");
+  EXPECT_STREQ(directional_0_position_x->value, "-1");
   EXPECT_EQ(directional_0_position_x->parent, directional_0_position);
   EXPECT_EQ(directional_0_position_x->type, LTYPE_LEAF);
   
@@ -187,7 +187,7 @@ TEST(ParserParseTest, ValidFull) {
   EXPECT_EQ(directional_0_position_z->child_offset, -1);
   EXPECT_EQ(directional_0_position_z->data, (void *)0);
   EXPECT_STREQ(directional_0_position_z->key, "z");
-  EXPECT_STREQ(directional_0_position_z->value, "4");
+  EXPECT_STREQ(directional_0_position_z->value, "-4");
   EXPECT_EQ(directional_0_position_z->parent, directional_0_position);
   EXPECT_EQ(directional_0_position_z->type, LTYPE_LEAF);
   

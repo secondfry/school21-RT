@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/04 17:41:01 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 15:54:33 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/18 16:17:58 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ LFT_FUNCTIONS = $(LFT_FUNCTIONS_PART1)\
 FUNCTIONS = get_next_line \
 	byte_array_new byte_array_resize byte_array_add byte_array_has \
 	byte_array_destroy \
-	ptr_array_new ptr_array_resize ptr_array_add ptr_array_has
+	ptr_array_new ptr_array_resize ptr_array_add ptr_array_has \
+	ptr_array_destroy
 
 OBJECTS = 	$(patsubst %,objs/ft_%.o,$(LFT_FUNCTIONS)) \
 			$(patsubst %,objs/%.o,$(FUNCTIONS))
