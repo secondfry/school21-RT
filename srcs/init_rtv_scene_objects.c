@@ -74,6 +74,7 @@ static void	init_rtv_cones(t_rtv *rtv)
 	}
 }
 
+#include <stdio.h>
 static void	init_rtv_unnormed(t_rtv *rtv)
 {
 	const float angle10 = 10.f * M_PI_F / 180.f;
@@ -111,6 +112,8 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		TRAIT_EXISTS
 	}), sizeof(t_cylinder));
 
+	t_vector_4 vec_norm = vector_normalize(vector_sub(cone_C1, cone_C0));
+	printf("\n\n\n\nREAL_VEC_NORM = {%f, %f, %f, %f}\n\n\n\n", vec_norm.x, vec_norm.y, vec_norm.z, vec_norm.w);
 	ft_memcpy(rtv->cylinders + 1, &((t_cylinder) {
 		{
 			cone_C0,

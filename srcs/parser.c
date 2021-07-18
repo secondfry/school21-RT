@@ -219,6 +219,25 @@ t_level		*parse(int fd, char **memory)
 	return (root);
 }
 
+void		free_parsed_struct(t_level *root)
+{
+	size_t	i;
+
+	if (root->child_offset == -1)
+	{
+		free(root->key);
+		free(root->value);
+		free(root);
+		return ;
+	}
+	i = 0;
+	while (i < root->data->used)
+	{
+		free_parsed_struct(root->data->data[i]);
+		i++;
+	}
+}
+
 void		parser(t_rtv *rtv, int argc, char **argv)
 {
 	int		fd;
@@ -229,4 +248,6 @@ void		parser(t_rtv *rtv, int argc, char **argv)
 	memory = 0;
 	root = parse(fd, &memory);
 	validate(rtv, root);
+	free_parsed_struct(root);
+	free(memory);
 }

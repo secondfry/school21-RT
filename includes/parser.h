@@ -84,7 +84,7 @@ t_byte		validate_sphere(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx);
-t_byte		validate_vector(void *dest, t_level *root);
+t_byte		validate_vector(t_vector_4 *dest, t_level *root);
 t_byte		validate_color_component(char *value);
 t_color		validate_color(t_level *root);
 t_byte		validate_radius(t_level *root);

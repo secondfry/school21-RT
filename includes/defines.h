@@ -6,7 +6,7 @@
 /*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/18 09:00:29 by pcarolei         ###   ########.fr       */
+/*   Updated: 2021/07/18 13:38:51 by pcarolei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,8 @@ typedef int			(*t_mlx_hook)();
  */
 # define DOHUYA 100000
 
-/**
- *	Структура четырехмерного вектора
- */
-typedef const struct	s_vector_4
-{
-	float	x;
-	float	y;
-	float	z;
-	float	w;
-}						t_vector_4;
-
 typedef float				*t_matrix_4;
 typedef float				*t_quaterion;
-typedef const float	* const t_const_matrix_4;
-typedef const float	* const t_const_quaterion;
 typedef int					(*t_mlx_hook)();
 typedef t_byte				*t_color;
 

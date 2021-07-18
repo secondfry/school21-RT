@@ -6,7 +6,7 @@
 #    By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 09:00:59 by pcarolei         ###   ########.fr        #
+#    Updated: 2021/07/18 13:39:38 by pcarolei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ else
 	endif
 endif
 
-CFLAGS_ERRORS = -Wall -Wextra -Werror
+CFLAGS_ERRORS = #-Wall -Wextra -Werror
 
 ifeq ($(DEBUG),1)
 	CFLAGS_OPTIMIZATIONS = -funroll-loops

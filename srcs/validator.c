@@ -6,7 +6,7 @@
 /*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/10 17:09:46 by pcarolei         ###   ########.fr       */
+/*   Updated: 2021/07/18 15:38:36 by pcarolei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 //	TODO: дописать валидатор
 void		validate(t_rtv *rtv, t_level *root)
 {
+	return ;
 	for (t_byte i = 0; i < root->data->used; i++)
 	{
 		t_level *level = root->data->data[i];
@@ -94,11 +95,14 @@ t_byte		validate_light_point(t_rtv *rtv, t_level *root)
 
 t_byte		validate_light_directional_one_directional(t_rtv *rtv, t_level *root, t_byte idx)
 {
-	const t_vector_4 direction = get_vector(root);
-	const float w = 0.f;
+	t_vector_4 direction = get_vector(root);
+	float w = 0.f;
 
 	ft_memcpy((void *)&direction.w, (void *)&w, sizeof(float));
 	ft_memcpy((void *)&rtv->dlights[idx].direction, (void *)&direction, sizeof(t_vector_4));
+	// t_vector_4 *v = &(rtv->dlights[idx].direction);
+	// *v = direction;
+	// printf("v->x = %f, v->y = %f, v->z = %f\n", v->x, v->y, v->z);
 	return (1);
 }
 
@@ -149,6 +153,7 @@ t_byte		validate_light_directional(t_rtv *rtv, t_level *root)
  */
 void		print_level_info(t_level *level)
 {
+	return ;
 	if (level->type == 0)
 		printf("level->type is UNSET\n");
 	if (level->type == 1)
@@ -243,13 +248,13 @@ t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
 		print_level_info(level);
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
 		{
-			res += validate_vector((void *)&vec_end, level);
+			res += validate_vector(&vec_end, level);
 			printf("\n\n\n\nVEC_END = {%f, %f, %f, %f}\n\n\n\n", vec_end.x, vec_end.y, vec_end.z, vec_end.w);
 			ft_memcpy((void *)&rtv->cones[idx].vectors[0], (void *)&vec_end, sizeof(t_vector_4));
 		}
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "direction"))
 		{
-			res += validate_vector((void *)&vec_start, level);
+			res += validate_vector(&vec_start, level);
 			printf("\n\n\n\nVEC_START = {%f, %f, %f, %f}\n\n\n\n", vec_start.x, vec_start.y, vec_start.z, vec_start.w);
 			ft_memcpy((void *)&rtv->cones[idx].vectors[1], (void *)&vec_start, sizeof(t_vector_4));
 		}
@@ -269,6 +274,8 @@ t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
 			res++;
 		}
 	}
+	t_vector_4 vec_norm = vector_normalize(vector_sub(vec_start, vec_end));
+	ft_memcpy((void *)&rtv->cones[idx].vectors[2], (void *)&vec_norm, sizeof(t_vector_4));
 	check(res != 5, 1, "[ERR] CONE IS INVALID\n");
 	printf("КОНЕЦ ВАЛИДАЦИИ КОНУСА\n");
 	return (1);
@@ -282,10 +289,9 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 	t_byte		res;
 
 	res = 0;
-
-	printf("НАЧАЛО ВАЛИДАЦИИ ЦИЛИНДРА\n");
 	t_vector_4 vec_start = (t_vector_4) {0, 0, 0, 0};
 	t_vector_4 vec_end = (t_vector_4) {0, 0, 0, 0};
+	printf("НАЧАЛО ВАЛИДАЦИИ ЦИЛИНДРА\n");
 	for (t_byte i = 0; i < root->data->used; i++)
 	{
 		t_level *level = root->data->data[i];
@@ -293,13 +299,13 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 		print_level_info(level);
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
 		{
-			res += validate_vector((void *)&vec_end, level);
+			res += validate_vector(&vec_end, level);
 			printf("\n\n\n\nVEC_END = {%f, %f, %f, %f}\n\n\n\n", vec_end.x, vec_end.y, vec_end.z, vec_end.w);
 			ft_memcpy((void *)&rtv->cylinders[idx].vectors[0], (void *)&vec_end, sizeof(t_vector_4));
 		}
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "direction"))
 		{
-			res += validate_vector((void *)&vec_start, level);
+			res += validate_vector(&vec_start, level);
 			printf("\n\n\n\nVEC_START = {%f, %f, %f, %f}\n\n\n\n", vec_start.x, vec_start.y, vec_start.z, vec_start.w);
 			ft_memcpy((void *)&rtv->cylinders[idx].vectors[1], (void *)&vec_start, sizeof(t_vector_4));
 		}
@@ -310,7 +316,7 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 		}
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "radius"))
 		{
-			rtv->cylinders[idx].radius_squared = validate_radius(level);
+			rtv->cylinders[idx].radius2 = validate_radius(level);
 			res++;
 		}
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "specular"))
@@ -319,6 +325,11 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 			res++;
 		}
 	}
+	printf("\n\n\n\nVEC_START = {%f, %f, %f, %f}\n\n\n\n", vec_start.x, vec_start.y, vec_start.z, vec_start.w);
+	printf("\n\n\n\nVEC_END = {%f, %f, %f, %f}\n\n\n\n", vec_end.x, vec_end.y, vec_end.z, vec_end.w);
+	t_vector_4 vec_norm = vector_normalize(vector_sub(vec_start, vec_end));
+	ft_memcpy((void *)&rtv->cylinders[idx].vectors[2], (void *)&vec_norm, sizeof(t_vector_4));
+	printf("\n\n\n\nVEC_NORM = {%f, %f, %f, %f}\n\n\n\n", vec_norm.x, vec_norm.y, vec_norm.z, vec_norm.w);
 	check(res != 5, 1, "[ERR] CYLINDER IS INVALID\n");
 	printf("КОНЕЦ ВАЛИДАЦИИ ЦИЛИНДРА\n");
 	return (1);
@@ -330,7 +341,7 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 {
 	t_byte	res;
-	void	*dest;
+	t_vector_4	*dest;
 
 	res = 0;
 
@@ -342,12 +353,12 @@ t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 		print_level_info(level);
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
 		{
-			dest = (void *)&rtv->planes[idx].position;
+			dest = &rtv->planes[idx].position;
 			res += validate_vector(dest, level);
 		}
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "normal"))
 		{
-			dest = (void *)&rtv->planes[idx].normal;
+			dest = &rtv->planes[idx].normal;
 			res += validate_vector(dest, level);
 		}
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "color"))
@@ -372,7 +383,7 @@ t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 t_byte		validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 {
 	t_byte	res;
-	void	*dest;
+	t_vector_4	*dest;
 
 	res = 0;
 
@@ -384,7 +395,7 @@ t_byte		validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 		print_level_info(level);
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
 		{
-			dest = (void *)&rtv->spheres[idx].vectors[VCTR_C];
+			dest = &rtv->spheres[idx].vectors[VCTR_SPHERE_C];
 			res += validate_vector(dest, level);
 		}
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "color"))
@@ -411,7 +422,7 @@ t_byte		validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 /**
  *	Функция для валидации вектора
  */
-t_byte	validate_vector(void *dest, t_level *root)
+t_byte	validate_vector(t_vector_4 *dest, t_level *root)
 {
 	t_byte				res;
 
@@ -439,8 +450,15 @@ t_byte	validate_vector(void *dest, t_level *root)
 		}
 	}
 	check(res != 3, 1, "[ERR] VECTOR PARAMETERS ERROR\n");
-	const t_vector_4 vector = get_vector(root);
-	ft_memcpy(dest, (void *)&vector, sizeof(t_vector_4));
+	// const t_vector_4 *vector = get_vector(root);
+	// const t_vector_4 *v = (t_vector_4 *)(dest);
+	t_vector_4 r = get_vector(root);
+
+	*dest = r;
+	// dest = (void *)v;
+	// const t_vector_4 v = get_vector(root);;
+	// printf("v->x = %f, v->y = %f, v->z = %f\n", v.x, v.y, v.z);
+	// ft_memcpy(dest, (void *)&vector, sizeof(t_vector_4));
 	printf("ВЕКТОР ВАЛИДЕН\n");
 	return (1);
 }
@@ -503,7 +521,7 @@ t_color	validate_color(t_level *root)
 	return (color);
 }
 
-/**
+/**aaa
  *	Функция для валидации радиуса
  *	@returns Квадрат радиуса
  */
@@ -533,7 +551,6 @@ t_byte	validate_specular(t_level *root)
 	specular = -1;
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "specular"))
 		specular = ft_atoi(root->value);
-	check(specular < 0, 1, "[ERR] INVALID SPECULAR INPUT\n");
 	printf("ЗЕРКАЛЬНОСТЬ ВАЛИДНА!\n");
 	return (specular);
 }
@@ -551,7 +568,6 @@ float	validate_angle(t_level *root)
 	angle = -1;
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "angle"))
 		angle = ft_atoi(root->value) * M_PI_F / 180.f,
-	check(angle < 0, 1, "[ERR] INVALID ANGLE INPUT\n");
 	printf("УГОЛ ВАЛИДЕН!\n");
 	return (angle);
 }
