@@ -6,7 +6,7 @@
 /*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/18 15:38:36 by pcarolei         ###   ########.fr       */
+/*   Updated: 2021/07/18 17:44:06 by pcarolei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 //	TODO: дописать валидатор
 void		validate(t_rtv *rtv, t_level *root)
 {
-	return ;
 	for (t_byte i = 0; i < root->data->used; i++)
 	{
 		t_level *level = root->data->data[i];
@@ -93,18 +92,16 @@ t_byte		validate_light_point(t_rtv *rtv, t_level *root)
 	return (1);
 }
 
-t_byte		validate_light_directional_one_directional(t_rtv *rtv, t_level *root, t_byte idx)
+t_byte validate_light_directional_one_directional(t_rtv *rtv, t_level *root, t_byte idx)
 {
-	t_vector_4 direction = get_vector(root);
-	float w = 0.f;
+	const t_vector_4 direction = vector_normalize(get_vector(root));
+	const float w = 0.f;
 
 	ft_memcpy((void *)&direction.w, (void *)&w, sizeof(float));
 	ft_memcpy((void *)&rtv->dlights[idx].direction, (void *)&direction, sizeof(t_vector_4));
-	// t_vector_4 *v = &(rtv->dlights[idx].direction);
-	// *v = direction;
-	// printf("v->x = %f, v->y = %f, v->z = %f\n", v->x, v->y, v->z);
 	return (1);
 }
+
 
 t_byte		validate_light_directional_one_intensity(t_rtv *rtv, t_level *root, t_byte idx)
 {
@@ -123,9 +120,17 @@ t_byte		validate_light_directional_one(t_rtv *rtv, t_level *root, t_byte idx)
 	{
 		t_level *level = root->data->data[i];
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "direction"))
+		{
 			res += validate_light_directional_one_directional(rtv, level, idx);
+			t_vector_4 *v = &(rtv->dlights[idx].direction);
+			printf("POST DLIGHT VALIDATION: v->x = %f, v->y = %f, v->z = %f\n", v->x, v->y, v->z);
+		}
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "intensity"))
+		{
 			res += validate_light_directional_one_intensity(rtv, level, idx);
+			float i = rtv->dlights[idx].intensity;
+			printf("POST DLIGHT VALIDATION: intensity = %f\n", i);
+		}
 	}
 	check(res != 2, 1, ERR_VALIDATOR_LIGHT_DIRECTIONAL_INVALID);
 	rtv->dlights[idx].traits = TRAIT_EXISTS;
@@ -266,6 +271,8 @@ t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "angle"))
 		{
 			rtv->cones[idx].angle = validate_angle(level);
+			rtv->cones[idx].cos = cosf(rtv->cones[idx].angle);
+			rtv->cones[idx].cos2 = rtv->cones[idx].cos * rtv->cones[idx].cos;
 			res++;
 		}
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "specular"))
@@ -278,6 +285,7 @@ t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
 	ft_memcpy((void *)&rtv->cones[idx].vectors[2], (void *)&vec_norm, sizeof(t_vector_4));
 	check(res != 5, 1, "[ERR] CONE IS INVALID\n");
 	printf("КОНЕЦ ВАЛИДАЦИИ КОНУСА\n");
+	rtv->cones[idx].traits = TRAIT_EXISTS;
 	return (1);
 }
 
@@ -332,6 +340,7 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 	printf("\n\n\n\nVEC_NORM = {%f, %f, %f, %f}\n\n\n\n", vec_norm.x, vec_norm.y, vec_norm.z, vec_norm.w);
 	check(res != 5, 1, "[ERR] CYLINDER IS INVALID\n");
 	printf("КОНЕЦ ВАЛИДАЦИИ ЦИЛИНДРА\n");
+	rtv->cylinders[idx].traits = TRAIT_EXISTS;
 	return (1);
 }
 
@@ -374,6 +383,7 @@ t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 	}
 	check(res != 4, 1, "[ERR] PLANE IS INVALID\n");
 	printf("КОНЕЦ ВАЛИДАЦИИ ПЛОСКОСТИ\n");
+	rtv->planes[idx].traits = TRAIT_EXISTS;
 	return (1);
 }
 
@@ -416,6 +426,7 @@ t_byte		validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 	}
 	check(res != 4, 1, "[ERR] SPHERE IS INVALID\n");
 	printf("КОНЕЦ ВАЛИДАЦИИ СФЕРЫ\n");
+	rtv->spheres[idx].traits = TRAIT_EXISTS;
 	return (1);
 }
 
@@ -533,8 +544,12 @@ t_byte	validate_radius(t_level *root)
 	print_level_info(root);
 	radius = -1;
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "radius"))
+	{
 		radius = ft_atoi(root->value);
+		printf("CYLINDER RADIUS = %f\n", radius);
+	}
 	check(radius < 0, 1, "[ERR] INVALID RADIUS INPUT\n");
+	printf("CYLINDER RADIUS = %f\n", radius * radius);
 	printf("РАДИУС ВАЛИДЕН!\n");
 	return (radius * radius);
 }
@@ -567,7 +582,7 @@ float	validate_angle(t_level *root)
 	print_level_info(root);
 	angle = -1;
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "angle"))
-		angle = ft_atoi(root->value) * M_PI_F / 180.f,
+		angle = (float)ft_atoi(root->value) * M_PI_F / 180.f,
 	printf("УГОЛ ВАЛИДЕН!\n");
 	return (angle);
 }

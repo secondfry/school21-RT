@@ -83,19 +83,19 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 	const t_vector_4 cone_C0 = vector_new(-1.f, 0.f, 10.f, 1.f);
 	const t_vector_4 cone_C1 = vector_new(-2.f, 10.f, 10.f, 1.f);
 
-	ft_memcpy(rtv->cones + 0, &((t_cone) {
-		{
-			cone_C0,
-			cone_C1,
-			vector_normalize(vector_sub(cone_C1, cone_C0))
-		},
-		color_new(255, 0, 255),
-		angle10,
-		cos,
-		cos2,
-		1000.0f,
-		TRAIT_EXISTS
-	}), sizeof(t_cone));
+	// ft_memcpy(rtv->cones + 0, &((t_cone) {
+	// 	{
+	// 		cone_C0,
+	// 		cone_C1,
+	// 		vector_normalize(vector_sub(cone_C1, cone_C0))
+	// 	},
+	// 	color_new(255, 0, 255),
+	// 	angle10,
+	// 	cos,
+	// 	cos2,
+	// 	1000.0f,
+	// 	TRAIT_EXISTS
+	// }), sizeof(t_cone));
 
 	const t_vector_4 cylinder_C0 = vector_new(1.f, 0.f, 10.f, 1.f);
 	const t_vector_4 cylinder_C1 = vector_new(2.f, 10.f, 10.f, 1.f);
@@ -112,8 +112,8 @@ static void	init_rtv_unnormed(t_rtv *rtv)
 		TRAIT_EXISTS
 	}), sizeof(t_cylinder));
 
-	t_vector_4 vec_norm = vector_normalize(vector_sub(cone_C1, cone_C0));
-	printf("\n\n\n\nREAL_VEC_NORM = {%f, %f, %f, %f}\n\n\n\n", vec_norm.x, vec_norm.y, vec_norm.z, vec_norm.w);
+	// t_vector_4 vec_norm = vector_normalize(vector_sub(cone_C1, cone_C0));
+	// printf("\n\n\n\nREAL_VEC_NORM = {%f, %f, %f, %f}\n\n\n\n", vec_norm.x, vec_norm.y, vec_norm.z, vec_norm.w);
 	ft_memcpy(rtv->cylinders + 1, &((t_cylinder) {
 		{
 			cone_C0,
@@ -189,5 +189,5 @@ void	init_rtv_objects(t_rtv *rtv)
 	init_rtv_planes(rtv);
 	init_rtv_cylinders(rtv);
 	init_rtv_cones(rtv);
-	init_rtv_unnormed(rtv);
+	// init_rtv_unnormed(rtv);
 }
