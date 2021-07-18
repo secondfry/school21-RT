@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/18 18:30:39 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 19:11:37 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,152 +36,102 @@ t_vector_4	get_vector(t_level *root)
 	return ((t_vector_4){coord[0], coord[1], coord[2], 1.f});
 }
 
-//	TODO: дописать валидатор
-void		validate(t_rtv *rtv, t_level *root)
+/**
+ *	Функция для валидации угла
+ */
+//	TODO: объединить в функцию валидации скаляра вместе с specular
+float	validate_angle(t_level *root)
 {
-	for (t_byte i = 0; i < root->data->used; i++)
+	float	angle;
+
+	angle = -1;
+	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "angle"))
+		angle = (float)ft_atoi(root->value) * M_PI_F / 180.f;
+	return (angle);
+}
+
+void	validate(t_rtv *rtv, t_level *root)
+{
+	t_byte	i;
+	t_level	*level;
+
+	i = 0;
+	while (i < root->data->used)
 	{
-		t_level *level = root->data->data[i];
+		level = root->data->data[i];
 		check(level->type != LTYPE_NODE, 1, ERR_VALIDATOR_ROOT_NODES);
 		if (!ft_strcmp(level->key, "light"))
 			validate_light(rtv, level);
 		if (!ft_strcmp(level->key, "sphere"))
-			validate_object(rtv, level, 2);
+			validate_object(rtv, level, ISPHERE);
 		if (!ft_strcmp(level->key, "plane"))
-			validate_object(rtv, level, 3);
+			validate_object(rtv, level, IPLANE);
 		if (!ft_strcmp(level->key, "cylinder"))
-			validate_object(rtv, level, 4);
+			validate_object(rtv, level, ICYLINDER);
 		if (!ft_strcmp(level->key, "cone"))
-			validate_object(rtv, level, 5);
+			validate_object(rtv, level, ICONE);
+		i++;
 	}
 }
 
 /**
- *	Функция для печати информации об "уровне" в карте
+ *	Функция для валидации списка объектов
+ *	(света/сфер/плоскостей/конусов/цилиндров)
  */
-void		print_level_info(t_level *level)
-{
-	return ;
-	if (level->type == 0)
-	if (level->type == 1)
-	if (level->type == 2)
-	if (level->type == 3)
-	if (level->type == 4)
-
-
-	if (level->data)
-	return ;
-}
-
-/**
- *	Функция для валидации списка объектов (света/сфер/плоскостей/конусов/цилиндров)
- */
-t_byte		validate_object(t_rtv *rtv, t_level *root, t_byte obj_type)
+t_byte	validate_object(t_rtv *rtv, t_level *root, t_byte obj_type)
 {
 	t_byte	res;
+	t_byte	i;
 	t_level	*level;
 
 	res = 0;
-
-	//	Проверяем, что на вход пришла нода
 	check(root->type != LTYPE_NODE, 1, "[ERR] EXPECTED NODE\n");
-	//	Проверяем, что описано не менее одного объекта
-	check(!root->data || !root->data->used, 0, "[ERR] EXPECTED ONE OR MORE OBJECTS\n");
-
-	print_level_info(root);
-
-	for (t_byte i = 0; i < root->data->used; i++)
+	check(!root->data || !root->data->used, \
+		1, "[ERR] EXPECTED ONE OR MORE OBJECTS\n");
+	i = 0;
+	while (i < root->data->used)
 	{
-		//	Вытаскиваем список со сферами
 		level = root->data->data[i];
-		print_level_info(level);
-		if (obj_type == 2)
+		if (obj_type == ISPHERE)
 			validate_sphere(rtv, level->data->data[0], i);
-		if (obj_type == 3)
+		if (obj_type == IPLANE)
 			validate_plane(rtv, level->data->data[0], i);
-		if (obj_type == 4)
+		if (obj_type == ICYLINDER)
 			validate_cylinder(rtv, level->data->data[0], i);
-		if (obj_type == 5)
+		if (obj_type == ICONE)
 			validate_cone(rtv, level->data->data[0], i);
+		i++;
 	}
-	return (1);
-}
-
-/**
- *	Функция для валидации параметров конуса
- */
-t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	t_byte		res;
-
-	res = 0;
-
-	t_vector_4 vec_start = (t_vector_4) {0, 0, 0, 0};
-	t_vector_4 vec_end = (t_vector_4) {0, 0, 0, 0};
-	for (t_byte i = 0; i < root->data->used; i++)
-	{
-		t_level *level = root->data->data[i];
-
-		print_level_info(level);
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
-		{
-			res += validate_vector(&vec_end, level);
-			ft_memcpy((void *)&rtv->cones[idx].vectors[0], (void *)&vec_end, sizeof(t_vector_4));
-		}
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "direction"))
-		{
-			res += validate_vector(&vec_start, level);
-			ft_memcpy((void *)&rtv->cones[idx].vectors[1], (void *)&vec_start, sizeof(t_vector_4));
-		}
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "color"))
-		{
-			rtv->cones[idx].color = validate_color(level);
-			res++;
-		}
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "angle"))
-		{
-			rtv->cones[idx].angle = validate_angle(level);
-			rtv->cones[idx].cos = cosf(rtv->cones[idx].angle);
-			rtv->cones[idx].cos2 = rtv->cones[idx].cos * rtv->cones[idx].cos;
-			res++;
-		}
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "specular"))
-		{
-			rtv->cones[idx].specular = validate_specular(level);
-			res++;
-		}
-	}
-	t_vector_4 vec_norm = vector_normalize(vector_sub(vec_start, vec_end));
-	ft_memcpy((void *)&rtv->cones[idx].vectors[2], (void *)&vec_norm, sizeof(t_vector_4));
-	check(res != 5, 1, "[ERR] CONE IS INVALID\n");
-	rtv->cones[idx].traits = TRAIT_EXISTS;
 	return (1);
 }
 
 /**
  *	Функция для валидации параметров цилиндра
  */
-t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
+t_byte	validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 {
-	t_byte		res;
+	t_byte				res;
+	t_byte				i;
+	t_level				*level;
+	const t_vector_4	vec_start = vector_new(0, 0, 0, 0);
+	const t_vector_4	vec_end = vector_new(0, 0, 0, 0);
 
 	res = 0;
-	t_vector_4 vec_start = (t_vector_4) {0, 0, 0, 0};
-	t_vector_4 vec_end = (t_vector_4) {0, 0, 0, 0};
-	for (t_byte i = 0; i < root->data->used; i++)
+	i = 0;
+	while (i < root->data->used)
 	{
-		t_level *level = root->data->data[i];
-
-		print_level_info(level);
+		level = root->data->data[i];
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
 		{
-			res += validate_vector(&vec_end, level);
-			ft_memcpy((void *)&rtv->cylinders[idx].vectors[0], (void *)&vec_end, sizeof(t_vector_4));
+			res += validate_vector(&vec_start, level);
+			vector_set(&rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0], \
+				&vec_start);
 		}
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "direction"))
 		{
-			res += validate_vector(&vec_start, level);
-			ft_memcpy((void *)&rtv->cylinders[idx].vectors[1], (void *)&vec_start, sizeof(t_vector_4));
+			res += validate_vector(&vec_end, level);
+			vector_set(&rtv->cylinders[idx].vectors[VCTR_CYLINDER_C1], \
+				&vec_end);
 		}
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "color"))
 		{
@@ -198,9 +148,10 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 			rtv->cylinders[idx].specular = validate_specular(level);
 			res++;
 		}
+		i++;
 	}
-	t_vector_4 vec_norm = vector_normalize(vector_sub(vec_start, vec_end));
-	ft_memcpy((void *)&rtv->cylinders[idx].vectors[2], (void *)&vec_norm, sizeof(t_vector_4));
+	vector_set_by_value(&rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0C1], \
+		vector_normalize(vector_sub(vec_end, vec_start)));
 	check(res != 5, 1, "[ERR] CYLINDER IS INVALID\n");
 	rtv->cylinders[idx].traits = TRAIT_EXISTS;
 	return (1);
@@ -209,18 +160,18 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 /**
  *	Функция для валидации параметров плоскости
  */
-t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
+t_byte	validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 {
-	t_byte	res;
+	t_byte		res;
 	t_vector_4	*dest;
+	t_byte		i;
+	t_level		*level;
 
 	res = 0;
-
-	for (t_byte i = 0; i < root->data->used; i++)
+	i = 0;
+	while (i < root->data->used)
 	{
-		t_level *level = root->data->data[i];
-
-		print_level_info(level);
+		level = root->data->data[i];
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
 		{
 			dest = &rtv->planes[idx].position;
@@ -241,6 +192,7 @@ t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 			rtv->planes[idx].specular = validate_specular(level);
 			res++;
 		}
+		i++;
 	}
 	check(res != 4, 1, "[ERR] PLANE IS INVALID\n");
 	rtv->planes[idx].traits = TRAIT_EXISTS;
@@ -250,18 +202,18 @@ t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 /**
  *	Функция для валидации параметров сферы
  */
-t_byte		validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
+t_byte	validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 {
-	t_byte	res;
+	t_byte		res;
 	t_vector_4	*dest;
+	t_byte		i;
+	t_level		*level;
 
 	res = 0;
-
-	for (t_byte i = 0; i < root->data->used; i++)
+	i = 0;
+	while (i < root->data->used)
 	{
-		t_level *level = root->data->data[i];
-
-		print_level_info(level);
+		level = root->data->data[i];
 		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
 		{
 			dest = &rtv->spheres[idx].vectors[VCTR_SPHERE_C];
@@ -282,6 +234,7 @@ t_byte		validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 			rtv->spheres[idx].specular = validate_specular(level);
 			res++;
 		}
+		i++;
 	}
 	check(res != 4, 1, "[ERR] SPHERE IS INVALID\n");
 	rtv->spheres[idx].traits = TRAIT_EXISTS;
@@ -293,50 +246,40 @@ t_byte		validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
  */
 t_byte	validate_vector(t_vector_4 *dest, t_level *root)
 {
-	t_byte				res;
+	t_byte	res;
+	t_byte	i;
+	t_level	*level;
 
 	res = 0;
-	check(root->data->used != 3, 1, "[ERR] VECTOR HAVE WRONG AMOUNT OF PARAMETERS\n");
-	for (t_byte i = 0; i < root->data->used; i++)
+	check(root->data->used != 3, \
+		1, "[ERR] VECTOR HAVE WRONG AMOUNT OF PARAMETERS\n");
+	i = 0;
+	while (i < root->data->used)
 	{
-		t_level *level = root->data->data[i];
-
+		level = root->data->data[i];
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "x"))
-		{
 			res++;
-		}
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "y"))
-		{
 			res++;
-		}
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "z"))
-		{
 			res++;
-		}
+		i++;
 	}
 	check(res != 3, 1, "[ERR] VECTOR PARAMETERS ERROR\n");
-	// const t_vector_4 *vector = get_vector(root);
-	// const t_vector_4 *v = (t_vector_4 *)(dest);
-	t_vector_4 r = get_vector(root);
-
-	*dest = r;
-	// dest = (void *)v;
-	// const t_vector_4 v = get_vector(root);;
-	// ft_memcpy(dest, (void *)&vector, sizeof(t_vector_4));
+	vector_set_by_value(dest, get_vector(root));
 	return (1);
 }
 
-
 /**
- *	Функция для валидации компонента цвета (представленного целым числом от нуля до 255)
+ *	Функция для валидации компонента цвета
+ *	(представленного целым числом от нуля до 255)
  */
-t_byte	validate_color_component(char *value)
+static t_byte	validate_color_component(char *value)
 {
-	t_byte component;
+	t_byte	component;
 
 	component = ft_atoi(value);
-	check((component < 0) || (component > 255), 1, "[ERR] COLOR COMPONENT HAS INCORRECT VALUE\n");
-	return component;
+	return (component);
 }
 
 /**
@@ -344,47 +287,36 @@ t_byte	validate_color_component(char *value)
  */
 t_color	validate_color(t_level *root)
 {
-	t_color				color;
-	t_byte				red;
-	t_byte				green;
-	t_byte				blue;
+	t_color	color;
+	t_byte	i;
+	t_level	*level;
 
-	print_level_info(root);
-	check(root->data->used != 3, 1, "[ERR] COLOR HAVE WRONG AMOUNT OF PARAMETERS\n");
-	red = -1;
-	green = -1;
-	blue = -1;
-	for (t_byte i = 0; i < root->data->used; i++)
+	check(root->data->used != 3, \
+		1, "[ERR] COLOR HAVE WRONG AMOUNT OF PARAMETERS\n");
+	color = color_new(0, 0, 0);
+	i = 0;
+	while (i < root->data->used)
 	{
-		t_level *level = root->data->data[i];
-
+		level = root->data->data[i];
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "red"))
-		{
-			red = validate_color_component(level->value);
-		}
+			color[TCRED] = validate_color_component(level->value);
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "green"))
-		{
-			green = validate_color_component(level->value);
-		}
+			color[TCGREEN] = validate_color_component(level->value);
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "blue"))
-		{
-			blue = validate_color_component(level->value);
-		}
+			color[TCBLUE] = validate_color_component(level->value);
+		i++;
 	}
-	check((red < 0) || (green < 0) || (blue < 0), 1, "[ERR] COLOR PARAMETERS ERROR\n");
-	color = color_new(red, green, blue);
 	return (color);
 }
 
-/**aaa
+/**
  *	Функция для валидации радиуса
  *	@returns Квадрат радиуса
  */
-t_byte	validate_radius(t_level *root)
+float	validate_radius(t_level *root)
 {
-	float	radius;
+	int	radius;
 
-	print_level_info(root);
 	radius = -1;
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "radius"))
 	{
@@ -397,28 +329,12 @@ t_byte	validate_radius(t_level *root)
 /**
  *	Функция для валидации зеркальности
  */
-t_byte	validate_specular(t_level *root)
+float	validate_specular(t_level *root)
 {
-	float	specular;
+	int	specular;
 
-	print_level_info(root);
 	specular = -1;
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "specular"))
 		specular = ft_atoi(root->value);
 	return (specular);
-}
-
-/**
- *	Функция для валидации угла
- */
-float	validate_angle(t_level *root)
-{
-	//	TODO: объединить в функцию валидации скаляра вместе с specular
-	float	angle;
-
-	print_level_info(root);
-	angle = -1;
-	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "angle"))
-		angle = (float)ft_atoi(root->value) * M_PI_F / 180.f;
-	return (angle);
 }

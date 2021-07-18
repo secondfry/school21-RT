@@ -19,7 +19,7 @@ static float	light_one(
 	dot = vector_dot(params->N, params->L);
 	if (dot > 0)
 		intensity += light_intensity * dot / vector_length(params->L);
-	if (params->specular == -1)
+	if (params->specular < 0)
 		return (intensity);
 	vector_set_by_value(&R, vector_sub(\
 		vector_mult(params->N, 2 * vector_dot(params->N, params->L)), \

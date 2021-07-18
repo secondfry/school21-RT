@@ -89,13 +89,10 @@ t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_vector(t_vector_4 *dest, t_level *root);
-t_byte		validate_color_component(char *value);
 t_color		validate_color(t_level *root);
-t_byte		validate_radius(t_level *root);
-t_byte		validate_specular(t_level *root);
+float		validate_radius(t_level *root);
+float		validate_specular(t_level *root);
 float		validate_angle(t_level *root);
-
-void		parser(t_rtv *rtv, int argc, char **argv);
 
 int			check_arguments(int argc, char **argv);
 
