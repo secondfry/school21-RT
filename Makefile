@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 19:11:25 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/18 19:24:47 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_FILES =	main.c \
 			parser_parse_1.c parser_parse_2.c \
 			validator.c validator_light.c \
 			validator_light_directional.c validator_light_point.c \
-			validator_cone.c \
+			validator_cone.c validator_cylinder.c \
 			graceful.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))

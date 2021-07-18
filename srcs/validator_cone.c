@@ -56,8 +56,10 @@ t_byte	validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
 	while (i < root->data->used)
 	{
 		level = root->data->data[i];
-		res += try_process_vector(&rtv->cones[idx], level, "position", 0);
-		res += try_process_vector(&rtv->cones[idx], level, "direction", 1);
+		res += try_process_vector(&rtv->cones[idx], level, \
+			"position", VCTR_CONE_C0);
+		res += try_process_vector(&rtv->cones[idx], level, \
+			"direction", VCTR_CONE_C1);
 		res += try_process_angle(rtv, idx, level);
 		res += try_process_color(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);

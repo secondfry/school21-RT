@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/18 19:11:37 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 19:20:15 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,58 +102,6 @@ t_byte	validate_object(t_rtv *rtv, t_level *root, t_byte obj_type)
 			validate_cone(rtv, level->data->data[0], i);
 		i++;
 	}
-	return (1);
-}
-
-/**
- *	Функция для валидации параметров цилиндра
- */
-t_byte	validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	t_byte				res;
-	t_byte				i;
-	t_level				*level;
-	const t_vector_4	vec_start = vector_new(0, 0, 0, 0);
-	const t_vector_4	vec_end = vector_new(0, 0, 0, 0);
-
-	res = 0;
-	i = 0;
-	while (i < root->data->used)
-	{
-		level = root->data->data[i];
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
-		{
-			res += validate_vector(&vec_start, level);
-			vector_set(&rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0], \
-				&vec_start);
-		}
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "direction"))
-		{
-			res += validate_vector(&vec_end, level);
-			vector_set(&rtv->cylinders[idx].vectors[VCTR_CYLINDER_C1], \
-				&vec_end);
-		}
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "color"))
-		{
-			rtv->cylinders[idx].color = validate_color(level);
-			res++;
-		}
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "radius"))
-		{
-			rtv->cylinders[idx].radius2 = validate_radius(level);
-			res++;
-		}
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "specular"))
-		{
-			rtv->cylinders[idx].specular = validate_specular(level);
-			res++;
-		}
-		i++;
-	}
-	vector_set_by_value(&rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0C1], \
-		vector_normalize(vector_sub(vec_end, vec_start)));
-	check(res != 5, 1, "[ERR] CYLINDER IS INVALID\n");
-	rtv->cylinders[idx].traits = TRAIT_EXISTS;
 	return (1);
 }
 
