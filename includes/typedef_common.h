@@ -3,7 +3,7 @@
 
 # include "libft.h"
 
-typedef			struct s_vector_4
+typedef struct s_vector_4
 {
 	float	x;
 	float	y;
