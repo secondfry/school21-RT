@@ -33,16 +33,16 @@ extra unneeded spaces but for some reason I have to workaround this exact \
 condition...\n or have colon in it."
 # define ERR_PARSER_ARGC "Provide scene argument, please. Must be an \
 accesible oadYAML file."
-/**
- *	Макрос для неиспользуемых параметров
- */
-# define UNUSED(x) (void)(x)
 
 /**
  *	Коды ошибок парсера
  */
-# define ERR_PARSER_NO_COLON "Line must either be filled with spaces which I disgrace because you should really not fill your configuration files with extra unneeded spaces but for some reason I have to workaround this exact condition...\n or have colon in it."
-# define ERR_PARSER_ARGC "Provide scene argument, please. Must be an accesible oadYAML file."
+# define ERR_PARSER_NO_COLON "Line must either be filled with spaces which \
+I disgrace because you should really not fill your configuration files \
+with extra unneeded spaces but for some reason I have to workaround \
+this exact condition...\n or have colon in it."
+# define ERR_PARSER_ARGC "Provide scene argument, please. \
+Must be an accesible oadYAML file."
 # define ERR_PARSER_OPEN "Can't open provided argument as file."
 # define ERR_PARSER_READ "Can't read from file. Is it a file?"
 # define ERR_PARSER_GNL "Could read from file, but can't anymore. Strange..."
@@ -62,21 +62,28 @@ configuration is invalid."
 lights configuration members expected to list nodes."
 # define ERR_VALIDATOR_LIGHT_DIRECTIONAL_INVALID "[validator] Directional \
 light configuration is invalid."
-# define ERR_PARSER_OADYAML_LIST_NAN "Your oadYAML has empty list entry definition."
+# define ERR_PARSER_OADYAML_LIST_NAN "Your oadYAML has empty \
+list entry definition."
 
-# define ERR_VALIDATOR_SPHERE_INCOMPLETE "[validator] Sphere configuration is incomplete."
+# define ERR_VALIDATOR_SPHERE_INCOMPLETE "[validator] Sphere configuration \
+is incomplete."
 
 void		validate(t_rtv *rtv, t_level *root);
 //	Валидация света
 t_byte		validate_light(t_rtv *rtv, t_level *root);
 t_byte		validate_light_ambient(t_rtv *rtv, t_level *root);
-t_byte		validate_light_point_one_position(t_rtv *rtv, t_level *root, t_byte idx);
-t_byte		validate_light_point_one_intensity(t_rtv *rtv, t_level *root, t_byte idx);
+t_byte		validate_light_point_one_position(\
+	t_rtv *rtv, t_level *root, t_byte idx);
+t_byte		validate_light_point_one_intensity(\
+	t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_light_point_one(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_light_point(t_rtv *rtv, t_level *root);
-t_byte		validate_light_directional_one_directional(t_rtv *rtv, t_level *root, t_byte idx);
-t_byte		validate_light_directional_one_intensity(t_rtv *rtv, t_level *root, t_byte idx);
-t_byte		validate_light_directional_one(t_rtv *rtv, t_level *root, t_byte idx);
+t_byte		validate_light_directional_one_directional(\
+	t_rtv *rtv, t_level *root, t_byte idx);
+t_byte		validate_light_directional_one_intensity(\
+	t_rtv *rtv, t_level *root, t_byte idx);
+t_byte		validate_light_directional_one(\
+	t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_light_directional(t_rtv *rtv, t_level *root);
 //	Общие функции валидации
 t_byte		validate_object(t_rtv *rtv, t_level *root, t_byte obj_type);
