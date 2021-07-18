@@ -42,7 +42,7 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 		&params.N, find_normal(rtv, intr, &params));
 	vector_set_by_value(&params.V, vector_mult(data->vectors[VCTR_D], -1));
 	intensity = light(rtv, &params);
-	return (color_mult(params.color, intensity));
+	return (*color_mult(&params.color, intensity));
 }
 
 static t_color	raytrace(
@@ -64,7 +64,7 @@ static t_color	raytrace(
 		}) \
 	);
 	if (intr.distance == 1.0 / 0.0)
-		return (color_new(0, 0, 0));
+		return ((t_color){0, 0, 0});
 	return (pre_light(rtv, data, &intr));
 }
 
@@ -75,7 +75,8 @@ static void	canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
 
 	xs = WIDTH / 2 + xc;
 	ys = HEIGHT / 2 - yc;
-	rtv->mlx->img_data[ys * rtv->mlx->size_line_int + xs] = color_to_int(color);
+	rtv->mlx->img_data[ys * rtv->mlx->size_line_int + xs] = \
+		color_to_int(&color);
 }
 
 void	process_pixel(t_rtv *rtv, short xc, short yc)
@@ -95,5 +96,4 @@ void	process_pixel(t_rtv *rtv, short xc, short yc)
 	);
 	color = raytrace(rtv, &data, 1.0f, 1.0 / 0.0);
 	canvas_to_screen(rtv, xc, yc, color);
-	free(color);
 }

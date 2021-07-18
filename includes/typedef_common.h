@@ -15,7 +15,12 @@ typedef const struct s_vector_4
 # define TCGREEN	1
 # define TCBLUE		2
 
-typedef t_byte			*t_color;
+typedef struct s_color
+{
+	t_byte	red;
+	t_byte	green;
+	t_byte	blue;
+}				t_color;
 
 typedef struct s_mlx
 {

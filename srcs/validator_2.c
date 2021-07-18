@@ -23,17 +23,17 @@ t_color	validate_color(t_level *root)
 
 	check(root->data->used != 3, \
 		1, "[ERR] COLOR HAVE WRONG AMOUNT OF PARAMETERS\n");
-	color = color_new(0, 0, 0);
+	color = (t_color){0, 0, 0};
 	i = 0;
 	while (i < root->data->used)
 	{
 		level = root->data->data[i];
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "red"))
-			color[TCRED] = validate_color_component(level->value);
+			color.red = validate_color_component(level->value);
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "green"))
-			color[TCGREEN] = validate_color_component(level->value);
+			color.green = validate_color_component(level->value);
 		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "blue"))
-			color[TCBLUE] = validate_color_component(level->value);
+			color.blue = validate_color_component(level->value);
 		i++;
 	}
 	return (color);
