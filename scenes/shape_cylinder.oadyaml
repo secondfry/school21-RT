@@ -1,0 +1,30 @@
+light:
+  point:
+    - position:
+        x: 2
+        y: 1
+        z: 0
+      intensity: 60
+  directional:
+    - direction:
+        x: -1
+        y: 4
+        z: -4
+      intensity: 20
+  ambient: 20
+
+cylinder:
+  - position:
+      x: 0
+      y: 0
+      z: 0
+    direction:
+      x: 10
+      y: 0
+      z: 0
+    color:
+      red: 255
+      green: 255
+      blue: 255
+    radius: 1
+    specular: 1000
