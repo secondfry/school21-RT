@@ -77,9 +77,9 @@ static void	init_rtv_cones(t_rtv *rtv)
 #include <stdio.h>
 static void	init_rtv_unnormed(t_rtv *rtv)
 {
-	const float angle10 = 10.f * M_PI_F / 180.f;
-	const float cos = cosf(angle10);
-	const float cos2 = cos * cos;
+	// const float angle10 = 10.f * M_PI_F / 180.f;
+	// const float cos = cosf(angle10);
+	// const float cos2 = cos * cos;
 	const t_vector_4 cone_C0 = vector_new(-1.f, 0.f, 10.f, 1.f);
 	const t_vector_4 cone_C1 = vector_new(-2.f, 10.f, 10.f, 1.f);
 
@@ -189,5 +189,6 @@ void	init_rtv_objects(t_rtv *rtv)
 	init_rtv_planes(rtv);
 	init_rtv_cylinders(rtv);
 	init_rtv_cones(rtv);
-	// init_rtv_unnormed(rtv);
+	if (0)
+		init_rtv_unnormed(rtv);
 }
