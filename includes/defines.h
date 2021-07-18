@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/18 13:38:51 by pcarolei         ###   ########.fr       */
+/*   Updated: 2021/07/18 16:50:44 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,6 @@
 
 # define EPSILON 0.001f
 typedef int			(*t_mlx_hook)();
-/**
- * (´･_･`)
- */
-# define DOHUYA 100000
-
-typedef float				*t_matrix_4;
-typedef float				*t_quaterion;
-typedef int					(*t_mlx_hook)();
-typedef t_byte				*t_color;
 
 # define TCRED		0
 # define TCGREEN	1
