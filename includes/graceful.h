@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graceful.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/01 06:12:20 by oadhesiv          #+#    #+#             */
-/*   Updated: 2020/06/06 21:46:12 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/04 15:05:31 by pcarolei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include <stdlib.h>
 # include "libft.h"
 
+/**
+ *	Макросы ошибок
+ */
 # define ERR_OPEN_MSG			"Can't open."
 # define ERR_READ_MSG			"Can't read."
 # define ERR_MEM_MSG			"Memory error."

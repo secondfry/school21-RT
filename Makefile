@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
+#    By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/17 19:48:11 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/07/18 09:00:59 by pcarolei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRC_FILES =	main.c \
 			intersection.c intersection_sphere.c intersection_plane.c intersection_cylinder.c intersection_cone.c \
 			intersection_common.c \
 			parser.c \
+			validator.c \
 			graceful.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))

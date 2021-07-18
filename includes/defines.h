@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/17 19:31:33 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:00:29 by pcarolei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,33 @@
 # define M_PI_4F 0.785398163397448309615660845819875721f
 
 # define EPSILON 0.001f
-
 typedef int			(*t_mlx_hook)();
+/**
+ * (´･_･`)
+ */
+# define DOHUYA 100000
+
+/**
+ *	Структура четырехмерного вектора
+ */
+typedef const struct	s_vector_4
+{
+	float	x;
+	float	y;
+	float	z;
+	float	w;
+}						t_vector_4;
+
+typedef float				*t_matrix_4;
+typedef float				*t_quaterion;
+typedef const float	* const t_const_matrix_4;
+typedef const float	* const t_const_quaterion;
+typedef int					(*t_mlx_hook)();
+typedef t_byte				*t_color;
+
+# define TCRED		0
+# define TCGREEN	1
+# define TCBLUE		2
 
 # define AROLL	0
 # define APITCH	1

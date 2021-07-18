@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/03 00:16:08 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 09:04:03 by pcarolei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ void	check_defines(void)
 		graceful(ERR_INVALID_DEFINE, ERR_INVALID_DEFINE_MSG);
 }
 
+/**
+ *	Точка входа в приложение
+ */
 int	main(int argc, char **argv)
 {
 	t_rtv	rtv;
