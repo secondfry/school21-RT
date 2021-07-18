@@ -6,15 +6,13 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/18 18:14:43 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/18 18:30:39 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "color.h"
-#include "vector.h"
 
-static t_vector_4	get_vector(t_level *root)
+t_vector_4	get_vector(t_level *root)
 {
 	float	coord[3];
 	t_byte	i;
@@ -58,121 +56,6 @@ void		validate(t_rtv *rtv, t_level *root)
 	}
 }
 
-t_byte		validate_light_ambient(t_rtv *rtv, t_level *root)
-{
-	rtv->ambient = (float) ft_atoi(root->value) / 100.f;
-	return (1);
-}
-
-t_byte		validate_light_point_one_position(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	const t_vector_4 position = get_vector(root);
-
-	ft_memcpy((void *)&rtv->plights[idx].position, (void *)&position, sizeof(t_vector_4));
-	return (1);
-}
-
-t_byte		validate_light_point_one_intensity(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	rtv->plights[idx].intensity = (float) ft_atoi(root->value) / 100.f;
-	return (1);
-}
-
-t_byte		validate_light_point_one(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	t_byte res;
-
-	root = root->data->data[0];
-	check(root->type != LTYPE_NODE, 1, ERR_VALIDATOR_LIGHT_POINT_INVALID);
-	res = 0;
-	for (t_byte i = 0; i < root->data->used; i++)
-	{
-		t_level *level = root->data->data[i];
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "position"))
-			res += validate_light_point_one_position(rtv, level, idx);
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "intensity"))
-			res += validate_light_point_one_intensity(rtv, level, idx);
-	}
-	check(res != 2, 1, ERR_VALIDATOR_LIGHT_POINT_INVALID);
-	rtv->plights[idx].traits = TRAIT_EXISTS;
-	return (1);
-}
-
-t_byte		validate_light_point(t_rtv *rtv, t_level *root)
-{
-	t_byte res;
-
-	res = 0;
-	for (t_byte i = 0; i < root->data->used; i++)
-	{
-		t_level *level = root->data->data[i];
-		check(level->type != LTYPE_LIST_NODE, 1, ERR_VALIDATOR_LIGHT_POINT_LIST);
-		res += validate_light_point_one(rtv, level, i);
-	}
-	if (res == 0)
-		ft_putendl("[validator] Scene has no point lights");
-	return (1);
-}
-
-t_byte validate_light_directional_one_directional(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	const t_vector_4 direction = vector_normalize(get_vector(root));
-	const float w = 0.f;
-
-	ft_memcpy((void *)&direction.w, (void *)&w, sizeof(float));
-	ft_memcpy((void *)&rtv->dlights[idx].direction, (void *)&direction, sizeof(t_vector_4));
-	return (1);
-}
-
-
-t_byte		validate_light_directional_one_intensity(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	rtv->dlights[idx].intensity = (float) ft_atoi(root->value) / 100.f;
-	return (1);
-}
-
-t_byte		validate_light_directional_one(t_rtv *rtv, t_level *root, t_byte idx)
-{
-	t_byte res;
-
-	root = root->data->data[0];
-	check(root->type != LTYPE_NODE, 1, ERR_VALIDATOR_LIGHT_DIRECTIONAL_INVALID);
-	res = 0;
-	for (t_byte i = 0; i < root->data->used; i++)
-	{
-		t_level *level = root->data->data[i];
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "direction"))
-		{
-			res += validate_light_directional_one_directional(rtv, level, idx);
-			t_vector_4 *v = &(rtv->dlights[idx].direction);
-		}
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "intensity"))
-		{
-			res += validate_light_directional_one_intensity(rtv, level, idx);
-			float i = rtv->dlights[idx].intensity;
-		}
-	}
-	check(res != 2, 1, ERR_VALIDATOR_LIGHT_DIRECTIONAL_INVALID);
-	rtv->dlights[idx].traits = TRAIT_EXISTS;
-	return (1);
-}
-
-t_byte		validate_light_directional(t_rtv *rtv, t_level *root)
-{
-	t_byte res;
-
-	res = 0;
-	for (t_byte i = 0; i < root->data->used; i++)
-	{
-		t_level *level = root->data->data[i];
-		check(level->type != LTYPE_LIST_NODE, 1, ERR_VALIDATOR_LIGHT_DIRECTIONAL_LIST);
-		res += validate_light_directional_one(rtv, level, i);
-	}
-	if (res == 0)
-		ft_putendl("[validator] Scene has no directional lights");
-	return (1);
-}
-
 /**
  *	Функция для печати информации об "уровне" в карте
  */
@@ -188,25 +71,6 @@ void		print_level_info(t_level *level)
 
 	if (level->data)
 	return ;
-}
-
-t_byte		validate_light(t_rtv *rtv, t_level *root)
-{
-	t_byte res;
-
-	res = 0;
-	for (t_byte i = 0; i < root->data->used; i++)
-	{
-		t_level *level = root->data->data[i];
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "ambient"))
-			res += validate_light_ambient(rtv, level);
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "point"))
-			res += validate_light_point(rtv, level);
-		if (level->type == LTYPE_NODE && !ft_strcmp(level->key, "directional"))
-			res += validate_light_directional(rtv, level);
-	}
-	check(res != 3, 1, ERR_VALIDATOR_LIGHT_INCOMPLETE);
-	return (1);
 }
 
 /**
@@ -555,6 +419,6 @@ float	validate_angle(t_level *root)
 	print_level_info(root);
 	angle = -1;
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "angle"))
-		angle = (float)ft_atoi(root->value) * M_PI_F / 180.f,
+		angle = (float)ft_atoi(root->value) * M_PI_F / 180.f;
 	return (angle);
 }

@@ -8,6 +8,7 @@
 # include "defines.h"
 # include "get_next_line.h"
 # include "graceful.h"
+# include "color.h"
 # include "vector.h"
 
 # define LTYPE_UNSET		0
@@ -75,22 +76,11 @@ list entry definition."
 # define ERR_VALIDATOR_SPHERE_INCOMPLETE "[validator] Sphere configuration \
 is incomplete."
 
+t_vector_4	get_vector(t_level *root);
 void		validate(t_rtv *rtv, t_level *root);
 //	Валидация света
 t_byte		validate_light(t_rtv *rtv, t_level *root);
-t_byte		validate_light_ambient(t_rtv *rtv, t_level *root);
-t_byte		validate_light_point_one_position(\
-	t_rtv *rtv, t_level *root, t_byte idx);
-t_byte		validate_light_point_one_intensity(\
-	t_rtv *rtv, t_level *root, t_byte idx);
-t_byte		validate_light_point_one(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_light_point(t_rtv *rtv, t_level *root);
-t_byte		validate_light_directional_one_directional(\
-	t_rtv *rtv, t_level *root, t_byte idx);
-t_byte		validate_light_directional_one_intensity(\
-	t_rtv *rtv, t_level *root, t_byte idx);
-t_byte		validate_light_directional_one(\
-	t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_light_directional(t_rtv *rtv, t_level *root);
 //	Общие функции валидации
 t_byte		validate_object(t_rtv *rtv, t_level *root, t_byte obj_type);
