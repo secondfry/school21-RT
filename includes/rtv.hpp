@@ -19,7 +19,7 @@ typedef struct s_rtv
 	t_byte		options;
 	t_byte		flags;
 	t_vector_4	camera_position;
-	float		camera_angles[3];
+	t_vector_4	camera_angles;
 	t_matrix_4	camera_rotation;
 	t_sphere	spheres[MAX_SPHERES];
 	t_plane		planes[MAX_PLANES];

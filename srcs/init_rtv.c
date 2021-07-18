@@ -15,9 +15,7 @@ static void	init_rtv_common(t_rtv *rtv)
 		&((t_vector_4){0.f, 0.f, -21.f, 1.f}), \
 		sizeof(t_vector_4) \
 	);
-	rtv->camera_angles[AROLL] = 0;
-	rtv->camera_angles[AYAW] = 0;
-	rtv->camera_angles[APITCH] = 0;
+	vector_set_by_value(&rtv->camera_angles, vector_new(0, 0, 0, 0));
 	rtv->camera_rotation = matrix_new_identity();
 }
 

@@ -39,9 +39,9 @@ void	loop_invalidate_rotation(t_rtv *rtv)
 		return ;
 	rtv->flags -= FLAG_INVALIDATE_ROTATION;
 	rotator = quaternion_new(\
-		rtv->camera_angles[AYAW], \
-		rtv->camera_angles[AROLL], \
-		rtv->camera_angles[APITCH] \
+		rtv->camera_angles.x * M_PI_F / 180, \
+		rtv->camera_angles.y * M_PI_F / 180, \
+		rtv->camera_angles.z * M_PI_F / 180 \
 	);
 	free(rtv->camera_rotation);
 	rtv->camera_rotation = quaternion_to_matrix(rotator);
