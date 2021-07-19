@@ -75,8 +75,10 @@ static void	canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
 
 	xs = WIDTH / 2 + xc;
 	ys = HEIGHT / 2 - yc;
+	pthread_mutex_lock(&rtv->mutex);
 	rtv->mlx->img_data[ys * rtv->mlx->size_line_int + xs] = \
 		color_to_int(color);
+	pthread_mutex_unlock(&rtv->mutex);
 }
 
 void	process_pixel(t_rtv *rtv, short xc, short yc)
