@@ -49,24 +49,22 @@ static void	*run_parametrized(void *params)
 // 	}
 // }
 
-static void	correct_first_param(t_rtv *rtv, t_params *param)
+static short	get_y_start(t_byte y)
 {
+	short			yf;
 	static short	ya = -1 * HEIGHT / 2;
-	static short	xa = -1 * WIDTH / 2;
 
-	param[0] = (t_params){\
-		rtv, \
-		ya + 1, \
-		ya + HEIGHT / 2, \
-		xa, \
-		xa + WIDTH / 4 \
-	};
+	yf = ya + y * HEIGHT / 2;
+	if (yf == ya)
+		yf += 1;
+	return (yf);
 }
 
 static void	prepare_parellel_params(t_rtv *rtv, t_params *param)
 {
 	t_byte			y;
 	t_byte			x;
+	short			yf;
 	static short	ya = -1 * HEIGHT / 2;
 	static short	xa = -1 * WIDTH / 2;
 
@@ -74,11 +72,12 @@ static void	prepare_parellel_params(t_rtv *rtv, t_params *param)
 	while (y < 2)
 	{
 		x = 0;
+		yf = get_y_start(y);
 		while (x < 4)
 		{
 			param[y * 4 + x] = (t_params){\
 				rtv, \
-				ya + y * HEIGHT / 2, \
+				yf, \
 				ya + (y + 1) * HEIGHT / 2, \
 				xa + x * WIDTH / 4, \
 				xa + (x + 1) * WIDTH / 4 \
@@ -87,7 +86,6 @@ static void	prepare_parellel_params(t_rtv *rtv, t_params *param)
 		}
 		y++;
 	}
-	correct_first_param(rtv, param);
 }
 
 static void	run_parallel(t_rtv *rtv)
