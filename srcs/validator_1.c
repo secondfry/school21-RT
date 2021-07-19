@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/18 20:04:53 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:31:41 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ t_byte	validate_object(t_rtv *rtv, t_level *root, t_byte obj_type)
 
 	res = 0;
 	check(root->type != LTYPE_NODE, 1, "[ERR] EXPECTED NODE\n");
-	check(!root->data || !root->data->used, \
-		1, "[ERR] EXPECTED ONE OR MORE OBJECTS\n");
 	i = 0;
 	while (i < root->data->used)
 	{
@@ -112,26 +110,6 @@ t_byte	validate_object(t_rtv *rtv, t_level *root, t_byte obj_type)
  */
 t_byte	validate_vector(t_vector_4 *dest, t_level *root)
 {
-	t_byte	res;
-	t_byte	i;
-	t_level	*level;
-
-	res = 0;
-	check(root->data->used != 3, \
-		1, "[ERR] VECTOR HAVE WRONG AMOUNT OF PARAMETERS\n");
-	i = 0;
-	while (i < root->data->used)
-	{
-		level = root->data->data[i];
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "x"))
-			res++;
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "y"))
-			res++;
-		if (level->type == LTYPE_LEAF && !ft_strcmp(level->key, "z"))
-			res++;
-		i++;
-	}
-	check(res != 3, 1, "[ERR] VECTOR PARAMETERS ERROR\n");
 	vector_set_by_value(dest, get_vector(root));
 	return (1);
 }
