@@ -23,6 +23,6 @@ t_byte	validate_camera(t_rtv *rtv, t_level *root)
 		}
 		i++;
 	}
-	check(res != 2, 1, ERR_VALIDATOR_LIGHT_INCOMPLETE);
+	check(res != 2, 1, ERR_VALIDATOR_CAMERA_INCOMPLETE);
 	return (1);
 }

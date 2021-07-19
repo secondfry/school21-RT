@@ -70,6 +70,8 @@ configuration is invalid."
 lights configuration members expected to list nodes."
 # define ERR_VALIDATOR_LIGHT_DIRECTIONAL_INVALID "[validator] Directional \
 light configuration is invalid."
+# define ERR_VALIDATOR_CAMERA_INCOMPLETE "[validator] Camera configuration is \
+incomplete."
 # define ERR_PARSER_OADYAML_LIST_NAN "Your oadYAML has empty \
 list entry definition."
 
