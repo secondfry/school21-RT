@@ -25,7 +25,7 @@ static void	intersection_cylinder(
 	t_rtv *rtv,
 	t_intersect_params *params,
 	t_byte idx,
-	float t[2]
+	double t[2]
 )
 {
 	const t_intersection_cylinder	data = {
@@ -39,7 +39,7 @@ static void	intersection_cylinder(
 		vector_dot(data.X, data.X) \
 			- (rtv->cylinders[idx].radius2 * vector_dot(data.CQ, data.CQ)),
 		(data.b * data.b) - (4.0 * data.a * data.c),
-		sqrtf(data.cubed)
+		sqrt(data.cubed)
 	};
 
 	if (data.cubed < 0)
@@ -59,7 +59,7 @@ t_intersection	intersection_cylinder_closest(
 {
 	t_intersection	ret;
 	t_byte			i;
-	float			t[2];
+	double			t[2];
 
 	ret.distance = 1.0 / 0.0;
 	ret.idx = -1;

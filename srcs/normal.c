@@ -11,7 +11,7 @@ static t_vector_4	find_normal_cone(
 		rtv->cones[intr->idx].vectors[VCTR_CONE_C0] \
 	);
 	const t_vector_4	C0C1 = rtv->cones[intr->idx].vectors[VCTR_CONE_C0C1];
-	const float			k = vector_length(CP) / rtv->cones[intr->idx].cos;
+	const double			k = vector_length(CP) / rtv->cones[intr->idx].cos;
 	const t_vector_4	CQ = vector_mult(C0C1, k);
 
 	if (vector_dot(CP, C0C1) < 0)
@@ -31,7 +31,7 @@ static t_vector_4	find_normal_cylinder(
 	);
 	const t_vector_4	C0C1 = \
 		rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0C1];
-	const float			k = vector_dot(CP, C0C1);
+	const double			k = vector_dot(CP, C0C1);
 	const t_vector_4	CQ = vector_mult(C0C1, k);
 
 	return (vector_normalize(vector_sub(CP, CQ)));

@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/04 17:45:52 by pcarolei          #+#    #+#             */
-/*   Updated: 2021/07/19 19:31:41 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:33:35 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_vector_4	get_vector(t_level *root)
 {
-	float	coord[3];
+	double	coord[3];
 	t_byte	i;
 	t_level	*level;
 
@@ -40,13 +40,13 @@ t_vector_4	get_vector(t_level *root)
  *	Функция для валидации угла
  */
 //	TODO: объединить в функцию валидации скаляра вместе с specular
-float	validate_angle(t_level *root)
+double	validate_angle(t_level *root)
 {
-	float	angle;
+	double	angle;
 
 	angle = -1;
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "angle"))
-		angle = (float)ft_atoi(root->value) * M_PI_F / 180.f;
+		angle = (double)ft_atoi(root->value) * M_PI_F / 180.f;
 	return (angle);
 }
 

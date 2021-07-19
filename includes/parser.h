@@ -92,9 +92,9 @@ t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_vector(t_vector_4 *dest, t_level *root);
 t_color		validate_color(t_level *root);
-float		validate_radius(t_level *root);
-float		validate_specular(t_level *root);
-float		validate_angle(t_level *root);
+double		validate_radius(t_level *root);
+double		validate_specular(t_level *root);
+double		validate_angle(t_level *root);
 t_byte		validate_camera(t_rtv *rtv, t_level *root);
 
 int			check_arguments(int argc, char **argv);

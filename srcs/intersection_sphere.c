@@ -7,7 +7,7 @@ static void	intersection_sphere(
 	t_rtv *rtv,
 	t_intersect_params *params,
 	t_byte idx,
-	float t[2]
+	double t[2]
 )
 {
 	const t_intersection_sphere	data = {
@@ -17,7 +17,7 @@ static void	intersection_sphere(
 		2 * vector_dot(params->D, data.CO),
 		vector_dot(data.CO, data.CO) - rtv->spheres[idx].radius_squared,
 		data.b * data.b - 4 * data.a * data.c,
-		sqrtf(data.cubed)
+		sqrt(data.cubed)
 	};
 
 	if (data.cubed < 0)
@@ -37,7 +37,7 @@ t_intersection	intersection_sphere_closest(
 {
 	t_intersection	ret;
 	t_byte			i;
-	float			t[2];
+	double			t[2];
 
 	ret.distance = 1.0 / 0.0;
 	ret.idx = -1;

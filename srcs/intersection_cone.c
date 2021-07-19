@@ -7,7 +7,7 @@ static void	intersection_cone(
 	t_rtv *rtv,
 	t_intersect_params *params,
 	t_byte idx,
-	float	t[2]
+	double	t[2]
 )
 {
 	const t_intersection_cone	data = {
@@ -23,7 +23,7 @@ static void	intersection_cone(
 		2 * (data.DdotCQ * data.COdotCQ - data.DdotCO * data.cos2),
 		data.COdotCQ * data.COdotCQ - data.COdotCO * data.cos2,
 		(data.b * data.b) - (4.0 * data.a * data.c),
-		sqrtf(data.cubed)
+		sqrt(data.cubed)
 	};
 
 	if (data.cubed < 0)
@@ -43,7 +43,7 @@ t_intersection	intersection_cone_closest(
 {
 	t_intersection	ret;
 	t_byte			i;
-	float			t[2];
+	double			t[2];
 
 	ret.distance = 1.0 / 0.0;
 	ret.idx = -1;

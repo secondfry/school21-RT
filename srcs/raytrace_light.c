@@ -1,17 +1,17 @@
 #include "raytrace_light.h"
 
-static float	light_one(
+static double	light_one(
 	t_rtv *rtv,
 	const t_light_params *params,
-	float cutoff,
-	float light_intensity
+	double cutoff,
+	double light_intensity
 )
 {
 	const t_vector_4		R = vector_new(0, 0, 0, 0);
 	const t_intersection	res = intersection_closest(\
 		rtv, &((t_intersect_params){params->P, params->L, EPSILON, cutoff}));
-	float					dot;
-	float					intensity;
+	double					dot;
+	double					intensity;
 
 	intensity = 0;
 	if (res.distance != 1.0 / 0.0)
@@ -35,15 +35,15 @@ static float	light_one(
 }
 
 // NOTE(secondfry): should really optimize getting cutoff and vector math...
-static float	light_point(
+static double	light_point(
 	t_rtv *rtv,
 	const t_light_params *params
 )
 {
 	const t_vector_4	L = vector_new(0, 0, 0, 0);
-	float				intensity;
+	double				intensity;
 	t_byte				i;
-	float				cutoff;
+	double				cutoff;
 
 	intensity = 0;
 	i = 0;
@@ -64,12 +64,12 @@ static float	light_point(
 	return (intensity);
 }
 
-static float	light_directional(
+static double	light_directional(
 	t_rtv *rtv,
 	const t_light_params *params
 )
 {
-	float	intensity;
+	double	intensity;
 	t_byte	i;
 
 	intensity = 0;
@@ -93,12 +93,12 @@ static float	light_directional(
 	return (intensity);
 }
 
-float	light(
+double	light(
 	t_rtv *rtv,
 	const t_light_params *params
 )
 {
-	float	intensity;
+	double	intensity;
 
 	intensity = rtv->ambient + \
 		light_point(rtv, params) + \

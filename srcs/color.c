@@ -36,7 +36,7 @@ t_color	*color_zero(t_color *a)
 	return (a);
 }
 
-t_color	*color_mult(t_color *a, float k)
+t_color	*color_mult(t_color *a, double k)
 {
 	t_color	ret;
 

@@ -6,7 +6,7 @@
 typedef struct s_plight
 {
 	t_vector_4	position;
-	float		intensity;
+	double		intensity;
 	t_byte		traits;
 
 	s_plight() : position{ 0.f, 0.f, 0.f, 1.f } {}
@@ -15,7 +15,7 @@ typedef struct s_plight
 typedef struct	s_dlight
 {
 	t_vector_4	direction;
-	float		intensity;
+	double		intensity;
 	t_byte		traits;
 
 	s_dlight() : direction{ -1.f, -1.f, -1.f, 0.f } {}

@@ -14,8 +14,8 @@ typedef struct s_sphere
 {
 	t_vector_4	vectors[MAX_VECTORS_SPHERE];
 	t_color		color;
-	float		radius_squared;
-	float		specular;
+	double		radius_squared;
+	double		specular;
 	t_byte		traits;
 
 	s_sphere() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 0.f, 0.f, 0.f }} {}
@@ -26,7 +26,7 @@ typedef struct	s_plane
 	t_vector_4	position;
 	t_vector_4	normal;
 	t_color		color;
-	float		specular;
+	double		specular;
 	t_byte		traits;
 
 	s_plane() : position{ 0.f, 0.f, 0.f, 1.f }, normal{ 0.f, 1.f, 0.f, 0.f } {}
@@ -42,8 +42,8 @@ typedef struct	s_cylinder
 {
 	t_vector_4	vectors[MAX_VECTORS_CYLINDER];
 	t_color		color;
-	float		radius2;
-	float		specular;
+	double		radius2;
+	double		specular;
 	t_byte		traits;
 
 	s_cylinder() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 0.f }} {}
@@ -59,9 +59,9 @@ typedef struct	s_cone
 {
 	t_vector_4	vectors[MAX_VECTORS_CONE];
 	t_color		color;
-	float		angle;
-	float		cos2;
-	float		specular;
+	double		angle;
+	double		cos2;
+	double		specular;
 	t_byte		traits;
 
 	s_cone() : vectors{{ 0.f, 0.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 1.f }, { 0.f, 10.f, 0.f, 0.f }} {}

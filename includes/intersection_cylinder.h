@@ -14,11 +14,11 @@ typedef struct s_intersection_cylinder
 	t_vector_4	CQ;
 	t_vector_4	X;
 	t_vector_4	Z;
-	float		a;
-	float		b;
-	float		c;
-	float		cubed;
-	float		sqrt;
+	double		a;
+	double		b;
+	double		c;
+	double		cubed;
+	double		sqrt;
 }				t_intersection_cylinder;
 
 t_intersection	intersection_cylinder_closest( \

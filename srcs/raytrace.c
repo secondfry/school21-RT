@@ -32,7 +32,7 @@ static t_light_params	get_light_params(t_rtv *rtv, t_intersection *intr)
 static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 {
 	const t_light_params	params = get_light_params(rtv, intr);
-	float					intensity;
+	double					intensity;
 
 	vector_set_by_value(&params.P, vector_add(\
 		data->vectors[VCTR_O], \
@@ -48,8 +48,8 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 static t_color	raytrace(
 	t_rtv *rtv,
 	t_worker_data *data,
-	float t_min,
-	float t_max
+	double t_min,
+	double t_max
 )
 {
 	t_intersection	intr;
@@ -84,13 +84,13 @@ void	process_pixel(t_rtv *rtv, short xc, short yc)
 	t_color				color;
 	const t_vector_4	D = vector_normalize(matrix_on_vector(
 		rtv->camera_rotation,
-		(t_vector_4){(float) xc / WIDTH, (float) yc / HEIGHT, 1.f, 0}
+		(t_vector_4){(double) xc / WIDTH, (double) yc / HEIGHT, 1.f, 0}
 	));
 	t_worker_data		data;
 
 	vector_set(data.vectors + VCTR_O, &rtv->camera_position);
 	vector_set(data.vectors + VCTR_D, &D);
-	data.floats[D_DOT_D] = vector_dot(\
+	data.doubles[D_DOT_D] = vector_dot(\
 		data.vectors[VCTR_D], \
 		data.vectors[VCTR_D] \
 	);

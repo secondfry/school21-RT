@@ -5,10 +5,10 @@
 
 typedef const struct s_vector_4
 {
-	float	x;
-	float	y;
-	float	z;
-	float	w;
+	double	x;
+	double	y;
+	double	z;
+	double	w;
 }						t_vector_4;
 
 # define TCRED		0
@@ -32,9 +32,9 @@ typedef struct s_mlx
 	size_t		size_line_char;
 }				t_mlx;
 
-typedef float			*t_matrix_4;
-typedef float			*t_quaterion;
-typedef const float		*t_const_matrix_4;
-typedef const float		*t_const_quaterion;
+typedef double			*t_matrix_4;
+typedef double			*t_quaterion;
+typedef const double		*t_const_matrix_4;
+typedef const double		*t_const_quaterion;
 
 #endif

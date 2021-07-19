@@ -11,11 +11,11 @@ typedef struct s_intersection_sphere
 {
 	t_vector_4	C;
 	t_vector_4	CO;
-	float		a;
-	float		b;
-	float		c;
-	float		cubed;
-	float		sqrt;
+	double		a;
+	double		b;
+	double		c;
+	double		cubed;
+	double		sqrt;
 }				t_intersection_sphere;
 
 t_intersection	intersection_sphere_closest(\

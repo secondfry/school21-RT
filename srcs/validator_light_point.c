@@ -18,7 +18,7 @@ static t_byte	validate_light_point_one_intensity(
 	t_byte idx
 )
 {
-	rtv->plights[idx].intensity = (float) ft_atoi(root->value) / 100.f;
+	rtv->plights[idx].intensity = (double) ft_atoi(root->value) / 100.f;
 	return (1);
 }
 

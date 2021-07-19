@@ -2,7 +2,7 @@
 
 static t_byte	validate_light_ambient(t_rtv *rtv, t_level *root)
 {
-	rtv->ambient = (float) ft_atoi(root->value) / 100.f;
+	rtv->ambient = (double) ft_atoi(root->value) / 100.f;
 	return (1);
 }
 

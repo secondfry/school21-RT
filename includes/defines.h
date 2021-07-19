@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/18 19:51:14 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:33:35 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef int			(*t_mlx_hook)();
 
 typedef struct s_intersection
 {
-	float	distance;
+	double	distance;
 	t_byte	idx;
 	t_byte	type;
 }				t_intersection;
@@ -70,7 +70,7 @@ typedef struct s_intersection
 # define ICONE		3
 
 # define MAX_VECTORS_WORKER	7
-# define MAX_FLOATS_WORKER	3
+# define MAX_doubleS_WORKER	3
 
 # define VCTR_O	0
 # define VCTR_D	1
@@ -85,22 +85,22 @@ typedef struct s_intersection
 typedef struct s_worker_data
 {
 	t_vector_4	vectors[MAX_VECTORS_WORKER];
-	float		floats[MAX_FLOATS_WORKER];
+	double		doubles[MAX_doubleS_WORKER];
 }				t_worker_data;
 
 typedef struct s_intersect_params
 {
 	t_vector_4	O;
 	t_vector_4	D;
-	float		t_min;
-	float		t_max;
+	double		t_min;
+	double		t_max;
 }				t_intersect_params;
 
 typedef struct s_light_params
 {
 	t_vector_4		C;
 	t_color			color;
-	float			specular;
+	double			specular;
 	t_vector_4		P;
 	t_vector_4		N;
 	t_vector_4		V;

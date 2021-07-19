@@ -12,16 +12,16 @@ typedef struct s_intersection_cone
 	t_vector_4	C;
 	t_vector_4	CO;
 	t_vector_4	CQ;
-	float		DdotCQ;
-	float		COdotCQ;
-	float		DdotCO;
-	float		COdotCO;
-	float		cos2;
-	float		a;
-	float		b;
-	float		c;
-	float		cubed;
-	float		sqrt;
+	double		DdotCQ;
+	double		COdotCQ;
+	double		DdotCO;
+	double		COdotCO;
+	double		cos2;
+	double		a;
+	double		b;
+	double		c;
+	double		cubed;
+	double		sqrt;
 }				t_intersection_cone;
 
 t_intersection	intersection_cone_closest(\

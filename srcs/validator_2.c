@@ -43,7 +43,7 @@ t_color	validate_color(t_level *root)
  *	Функция для валидации радиуса
  *	@returns Квадрат радиуса
  */
-float	validate_radius(t_level *root)
+double	validate_radius(t_level *root)
 {
 	int	radius;
 
@@ -59,7 +59,7 @@ float	validate_radius(t_level *root)
 /**
  *	Функция для валидации зеркальности
  */
-float	validate_specular(t_level *root)
+double	validate_specular(t_level *root)
 {
 	int	specular;
 

@@ -21,7 +21,7 @@ static t_byte	try_process_angle(t_rtv *rtv, t_byte idx, t_level *level)
 	if (level->type != LTYPE_LEAF || ft_strcmp(level->key, "angle"))
 		return (0);
 	rtv->cones[idx].angle = validate_angle(level);
-	rtv->cones[idx].cos = cosf(rtv->cones[idx].angle);
+	rtv->cones[idx].cos = cos(rtv->cones[idx].angle);
 	rtv->cones[idx].cos2 = rtv->cones[idx].cos * rtv->cones[idx].cos;
 	return (1);
 }

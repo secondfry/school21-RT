@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 01:09:12 by oadhesiv          #+#    #+#             */
-/*   Updated: 2020/05/31 13:57:50 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:33:35 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_matrix_4	matrix_on_matrix(t_const_matrix_4 a, t_const_matrix_4 b)
 {
 	t_matrix_4	r;
 
-	r = (float *)ft_memalloc(sizeof(float) * 16);
+	r = (double *)ft_memalloc(sizeof(double) * 16);
 	ft_ptr_check(r, ERR_MEM_MSG, 0);
 	r[0] = a[0] * b[0] + a[1] * b[4] + a[2] * b[8] + a[3] * b[12];
 	r[1] = a[0] * b[1] + a[1] * b[5] + a[2] * b[9] + a[3] * b[13];

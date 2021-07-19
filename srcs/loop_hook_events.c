@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 14:59:41 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/18 20:18:52 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:33:35 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ static void	loop_movement(t_rtv *rtv, t_vector_4 direction)
 
 static void	loop_key_hook_movement(int keycode, t_rtv *rtv)
 {
-	float	angle;
+	double	angle;
 
 	if (keycode == KEY_A)
 	{
 		angle = rtv->camera_angles.x + 45;
-		ft_memcpy((void *)&rtv->camera_angles.x, (void *)&angle, sizeof(float));
+		ft_memcpy((void *)&rtv->camera_angles.x, (void *)&angle, sizeof(double));
 		rtv->flags |= FLAG_INVALIDATE_ROTATION;
 	}
 	if (keycode == KEY_D)
 	{
 		angle = rtv->camera_angles.x - 45;
-		ft_memcpy((void *)&rtv->camera_angles.x, (void *)&angle, sizeof(float));
+		ft_memcpy((void *)&rtv->camera_angles.x, (void *)&angle, sizeof(double));
 		rtv->flags |= FLAG_INVALIDATE_ROTATION;
 	}
 	if (keycode == KEY_W)

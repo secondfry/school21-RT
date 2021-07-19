@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 00:20:30 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/17 17:57:50 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:33:35 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 # include "defines.h"
 # include "graceful.h"
 
-t_vector_4	vector_new(float x, float y, float z, float w);
+t_vector_4	vector_new(double x, double y, double z, double w);
 t_vector_4	vector_sub(t_vector_4 a, t_vector_4 b);
 t_vector_4	vector_add(t_vector_4 a, t_vector_4 b);
-t_vector_4	vector_mult(t_vector_4 a, float k);
+t_vector_4	vector_mult(t_vector_4 a, double k);
 
-float		vector_dot(t_vector_4 a, t_vector_4 b);
-float		vector_length(t_vector_4 a);
+double		vector_dot(t_vector_4 a, t_vector_4 b);
+double		vector_length(t_vector_4 a);
 
 t_vector_4	vector_normalize(t_vector_4 a);
 t_vector_4	vector_cross(t_vector_4 a, t_vector_4 b);

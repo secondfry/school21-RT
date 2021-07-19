@@ -7,9 +7,9 @@ static t_byte	validate_light_directional_one_directional(
 )
 {
 	const t_vector_4	direction = vector_normalize(get_vector(root));
-	const float			w = 0.f;
+	const double			w = 0.f;
 
-	ft_memcpy((void *)&direction.w, (void *)&w, sizeof(float));
+	ft_memcpy((void *)&direction.w, (void *)&w, sizeof(double));
 	vector_set(&rtv->dlights[idx].direction, &direction);
 	return (1);
 }
@@ -20,7 +20,7 @@ static t_byte	validate_light_directional_one_intensity(
 	t_byte idx
 )
 {
-	rtv->dlights[idx].intensity = (float) ft_atoi(root->value) / 100.f;
+	rtv->dlights[idx].intensity = (double) ft_atoi(root->value) / 100.f;
 	return (1);
 }
 

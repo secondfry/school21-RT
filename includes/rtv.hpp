@@ -25,7 +25,7 @@ typedef struct s_rtv
 	t_plane		planes[MAX_PLANES];
 	t_cylinder	cylinders[MAX_CYLINDERS];
 	t_cone		cones[MAX_CONES];
-	float		ambient;
+	double		ambient;
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
 

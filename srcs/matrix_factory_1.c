@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matrix_factory.c                                   :+:      :+:    :+:   */
+/*   matrix_factory_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 22:07:08 by oadhesiv          #+#    #+#             */
-/*   Updated: 2020/06/06 22:07:12 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:34:45 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_matrix_4	matrix_new_identity(void)
 {
 	t_matrix_4	ret;
 
-	ret = (float *)ft_memalloc(sizeof(float) * 16);
+	ret = (double *)ft_memalloc(sizeof(double) * 16);
 	ft_ptr_check(ret, ERR_MEM_MSG, 0);
 	ret[0] = 1;
 	ret[5] = 1;
@@ -25,7 +25,7 @@ t_matrix_4	matrix_new_identity(void)
 	return (ret);
 }
 
-t_matrix_4	matrix_new_translation(float x, float y, float z)
+t_matrix_4	matrix_new_translation(double x, double y, double z)
 {
 	t_matrix_4	ret;
 
@@ -37,11 +37,11 @@ t_matrix_4	matrix_new_translation(float x, float y, float z)
 	return (ret);
 }
 
-t_matrix_4	matrix_new_scale(float factor_x, float factor_y, float factor_z)
+t_matrix_4	matrix_new_scale(double factor_x, double factor_y, double factor_z)
 {
 	t_matrix_4	ret;
 
-	ret = (float *)ft_memalloc(sizeof(float) * 16);
+	ret = (double *)ft_memalloc(sizeof(double) * 16);
 	ft_ptr_check(ret, ERR_MEM_MSG, 0);
 	ret[0] = factor_x;
 	ret[5] = factor_y;
@@ -50,19 +50,19 @@ t_matrix_4	matrix_new_scale(float factor_x, float factor_y, float factor_z)
 	return (ret);
 }
 
-t_matrix_4	matrix_new_rotation(float angle_x, float angle_y, float angle_z)
+t_matrix_4	matrix_new_rotation(double angle_x, double angle_y, double angle_z)
 {
 	t_matrix_4	ret;
-	float		h[8];
+	double		h[8];
 
-	ret = (float *)ft_memalloc(sizeof(float) * 16);
+	ret = (double *)ft_memalloc(sizeof(double) * 16);
 	ft_ptr_check(ret, ERR_MEM_MSG, 0);
-	h[0] = cosf(angle_x);
-	h[1] = sinf(angle_x);
-	h[2] = cosf(angle_y);
-	h[3] = sinf(angle_y);
-	h[4] = cosf(angle_z);
-	h[5] = sinf(angle_z);
+	h[0] = cos(angle_x);
+	h[1] = sin(angle_x);
+	h[2] = cos(angle_y);
+	h[3] = sin(angle_y);
+	h[4] = cos(angle_z);
+	h[5] = sin(angle_z);
 	h[6] = h[0] * h[3];
 	h[7] = h[1] * h[3];
 	ret[0] = h[2] * h[4];
@@ -78,17 +78,17 @@ t_matrix_4	matrix_new_rotation(float angle_x, float angle_y, float angle_z)
 	return (ret);
 }
 
-t_matrix_4	matrix_new_projection(float fov, float ratio, float near, float far)
+t_matrix_4	matrix_new_projection(double fov, double ratio, double near, double far)
 {
 	t_matrix_4	ret;
-	float		scale;
-	float		width;
-	float		height;
+	double		scale;
+	double		width;
+	double		height;
 
 	scale = tanf(fov * M_PI_2F / 180) * near;
 	width = 2 * ratio * scale;
 	height = 2 * scale;
-	ret = (float *)ft_memalloc(sizeof(float) * 16);
+	ret = (double *)ft_memalloc(sizeof(double) * 16);
 	ft_ptr_check(ret, ERR_MEM_MSG, 0);
 	ret[0] = 2 * near / width;
 	ret[5] = 2 * near / height;

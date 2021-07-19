@@ -6,25 +6,25 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/31 13:57:53 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/17 17:57:20 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:35:24 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-float	vector_dot(t_vector_4 a, t_vector_4 b)
+double	vector_dot(t_vector_4 a, t_vector_4 b)
 {
 	return (a.x * b.x + a.y * b.y + a.z * b.z + a.w * b.w);
 }
 
-float	vector_length(t_vector_4 a)
+double	vector_length(t_vector_4 a)
 {
-	return (sqrtf(vector_dot(a, a)));
+	return (sqrt(vector_dot(a, a)));
 }
 
 t_vector_4	vector_normalize(t_vector_4 a)
 {
-	float	length;
+	double	length;
 
 	length = vector_length(a);
 	return ((t_vector_4){

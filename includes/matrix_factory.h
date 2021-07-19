@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   matrix_factory.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/15 01:07:08 by oadhesiv          #+#    #+#             */
-/*   Updated: 2020/06/06 21:47:02 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:33:35 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@
 # include "graceful.h"
 
 t_matrix_4	matrix_new_identity(void);
-t_matrix_4	matrix_new_translation(float x, float y, float z);
-t_matrix_4	matrix_new_scale(float factor_x, float factor_y, float factor_z);
-t_matrix_4	matrix_new_rotation(float angle_x, float angle_y, float angle_z);
+t_matrix_4	matrix_new_translation(double x, double y, double z);
+t_matrix_4	matrix_new_scale(double factor_x, double factor_y, double factor_z);
+t_matrix_4	matrix_new_rotation(double angle_x, double angle_y, double angle_z);
 t_matrix_4	matrix_new_projection(\
-	float fov, \
-	float ratio, \
-	float near, \
-	float far \
+	double fov, \
+	double ratio, \
+	double near, \
+	double far \
 );
 t_matrix_4	matrix_new_projection_ortho(\
-	float fov, \
-	float ratio, \
-	float near, \
-	float far \
+	double fov, \
+	double ratio, \
+	double near, \
+	double far \
 );
 
 #endif

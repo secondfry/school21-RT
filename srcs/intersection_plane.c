@@ -12,7 +12,7 @@
 // (C - O) dot N - t * D dot N = 0
 // t = (C - O) dot N / D dot N
 
-static float	intersection_plane(
+static double	intersection_plane(
 	t_rtv *rtv,
 	t_intersect_params *params,
 	t_byte idx
@@ -20,8 +20,8 @@ static float	intersection_plane(
 {
 	const t_vector_4	C = rtv->planes[idx].position;
 	const t_vector_4	CO = vector_sub(C, params->O);
-	const float			a = vector_dot(rtv->planes[idx].normal, CO);
-	const float			b = vector_dot(rtv->planes[idx].normal, params->D);
+	const double			a = vector_dot(rtv->planes[idx].normal, CO);
+	const double			b = vector_dot(rtv->planes[idx].normal, params->D);
 
 	if (b < EPSILON && b > -1 * EPSILON)
 	{
@@ -35,10 +35,10 @@ t_intersection	intersection_plane_closest(
 	t_intersect_params *params
 )
 {
-	float	t_closest;
+	double	t_closest;
 	t_byte	idx;
 	t_byte	i;
-	float	t;
+	double	t;
 
 	t_closest = 1.0 / 0.0;
 	idx = -1;

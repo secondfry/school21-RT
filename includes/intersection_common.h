@@ -6,7 +6,7 @@
 void	check_intersection(\
 	t_intersection *ret, \
 	t_intersect_params *params, \
-	float t, \
+	double t, \
 	t_byte i \
 );
 

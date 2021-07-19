@@ -5,7 +5,7 @@
 # include "vector.h"
 # include "intersection.h"
 
-float	light(\
+double	light(\
 	t_rtv *rtv, \
 	const t_light_params *params \
 );
