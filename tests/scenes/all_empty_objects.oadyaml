@@ -1,0 +1,22 @@
+light:
+  directional:
+    - empty
+  point:
+    - empty
+  ambient:
+    - empty
+
+sphere:
+  - empty
+
+cone:
+  - empty
+
+cylinder:
+  - empty
+
+plane:
+  - empty
+
+camera:
+  - empty

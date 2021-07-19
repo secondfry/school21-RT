@@ -1,0 +1,10 @@
+light:
+  directional:
+  point:
+  ambient:
+
+sphere:
+cone:
+cylinder:
+plane:
+camera:

@@ -1,0 +1,27 @@
+light:
+  point:
+    - position:
+      intensity: 60
+  directional:
+    - direction:
+      intensity: 20
+  ambient: 20
+
+sphere:
+  - position:
+      d:
+        r:
+      x: 1
+      k: 4
+    color:
+      red: -127
+      green: 0
+      blue: 0
+    radius: 1
+    specular: 0
+cone:
+cylinder:
+plane:
+camera:
+  position:
+  rotation:
