@@ -14,7 +14,7 @@ static t_byte	try_process_position(t_rtv *rtv, t_byte idx, t_level *level)
 static t_byte	try_process_normal(t_rtv *rtv, t_byte idx, t_level *level)
 {
 	const t_vector_4	vector = vector_new(0, 0, 0, 0);
-	const double			w = 0.f;
+	const double		w = 0.f;
 
 	if (level->type != LTYPE_NODE || ft_strcmp(level->key, "normal"))
 		return (0);

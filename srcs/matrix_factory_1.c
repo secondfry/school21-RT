@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 22:07:08 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/19 19:34:45 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:56:47 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,12 @@ t_matrix_4	matrix_new_rotation(double angle_x, double angle_y, double angle_z)
 	return (ret);
 }
 
-t_matrix_4	matrix_new_projection(double fov, double ratio, double near, double far)
+t_matrix_4	matrix_new_projection(
+	double fov,
+	double ratio,
+	double near,
+	double far
+)
 {
 	t_matrix_4	ret;
 	double		scale;

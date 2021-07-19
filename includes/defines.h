@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/19 19:33:35 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/19 19:57:51 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ typedef struct s_intersection
 # define ICONE		3
 
 # define MAX_VECTORS_WORKER	7
-# define MAX_doubleS_WORKER	3
+# define MAX_DOUBLES_WORKER	3
 
 # define VCTR_O	0
 # define VCTR_D	1
@@ -85,7 +85,7 @@ typedef struct s_intersection
 typedef struct s_worker_data
 {
 	t_vector_4	vectors[MAX_VECTORS_WORKER];
-	double		doubles[MAX_doubleS_WORKER];
+	double		doubles[MAX_DOUBLES_WORKER];
 }				t_worker_data;
 
 typedef struct s_intersect_params

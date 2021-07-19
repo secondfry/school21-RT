@@ -7,7 +7,7 @@ static t_byte	validate_light_directional_one_directional(
 )
 {
 	const t_vector_4	direction = vector_normalize(get_vector(root));
-	const double			w = 0.f;
+	const double		w = 0.f;
 
 	ft_memcpy((void *)&direction.w, (void *)&w, sizeof(double));
 	vector_set(&rtv->dlights[idx].direction, &direction);

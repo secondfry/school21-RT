@@ -34,7 +34,7 @@ typedef struct s_mlx
 
 typedef double			*t_matrix_4;
 typedef double			*t_quaterion;
-typedef const double		*t_const_matrix_4;
-typedef const double		*t_const_quaterion;
+typedef const double	*t_const_matrix_4;
+typedef const double	*t_const_quaterion;
 
 #endif
