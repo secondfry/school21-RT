@@ -51,13 +51,11 @@ static void	*run_parametrized(void *params)
 
 static short	get_y_start(t_byte y)
 {
-	short			yf;
 	static short	ya = -1 * HEIGHT / 2;
 
-	yf = ya + y * HEIGHT / 2;
-	if (yf == ya)
-		yf += 1;
-	return (yf);
+	if (y == 0)
+		return (ya + 1);
+	return (ya + y * HEIGHT / 2);
 }
 
 static void	prepare_parellel_params(t_rtv *rtv, t_params *param)
