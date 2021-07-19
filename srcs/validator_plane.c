@@ -20,7 +20,7 @@ static t_byte	try_process_normal(t_rtv *rtv, t_byte idx, t_level *level)
 		return (0);
 	validate_vector(&vector, level);
 	vector_set(&rtv->planes[idx].normal, &vector);
-	ft_memcpy((void *)&rtv->planes[idx].normal, (void *)&w, sizeof(double));
+	ft_memcpy((void *)&rtv->planes[idx].normal.w, (void *)&w, sizeof(double));
 	return (1);
 }
 
