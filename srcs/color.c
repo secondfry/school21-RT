@@ -58,7 +58,7 @@ t_color	*color_mult(t_color *a, float k)
 	return (a);
 }
 
-int	color_to_int(t_color *a)
+int	color_to_int(t_color a)
 {
-	return ((a->red << 16) + (a->green << 8) + a->blue);
+	return ((a.red << 16) + (a.green << 8) + a.blue);
 }
