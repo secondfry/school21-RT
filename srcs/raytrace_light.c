@@ -56,7 +56,7 @@ static double	light_point(
 		}
 		vector_set_by_value(&L, \
 			vector_sub(rtv->plights[i].position, params->P));
-		cutoff = vector_length(L);
+		cutoff = vector_length(L) + EPSILON;
 		vector_set_by_value(&params->L, vector_normalize(L));
 		intensity += light_one(rtv, params, cutoff, rtv->plights[i].intensity);
 		i++;

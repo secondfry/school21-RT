@@ -94,6 +94,6 @@ void	process_pixel(t_rtv *rtv, short xc, short yc)
 		data.vectors[VCTR_D], \
 		data.vectors[VCTR_D] \
 	);
-	color = raytrace(rtv, &data, 1.0f, 1.0 / 0.0);
+	color = raytrace(rtv, &data, 0.1f, 1.0 / 0.0);
 	canvas_to_screen(rtv, xc, yc, color);
 }
