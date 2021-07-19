@@ -1,6 +1,7 @@
 #ifndef INIT_RTV_H
 # define INIT_RTV_H
 
+# include <pthread.h>
 # include "defines.h"
 # include "vector.h"
 # include "matrix_factory.h"

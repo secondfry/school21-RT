@@ -17,6 +17,7 @@ static void	init_rtv_common(t_rtv *rtv)
 	);
 	vector_set_by_value(&rtv->camera_angles, vector_new(0, 0, 0, 0));
 	rtv->camera_rotation = matrix_new_identity();
+	rtv->mutex = (pthread_mutex_t)PTHREAD_MUTEX_INITIALIZER;
 }
 
 void	init_rtv(t_rtv *rtv)
