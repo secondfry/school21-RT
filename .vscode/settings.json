@@ -100,5 +100,12 @@
 		"array.h": "c",
 		"filesystem": "cpp"
 	},
-	"editor.formatOnSave": false
+	"editor.formatOnSave": false,
+	"C_Cpp.default.includePath": [
+		"${default}",
+		"~/.brew/opt/czmq/include",
+		"~/.brew/opt/zmq/include",
+		"${workspaceFolder}/includes",
+		"${workspaceFolder}/libft",
+	]
 }
