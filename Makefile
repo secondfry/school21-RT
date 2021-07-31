@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/01 01:11:12 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/01 02:08:32 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -144,6 +144,7 @@ all:
 	@echo -n $(DEFAULT)
 
 	$(MAKE) -f Makefile.server
+	$(MAKE) -f Makefile.client
 
 -include $(DEPS)
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIRS)

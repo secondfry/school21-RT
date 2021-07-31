@@ -1,18 +1,18 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile.server                                    :+:      :+:    :+:    #
+#    Makefile.client                                    :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/01 02:08:06 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/01 02:08:02 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL = /bin/zsh
 
-NAME = RT.server
+NAME = RT.client
 SRCS_DIR = ./srcs
 INCLUDES_DIR = ./includes
 OBJS_DIR = ./objs
@@ -42,7 +42,7 @@ FILES_VALIDATOR :=	validator_1.c validator_2.c validator_light.c \
 					validator_sphere.c validator_camera.c
 FILES_VALIDATOR :=	$(addprefix validator/, $(FILES_VALIDATOR))
 
-SRC_FILES =	server/main.c \
+SRC_FILES =	client/main.c \
 			matrix_factory_1.c matrix_factory_2.c \
 			matrix_utils.c \
 			vector_1.c vector_2.c \
@@ -99,9 +99,9 @@ all:
 	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(LIB_DIR)
 	@echo -n $(DEFAULT)
 
-	@echo $(CYAN) "Making RT.server" $(DEFAULT)
+	@echo $(CYAN) "Making RT.client" $(DEFAULT)
 	@echo -n $(GREEN)
-	$(MAKE) -f Makefile.server $(NAME)
+	$(MAKE) -f Makefile.client $(NAME)
 	@echo -n $(DEFAULT)
 
 -include $(DEPS)
@@ -123,7 +123,7 @@ clean_libs:
 	@echo -n $(DEFAULT)
 
 clean_self:
-	@echo $(CYAN) "Cleaning RT.server" $(DEFAULT)
+	@echo $(CYAN) "Cleaning RT.client" $(DEFAULT)
 	@echo -n $(GREEN)
 	rm -rfv $(OBJS_DIR)
 	@echo -n $(DEFAULT)
@@ -137,30 +137,30 @@ fclean_libs: clean_libs
 	@echo -n $(DEFAULT)
 
 fclean_self: clean_self
-	@echo $(CYAN) "Purging RT.server" $(DEFAULT)
+	@echo $(CYAN) "Purging RT.client" $(DEFAULT)
 	@echo -n $(GREEN)
 	rm -rfv $(NAME)
 	@echo -n $(DEFAULT)
 
 debug: clean_self
-	DEBUG="1" $(MAKE) -f Makefile.server all
+	DEBUG="1" $(MAKE) -f Makefile.client all
 
 debug_wsl:
 	@echo "Don't forget to run on Windows host:"
 	@echo '"C:\\Program Files\\VcXsrv\\vcxsrv.exe" :0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl -dpi auto'
 	@echo "Press any key to continue..."
 	@read
-	$(MAKE) -f Makefile.server debug
+	$(MAKE) -f Makefile.client debug
 
 debug_all: clean_self clean_libs
-	DEBUG="1" $(MAKE) -f Makefile.server all
+	DEBUG="1" $(MAKE) -f Makefile.client all
 
 asan: clean_self
 	DEBUG="1" CFLAGS_INTERNAL="$(CFLAGS_ASAN)" LDFLAGS="$(LDFLAGS_ASAN)" \
-	$(MAKE) -f Makefile.server all
+	$(MAKE) -f Makefile.client all
 
 asan_all: clean_self clean_libs
 	DEBUG="1" CFLAGS_INTERNAL="$(CFLAGS_ASAN)" LDFLAGS="$(LDFLAGS_ASAN)" \
-	$(MAKE) -f Makefile.server all
+	$(MAKE) -f Makefile.client all
 
 re: fclean all
