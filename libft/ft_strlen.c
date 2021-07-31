@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 19:11:17 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/06 18:00:00 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/07/31 20:34:48 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	*check_ulong(t_ulong *data)
 
 	cell_one = make_memory_cell(0x01);
 	cell_eighties = make_memory_cell(0x80);
-	if (((*data - cell_one) & ~ *data & cell_eighties) != 0)
+	if (((*data - cell_one) & ~*data & cell_eighties) != 0)
 	{
 		ptr = check_bytes((t_byte *)data);
 		if (ptr)
