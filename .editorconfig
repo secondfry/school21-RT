@@ -1,4 +1,6 @@
-[root]
+root = true
+
+[*]
 insert_final_newline = true
 end_of_line = lf
 
@@ -7,5 +9,9 @@ indent_size = 4
 indent_style = tab
 
 [*.h]
+indent_size = 4
+indent_style = tab
+
+[Makefile]
 indent_size = 4
 indent_style = tab
