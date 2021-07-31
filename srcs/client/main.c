@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/01 02:17:27 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/01 02:25:11 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(void)
 {
 	zsock_t	*requester;
 	int		status;
+	char	*data;
 
 	printf("zmq: %d, czmq: %d\n", ZMQ_VERSION, CZMQ_VERSION);
 	requester = zsock_new(ZMQ_REQ);
@@ -29,8 +30,9 @@ int	main(void)
 	printf("Sending payload.\n");
 	zstr_sendm(requester, "TYPE-INIT");
 	zstr_send(requester, "This is some data for you.");
-	char *a = zstr_recv(requester);
-	zstr_free(&a);
+	data = zstr_recv(requester);
+	printf("Received: %s", data);
+	zstr_free(&data);
 	zsock_destroy(&requester);
 	return (0);
 }
