@@ -91,6 +91,7 @@ Temporary Items
 
 # Personal
 RT
+RT.client
 RT.server
 *.supp
 vgcore.*
