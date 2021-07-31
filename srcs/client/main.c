@@ -6,13 +6,16 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/01 02:25:11 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/01 02:51:54 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <czmq.h>
+#include "typedef_common.h"
+#include "init_rtv.h"
+#include "init_mlx.h"
 
-int	main(void)
+char	*cluster_request(void)
 {
 	zsock_t	*requester;
 	int		status;
@@ -25,14 +28,66 @@ int	main(void)
 	{
 		printf("Could not connect to server... Bailing!");
 		zsock_destroy(&requester);
-		return (1);
+		return (NULL);
 	}
 	printf("Sending payload.\n");
 	zstr_sendm(requester, "TYPE-INIT");
 	zstr_send(requester, "This is some data for you.");
 	data = zstr_recv(requester);
-	printf("Received: %s", data);
-	zstr_free(&data);
+	printf("Received: %s\n", data);
 	zsock_destroy(&requester);
+	return (data);
+}
+
+void	run_cluster(t_rtv *rtv)
+{
+	char	*data;
+
+	data = cluster_request();
+	ft_strcpy((char *)rtv->mlx->img_data, data);
+	zstr_free(&data);
+}
+
+int	loop_key_hook(int keycode, t_rtv *rtv)
+{
+	(void)keycode;
+	(void)rtv;
+	return (0);
+}
+
+void	loop_redraw(t_rtv *rtv)
+{
+	if (!(rtv->flags & FLAG_REDRAW))
+		return ;
+	ft_bzero(rtv->mlx->img_data, rtv->mlx->size_line_char * HEIGHT);
+	rtv->flags -= FLAG_REDRAW;
+	run_cluster(rtv);
+	mlx_put_image_to_window(\
+		rtv->mlx->mlx, rtv->mlx->win, rtv->mlx->img, 0, 0);
+}
+
+void	loop_before_next_update(t_rtv *rtv)
+{
+	mlx_do_sync(rtv->mlx->mlx);
+}
+
+int	loop_hook(t_rtv *rtv)
+{
+	loop_redraw(rtv);
+	loop_before_next_update(rtv);
+	return (0);
+}
+
+int	main(void)
+{
+	t_rtv	rtv;
+	t_mlx	mlx;
+
+	init_rtv(&rtv);
+	init_mlx(&mlx);
+	init_mlx_image(&mlx);
+	rtv.mlx = &mlx;
+	init_mlx_hooks(&rtv);
+	mlx_loop(mlx.mlx);
 	return (0);
 }

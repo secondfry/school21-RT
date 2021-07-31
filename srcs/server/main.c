@@ -6,24 +6,37 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/01 02:23:44 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/01 02:54:25 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <czmq.h>
+#include "libft.h"
+
+void	handle_scene(zsock_t *reader)
+{
+	char	*scene;
+
+	scene = zstr_recv(reader);
+	zstr_free(&scene);
+}
+
+void	handle_typed_message(zsock_t *reader, char *id)
+{
+	if (!ft_strcmp(id, "SCENE"))
+		handle_scene(reader);
+}
 
 int	handle_message(zloop_t *loop, zsock_t *reader, void *arg)
 {
 	char	*id;
-	char	*data;
 
 	(void)loop;
 	(void)arg;
-	zstr_recvx(reader, &id, &data, NULL);
-	printf("%s: %s\n", id, data);
+	id = zstr_recv(reader);
+	handle_typed_message(reader, id);
 	zstr_send(reader, "ACK");
 	zstr_free(&id);
-	zstr_free(&data);
 	return (0);
 }
 
