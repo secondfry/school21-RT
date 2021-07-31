@@ -29,7 +29,7 @@ typedef struct s_rtv
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
 
-	s_rtv() : camera_position{ 0.f, 0.f, 0.f, 1.f } {}
+	s_rtv() : camera_position{ 0.f, 0.f, 0.f, 1.f }, camera_angles{ 0.f, 0.f, 0.f, 0.f } {}
 } t_rtv;
 
 #endif
