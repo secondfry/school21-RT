@@ -26,7 +26,7 @@
       "name": "(gdb) Launch (local)",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/RTv1",
+      "program": "${workspaceFolder}/RT",
       "args": [
         "tests/scenes/full.oadyaml"
       ],
@@ -47,7 +47,7 @@
       "name": "(gdb) Launch (virtualbox)",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/RTv1",
+      "program": "${workspaceFolder}/RT",
       "args": [
         "maps/map_without_lf"
       ],
@@ -73,7 +73,7 @@
       "name": "(gdb) Launch (WSL)",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/RTv1",
+      "program": "${workspaceFolder}/RT",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",

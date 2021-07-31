@@ -6,13 +6,13 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/07/18 20:08:16 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/01 00:59:03 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SHELL = /bin/zsh
 
-NAME = RTv1
+NAME = RT
 SRCS_DIR = ./srcs
 INCLUDES_DIR = ./includes
 OBJS_DIR = ./objs
@@ -20,28 +20,42 @@ OBJS_DIR = ./objs
 LIB = libft.a
 LIB_DIR = ./libft
 
+FILES_INIT := init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c
+FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
+
+FILES_INTERSECTION :=	intersection.c intersection_common.c \
+						intersection_sphere.c intersection_plane.c \
+						intersection_cylinder.c intersection_cone.c 
+FILES_INTERSECTION :=	$(addprefix intersection/, $(FILES_INTERSECTION))
+
+FILES_MLX :=	clear_mlx.c init_mlx.c init_mlx_2.c \
+				loop_hook_flow.c loop_hook_invalidate.c loop_hook_events.c \
+				loop_hook_render_debug.c \
+				loop_hook_redraw.c
+FILES_MLX := $(addprefix mlx/, $(FILES_MLX))
+
+FILES_PARSER :=	parser.c parser_level.c parser_level_process.c \
+				parser_parse_1.c parser_parse_2.c
+FILES_PARSER :=	$(addprefix parser/, $(FILES_PARSER))
+
+FILES_VALIDATOR :=	validator_1.c validator_2.c validator_light.c \
+					validator_light_directional.c validator_light_point.c \
+					validator_cone.c validator_cylinder.c validator_plane.c \
+					validator_sphere.c validator_camera.c
+FILES_VALIDATOR :=	$(addprefix validator/, $(FILES_VALIDATOR))
+
 SRC_FILES =	main.c \
 			matrix_factory_1.c matrix_factory_2.c \
 			matrix_utils.c \
 			vector_1.c vector_2.c \
 			quaternion.c \
-			clear_mlx.c init_mlx.c init_mlx_2.c \
-			init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c \
-			loop_hook_flow.c \
-			loop_hook_invalidate.c loop_hook_events.c loop_hook_render_debug.c \
-			loop_hook_redraw.c \
 			raytrace.c raytrace_light.c normal.c \
 			color.c \
-			intersection.c intersection_sphere.c intersection_plane.c intersection_cylinder.c intersection_cone.c \
-			intersection_common.c \
-			parser.c parser_level.c parser_level_process.c \
-			parser_parse_1.c parser_parse_2.c \
-			validator_1.c validator_2.c validator_light.c \
-			validator_light_directional.c validator_light_point.c \
-			validator_cone.c validator_cylinder.c validator_plane.c \
-			validator_sphere.c validator_camera.c \
-			graceful.c
+			graceful.c \
+			$(FILES_INIT) $(FILES_INTERSECTION) $(FILES_MLX) $(FILES_PARSER) $(FILES_VALIDATOR)
 
+SRC_DIRS = $(sort $(dir $(SRC_FILES)))
+OBJS_DIRS = $(addprefix $(OBJS_DIR)/, $(SRC_DIRS))
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)
@@ -124,17 +138,17 @@ all:
 	cp $(MLX_DIR)/$(MLX) $(MLX)
 	@echo -n $(DEFAULT)
 
-	@echo $(CYAN) "Making RTv1" $(DEFAULT)
+	@echo $(CYAN) "Making RT" $(DEFAULT)
 	@echo -n $(GREEN)
 	$(MAKE) $(NAME)
 	@echo -n $(DEFAULT)
 
 -include $(DEPS)
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIRS)
 	$(CC) $(CFLAGS_FINAL) -c -o $@ $<
 
-$(OBJS_DIR):
-	mkdir -p $(OBJS_DIR)
+$(OBJS_DIRS):
+	mkdir -p $@
 
 $(NAME): $(OBJS) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX)
 	$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
@@ -153,7 +167,7 @@ clean_libs:
 	@echo -n $(DEFAULT)
 
 clean_self:
-	@echo $(CYAN) "Cleaning RTv1" $(DEFAULT)
+	@echo $(CYAN) "Cleaning RT" $(DEFAULT)
 	@echo -n $(GREEN)
 	rm -rfv $(OBJS_DIR)
 	@echo -n $(DEFAULT)
@@ -173,7 +187,7 @@ fclean_libs: clean_libs
 	@echo -n $(DEFAULT)
 
 fclean_self: clean_self
-	@echo $(CYAN) "Purging RTv1" $(DEFAULT)
+	@echo $(CYAN) "Purging RT" $(DEFAULT)
 	@echo -n $(GREEN)
 	rm -rfv $(NAME)
 	@echo -n $(DEFAULT)

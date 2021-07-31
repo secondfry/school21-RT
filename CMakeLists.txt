@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(school21-rtv1)
+project(school21-rt)
 
 # GoogleTest requires at least C++11
 set(CMAKE_CXX_STANDARD 11)
@@ -29,11 +29,11 @@ add_executable(
   tests/parser_check_arguments_test.cc
   tests/mocks.cc
   includes/parser.h
-  srcs/parser.c
-  srcs/parser_level.c
-  srcs/parser_level_process.c
-  srcs/parser_parse_1.c
-  srcs/parser_parse_2.c
+  srcs/parser/parser.c
+  srcs/parser/parser_level.c
+  srcs/parser/parser_level_process.c
+  srcs/parser/parser_parse_1.c
+  srcs/parser/parser_parse_2.c
   srcs/graceful.c
 )
 target_link_libraries(

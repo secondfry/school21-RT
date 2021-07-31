@@ -9,7 +9,7 @@ extern "C" {
 // Valid cases
 
 TEST(ParserCheckArgumentsTest, Valid) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes/empty.oadyaml"};
+  std::vector<std::string> args {"./RT", "tests/scenes/empty.oadyaml"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); ++i)
@@ -25,7 +25,7 @@ TEST(ParserCheckArgumentsTest, Valid) {
 // Invalid cases
 
 TEST(ParserCheckArgumentsTest, InvalidOneArg) {
-  std::vector<std::string> args {"./RTv1"};
+  std::vector<std::string> args {"./RT"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); ++i)
@@ -35,7 +35,7 @@ TEST(ParserCheckArgumentsTest, InvalidOneArg) {
 }
 
 TEST(ParserCheckArgumentsTest, InvalidThreeArgs) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes/empty.yaml", "kripp"};
+  std::vector<std::string> args {"./RT", "tests/scenes/empty.yaml", "kripp"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); ++i)
@@ -45,7 +45,7 @@ TEST(ParserCheckArgumentsTest, InvalidThreeArgs) {
 }
 
 TEST(ParserCheckArgumentsTest, InvalidFileDoesNotExist) {
-  std::vector<std::string> args {"./RTv1", "/loboq"};
+  std::vector<std::string> args {"./RT", "/loboq"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); ++i)
@@ -55,7 +55,7 @@ TEST(ParserCheckArgumentsTest, InvalidFileDoesNotExist) {
 }
 
 TEST(ParserCheckArgumentsTest, InvalidFileIsDirectory) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes"};
+  std::vector<std::string> args {"./RT", "tests/scenes"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); ++i)

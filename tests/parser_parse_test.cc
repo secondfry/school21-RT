@@ -9,7 +9,7 @@ extern "C" {
 // Valid cases
 
 TEST(ParserParseTest, ValidEmpty) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes/empty.oadyaml"};
+  std::vector<std::string> args {"./RT", "tests/scenes/empty.oadyaml"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); i++)
@@ -29,7 +29,7 @@ TEST(ParserParseTest, ValidEmpty) {
 }
 
 TEST(ParserParseTest, ValidFull) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes/full.oadyaml"};
+  std::vector<std::string> args {"./RT", "tests/scenes/full.oadyaml"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); i++)
@@ -271,7 +271,7 @@ TEST(ParserParseTest, ValidFull) {
 }
 
 TEST(ParserParseTest, ValidEmptyNode_0) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes/empty_node_0.oadyaml"};
+  std::vector<std::string> args {"./RT", "tests/scenes/empty_node_0.oadyaml"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); i++)
@@ -300,7 +300,7 @@ TEST(ParserParseTest, ValidEmptyNode_0) {
 }
 
 TEST(ParserParseTest, ValidEmptyNode_1) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes/empty_node_1.oadyaml"};
+  std::vector<std::string> args {"./RT", "tests/scenes/empty_node_1.oadyaml"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); i++)
@@ -340,7 +340,7 @@ TEST(ParserParseTest, ValidEmptyNode_1) {
 }
 
 TEST(ParserParseTest, ValidEmptyNode_2) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes/empty_node_2.oadyaml"};
+  std::vector<std::string> args {"./RT", "tests/scenes/empty_node_2.oadyaml"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); i++)
@@ -381,7 +381,7 @@ TEST(ParserParseTest, ValidEmptyNode_2) {
 }
 
 TEST(ParserParseTest, ValidEmptyNode_3) {
-  std::vector<std::string> args {"./RTv1", "tests/scenes/empty_node_3.oadyaml"};
+  std::vector<std::string> args {"./RT", "tests/scenes/empty_node_3.oadyaml"};
   std::vector<char *> argv;
   argv.reserve(args.size());
   for(size_t i = 0; i < args.size(); i++)
@@ -438,7 +438,7 @@ TEST(ParserParseTest, InvalidOffset) {
   for (size_t i = 0; i < 1; i++) {
     char buffer[100];
     sprintf(buffer, "tests/scenes/invalid_offset_%zu.oadyaml", i);
-    std::vector<std::string> args {"./RTv1", buffer};
+    std::vector<std::string> args {"./RT", buffer};
     std::vector<char *> argv;
     argv.reserve(args.size());
     for(size_t i = 0; i < args.size(); i++)

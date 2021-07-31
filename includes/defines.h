@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/19 19:57:51 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/01 00:38:21 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 # define WIDTH 768
 # define HEIGHT 768
-# define TITLE "RTv1"
+# define TITLE "RT"
 
 # define M_PI_F 3.14159265358979323846264338327950288f
 # define M_PI_2F 1.57079632679489661923132169163975144f
