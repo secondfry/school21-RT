@@ -91,6 +91,7 @@ Temporary Items
 
 # Personal
 RT
+RT.server
 *.supp
 vgcore.*
 minilibx-linux/test/mlx-test
