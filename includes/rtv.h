@@ -28,6 +28,7 @@ typedef struct s_rtv
 	double		ambient;
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
+	char		*filename;
 }				t_rtv;
 
 #endif
