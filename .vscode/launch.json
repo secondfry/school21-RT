@@ -44,6 +44,27 @@
       "preLaunchTask": "make debug"
     },
     {
+      "name": "(gdb) Launch client (local)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/RT.client",
+      "args": [
+        "tests/scenes/full.oadyaml"
+      ],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "MIMode": "lldb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ],
+      "preLaunchTask": "make debug"
+    },
+    {
       "name": "(gdb) Launch (virtualbox)",
       "type": "cppdbg",
       "request": "launch",

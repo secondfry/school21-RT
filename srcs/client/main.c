@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/01 02:51:54 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/01 03:27:23 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 #include "init_rtv.h"
 #include "init_mlx.h"
 
-char	*cluster_request(void)
+#define BUFFER_SIZE 10
+
+void	cluster_request(void)
 {
 	zsock_t	*requester;
 	int		status;
@@ -28,24 +30,37 @@ char	*cluster_request(void)
 	{
 		printf("Could not connect to server... Bailing!");
 		zsock_destroy(&requester);
-		return (NULL);
 	}
-	printf("Sending payload.\n");
-	zstr_sendm(requester, "TYPE-INIT");
-	zstr_send(requester, "This is some data for you.");
+	zstr_send(requester, "INIT");
 	data = zstr_recv(requester);
 	printf("Received: %s\n", data);
+	zstr_free(&data);
+	int fd = open("tests/scenes/full.oadyaml", O_RDONLY);
+	char buffer[BUFFER_SIZE + 1];
+	ft_bzero(buffer, BUFFER_SIZE + 1);
+	int len;
+	while ((len = read(fd, buffer, BUFFER_SIZE)) > 0)
+	{
+		buffer[len] = 0;
+		printf("Sending payload.\n");
+		zstr_sendm(requester, "SCENE");
+		zstr_send(requester, buffer);
+		data = zstr_recv(requester);
+		printf("Received: %s\n", data);
+		zstr_free(&data);
+	}
+	close(fd);
 	zsock_destroy(&requester);
-	return (data);
 }
 
 void	run_cluster(t_rtv *rtv)
 {
-	char	*data;
+	// char	*data;
 
-	data = cluster_request();
-	ft_strcpy((char *)rtv->mlx->img_data, data);
-	zstr_free(&data);
+	(void)rtv;
+	cluster_request();
+	// ft_strcpy((char *)rtv->mlx->img_data, data);
+	// zstr_free(&data);
 }
 
 int	loop_key_hook(int keycode, t_rtv *rtv)
