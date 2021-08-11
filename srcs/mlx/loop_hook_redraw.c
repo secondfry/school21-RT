@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/18 19:57:22 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/11 21:29:27 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,40 +49,28 @@ static void	*run_parametrized(void *params)
 // 	}
 // }
 
-static short	get_y_start(t_byte y)
-{
-	static short	ya = -1 * HEIGHT / 2;
-
-	if (y == 0)
-		return (ya + 1);
-	return (ya + y * HEIGHT / 2);
-}
-
 static void	prepare_parellel_params(t_rtv *rtv, t_params *param)
 {
-	t_byte			y;
-	t_byte			x;
-	short			yf;
-	static short	ya = -1 * HEIGHT / 2;
-	static short	xa = -1 * WIDTH / 2;
+	t_byte			line;
+	short			line_start;
+	short			line_end;
+	static short	global_start = -1 * HEIGHT / 2;
 
-	y = 0;
-	while (y < 2)
+	line = 0;
+	while (line < 8)
 	{
-		x = 0;
-		yf = get_y_start(y);
-		while (x < 4)
-		{
-			param[y * 4 + x] = (t_params){\
-				rtv, \
-				yf, \
-				ya + (y + 1) * HEIGHT / 2, \
-				xa + x * WIDTH / 4, \
-				xa + (x + 1) * WIDTH / 4 \
-			};
-			x++;
-		}
-		y++;
+		line_start = global_start + line * HEIGHT / 8;
+		line_end = global_start + (line + 1) * HEIGHT / 8;
+		if (line_start == 0)
+			line_start = 1;
+		param[line] = (t_params){\
+			rtv, \
+			line_start, \
+			line_end, \
+			-1 * WIDTH / 2, \
+			WIDTH / 2 \
+		};
+		line++;
 	}
 }
 

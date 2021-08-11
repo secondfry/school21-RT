@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/01 03:27:23 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/11 21:26:33 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,38 @@
 #include "init_rtv.h"
 #include "init_mlx.h"
 
-#define BUFFER_SIZE 10
+#define BUFFER_SIZE 1048576
 
-void	cluster_request(void)
+void	network_init(zsock_t **requester, int *status)
 {
-	zsock_t	*requester;
-	int		status;
-	char	*data;
-
 	printf("zmq: %d, czmq: %d\n", ZMQ_VERSION, CZMQ_VERSION);
-	requester = zsock_new(ZMQ_REQ);
-	status = zsock_connect(requester, "tcp://localhost:30000");
-	if (status == -1)
+	*requester = zsock_new(ZMQ_REQ);
+	*status = zsock_connect(*requester, "tcp://localhost:30000");
+	if (*status == -1)
 	{
 		printf("Could not connect to server... Bailing!");
-		zsock_destroy(&requester);
+		zsock_destroy(requester);
 	}
+}
+
+void	network_send_init(zsock_t *requester)
+{
+	char	*data;
+
 	zstr_send(requester, "INIT");
 	data = zstr_recv(requester);
 	printf("Received: %s\n", data);
 	zstr_free(&data);
-	int fd = open("tests/scenes/full.oadyaml", O_RDONLY);
-	char buffer[BUFFER_SIZE + 1];
+}
+
+void	network_send_scene(zsock_t *requester)
+{
+	const int	fd = open("tests/scenes/full.oadyaml", O_RDONLY);
+	char		*data;
+	char		buffer[BUFFER_SIZE + 1];
+	int			len;
+
 	ft_bzero(buffer, BUFFER_SIZE + 1);
-	int len;
 	while ((len = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[len] = 0;
@@ -50,6 +58,27 @@ void	cluster_request(void)
 		zstr_free(&data);
 	}
 	close(fd);
+}
+
+void	network_request_parse(zsock_t *requester)
+{
+	char		*data;
+
+	zstr_send(requester, "PARSE");
+	data = zstr_recv(requester);
+	printf("Received: %s\n", data);
+	zstr_free(&data);
+}
+
+void	cluster_request(void)
+{
+	zsock_t	*requester;
+	int		status;
+
+	network_init(&requester, &status);
+	network_send_init(requester);
+	network_send_scene(requester);
+	network_request_parse(requester);
 	zsock_destroy(&requester);
 }
 

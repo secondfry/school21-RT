@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/01 02:38:44 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/11 21:06:05 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ FILES_MLX :=	clear_mlx.c init_mlx.c init_mlx_2.c \
 FILES_MLX := $(addprefix mlx/, $(FILES_MLX))
 
 FILES_PARSER :=	parser.c parser_level.c parser_level_process.c \
-				parser_parse_1.c parser_parse_2.c
+				parser_parse_1.c parser_parse_2.c parser_cleanup.c
 FILES_PARSER :=	$(addprefix parser/, $(FILES_PARSER))
 
 FILES_VALIDATOR :=	validator_1.c validator_2.c validator_light.c \
