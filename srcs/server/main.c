@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/11 21:19:55 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/11 21:32:26 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,20 @@ t_byte	handle_parse(t_rtv *rtv)
 
 t_byte	handle_render(t_rtv *rtv)
 {
-	(void)rtv;
+	short	yc;
+	short	xc;
+
+	yc = -1 * HEIGHT / 2 + 1;
+	while (yc <= HEIGHT / 2)
+	{
+		xc = -1 * WIDTH / 2;
+		while (xc < WIDTH / 2)
+		{
+			process_pixel(rtv, xc, yc);
+			xc++;
+		}
+		yc++;
+	}
 	return (0);
 }
 
