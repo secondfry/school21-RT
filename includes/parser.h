@@ -108,4 +108,6 @@ short		get_offset(char *line);
 void		init_root(t_level **root, char **memory);
 void		process_parent_child(t_level **parent, t_level *child);
 
+void		free_parsed_struct(t_level *root);
+
 #endif

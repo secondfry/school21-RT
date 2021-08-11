@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/01 02:08:06 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/11 21:06:20 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ FILES_INTERSECTION :=	intersection.c intersection_common.c \
 						intersection_cylinder.c intersection_cone.c
 FILES_INTERSECTION :=	$(addprefix intersection/, $(FILES_INTERSECTION))
 
-FILES_PARSER :=	parser.c parser_level.c parser_level_process.c \
-				parser_parse_1.c parser_parse_2.c
+FILES_PARSER :=	parser_level.c parser_level_process.c \
+				parser_parse_1.c parser_parse_2.c parser_cleanup.c
 FILES_PARSER :=	$(addprefix parser/, $(FILES_PARSER))
 
 FILES_VALIDATOR :=	validator_1.c validator_2.c validator_light.c \
