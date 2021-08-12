@@ -68,20 +68,8 @@ static t_color	raytrace(
 	return (pre_light(rtv, data, &intr));
 }
 
-static void	canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
+t_color	process_pixel(t_rtv *rtv, short xc, short yc)
 {
-	t_ushort	xs;
-	t_ushort	ys;
-
-	xs = WIDTH / 2 + xc;
-	ys = HEIGHT / 2 - yc;
-	rtv->mlx->img_data[ys * rtv->mlx->size_line_int + xs] = \
-		color_to_int(color);
-}
-
-void	process_pixel(t_rtv *rtv, short xc, short yc)
-{
-	t_color				color;
 	const t_vector_4	D = vector_normalize(matrix_on_vector(
 		rtv->camera_rotation,
 		(t_vector_4){(double) xc / WIDTH, (double) yc / HEIGHT, 1.f, 0}
@@ -94,6 +82,5 @@ void	process_pixel(t_rtv *rtv, short xc, short yc)
 		data.vectors[VCTR_D], \
 		data.vectors[VCTR_D] \
 	);
-	color = raytrace(rtv, &data, 0.1f, 1.0 / 0.0);
-	canvas_to_screen(rtv, xc, yc, color);
+	return (raytrace(rtv, &data, 0.1f, 1.0 / 0.0));
 }

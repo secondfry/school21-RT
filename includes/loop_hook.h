@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:50:14 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/17 14:26:43 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/12 22:15:13 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ void	loop_redraw(t_rtv *rtv);
 void	draw(t_rtv *rtv);
 void	loop_render_debug(t_rtv *rtv);
 int		loop_key_hook(int keycode, t_rtv *rtv);
+
+void	canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color);
 
 #endif

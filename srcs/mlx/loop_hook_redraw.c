@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/11 21:29:27 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/12 22:16:42 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	*run_parametrized(void *params)
 {
 	short	yc;
 	short	xc;
+	t_color	color;
 
 	yc = ((t_params *)params)->ya;
 	while (yc <= ((t_params *)params)->yb)
@@ -23,7 +24,8 @@ static void	*run_parametrized(void *params)
 		xc = ((t_params *)params)->xa;
 		while (xc < ((t_params *)params)->xb)
 		{
-			process_pixel(((t_params *)params)->rtv, xc, yc);
+			color = process_pixel(((t_params *)params)->rtv, xc, yc);
+			canvas_to_screen(((t_params *)params)->rtv, xc, yc, color);
 			xc++;
 		}
 		yc++;
