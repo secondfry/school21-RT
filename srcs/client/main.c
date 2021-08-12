@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/11 21:26:33 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/12 22:27:43 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "typedef_common.h"
 #include "init_rtv.h"
 #include "init_mlx.h"
+#include "loop_hook.h"
 
 #define BUFFER_SIZE 1048576
 
@@ -62,7 +63,7 @@ void	network_send_scene(zsock_t *requester)
 
 void	network_request_parse(zsock_t *requester)
 {
-	char		*data;
+	char	*data;
 
 	zstr_send(requester, "PARSE");
 	data = zstr_recv(requester);
@@ -70,7 +71,39 @@ void	network_request_parse(zsock_t *requester)
 	zstr_free(&data);
 }
 
-void	cluster_request(void)
+void	network_request_render(zsock_t *requester, t_rtv *rtv)
+{
+	char	*data;
+	t_color	color;
+	short	yc;
+	short	xc;
+	size_t	parts;
+
+	zstr_send(requester, "RENDER");
+	parts = 0;
+	while (1)
+	{
+		data = zstr_recv(requester);
+		if (!ft_strcmp(data, "ACK"))
+		{
+			zstr_free(&data);
+			break;
+		}
+		color = (t_color){data[0], data[1], data[2]};
+		zstr_free(&data);
+		data = zstr_recv(requester);
+		yc = ft_atoi(data);
+		zstr_free(&data);
+		data = zstr_recv(requester);
+		xc = ft_atoi(data);
+		zstr_free(&data);
+		canvas_to_screen(rtv, xc, yc, color);
+		parts++;
+	}
+	printf("Received %zu parts.\n", parts);
+}
+
+void	cluster_request(t_rtv *rtv)
 {
 	zsock_t	*requester;
 	int		status;
@@ -79,17 +112,13 @@ void	cluster_request(void)
 	network_send_init(requester);
 	network_send_scene(requester);
 	network_request_parse(requester);
+	network_request_render(requester, rtv);
 	zsock_destroy(&requester);
 }
 
 void	run_cluster(t_rtv *rtv)
 {
-	// char	*data;
-
-	(void)rtv;
-	cluster_request();
-	// ft_strcpy((char *)rtv->mlx->img_data, data);
-	// zstr_free(&data);
+	cluster_request(rtv);
 }
 
 int	loop_key_hook(int keycode, t_rtv *rtv)

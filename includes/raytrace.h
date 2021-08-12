@@ -19,6 +19,6 @@ typedef struct s_pre_light
 	double			intensity;
 }				t_pre_light;
 
-void	process_pixel(t_rtv *rtv, short xc, short yc);
+t_color	process_pixel(t_rtv *rtv, short xc, short yc);
 
 #endif

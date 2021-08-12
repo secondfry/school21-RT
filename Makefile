@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/11 21:06:05 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/12 22:16:55 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ FILES_INTERSECTION :=	$(addprefix intersection/, $(FILES_INTERSECTION))
 FILES_MLX :=	clear_mlx.c init_mlx.c init_mlx_2.c \
 				loop_hook_flow.c loop_hook_invalidate.c loop_hook_events.c \
 				loop_hook_render_debug.c \
-				loop_hook_redraw.c loop_hook_destroy.c
+				loop_hook_redraw.c loop_hook_destroy.c loop_hook_common.c
 FILES_MLX := $(addprefix mlx/, $(FILES_MLX))
 
 FILES_PARSER :=	parser.c parser_level.c parser_level_process.c \
