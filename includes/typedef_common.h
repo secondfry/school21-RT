@@ -3,6 +3,8 @@
 
 # include "libft.h"
 
+# define BUFFER_SIZE 1048576
+
 typedef const struct s_vector_4
 {
 	double	x;
