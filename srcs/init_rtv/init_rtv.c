@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_rtv.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/17 22:08:37 by oadhesiv          #+#    #+#             */
+/*   Updated: 2021/08/17 22:08:38 by oadhesiv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "init_rtv.h"
 
 static void	init_rtv_scene(t_rtv *rtv)
@@ -8,6 +20,8 @@ static void	init_rtv_scene(t_rtv *rtv)
 
 static void	init_rtv_common(t_rtv *rtv)
 {
+	static t_byte	once;
+
 	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
 	ft_memcpy(
@@ -16,7 +30,11 @@ static void	init_rtv_common(t_rtv *rtv)
 		sizeof(t_vector_4) \
 	);
 	vector_set_by_value(&rtv->camera_angles, vector_new(0, 0, 0, 0));
-	rtv->camera_rotation = matrix_new_identity();
+	if (!once)
+	{
+		rtv->camera_rotation = matrix_new_identity();
+		once = 1;
+	}
 	rtv->filename = (void *)0;
 }
 
