@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/12 22:16:55 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/17 20:33:55 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -197,7 +197,9 @@ fclean_self: clean_self
 	rm -rfv $(NAME)
 	@echo -n $(DEFAULT)
 
-debug: clean_self
+debug_init: clean_self debug
+
+debug:
 	DEBUG="1" $(MAKE) all
 
 debug_wsl:

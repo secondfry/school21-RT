@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/12 22:27:43 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/17 20:37:23 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,13 @@ void	network_request_render(zsock_t *requester, t_rtv *rtv)
 			zstr_free(&data);
 			break;
 		}
-		color = (t_color){data[0], data[1], data[2]};
+		color.red = data[0];
+		zstr_free(&data);
+		data = zstr_recv(requester);
+		color.green = data[0];
+		zstr_free(&data);
+		data = zstr_recv(requester);
+		color.blue = data[0];
 		zstr_free(&data);
 		data = zstr_recv(requester);
 		yc = ft_atoi(data);
