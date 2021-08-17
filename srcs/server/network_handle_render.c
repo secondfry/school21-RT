@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:28:39 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 21:49:54 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/17 22:00:38 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ t_byte	handle_render(t_rtv *rtv, zsock_t *reader)
 		i++;
 	}
 	send_all(reader, data);
+	free(data);
 	zstr_send(reader, "ACK");
 	return (0);
 }
