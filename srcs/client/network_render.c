@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:03:47 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 21:09:21 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/17 21:51:46 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ static t_byte	receive_color(zsock_t *requester, t_color *color)
 
 	data = zstr_recv(requester);
 	if (!ft_strcmp(data, "ACK"))
+	{
+		zstr_free(&data);
 		return (1);
+	}
 	color->red = data[0];
 	zstr_free(&data);
 	data = zstr_recv(requester);
