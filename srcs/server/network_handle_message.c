@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:17:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 21:18:45 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/17 21:29:11 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "init_rtv.h"
 #include "parser.h"
-#include "raytrace.h"
+#include "server/main.h"
 
 static t_byte	handle_init(t_rtv *rtv)
 {
@@ -67,32 +67,6 @@ static t_byte	handle_parse(t_rtv *rtv)
 	free_parsed_struct(root);
 	free(memory);
 	return (1);
-}
-
-static t_byte	handle_render(t_rtv *rtv, zsock_t *reader)
-{
-	short	yc;
-	short	xc;
-	t_color	color;
-
-	yc = -1 * HEIGHT / 2 + 1;
-	while (yc <= HEIGHT / 2)
-	{
-		xc = -1 * WIDTH / 2;
-		while (xc < WIDTH / 2)
-		{
-			color = process_pixel(rtv, xc, yc);
-			zstr_sendm(reader, (char [2]){color.red, 0});
-			zstr_sendm(reader, (char [2]){color.green, 0});
-			zstr_sendm(reader, (char [2]){color.blue, 0});
-			zstr_sendm(reader, ft_itoa(yc));
-			zstr_sendm(reader, ft_itoa(xc));
-			xc++;
-		}
-		yc++;
-	}
-	zstr_send(reader, "ACK");
-	return (0);
 }
 
 t_byte	handle_typed_message(zsock_t *reader, t_rtv *rtv, char *id)
