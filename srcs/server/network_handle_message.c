@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:17:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 21:29:11 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/17 22:33:56 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_byte	handle_init(t_rtv *rtv)
 	fgets(filename, sizeof(filename), fp);
 	pclose(fp);
 	init_rtv(rtv);
-	free(rtv->filename);
 	rtv->filename = ft_strdup(filename);
 	return (1);
 }
