@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 01:06:13 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/12 22:27:30 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/17 20:37:45 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ t_byte	handle_render(t_rtv *rtv, zsock_t *reader)
 		while (xc < WIDTH / 2)
 		{
 			color = process_pixel(rtv, xc, yc);
-			zstr_sendm(reader, (char[4]){color.red, color.green, color.blue, 0});
+			zstr_sendm(reader, (char[2]){color.red, 0});
+			zstr_sendm(reader, (char[2]){color.green, 0});
+			zstr_sendm(reader, (char[2]){color.blue, 0});
 			zstr_sendm(reader, ft_itoa(yc));
 			zstr_sendm(reader, ft_itoa(xc));
 			xc++;
