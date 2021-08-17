@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/11 21:06:20 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/17 21:19:30 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ FILES_VALIDATOR :=	validator_1.c validator_2.c validator_light.c \
 					validator_sphere.c validator_camera.c
 FILES_VALIDATOR :=	$(addprefix validator/, $(FILES_VALIDATOR))
 
-SRC_FILES =	server/main.c \
+SRC_FILES =	server/main.c server/network_handle_message.c \
 			matrix_factory_1.c matrix_factory_2.c \
 			matrix_utils.c \
 			vector_1.c vector_2.c \
