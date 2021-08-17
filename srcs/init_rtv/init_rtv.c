@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 22:08:37 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 22:08:38 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/17 22:23:26 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	init_rtv_scene(t_rtv *rtv)
 
 static void	init_rtv_common(t_rtv *rtv)
 {
-	static t_byte	once;
+	static t_byte	not_first;
 
 	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
@@ -30,10 +30,12 @@ static void	init_rtv_common(t_rtv *rtv)
 		sizeof(t_vector_4) \
 	);
 	vector_set_by_value(&rtv->camera_angles, vector_new(0, 0, 0, 0));
-	if (!once)
+	if (not_first)
+		free(rtv->filename);
+	if (!not_first)
 	{
 		rtv->camera_rotation = matrix_new_identity();
-		once = 1;
+		not_first = 1;
 	}
 	rtv->filename = (void *)0;
 }
