@@ -41,7 +41,7 @@ TEST(ParserParseTest, ValidFull) {
   t_level *root = parse(fd, &memory);
   EXPECT_EQ(root->offset, -2);
   EXPECT_EQ(root->child_offset, 0);
-  EXPECT_EQ(root->data->used, 5);
+  EXPECT_EQ(root->data->used, 6);
   EXPECT_EQ(root->key, (void *)0);
   EXPECT_EQ(root->value, (void *)0);
   EXPECT_EQ(root->parent, (void *)0);
@@ -200,7 +200,16 @@ TEST(ParserParseTest, ValidFull) {
   EXPECT_EQ(directional_0_intensity->parent, directional_0_root);
   EXPECT_EQ(directional_0_intensity->type, LTYPE_LEAF);
   
-  t_level *sphere = (t_level *)root->data->data[1];
+  t_level *camera = (t_level *)root->data->data[1];
+  EXPECT_EQ(camera->offset, 0);
+  EXPECT_EQ(camera->child_offset, 2);
+  EXPECT_EQ(camera->data->used, 2);
+  EXPECT_STREQ(camera->key, "camera");
+  EXPECT_EQ(camera->value, (void *)0);
+  EXPECT_EQ(camera->parent, root);
+  EXPECT_EQ(camera->type, LTYPE_NODE);
+
+  t_level *sphere = (t_level *)root->data->data[2];
   EXPECT_EQ(sphere->offset, 0);
   EXPECT_EQ(sphere->child_offset, 2);
   EXPECT_EQ(sphere->data->used, 3);

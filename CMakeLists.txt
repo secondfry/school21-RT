@@ -34,6 +34,7 @@ add_executable(
   srcs/parser/parser_level_process.c
   srcs/parser/parser_parse_1.c
   srcs/parser/parser_parse_2.c
+  srcs/parser/parser_cleanup.c
   srcs/graceful.c
 )
 target_link_libraries(
