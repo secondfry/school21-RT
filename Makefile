@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/17 20:33:55 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/21 16:10:08 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,7 +83,7 @@ else
 		VER := $(shell test $(UNAME_R) -ge 17 && echo 'new' || echo 'old')
 		ifeq ($(VER),new)
 			MLX = libmlx.dylib
-			MLX_DIR = ./minilibx_mms_20200219
+			MLX_DIR = ./minilibx_mms_20210621
 			CFLAGS_PLATFORM = -D MLX_MACOS_METAL
 		endif
 		ifeq ($(VER),old)

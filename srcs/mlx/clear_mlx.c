@@ -21,7 +21,7 @@ void	ft_mlx_destroy_display(void *mlx)
 
 void	ft_mlx_destroy(void *mlx)
 {
-	mlx_destroy(mlx);
+	(void)mlx;
 }
 
 #endif
