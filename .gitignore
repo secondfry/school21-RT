@@ -110,7 +110,12 @@ CMakeCache.txt
 CMakeFiles
 CMakeScripts
 Testing
-Makefile
+**/Makefile
+!Makefile
+!libft/Makefile
+!minilibx_mms_20210621/Makefile
+!minilibx-linux/Makefile
+!minilibx_macos/Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json

@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/21 16:10:08 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/21 16:16:00 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -158,6 +158,7 @@ $(NAME): $(OBJS) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX)
 
 clean: clean_libs clean_self
 	$(MAKE) -f Makefile.server clean
+	$(MAKE) -f Makefile.client clean
 
 clean_libs:
 	@echo $(CYAN) "Cleaning libft" $(DEFAULT)
@@ -178,6 +179,7 @@ clean_self:
 
 fclean: fclean_libs fclean_self
 	$(MAKE) -f Makefile.server fclean
+	$(MAKE) -f Makefile.client fclean
 
 fclean_libs: clean_libs
 	@echo $(CYAN) "Purging libft" $(DEFAULT)
