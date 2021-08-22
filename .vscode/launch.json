@@ -28,7 +28,7 @@
       "request": "launch",
       "program": "${workspaceFolder}/RT",
       "args": [
-        "tests/scenes/full.oadyaml"
+        "scenes/ambient_not_present.oadyaml"
       ],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
