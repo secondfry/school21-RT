@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/21 16:16:00 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/22 16:18:10 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLUDES_DIR = ./includes
 OBJS_DIR = ./objs
 
 LIB = libft.a
-LIB_DIR = ./libft
+LIB_DIR = ./lib/libft
 
 FILES_INIT := init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c
 FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
@@ -70,7 +70,7 @@ else
 		endif
 
 		MLX = libmlx.a
-		MLX_DIR = ./minilibx-linux
+		MLX_DIR = ./lib/minilibx-linux
 		CFLAGS_PLATFORM = -D MLX_LINUX
 		LDFLAGS += -lX11 -lXext -lm -pthread
 	endif
@@ -83,12 +83,12 @@ else
 		VER := $(shell test $(UNAME_R) -ge 17 && echo 'new' || echo 'old')
 		ifeq ($(VER),new)
 			MLX = libmlx.dylib
-			MLX_DIR = ./minilibx_mms_20210621
+			MLX_DIR = ./lib/minilibx_mms_20210621
 			CFLAGS_PLATFORM = -D MLX_MACOS_METAL
 		endif
 		ifeq ($(VER),old)
 			MLX = libmlx.a
-			MLX_DIR = ./minilibx_macos
+			MLX_DIR = ./lib/minilibx_macos
 			CFLAGS_PLATFORM = -D MLX_MACOS
 			LDFLAGS += -framework OpenGL -framework AppKit
 		endif
