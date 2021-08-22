@@ -1,0 +1,16 @@
+light:
+  directional:
+  point:
+  ambient: 0
+
+sphere:
+  - position:
+      x: 0
+      y: 0
+      z: 5
+    color:
+      red: 255
+      green: 0
+      blue: 0
+    radius: 1
+    specular: 100

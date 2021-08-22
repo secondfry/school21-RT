@@ -34,7 +34,7 @@ static void	init_rtv_dlights(t_rtv *rtv)
 
 static void	init_rtv_ambient(t_rtv *rtv)
 {
-	rtv->ambient = 0.0f;
+	rtv->ambient = 0.2f;
 }
 
 void	init_rtv_lights(t_rtv *rtv)
