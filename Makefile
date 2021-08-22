@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/22 16:18:10 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/22 16:24:16 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ OBJS_DIR = ./objs
 
 LIB = libft.a
 LIB_DIR = ./lib/libft
+
+IMGUI = cimgui.dylib
+IMGUI_DIR = ./lib/cimgui
 
 FILES_INIT := init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c
 FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
@@ -145,6 +148,12 @@ all:
 	cp $(MLX_DIR)/$(MLX) $(MLX)
 	@echo -n $(DEFAULT)
 
+	@echo $(CYAN) "Making ImGui" $(DEFAULT)
+	@echo -n $(BLUE)
+	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(IMGUI_DIR)
+	cp $(IMGUI_DIR)/$(IMGUI) $(IMGUI)
+	@echo -n $(DEFAULT)
+
 	@echo $(CYAN) "Making RT" $(DEFAULT)
 	@echo -n $(GREEN)
 	$(MAKE) $(NAME)
@@ -178,6 +187,11 @@ clean_libs:
 	$(MAKE) -C $(MLX_DIR) clean
 	@echo -n $(DEFAULT)
 
+	@echo $(CYAN) "Cleaning ImGui" $(DEFAULT)
+	@echo -n $(BLUE)
+	$(MAKE) -C $(IMGUI_DIR) clean
+	@echo -n $(DEFAULT)
+
 clean_self:
 	@echo $(CYAN) "Cleaning RT" $(DEFAULT)
 	@echo -n $(GREEN)
@@ -198,6 +212,12 @@ fclean_libs: clean_libs
 	@echo -n $(BLUE)
 	$(MAKE) -C $(MLX_DIR) fclean
 	rm -rfv $(MLX)
+	@echo -n $(DEFAULT)
+
+	@echo $(CYAN) "Purging ImGui" $(DEFAULT)
+	@echo -n $(BLUE)
+	$(MAKE) -C $(IMGUI_DIR) fclean
+	rm -rfv $(IMGUI)
 	@echo -n $(DEFAULT)
 
 fclean_self: clean_self
