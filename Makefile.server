@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/17 21:44:12 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/22 16:18:23 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCLUDES_DIR = ./includes
 OBJS_DIR = ./objs
 
 LIB = libft.a
-LIB_DIR = ./libft
+LIB_DIR = ./lib/libft
 
 BREW_DIR = $(shell brew --prefix)
 ZMQ_DIR = $(BREW_DIR)/opt/zmq
