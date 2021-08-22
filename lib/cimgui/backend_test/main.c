@@ -8,8 +8,8 @@
 #ifdef _MSC_VER
 #include <windows.h>
 #endif
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
 
 #ifdef IMGUI_HAS_IMSTR
 #define igBegin igBegin_Str

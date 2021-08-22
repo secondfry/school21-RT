@@ -58,7 +58,7 @@ include_directories(../imgui/examples/libs/gl3w)
 if(WIN32)
        list(APPEND IMGUI_LIBRARIES opengl32)
 else(WIN32)#Unix
-       list(APPEND IMGUI_LIBRARIES GL)
+	find_library(OPENGL OpenGL)
 endif(WIN32)
 
 
@@ -86,7 +86,7 @@ else(DEFINED SDL_PATH)
 endif(DEFINED SDL_PATH)
 
 add_library(cimgui_sdl SHARED ${IMGUI_SOURCES})
-target_link_libraries(cimgui_sdl ${IMGUI_LIBRARIES} ${IMGUI_SDL_LIBRARY})
+target_link_libraries(cimgui_sdl ${IMGUI_LIBRARIES} ${IMGUI_SDL_LIBRARY} ${OPENGL})
 
 #using library
 include_directories(../generator/output/)
