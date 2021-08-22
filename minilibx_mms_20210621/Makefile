@@ -13,8 +13,16 @@ ifeq ($(DEBUG),1)
 	SWIFTFLAGS_OPTIMIZATIONS = -Onone
 	SWIFTFLAGS_DEBUG = -g
 else
-	CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops -march=native
+	CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops
 	CFLAGS_DEBUG =
+
+	UNAME_P := $(shell uname -p)
+	ifneq ($(filter arm%,$(UNAME_P)),)
+		CFLAGS_OPTIMIZATIONS +=
+	else
+		CFLAGS_OPTIMIZATIONS += -march=native
+	endif
+
 	SWIFTFLAGS_OPTIMIZATIONS = -O
 	SWIFTFLAGS_DEBUG =
 endif
