@@ -63,8 +63,8 @@ static void	prepare_parellel_params(t_rtv *rtv, t_params *param)
 	{
 		line_start = global_start + line * HEIGHT / 8;
 		line_end = global_start + (line + 1) * HEIGHT / 8;
-		if (line_start == 0)
-			line_start = 1;
+		if (line_start == global_start)
+			line_start = global_start + 1;
 		param[line] = (t_params){\
 			rtv, \
 			line_start, \
