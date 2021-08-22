@@ -101,8 +101,15 @@ ifeq ($(DEBUG),1)
 	CFLAGS_OPTIMIZATIONS = -funroll-loops
 	CFLAGS_DEBUG = -O0 -pg -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer
 else
-	CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops -march=native
+	CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops
 	CFLAGS_DEBUG =
+
+	UNAME_P := $(shell uname -p)
+	ifneq ($(filter arm%,$(UNAME_P)),)
+		CFLAGS_OPTIMIZATIONS +=
+	else
+		CFLAGS_OPTIMIZATIONS += -march=native
+	endif
 endif
 
 CFLAGS_DEPENDENCIES = -MMD -MP
