@@ -98,7 +98,13 @@
 		"utility": "cpp",
 		"variant": "cpp",
 		"array.h": "c",
-		"filesystem": "cpp"
+		"filesystem": "cpp",
+		"math.h": "c",
+		"stdarg.h": "c",
+		"libft.h": "c",
+		"czmq.h": "c",
+		"init_rtv.h": "c",
+		"typedef_common.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [
@@ -106,6 +112,8 @@
 		"~/.brew/opt/czmq/include",
 		"~/.brew/opt/zmq/include",
 		"${workspaceFolder}/includes",
-		"${workspaceFolder}/libft",
-	]
+		"${workspaceFolder}/lib/libft",
+		"${workspaceFolder}/lib/minilibx_mms_20210621",
+		"${workspaceFolder}/lib/cimgui",
+	],
 }

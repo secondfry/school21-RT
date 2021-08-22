@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/22 16:24:16 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/22 19:38:25 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ else
 	ifeq ($(UNAME_S),Linux)
 		ifeq ($(origin CC), default)
 			CC = clang
+			CXX = clang++
 		endif
 
 		MLX = libmlx.a
@@ -80,6 +81,7 @@ else
 	ifeq ($(UNAME_S),Darwin)
 		ifeq ($(origin CC), default)
 			CC = clang
+			CXX = clang++
 		endif
 
 		UNAME_R := $(shell uname -r | cut -d. -f1)
@@ -116,7 +118,18 @@ else
 endif
 
 CFLAGS_DEPENDENCIES = -MMD -MP
-CFLAGS_INCLUDES = -I$(INCLUDES_DIR) -I$(LIB_DIR) -I$(MLX_DIR)
+
+# Project
+CFLAGS_INCLUDES += -I$(INCLUDES_DIR)
+# libft
+CFLAGS_INCLUDES += -I$(LIB_DIR)
+# MLX
+CFLAGS_INCLUDES += -I$(MLX_DIR)
+# ImGui
+CFLAGS_INCLUDES += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/generator/output
+# ImGui SDL Backend
+CFLAGS_INCLUDES += `sdl2-config --cflags`
+
 CFLAGS_ASAN = -fsanitize=address
 
 CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
@@ -124,7 +137,16 @@ CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 				$(CFLAGS_PLATFORM) $(CFLAGS_DEBUG) $(CFLAGS_INTERNAL) \
 				$(CFLAGS)
 
-LDFLAGS += -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx
+# libft
+LDFLAGS += -L$(LIB_DIR) -lft
+# MLX
+LDFLAGS += -L$(MLX_DIR) -lmlx
+# ImGui
+LDFLAGS += cimgui.dylib
+# ImGui SDL Backend
+LDFLAGS += `sdl2-config --libs`
+# ImGui OpenGL3 Backend
+LDFLAGS += -framework OpenGL
 
 LDFLAGS_ASAN = -fsanitize=address
 
@@ -254,3 +276,6 @@ re: fclean all
 prepare_ubuntu:
 	sudo apt update
 	sudo apt install zsh clang lldb libx11-dev libxext-dev libbsd-dev gdb -y
+
+prepare_mac:
+	brew install czmq sdl2
