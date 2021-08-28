@@ -1,6 +1,6 @@
 #include "loop_hook.h"
 
-static void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
+void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
 {
 	const t_vector_4	CO = vector_sub(
 		rtv->camera_position,
@@ -8,6 +8,8 @@ static void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
 	);
 
 	vector_set(sphere.vectors + VCTR_SPHERE_CO, &CO);
+	ft_print_memory(&CO, sizeof(CO));
+	rtv->flags |= FLAG_REDRAW;
 }
 
 static void	invalidate_spheres_vectors(t_rtv *rtv)
