@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 15:00:36 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 15:45:35 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,14 +100,9 @@ static void	run_parallel(t_rtv *rtv)
 
 void	loop_redraw(t_rtv *rtv)
 {
-	void	*data;
-
 	if (!(rtv->flags & FLAG_REDRAW))
 		return ;
 	sdl_clear_texture(rtv->sdl);
 	rtv->flags -= FLAG_REDRAW;
-	SDL_LockTexture(rtv->sdl->texture, NULL, &data, &rtv->sdl->pitch);
-	rtv->sdl->buffer = data;
 	run_parallel(rtv);
-	SDL_UnlockTexture(rtv->sdl->texture);
 }

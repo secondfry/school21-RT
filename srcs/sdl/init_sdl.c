@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 13:56:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 14:49:35 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 15:45:55 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,12 @@ int	sdl_init(t_sdl *sdl)
 	SDL_GL_MakeCurrent(sdl->window, sdl->gl_context);
 	SDL_GL_SetSwapInterval(1); // Enable vsync
 
-	sdl->renderer = SDL_CreateRenderer(sdl->window, -1, 0);
-	ft_ptr_check(sdl->renderer, SDL_GetError(), 0);
-
-	sdl->texture = SDL_CreateTexture(sdl->renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
-	ft_ptr_check(sdl->texture, SDL_GetError(), 0);
-
 	return 0;
 }
 
 void	sdl_clear_texture(t_sdl *sdl)
 {
-	void	*data;
-	int		*pixels;
-	int		pitch;
-
-	SDL_LockTexture(sdl->texture, NULL, &data, &pitch);
-	pixels = data;
-	ft_bzero(pixels, pitch * HEIGHT);
-	SDL_UnlockTexture(sdl->texture);
+	ft_bzero(sdl->buffer, WIDTH * HEIGHT * 4);
 }
 
 t_byte	sdl_handle_event(t_sdl *sdl)
@@ -93,11 +80,7 @@ t_byte	sdl_handle_event(t_sdl *sdl)
 
 void	sdl_draw(t_sdl *sdl)
 {
-	SDL_SetRenderDrawColor(sdl->renderer, 0x00, 0x00, 0x00, 0x00);
-	SDL_RenderClear(sdl->renderer);
-	SDL_SetRenderTarget(sdl->renderer, NULL);
-	SDL_RenderCopy(sdl->renderer, sdl->texture, NULL, NULL);
-	SDL_RenderPresent(sdl->renderer);
+	(void)sdl;
 }
 
 void	sdl_loop(t_rtv *rtv, t_sdl *sdl)
@@ -106,15 +89,13 @@ void	sdl_loop(t_rtv *rtv, t_sdl *sdl)
 	{
 		if (sdl_handle_event(sdl))
 			break ;
-		loop_redraw(rtv);
-		sdl_draw(sdl);
+		loop_hook(rtv);
+		// sdl_draw(sdl);
 	}
 }
 
 void	sdl_clear(t_sdl *sdl)
 {
-	SDL_DestroyTexture(sdl->texture);
-	SDL_DestroyRenderer(sdl->renderer);
 	SDL_GL_DeleteContext(sdl->gl_context);
 	if (sdl->window != NULL)
 	{
