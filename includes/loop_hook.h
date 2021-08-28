@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:50:14 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/12 22:15:13 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 15:19:47 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <pthread.h>
 # include <math.h>
-# include "init_mlx.h"
 # include "color.h"
 # include "quaternion.h"
 # include "matrix_utils.h"
