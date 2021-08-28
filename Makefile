@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/22 19:38:25 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/28 14:00:10 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,9 @@ FILES_MLX :=	clear_mlx.c init_mlx.c init_mlx_2.c \
 				loop_hook_redraw.c loop_hook_destroy.c loop_hook_common.c
 FILES_MLX := $(addprefix mlx/, $(FILES_MLX))
 
+FILES_SDL :=	init_sdl.c
+FILES_SDL := $(addprefix sdl/, $(FILES_SDL))
+
 FILES_PARSER :=	parser.c parser_level.c parser_level_process.c \
 				parser_parse_1.c parser_parse_2.c parser_cleanup.c
 FILES_PARSER :=	$(addprefix parser/, $(FILES_PARSER))
@@ -55,7 +58,7 @@ SRC_FILES =	main.c \
 			raytrace.c raytrace_light.c normal.c \
 			color.c \
 			graceful.c \
-			$(FILES_INIT) $(FILES_INTERSECTION) $(FILES_MLX) $(FILES_PARSER) $(FILES_VALIDATOR)
+			$(FILES_INIT) $(FILES_INTERSECTION) $(FILES_MLX) $(FILES_PARSER) $(FILES_VALIDATOR) $(FILES_SDL)
 
 SRC_DIRS = $(sort $(dir $(SRC_FILES)))
 OBJS_DIRS = $(addprefix $(OBJS_DIR)/, $(SRC_DIRS))

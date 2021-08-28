@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ptr_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:21:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2020/03/13 20:41:25 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 14:26:17 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-void	ft_ptr_check(void *ptr, char *msg, size_t args, ...)
+void	ft_ptr_check(void *ptr, const char *msg, size_t args, ...)
 {
 	va_list	ap;
 	void	*tmp;

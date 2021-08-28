@@ -16,6 +16,7 @@
 
 typedef struct s_rtv
 {
+	t_sdl		*sdl;
 	t_mlx		*mlx;
 	t_byte		options;
 	t_byte		flags;

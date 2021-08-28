@@ -2,6 +2,7 @@
 # define RTV_H
 
 # include "typedef_common.h"
+# include "sdl_defines.h"
 # include "figures.h"
 # include "lights.h"
 # include <SDL.h>
@@ -16,6 +17,7 @@
 
 typedef struct s_rtv
 {
+	t_sdl		*sdl;
 	t_mlx		*mlx;
 	t_byte		options;
 	t_byte		flags;
