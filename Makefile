@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/28 15:18:04 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/28 15:21:00 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,41 +64,6 @@ OBJS_DIRS = $(addprefix $(OBJS_DIR)/, $(SRC_DIRS))
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)
-
-# ifeq ($(OS),Windows_NT)
-# # huh lol
-# else
-# 	UNAME_S := $(shell uname -s)
-# 	ifeq ($(UNAME_S),Linux)
-# 		ifeq ($(origin CC), default)
-# 			CC = clang
-# 			CXX = clang++
-# 		endif
-
-# 		CFLAGS_PLATFORM = -D MLX_LINUX
-# 		LDFLAGS += -lX11 -lXext -lm -pthread
-# 	endif
-# 	ifeq ($(UNAME_S),Darwin)
-# 		ifeq ($(origin CC), default)
-# 			CC = clang
-# 			CXX = clang++
-# 		endif
-
-# 		UNAME_R := $(shell uname -r | cut -d. -f1)
-# 		VER := $(shell test $(UNAME_R) -ge 17 && echo 'new' || echo 'old')
-# 		ifeq ($(VER),new)
-# 			MLX = libmlx.dylib
-# 			MLX_DIR = ./lib/minilibx_mms_20210621
-# 			CFLAGS_PLATFORM = -D MLX_MACOS_METAL
-# 		endif
-# 		ifeq ($(VER),old)
-# 			MLX = libmlx.a
-# 			MLX_DIR = ./lib/minilibx_macos
-# 			CFLAGS_PLATFORM = -D MLX_MACOS
-# 			LDFLAGS += -framework OpenGL -framework AppKit
-# 		endif
-# 	endif
-# endif
 
 CFLAGS_ERRORS = -Wall -Wextra -Werror
 
