@@ -4,6 +4,7 @@
 # include "typedef_common.h"
 # include "figures.h"
 # include "lights.h"
+# include <SDL.h>
 
 # define MAX_SPHERES	10
 # define MAX_PLANES		10
@@ -29,6 +30,7 @@ typedef struct s_rtv
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
 	char		*filename;
+	SDL_Window	*window;
 }				t_rtv;
 
 #endif
