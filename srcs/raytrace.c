@@ -33,6 +33,7 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 {
 	const t_light_params	params = get_light_params(rtv, intr);
 	double					intensity;
+	t_color                 new_color;
 
 	vector_set_by_value(&params.P, vector_add(\
 		data->vectors[VCTR_O], \
@@ -42,7 +43,14 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 		&params.N, find_normal(rtv, intr, &params));
 	vector_set_by_value(&params.V, vector_mult(data->vectors[VCTR_D], -1));
 	intensity = light(rtv, &params);
-	return (*color_mult((void *)&params.color, intensity));
+
+	new_color = *color_mult((void *)&params.color, intensity);
+// mirror thing 
+
+	
+
+
+	// return (*color_mult((void *)&params.color, intensity));
 }
 
 static t_color	raytrace(

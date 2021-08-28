@@ -17,6 +17,7 @@ typedef struct s_sphere
 	double		radius_squared;
 	double		specular;
 	t_byte		traits;
+	// double      mirror;
 }				t_sphere;
 
 typedef struct s_plane

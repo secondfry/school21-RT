@@ -35,6 +35,13 @@ static t_byte	try_process_specular(t_rtv *rtv, t_byte idx, t_level *level)
 	return (1);
 }
 
+// static t_byte  try_process_mirror(t_rtv *rtv, t_byte idx, t_level * level)
+// {
+// 	if (level->type != LTYPE_LEAF || ft_strcmp(level->key, "mirror"))
+// 	    return (0);
+// 	rtv->spheres[idx].mirror = validate_mirror(level);
+// }
+
 /**
  *	Функция для валидации параметров сферы
  */
@@ -53,6 +60,7 @@ t_byte	validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_color(rtv, idx, level);
 		res += try_process_radius(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
+		// res += try_process_mirror(rtv, idx, level);
 		i++;
 	}
 	check(res != 4, 1, "[ERR] SPHERE IS INVALID\n");
