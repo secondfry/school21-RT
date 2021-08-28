@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/28 14:00:10 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/08/28 15:18:04 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,9 @@ FILES_INTERSECTION :=	intersection.c intersection_common.c \
 						intersection_cylinder.c intersection_cone.c 
 FILES_INTERSECTION :=	$(addprefix intersection/, $(FILES_INTERSECTION))
 
-FILES_MLX :=	clear_mlx.c init_mlx.c init_mlx_2.c \
-				loop_hook_flow.c loop_hook_invalidate.c loop_hook_events.c \
+FILES_MLX :=	loop_hook_flow.c loop_hook_invalidate.c loop_hook_events.c \
 				loop_hook_render_debug.c \
-				loop_hook_redraw.c loop_hook_destroy.c loop_hook_common.c
+				loop_hook_redraw.c loop_hook_common.c
 FILES_MLX := $(addprefix mlx/, $(FILES_MLX))
 
 FILES_SDL :=	init_sdl.c
@@ -66,42 +65,40 @@ SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o, $(SRCS))
 DEPS = $(OBJS:.o=.d)
 
-ifeq ($(OS),Windows_NT)
-# huh lol
-else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Linux)
-		ifeq ($(origin CC), default)
-			CC = clang
-			CXX = clang++
-		endif
+# ifeq ($(OS),Windows_NT)
+# # huh lol
+# else
+# 	UNAME_S := $(shell uname -s)
+# 	ifeq ($(UNAME_S),Linux)
+# 		ifeq ($(origin CC), default)
+# 			CC = clang
+# 			CXX = clang++
+# 		endif
 
-		MLX = libmlx.a
-		MLX_DIR = ./lib/minilibx-linux
-		CFLAGS_PLATFORM = -D MLX_LINUX
-		LDFLAGS += -lX11 -lXext -lm -pthread
-	endif
-	ifeq ($(UNAME_S),Darwin)
-		ifeq ($(origin CC), default)
-			CC = clang
-			CXX = clang++
-		endif
+# 		CFLAGS_PLATFORM = -D MLX_LINUX
+# 		LDFLAGS += -lX11 -lXext -lm -pthread
+# 	endif
+# 	ifeq ($(UNAME_S),Darwin)
+# 		ifeq ($(origin CC), default)
+# 			CC = clang
+# 			CXX = clang++
+# 		endif
 
-		UNAME_R := $(shell uname -r | cut -d. -f1)
-		VER := $(shell test $(UNAME_R) -ge 17 && echo 'new' || echo 'old')
-		ifeq ($(VER),new)
-			MLX = libmlx.dylib
-			MLX_DIR = ./lib/minilibx_mms_20210621
-			CFLAGS_PLATFORM = -D MLX_MACOS_METAL
-		endif
-		ifeq ($(VER),old)
-			MLX = libmlx.a
-			MLX_DIR = ./lib/minilibx_macos
-			CFLAGS_PLATFORM = -D MLX_MACOS
-			LDFLAGS += -framework OpenGL -framework AppKit
-		endif
-	endif
-endif
+# 		UNAME_R := $(shell uname -r | cut -d. -f1)
+# 		VER := $(shell test $(UNAME_R) -ge 17 && echo 'new' || echo 'old')
+# 		ifeq ($(VER),new)
+# 			MLX = libmlx.dylib
+# 			MLX_DIR = ./lib/minilibx_mms_20210621
+# 			CFLAGS_PLATFORM = -D MLX_MACOS_METAL
+# 		endif
+# 		ifeq ($(VER),old)
+# 			MLX = libmlx.a
+# 			MLX_DIR = ./lib/minilibx_macos
+# 			CFLAGS_PLATFORM = -D MLX_MACOS
+# 			LDFLAGS += -framework OpenGL -framework AppKit
+# 		endif
+# 	endif
+# endif
 
 CFLAGS_ERRORS = -Wall -Wextra -Werror
 
@@ -126,8 +123,6 @@ CFLAGS_DEPENDENCIES = -MMD -MP
 CFLAGS_INCLUDES += -I$(INCLUDES_DIR)
 # libft
 CFLAGS_INCLUDES += -I$(LIB_DIR)
-# MLX
-CFLAGS_INCLUDES += -I$(MLX_DIR)
 # ImGui
 CFLAGS_INCLUDES += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/generator/output
 # ImGui SDL Backend
@@ -142,8 +137,6 @@ CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 
 # libft
 LDFLAGS += -L$(LIB_DIR) -lft
-# MLX
-LDFLAGS += -L$(MLX_DIR) -lmlx
 # ImGui
 LDFLAGS += cimgui.dylib
 # ImGui SDL Backend
@@ -165,12 +158,6 @@ all:
 	@echo $(CYAN) "Making libft" $(DEFAULT)
 	@echo -n $(BLUE)
 	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(LIB_DIR)
-	@echo -n $(DEFAULT)
-
-	@echo $(CYAN) "Making minilibx" $(DEFAULT)
-	@echo -n $(BLUE)
-	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(MLX_DIR)
-	cp $(MLX_DIR)/$(MLX) $(MLX)
 	@echo -n $(DEFAULT)
 
 	@echo $(CYAN) "Making ImGui" $(DEFAULT)
@@ -207,11 +194,6 @@ clean_libs:
 	$(MAKE) -C $(LIB_DIR) clean
 	@echo -n $(DEFAULT)
 
-	@echo $(CYAN) "Cleaning minilibx" $(DEFAULT)
-	@echo -n $(BLUE)
-	$(MAKE) -C $(MLX_DIR) clean
-	@echo -n $(DEFAULT)
-
 	@echo $(CYAN) "Cleaning ImGui" $(DEFAULT)
 	@echo -n $(BLUE)
 	$(MAKE) -C $(IMGUI_DIR) clean
@@ -231,12 +213,6 @@ fclean_libs: clean_libs
 	@echo $(CYAN) "Purging libft" $(DEFAULT)
 	@echo -n $(BLUE)
 	$(MAKE) -C $(LIB_DIR) fclean
-	@echo -n $(DEFAULT)
-
-	@echo $(CYAN) "Purging minilibx" $(DEFAULT)
-	@echo -n $(BLUE)
-	$(MAKE) -C $(MLX_DIR) fclean
-	rm -rfv $(MLX)
 	@echo -n $(DEFAULT)
 
 	@echo $(CYAN) "Purging ImGui" $(DEFAULT)

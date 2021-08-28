@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:49:39 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 13:44:57 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 15:17:48 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ int	loop_hook(t_rtv *rtv)
 
 void	loop_before_next_update(t_rtv *rtv)
 {
-	mlx_do_sync(rtv->mlx->mlx);
+	(void)rtv;
 }
