@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:50:14 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 15:19:47 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 16:38:22 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void	loop_render_debug(t_rtv *rtv);
 int		loop_key_hook(int keycode, t_rtv *rtv);
 
 void	canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color);
+void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere);
 
 #endif
