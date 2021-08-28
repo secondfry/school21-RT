@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 18:21:31 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 21:11:30 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 14:26:19 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,7 @@ char			*ft_ltoa(long n);
 int				ft_isspace(int c);
 long			ft_atol(const char *str);
 long			ft_strtol(const char *str, char **endptr, int base);
-void			ft_ptr_check(void *ptr, char *msg, size_t args, ...);
+void			ft_ptr_check(void *ptr, const char *msg, size_t args, ...);
 
 /*
 ** Not-a-printf
