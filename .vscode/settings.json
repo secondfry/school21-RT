@@ -111,9 +111,11 @@
 		"${default}",
 		"~/.brew/opt/czmq/include",
 		"~/.brew/opt/zmq/include",
+		"~/.brew/opt/sdl2/include/SDL2",
 		"${workspaceFolder}/includes",
 		"${workspaceFolder}/lib/libft",
 		"${workspaceFolder}/lib/minilibx_mms_20210621",
 		"${workspaceFolder}/lib/cimgui",
+		"${workspaceFolder}/lib/cimgui/generator/output",
 	],
 }

@@ -4,6 +4,7 @@
 # include "typedef_common.h"
 # include "figures.hpp"
 # include "lights.hpp"
+# include <SDL.h>
 
 # define MAX_SPHERES	10
 # define MAX_PLANES		10
@@ -28,6 +29,7 @@ typedef struct s_rtv
 	double		ambient;
 	t_plight	plights[MAX_PLIGHTS];
 	t_dlight	dlights[MAX_DLIGHTS];
+	SDL_Window	*window;
 
 	s_rtv() : camera_position{ 0.f, 0.f, 0.f, 1.f }, camera_angles{ 0.f, 0.f, 0.f, 0.f } {}
 } t_rtv;

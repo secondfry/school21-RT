@@ -191,7 +191,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIRS)
 $(OBJS_DIRS):
 	mkdir -p $@
 
-$(NAME): $(OBJS) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX)
+$(NAME): $(OBJS) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX) $(IMGUI_DIR)/$(IMGUI)
 	$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 clean: clean_libs clean_self

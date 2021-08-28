@@ -15,8 +15,6 @@
 #define CIMGUI_DEFINE_ENUMS_AND_STRUCTS
 #include "cimgui.h"
 #include "cimgui_impl.h"
-#include <SDL.h>
-#include <SDL_opengl.h>
 
 void	check_defines(void)
 {
@@ -88,34 +86,26 @@ int	main(int argc, char **argv)
 	SDL_GL_MakeCurrent(window, gl_context);
 	SDL_GL_SetSwapInterval(1); // Enable vsync
 
+	rtv.window = window;
+
 	ImGuiContext *ctx = igCreateContext(NULL);
-	ImGuiIO *io = igGetIO();
 
 	ImGui_ImplSDL2_InitForOpenGL(window, gl_context);
 	ImGui_ImplOpenGL3_Init(glsl_version);
-
-	ImVec4 clear_color = {0.45f, 0.55f, 0.60f, 1.00f};
-
-	ImGui_ImplOpenGL3_NewFrame();
-	ImGui_ImplSDL2_NewFrame();
-	igNewFrame();
-
-	bool showDemoWindow = true;
-	igShowDemoWindow(&showDemoWindow);
-
-	igRender();
-
-	glViewport(0, 0, (int)io->DisplaySize.x, (int)io->DisplaySize.y);
-	glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-	glClear(GL_COLOR_BUFFER_BIT);
-	ImGui_ImplOpenGL3_RenderDrawData(igGetDrawData());
-	SDL_GL_SwapWindow(window);
 
 	mlx_loop(mlx.mlx);
 
 	ImGui_ImplOpenGL3_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	igDestroyContext(ctx);
+
+	SDL_GL_DeleteContext(gl_context);
+	if (window != NULL)
+	{
+		SDL_DestroyWindow(window);
+		window = NULL;
+	}
+	SDL_Quit();
 
 	return (0);
 }
