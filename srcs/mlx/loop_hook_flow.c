@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:49:39 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 15:17:48 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 16:25:10 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,42 @@
 bool show_demo_window = true;
 ImVec4 clear_color = {0.45f, 0.55f, 0.60f, 1.00f};
 
+void	igImageDefaults(ImTextureID user_texture_id, const ImVec2 size)
+{
+	igImage(user_texture_id, size, (ImVec2){0, 0}, (ImVec2){1, 1}, (ImVec4){1, 1, 1, 1}, (ImVec4){0, 0, 0, 0});
+}
+
 static void	loop_SDL(t_rtv *rtv)
 {
-	ImGuiIO *io = igGetIO();
+	GLuint texture_id;
+	glGenTextures(1, &texture_id);
+	glBindTexture(GL_TEXTURE_2D, texture_id);
 
-	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		ImGui_ImplSDL2_ProcessEvent(&event);
-		if (event.type == SDL_QUIT)
-			show_demo_window = false;
-		if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(rtv->window))
-			show_demo_window = false;
-	}
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, WIDTH, HEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, rtv->sdl->buffer);
+
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+
+
+	ImGuiIO *io = igGetIO(); (void)io;
 
 	// Start the Dear ImGui frame
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	igNewFrame();
+
+	bool wat = true;
+	igBegin("OpenGL Texture Text", &wat, 0);
+	igText("pointer = %p", texture_id);
+	igText("size = %d x %d", WIDTH, HEIGHT);
+	igImageDefaults((void*)(intptr_t)texture_id, (ImVec2) {WIDTH, HEIGHT});
+	igEnd();
 
 	// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
 	if (show_demo_window)
@@ -49,7 +67,7 @@ static void	loop_SDL(t_rtv *rtv)
 	glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
 	glClear(GL_COLOR_BUFFER_BIT);
 	ImGui_ImplOpenGL3_RenderDrawData(igGetDrawData());
-	SDL_GL_SwapWindow(rtv->window);
+	SDL_GL_SwapWindow(rtv->sdl->window);
 }
 
 int	loop_hook(t_rtv *rtv)

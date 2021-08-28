@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 22:16:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 15:13:41 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/08/28 16:26:38 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color)
 
 	xs = WIDTH / 2 + xc;
 	ys = HEIGHT / 2 - yc;
-	offset = ys * rtv->sdl->pitch + xs * 4;
-	rtv->sdl->buffer[offset++] = color.blue;
-	rtv->sdl->buffer[offset++] = color.green;
+	offset = ys * WIDTH * 4 + xs * 4;
 	rtv->sdl->buffer[offset++] = color.red;
-	rtv->sdl->buffer[offset] = 0;
+	rtv->sdl->buffer[offset++] = color.green;
+	rtv->sdl->buffer[offset++] = color.blue;
+	rtv->sdl->buffer[offset++] = 255;
 }
