@@ -6,17 +6,18 @@ static t_vector_4	find_normal_cone(
 	t_vector_4 P
 )
 {
-	const t_vector_4	CP = vector_sub(\
+	const t_vector_4	vec_cp = vector_sub(\
 		P, \
 		rtv->cones[intr->idx].vectors[VCTR_CONE_C0] \
 	);
-	const t_vector_4	C0C1 = rtv->cones[intr->idx].vectors[VCTR_CONE_C0C1];
-	const double		k = vector_length(CP) / rtv->cones[intr->idx].cos;
-	const t_vector_4	CQ = vector_mult(C0C1, k);
+	const t_vector_4	vec_c0c1 = \
+		rtv->cones[intr->idx].vectors[VCTR_CONE_C0C1];
+	const double		k = vector_length(vec_cp) / rtv->cones[intr->idx].cos;
+	const t_vector_4	vec_cq = vector_mult(vec_c0c1, k);
 
-	if (vector_dot(CP, C0C1) < 0)
-		vector_set_by_value(&CQ, vector_mult(CQ, -1));
-	return (vector_normalize(vector_sub(CP, CQ)));
+	if (vector_dot(vec_cp, vec_c0c1) < 0)
+		vector_set_by_value(&vec_cq, vector_mult(vec_cq, -1));
+	return (vector_normalize(vector_sub(vec_cp, vec_cq)));
 }
 
 static t_vector_4	find_normal_cylinder(
@@ -25,16 +26,16 @@ static t_vector_4	find_normal_cylinder(
 	t_vector_4 P
 )
 {
-	const t_vector_4	CP = vector_sub(\
+	const t_vector_4	vec_cp = vector_sub(\
 		P, \
 		rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0] \
 	);
-	const t_vector_4	C0C1 = \
+	const t_vector_4	vec_c0c1 = \
 		rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0C1];
-	const double		k = vector_dot(CP, C0C1);
-	const t_vector_4	CQ = vector_mult(C0C1, k);
+	const double		k = vector_dot(vec_cp, vec_c0c1);
+	const t_vector_4	vec_cq = vector_mult(vec_c0c1, k);
 
-	return (vector_normalize(vector_sub(CP, CQ)));
+	return (vector_normalize(vector_sub(vec_cp, vec_cq)));
 }
 
 t_vector_4	find_normal(
