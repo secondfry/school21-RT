@@ -36,8 +36,8 @@ static void	intersection_cylinder(
 		vector_cross(params->vec_d, data.vec_cq),
 		vector_dot(data.vec_z, data.vec_z),
 		2 * vector_dot(data.vec_z, data.vec_x),
-		vector_dot(data.vec_x, data.vec_x) \
-			- (rtv->cylinders[idx].radius2 * vector_dot(data.vec_cq, data.vec_cq)),
+		vector_dot(data.vec_x, data.vec_x) - (rtv->cylinders[idx].radius2 * \
+			vector_dot(data.vec_cq, data.vec_cq)),
 		(data.b * data.b) - (4.0 * data.a * data.c),
 		sqrt(data.cubed)
 	};
