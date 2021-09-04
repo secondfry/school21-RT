@@ -2,13 +2,13 @@
 
 void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
 {
-	const t_vector_4	CO = vector_sub(
+	const t_vector_4	vec_co = vector_sub(
 		rtv->camera_position,
 		sphere.vectors[VCTR_SPHERE_C]
 	);
 
-	vector_set(sphere.vectors + VCTR_SPHERE_CO, &CO);
-	ft_print_memory(&CO, sizeof(CO));
+	vector_set(sphere.vectors + VCTR_SPHERE_CO, &vec_co);
+	ft_print_memory(&vec_co, sizeof(vec_co));
 	rtv->flags |= FLAG_REDRAW;
 }
 
