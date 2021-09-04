@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sdl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*   By: secondfry <secondfry@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 13:56:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 15:45:55 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/04 20:12:22 by secondfry        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ int	sdl_init(t_sdl *sdl)
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-	SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-	sdl->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, window_flags);
+	SDL_DisplayMode DM;
+	SDL_GetCurrentDisplayMode(0, &DM);
+	sdl->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, DM.w, DM.h, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
 	ft_ptr_check(sdl->window, SDL_GetError(), 0);
 	sdl->gl_context = SDL_GL_CreateContext(sdl->window);
 	ft_ptr_check(sdl->gl_context, SDL_GetError(), 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   loop_hook.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*   By: secondfry <secondfry@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:50:14 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 16:38:22 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/04 19:52:44 by secondfry        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include "intersection.h"
 # include "vector.h"
 # include "raytrace.h"
+
+# define CIMGUI_DEFINE_ENUMS_AND_STRUCTS
+# include "cimgui.h"
+# include "cimgui_impl.h"
+# include <SDL_opengl.h>
 
 typedef struct s_params {
 	t_rtv	*rtv;
