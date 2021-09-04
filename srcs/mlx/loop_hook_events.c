@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 14:59:41 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 15:18:20 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/04 20:44:18 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ static void	loop_key_hook_movement(int keycode, t_rtv *rtv)
 
 int	loop_key_hook(int keycode, t_rtv *rtv)
 {
-	// if (keycode == KEY_ESC)
-	// 	loop_destroy_hook(rtv);
 	if (keycode == KEY_R)
 		rtv->flags |= FLAG_REDRAW;
 	loop_key_hook_movement(keycode, rtv);
