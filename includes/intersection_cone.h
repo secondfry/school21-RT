@@ -9,13 +9,13 @@
 
 typedef struct s_intersection_cone
 {
-	t_vector_4	C;
-	t_vector_4	CO;
-	t_vector_4	CQ;
-	double		DdotCQ;
-	double		COdotCQ;
-	double		DdotCO;
-	double		COdotCO;
+	t_vector_4	vec_c;
+	t_vector_4	vec_co;
+	t_vector_4	vec_cq;
+	double		d_dot_cq;
+	double		co_dot_cq;
+	double		d_dot_co;
+	double		co_dot_co;
 	double		cos2;
 	double		a;
 	double		b;
