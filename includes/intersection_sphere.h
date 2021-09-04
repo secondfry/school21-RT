@@ -9,8 +9,8 @@
 
 typedef struct s_intersection_sphere
 {
-	t_vector_4	C;
-	t_vector_4	CO;
+	t_vector_4	vec_c;
+	t_vector_4	vec_co;
 	double		a;
 	double		b;
 	double		c;
