@@ -18,10 +18,10 @@
     "default": {
         "norminette": {
             "hashes": [
-                "sha256:cdfc6a4786ffb03fb1d1a2f8f2c54ec6a25d27e03c87a12ff094e6a547a86a85"
+                "sha256:b9ccc0dce7a8f75e2bc6e494d3798b1e5eab7eb2dc5ef9becd0650594e06bb4f"
             ],
             "index": "pypi",
-            "version": "==3.3.1"
+            "version": "==3.3.32"
         }
     },
     "develop": {}
