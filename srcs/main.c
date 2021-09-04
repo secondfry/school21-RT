@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*   By: secondfry <secondfry@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 14:46:37 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/04 20:20:08 by secondfry        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv)
 	t_sdl	sdl;
 	t_imgui	imgui;
 	int		status;
-	// t_mlx	mlx;
 
 	check_defines();
 	init_rtv(&rtv);
@@ -41,11 +40,6 @@ int	main(int argc, char **argv)
 	rtv.sdl = &sdl;
 	imgui_init(&sdl, &imgui);
 	sdl_loop(&rtv, &sdl);
-	// init_mlx(&mlx);
-	// init_mlx_image(&mlx);
-	// rtv.mlx = &mlx;
-	// init_mlx_hooks(&rtv);
-	// mlx_loop(mlx.mlx);
 	imgui_clear(&imgui);
 	sdl_clear(&sdl);
 	return (0);
