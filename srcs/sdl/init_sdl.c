@@ -6,7 +6,7 @@
 /*   By: secondfry <secondfry@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 13:56:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/04 20:12:22 by secondfry        ###   ########.fr       */
+/*   Updated: 2021/09/04 20:36:23 by secondfry        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ t_byte	sdl_handle_event(t_sdl *sdl)
 		if (event.type == SDL_QUIT)
 			return (1);
 		if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE && event.window.windowID == SDL_GetWindowID(sdl->window))
+			return (1);
+		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
 			return (1);
 	}
 	return (0);
