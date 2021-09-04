@@ -47,10 +47,10 @@ t_vector_4	find_normal(
 	if (intr->type == IPLANE)
 		return (rtv->planes[intr->idx].normal);
 	if (intr->type == ISPHERE)
-		return (vector_normalize(vector_sub(params->P, params->C)));
+		return (vector_normalize(vector_sub(params->vec_p, params->vec_c)));
 	if (intr->type == ICONE)
-		return (find_normal_cone(rtv, intr, params->P));
+		return (find_normal_cone(rtv, intr, params->vec_p));
 	if (intr->type == ICYLINDER)
-		return (find_normal_cylinder(rtv, intr, params->P));
+		return (find_normal_cylinder(rtv, intr, params->vec_p));
 	return ((t_vector_4){0, 0, 0, 0});
 }

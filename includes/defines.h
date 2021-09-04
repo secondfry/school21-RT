@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   defines.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*   By: secondfry <secondfry@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/28 15:45:11 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/04 19:38:03 by secondfry        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,21 @@ typedef struct s_worker_data
 
 typedef struct s_intersect_params
 {
-	t_vector_4	O;
-	t_vector_4	D;
+	t_vector_4	vec_o;
+	t_vector_4	vec_d;
 	double		t_min;
 	double		t_max;
 }				t_intersect_params;
 
 typedef struct s_light_params
 {
-	t_vector_4		C;
+	t_vector_4		vec_c;
 	t_color			color;
 	double			specular;
-	t_vector_4		P;
-	t_vector_4		N;
-	t_vector_4		V;
-	t_vector_4		L;
+	t_vector_4		vec_p;
+	t_vector_4		vec_n;
+	t_vector_4		vec_v;
+	t_vector_4		vec_l;
 	t_intersection	intr;
 }				t_light_params;
 

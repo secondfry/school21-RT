@@ -18,10 +18,10 @@ static double	intersection_plane(
 	t_byte idx
 )
 {
-	const t_vector_4	C = rtv->planes[idx].position;
-	const t_vector_4	CO = vector_sub(C, params->O);
-	const double		a = vector_dot(rtv->planes[idx].normal, CO);
-	const double		b = vector_dot(rtv->planes[idx].normal, params->D);
+	const t_vector_4	vec_c = rtv->planes[idx].position;
+	const t_vector_4	vec_co = vector_sub(vec_c, params->vec_o);
+	const double		a = vector_dot(rtv->planes[idx].normal, vec_co);
+	const double		b = vector_dot(rtv->planes[idx].normal, params->vec_d);
 
 	if (b < EPSILON && b > -1 * EPSILON)
 	{

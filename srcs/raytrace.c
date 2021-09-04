@@ -4,25 +4,25 @@ static t_light_params	get_light_params(t_rtv *rtv, t_intersection *intr)
 {
 	if (intr->type == ISPHERE)
 		return ((t_light_params){\
-			.C = rtv->spheres[intr->idx].vectors[VCTR_SPHERE_C], \
+			.vec_c = rtv->spheres[intr->idx].vectors[VCTR_SPHERE_C], \
 			.color = rtv->spheres[intr->idx].color, \
 			.specular = rtv->spheres[intr->idx].specular \
 		});
 	if (intr->type == IPLANE)
 		return ((t_light_params){\
-			.C = rtv->planes[intr->idx].position, \
+			.vec_c = rtv->planes[intr->idx].position, \
 			.color = rtv->planes[intr->idx].color, \
 			.specular = rtv->planes[intr->idx].specular \
 		});
 	if (intr->type == ICYLINDER)
 		return ((t_light_params){\
-			.C = rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0], \
+			.vec_c = rtv->cylinders[intr->idx].vectors[VCTR_CYLINDER_C0], \
 			.color = rtv->cylinders[intr->idx].color, \
 			.specular = rtv->cylinders[intr->idx].specular \
 		});
 	if (intr->type == ICONE)
 		return ((t_light_params){\
-			.C = rtv->cones[intr->idx].vectors[VCTR_CONE_C0], \
+			.vec_c = rtv->cones[intr->idx].vectors[VCTR_CONE_C0], \
 			.color = rtv->cones[intr->idx].color, \
 			.specular = rtv->cones[intr->idx].specular \
 		});
@@ -34,13 +34,13 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 	const t_light_params	params = get_light_params(rtv, intr);
 	double					intensity;
 
-	vector_set_by_value(&params.P, vector_add(\
+	vector_set_by_value(&params.vec_p, vector_add(\
 		data->vectors[VCTR_O], \
 		vector_mult(data->vectors[VCTR_D], intr->distance) \
 	));
 	vector_set_by_value(\
-		&params.N, find_normal(rtv, intr, &params));
-	vector_set_by_value(&params.V, vector_mult(data->vectors[VCTR_D], -1));
+		&params.vec_n, find_normal(rtv, intr, &params));
+	vector_set_by_value(&params.vec_v, vector_mult(data->vectors[VCTR_D], -1));
 	intensity = light(rtv, &params);
 	return (*color_mult((void *)&params.color, intensity));
 }

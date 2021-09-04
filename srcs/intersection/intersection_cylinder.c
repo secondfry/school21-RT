@@ -30,10 +30,10 @@ static void	intersection_cylinder(
 {
 	const t_intersection_cylinder	data = {
 		rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0],
-		vector_sub(params->O, data.vec_c),
+		vector_sub(params->vec_o, data.vec_c),
 		rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0C1],
 		vector_cross(data.vec_co, data.vec_cq),
-		vector_cross(params->D, data.vec_cq),
+		vector_cross(params->vec_d, data.vec_cq),
 		vector_dot(data.vec_z, data.vec_z),
 		2 * vector_dot(data.vec_z, data.vec_x),
 		vector_dot(data.vec_x, data.vec_x) \
