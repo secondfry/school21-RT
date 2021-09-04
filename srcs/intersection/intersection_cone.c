@@ -12,11 +12,11 @@ static void	intersection_cone(
 {
 	const t_intersection_cone	data = {
 		rtv->cones[idx].vectors[VCTR_CONE_C0],
-		vector_sub(params->O, data.C),
+		vector_sub(params->vec_o, data.C),
 		rtv->cones[idx].vectors[VCTR_CONE_C0C1],
-		vector_dot(params->D, data.CQ),
+		vector_dot(params->vec_d, data.CQ),
 		vector_dot(data.CO, data.CQ),
-		vector_dot(params->D, data.CO),
+		vector_dot(params->vec_d, data.CO),
 		vector_dot(data.CO, data.CO),
 		rtv->cones[idx].cos2,
 		data.DdotCQ * data.DdotCQ - data.cos2,

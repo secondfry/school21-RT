@@ -12,9 +12,9 @@ static void	intersection_sphere(
 {
 	const t_intersection_sphere	data = {
 		rtv->spheres[idx].vectors[VCTR_SPHERE_C],
-		vector_sub(params->O, data.C),
-		vector_dot(params->D, params->D),
-		2 * vector_dot(params->D, data.CO),
+		vector_sub(params->vec_o, data.C),
+		vector_dot(params->vec_d, params->vec_d),
+		2 * vector_dot(params->vec_d, data.CO),
 		vector_dot(data.CO, data.CO) - rtv->spheres[idx].radius_squared,
 		data.b * data.b - 4 * data.a * data.c,
 		sqrt(data.cubed)
