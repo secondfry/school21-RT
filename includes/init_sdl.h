@@ -4,7 +4,7 @@
 # include "sdl_defines.h"
 # include "init_rtv.h"
 
-int	sdl_init(t_sdl *sdl);
+int		sdl_init(t_sdl *sdl);
 void	sdl_loop(t_rtv *rtv, t_sdl *sdl);
 void	sdl_clear(t_sdl *sdl);
 
