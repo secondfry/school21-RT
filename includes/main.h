@@ -15,7 +15,6 @@
 
 # include <fcntl.h>
 # include <unistd.h>
-# include <mlx.h>
 # include "defines.h"
 # include "init_rtv.h"
 # include "graceful.h"
