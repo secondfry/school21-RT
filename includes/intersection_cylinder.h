@@ -9,11 +9,11 @@
 
 typedef struct s_intersection_cylinder
 {
-	t_vector_4	C;
-	t_vector_4	CO;
-	t_vector_4	CQ;
-	t_vector_4	X;
-	t_vector_4	Z;
+	t_vector_4	vec_c;
+	t_vector_4	vec_co;
+	t_vector_4	vec_cq;
+	t_vector_4	vec_x;
+	t_vector_4	vec_z;
 	double		a;
 	double		b;
 	double		c;
