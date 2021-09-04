@@ -70,14 +70,14 @@ static t_color	raytrace(
 
 t_color	process_pixel(t_rtv *rtv, short xc, short yc)
 {
-	const t_vector_4	D = vector_normalize(matrix_on_vector(
+	const t_vector_4	vec_d = vector_normalize(matrix_on_vector(
 		rtv->camera_rotation,
 		(t_vector_4){(double) xc / WIDTH, (double) yc / HEIGHT, 1.f, 0}
 	));
 	t_worker_data		data;
 
 	vector_set(data.vectors + VCTR_O, &rtv->camera_position);
-	vector_set(data.vectors + VCTR_D, &D);
+	vector_set(data.vectors + VCTR_D, &vec_d);
 	data.doubles[D_DOT_D] = vector_dot(\
 		data.vectors[VCTR_D], \
 		data.vectors[VCTR_D] \
