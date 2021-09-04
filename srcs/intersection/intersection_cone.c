@@ -7,7 +7,7 @@ static void	intersection_cone(
 	t_rtv *rtv,
 	t_intersect_params *params,
 	t_byte idx,
-	double	t[2]
+	double t[2]
 )
 {
 	const t_intersection_cone	data = {
