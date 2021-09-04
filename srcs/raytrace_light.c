@@ -7,9 +7,9 @@ static double	light_one(
 	double light_intensity
 )
 {
-	const t_vector_4		R = vector_new(0, 0, 0, 0);
-	const t_intersection	res = intersection_closest(\
-		rtv, &((t_intersect_params){params->vec_p, params->vec_l, EPSILON, cutoff}));
+	const t_vector_4		vec_r = vector_new(0, 0, 0, 0);
+	const t_intersection	res = intersection_closest(rtv, \
+		&((t_intersect_params){params->vec_p, params->vec_l, EPSILON, cutoff}));
 	double					dot;
 	double					intensity;
 
@@ -21,14 +21,12 @@ static double	light_one(
 		intensity += light_intensity * dot / vector_length(params->vec_l);
 	if (params->specular < 0)
 		return (intensity);
-	vector_set_by_value(&R, vector_sub(\
-		vector_mult(params->vec_n, 2 * vector_dot(params->vec_n, params->vec_l)), \
-		params->vec_l) \
-	);
-	dot = vector_dot(R, params->vec_v);
+	vector_set_by_value(&vec_r, vector_sub(vector_mult(params->vec_n, \
+		2 * vector_dot(params->vec_n, params->vec_l)), params->vec_l));
+	dot = vector_dot(vec_r, params->vec_v);
 	if (dot > 0)
 		intensity += light_intensity * powf(\
-			dot / vector_length(R) / vector_length(params->vec_v), \
+			dot / vector_length(vec_r) / vector_length(params->vec_v), \
 			params->specular \
 		);
 	return (intensity);
@@ -40,7 +38,7 @@ static double	light_point(
 	const t_light_params *params
 )
 {
-	const t_vector_4	L = vector_new(0, 0, 0, 0);
+	const t_vector_4	vec_l = vector_new(0, 0, 0, 0);
 	double				intensity;
 	t_byte				i;
 	double				cutoff;
@@ -54,10 +52,10 @@ static double	light_point(
 			i++;
 			continue ;
 		}
-		vector_set_by_value(&L, \
+		vector_set_by_value(&vec_l, \
 			vector_sub(rtv->plights[i].position, params->vec_p));
-		cutoff = vector_length(L) + EPSILON;
-		vector_set_by_value(&params->vec_l, vector_normalize(L));
+		cutoff = vector_length(vec_l) + EPSILON;
+		vector_set_by_value(&params->vec_l, vector_normalize(vec_l));
 		intensity += light_one(rtv, params, cutoff, rtv->plights[i].intensity);
 		i++;
 	}
