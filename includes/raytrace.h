@@ -10,12 +10,13 @@
 # include "normal.h"
 # include "raytrace_light.h"
 
+// FIXME(secondfry): unused
 typedef struct s_pre_light
 {
 	t_light_params	params;
-	t_vector_4		P;
-	t_vector_4		N;
-	t_vector_4		V;
+	t_vector_4		vec_p;
+	t_vector_4		vec_n;
+	t_vector_4		vec_v;
 	double			intensity;
 }				t_pre_light;
 
