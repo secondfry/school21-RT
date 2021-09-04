@@ -1,5 +1,5 @@
-#ifndef SDL_H
-# define SDL_H
+#ifndef SDL_DEFINES_H
+# define SDL_DEFINES_H
 
 # include "defines.h"
 
@@ -14,11 +14,11 @@ typedef struct s_sdl
 	SDL_Window		*window;
 	SDL_GLContext	gl_context;
 	t_byte			buffer[WIDTH * HEIGHT * 4];
-} t_sdl;
+}				t_sdl;
 
 typedef struct s_imgui
 {
 	ImGuiContext	*ctx;
-} t_imgui;
+}				t_imgui;
 
 #endif
