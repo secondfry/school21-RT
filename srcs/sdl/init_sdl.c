@@ -6,15 +6,16 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 13:56:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:29:19 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 15:11:57 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "defines.h"
 #include <SDL.h>
 #include <SDL_opengl.h>
-#include "init_sdl.h"
+#include "sdl/init_sdl.h"
 #include "loop_hook.h"
+#include "sdl/sdl_events.h"
 
 #if defined(__APPLE__)
 
@@ -78,26 +79,6 @@ int	sdl_init(t_sdl *sdl)
 void	sdl_clear_texture(t_sdl *sdl)
 {
 	ft_bzero(sdl->buffer, WIDTH * HEIGHT * 4);
-}
-
-t_byte	sdl_handle_event(t_sdl *sdl)
-{
-	SDL_Event	event;
-
-	while (SDL_PollEvent(&event))
-	{
-		ImGui_ImplSDL2_ProcessEvent(&event);
-		if (event.type == SDL_QUIT)
-			return (1);
-		if (event.type == SDL_WINDOWEVENT \
-			&& event.window.event == SDL_WINDOWEVENT_CLOSE \
-			&& event.window.windowID == SDL_GetWindowID(sdl->window) \
-		)
-			return (1);
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-			return (1);
-	}
-	return (0);
 }
 
 void	sdl_loop(t_rtv *rtv, t_sdl *sdl)
