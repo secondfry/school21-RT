@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/05 14:52:36 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/05 15:05:50 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,10 @@ FILES_INTERSECTION :=	intersection.c intersection_common.c \
 FILES_INTERSECTION :=	$(addprefix intersection/, $(FILES_INTERSECTION))
 
 FILES_LOOP :=	loop_hook_flow.c loop_hook_invalidate.c loop_hook_events.c \
-				loop_hook_render_debug.c \
 				loop_hook_redraw.c loop_hook_common.c loop_sdl.c
 FILES_LOOP := $(addprefix loop/, $(FILES_LOOP))
 
-FILES_IMGUI :=	controls.c imgui_init.c
+FILES_IMGUI :=	controls.c imgui_init.c windows.c
 FILES_IMGUI := $(addprefix imgui/, $(FILES_IMGUI))
 
 FILES_SDL :=	init_sdl.c
