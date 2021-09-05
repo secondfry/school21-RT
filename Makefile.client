@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/05 14:48:49 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/05 14:52:36 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,9 @@ CZMQ_DIR = $(BREW_DIR)/opt/czmq
 FILES_INIT := init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c
 FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
 
-FILES_MLX :=	loop_hook_render_debug.c \
+FILES_LOOP :=	loop_hook_render_debug.c \
 				loop_hook_common.c loop_sdl.c
-FILES_MLX := $(addprefix mlx/, $(FILES_MLX))
+FILES_LOOP := $(addprefix loop/, $(FILES_LOOP))
 
 FILES_IMGUI :=	controls.c imgui_init.c
 FILES_IMGUI := $(addprefix imgui/, $(FILES_IMGUI))
@@ -44,7 +44,7 @@ SRC_FILES =	client/main.c client/loop.c \
 			client/network_prepare.c client/network_render.c \
 			matrix_factory_1.c vector_2.c \
 			color.c \
-			$(FILES_INIT) $(FILES_MLX) $(FILES_SDL) $(FILES_IMGUI)
+			$(FILES_INIT) $(FILES_LOOP) $(FILES_SDL) $(FILES_IMGUI)
 
 SRC_DIRS = $(sort $(dir $(SRC_FILES)))
 OBJS_DIRS = $(addprefix $(OBJS_DIR)/, $(SRC_DIRS))
