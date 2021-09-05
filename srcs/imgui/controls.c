@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 14:12:23 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:13:50 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 15:31:07 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	ig_image_defaults(ImTextureID user_texture_id, const ImVec2 size)
 	);
 }
 
-bool	ig_drag_vector(const char *label, void *v)
+bool	ig_drag_vector(const char *label, const double *v)
 {
 	return (igDragScalarN(
 			label,
 			ImGuiDataType_Double,
-			v,
+			(void *)v,
 			3,
 			0.05f,
 			0,
