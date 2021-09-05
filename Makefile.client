@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/05 14:52:36 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/05 15:07:04 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,10 @@ CZMQ_DIR = $(BREW_DIR)/opt/czmq
 FILES_INIT := init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c
 FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
 
-FILES_LOOP :=	loop_hook_render_debug.c \
-				loop_hook_common.c loop_sdl.c
+FILES_LOOP :=	loop_hook_common.c loop_sdl.c
 FILES_LOOP := $(addprefix loop/, $(FILES_LOOP))
 
-FILES_IMGUI :=	controls.c imgui_init.c
+FILES_IMGUI :=	controls.c imgui_init.c windows.c
 FILES_IMGUI := $(addprefix imgui/, $(FILES_IMGUI))
 
 FILES_SDL :=	init_sdl.c
