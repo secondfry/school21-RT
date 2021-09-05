@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/05 15:05:50 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/05 15:12:07 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ FILES_LOOP := $(addprefix loop/, $(FILES_LOOP))
 FILES_IMGUI :=	controls.c imgui_init.c windows.c
 FILES_IMGUI := $(addprefix imgui/, $(FILES_IMGUI))
 
-FILES_SDL :=	init_sdl.c
+FILES_SDL :=	init_sdl.c sdl_events.c
 FILES_SDL := $(addprefix sdl/, $(FILES_SDL))
 
 FILES_PARSER :=	parser.c parser_level.c parser_level_process.c \
