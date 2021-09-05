@@ -36,6 +36,8 @@ jobs:
     
     - name: Install norminette
       run: pip install norminette
+
+    - uses: actions/checkout@v2
     
     - name: Check
       run: norminette srcs includes lib/libft
