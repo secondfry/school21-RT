@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 13:56:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 15:11:57 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 15:28:12 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,7 @@
 #include "sdl/init_sdl.h"
 #include "loop_hook.h"
 #include "sdl/sdl_events.h"
-
-#if defined(__APPLE__)
-
-// GL 3.2 Core + GLSL 150
-static void	set_platform_attributes(void)
-{
-	SDL_GL_SetAttribute(\
-		SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
-	SDL_GL_SetAttribute(\
-		SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
-}
-
-#else
-
-// GL 3.0 + GLSL 130
-static void	set_platform_attributes(void)
-{
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
-	SDL_GL_SetAttribute(\
-		SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
-}
-
-#endif
-
-static void	set_common_attributes(void)
-{
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
-}
+#include "sdl/sdl_gl_attributes.h"
 
 int	sdl_init(t_sdl *sdl)
 {
@@ -62,8 +29,7 @@ int	sdl_init(t_sdl *sdl)
 			"Couldn't initialize SDL: %s", SDL_GetError());
 		return (status);
 	}
-	set_platform_attributes();
-	set_common_attributes();
+	set_attributes();
 	SDL_GetCurrentDisplayMode(0, &dm);
 	sdl->window = SDL_CreateWindow("RT", \
 		SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, dm.w, dm.h, \
@@ -74,11 +40,6 @@ int	sdl_init(t_sdl *sdl)
 	SDL_GL_MakeCurrent(sdl->window, sdl->gl_context);
 	SDL_GL_SetSwapInterval(1);
 	return (0);
-}
-
-void	sdl_clear_texture(t_sdl *sdl)
-{
-	ft_bzero(sdl->buffer, WIDTH * HEIGHT * 4);
 }
 
 void	sdl_loop(t_rtv *rtv, t_sdl *sdl)
