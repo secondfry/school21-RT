@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:01:55 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 15:33:38 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 18:24:25 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,16 @@ void	imgui_window_controls(t_rtv *rtv)
 	igText("First sphere location");
 	if (ig_drag_vector("center", &rtv->spheres[0].vectors[VCTR_SPHERE_C].x))
 		invalidate_sphere_vectors(rtv, rtv->spheres[0]);
+	igText("Camera");
+	if (ig_drag_vector("position", &rtv->camera_position.x))
+	{
+		rtv->flags |= FLAG_INVALIDATE_POSITION;
+		loop_invalidate_position(rtv);
+	}
+	if (ig_drag_vector("rotation", &rtv->camera_angles.x))
+	{
+		rtv->flags |= FLAG_INVALIDATE_ROTATION;
+		loop_invalidate_rotation(rtv);
+	}
 	igEnd();
 }
