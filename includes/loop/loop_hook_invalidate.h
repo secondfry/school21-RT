@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_hook_flow.c                                   :+:      :+:    :+:   */
+/*   loop_hook_invalidate.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 17:49:39 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:18:21 by oadhesiv         ###   ########.fr       */
+/*   Created: 2021/09/05 14:17:03 by oadhesiv          #+#    #+#             */
+/*   Updated: 2021/09/05 14:18:00 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop_hook.h"
-#include "loop/loop_hook_invalidate.h"
-#include "loop/loop_sdl.h"
+#ifndef LOOP_HOOK_INVALIDATE_H
+# define LOOP_HOOK_INVALIDATE_H
 
-int	loop_hook(t_rtv *rtv)
-{
-	loop_invalidate_position(rtv);
-	loop_invalidate_rotation(rtv);
-	loop_redraw(rtv);
-	loop_render_debug(rtv);
-	loop_sdl(rtv);
-	loop_before_next_update(rtv);
-	return (0);
-}
+# include "rtv.h"
+# include "figures.h"
 
-void	loop_before_next_update(t_rtv *rtv)
-{
-	(void)rtv;
-}
+void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere);
+void	loop_invalidate_position(t_rtv *rtv);
+void	loop_invalidate_rotation(t_rtv *rtv);
+
+#endif

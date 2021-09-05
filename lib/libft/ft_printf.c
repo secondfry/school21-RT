@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 20:54:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 21:11:07 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 14:07:07 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static void	route(const char *format, size_t *i, va_list *ap)
 		ft_putnbr(va_arg(*ap, int));
 	if (format[*i + 1] == 's')
 		ft_putstr(va_arg(*ap, char *));
-	if (!ft_strcmp(format + *i + 1, "zu"))
+	if (!ft_strncmp(format + *i + 1, "zu", 2))
+	{
 		ft_putstr(ft_ltoa_static(va_arg(*ap, long)));
+		*i = *i + 1;
+	}
 	*i = *i + 1;
 }
 

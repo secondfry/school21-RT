@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_hook_flow.c                                   :+:      :+:    :+:   */
+/*   controls.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 17:49:39 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:18:21 by oadhesiv         ###   ########.fr       */
+/*   Created: 2021/09/05 14:12:23 by oadhesiv          #+#    #+#             */
+/*   Updated: 2021/09/05 14:13:50 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop_hook.h"
-#include "loop/loop_hook_invalidate.h"
-#include "loop/loop_sdl.h"
+#include "imgui/controls.h"
 
-int	loop_hook(t_rtv *rtv)
+void	ig_image_defaults(ImTextureID user_texture_id, const ImVec2 size)
 {
-	loop_invalidate_position(rtv);
-	loop_invalidate_rotation(rtv);
-	loop_redraw(rtv);
-	loop_render_debug(rtv);
-	loop_sdl(rtv);
-	loop_before_next_update(rtv);
-	return (0);
+	igImage(
+		user_texture_id,
+		size,
+		(ImVec2){0, 0},
+		(ImVec2){1, 1},
+		(ImVec4){1, 1, 1, 1},
+		(ImVec4){0, 0, 0, 0} \
+	);
 }
 
-void	loop_before_next_update(t_rtv *rtv)
+bool	ig_drag_vector(const char *label, void *v)
 {
-	(void)rtv;
+	return (igDragScalarN(
+			label,
+			ImGuiDataType_Double,
+			v,
+			3,
+			0.05f,
+			0,
+			0,
+			"%.3f",
+			0
+		)
+	);
 }

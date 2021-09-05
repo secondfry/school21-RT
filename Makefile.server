@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/08/22 16:18:23 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/05 14:25:13 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,9 @@ DEPS = $(OBJS:.o=.d)
 ifeq ($(origin CC), default)
 	CC = clang
 endif
+ifeq ($(origin CXX), default)
+	CXX = clang++
+endif
 
 CFLAGS_ERRORS = -Wall -Wextra -Werror
 
@@ -82,6 +85,7 @@ endif
 
 CFLAGS_DEPENDENCIES = -MMD -MP
 CFLAGS_INCLUDES = -I$(INCLUDES_DIR) -I$(LIB_DIR) -I$(ZMQ_DIR)/include -I$(CZMQ_DIR)/include
+CFLAGS_PLATFORM = -D RT_SERVER
 CFLAGS_ASAN = -fsanitize=address
 
 CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \

@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_hook_flow.c                                   :+:      :+:    :+:   */
+/*   loop_sdl.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 17:49:39 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:18:21 by oadhesiv         ###   ########.fr       */
+/*   Created: 2021/09/05 14:14:29 by oadhesiv          #+#    #+#             */
+/*   Updated: 2021/09/05 14:15:23 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop_hook.h"
-#include "loop/loop_hook_invalidate.h"
-#include "loop/loop_sdl.h"
+#ifndef LOOP_SDL_H
+# define LOOP_SDL_H
 
-int	loop_hook(t_rtv *rtv)
-{
-	loop_invalidate_position(rtv);
-	loop_invalidate_rotation(rtv);
-	loop_redraw(rtv);
-	loop_render_debug(rtv);
-	loop_sdl(rtv);
-	loop_before_next_update(rtv);
-	return (0);
-}
+# include "rtv.h"
 
-void	loop_before_next_update(t_rtv *rtv)
-{
-	(void)rtv;
-}
+# define CIMGUI_DEFINE_ENUMS_AND_STRUCTS
+
+void	loop_sdl(t_rtv *rtv);
+
+#endif
