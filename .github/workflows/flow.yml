@@ -1,0 +1,41 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: macos-11
+
+    steps:
+    - name: Set up Homebrew
+      id: set-up-homebrew
+      uses: Homebrew/actions/setup-homebrew@master
+
+    - uses: actions/checkout@v2
+    
+    - name: Install libraries
+      run: make prepare_mac
+
+    - name: Build
+      run: make
+
+  norminette:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+    
+    - name: Install norminette
+      run: pip install norminette
+    
+    - name: Check
+      run: norminette srcs includes lib/libft
