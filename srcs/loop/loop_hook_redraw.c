@@ -6,12 +6,13 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 15:11:15 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 15:26:42 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "loop_hook.h"
 #include "sdl/init_sdl.h"
+#include "sdl/sdl_clear_texture.h"
 
 static void	*run_parametrized(void *params)
 {

@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/05 15:12:09 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/05 15:27:08 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ FILES_LOOP := $(addprefix loop/, $(FILES_LOOP))
 FILES_IMGUI :=	controls.c imgui_init.c windows.c
 FILES_IMGUI := $(addprefix imgui/, $(FILES_IMGUI))
 
-FILES_SDL :=	init_sdl.c sdl_events.c
+FILES_SDL :=	init_sdl.c sdl_events.c sdl_gl_attributes.c sdl_clear_texture.c
 FILES_SDL := $(addprefix sdl/, $(FILES_SDL))
 
 SRC_FILES =	client/main.c client/loop.c \
