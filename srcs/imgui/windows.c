@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:01:55 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 15:06:43 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 15:33:38 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ bool	g_show_demo_window = true;
 
 void	imgui_window_texture(GLuint texture_id)
 {
-	igBegin("RT", 0, 0);
+	igBegin("RT", 0, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove \
+		| ImGuiWindowFlags_NoCollapse);
 	ig_image_defaults((void *)(intptr_t)texture_id, (ImVec2){WIDTH, HEIGHT});
 	igEnd();
 }
@@ -35,7 +36,7 @@ void	imgui_window_debug(void)
 
 void	imgui_window_controls(t_rtv *rtv)
 {
-	igBegin("RT controls", 0, 0);
+	igBegin("RT controls", 0, ImGuiWindowFlags_NoMove);
 	igText("First sphere location");
 	if (ig_drag_vector("center", &rtv->spheres[0].vectors[VCTR_SPHERE_C].x))
 		invalidate_sphere_vectors(rtv, rtv->spheres[0]);
