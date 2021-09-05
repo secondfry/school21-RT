@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 20:49:20 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:46:20 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 15:15:59 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
 	ft_putendl_fd("[invalidate_sphere_vectors] unimplemented", 2);
 	(void)rtv;
 	(void)sphere;
-}
-
-int	loop_key_hook(int keycode, t_rtv *rtv)
-{
-	(void)keycode;
-	(void)rtv;
-	return (0);
 }
 
 // FIXME(secondfry): clear texture okay son

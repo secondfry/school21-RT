@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:50:14 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 15:03:26 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 15:16:37 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,8 @@ typedef struct s_params {
 # define THREAD_COUNT 8
 
 int		loop_hook(t_rtv *rtv);
-int		loop_destroy_hook(t_rtv *rtv);
-void	loop_before_next_update(t_rtv *rtv);
 void	loop_redraw(t_rtv *rtv);
 void	draw(t_rtv *rtv);
-void	loop_render_debug(t_rtv *rtv);
-int		loop_key_hook(int keycode, t_rtv *rtv);
 
 void	canvas_to_screen(t_rtv *rtv, short xc, short yc, t_color color);
 
