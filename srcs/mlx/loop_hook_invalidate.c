@@ -8,7 +8,6 @@ void	invalidate_sphere_vectors(t_rtv *rtv, t_sphere sphere)
 	);
 
 	vector_set(sphere.vectors + VCTR_SPHERE_CO, &vec_co);
-	ft_print_memory(&vec_co, sizeof(vec_co));
 	rtv->flags |= FLAG_REDRAW;
 }
 

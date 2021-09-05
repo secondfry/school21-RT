@@ -1,5 +1,6 @@
 {
 	"files.associations": {
+		".arcignore": "ignore",
 		"*.oadyaml": "yaml",
 		"parser.h": "c",
 		"defines.h": "c",
@@ -104,7 +105,14 @@
 		"libft.h": "c",
 		"czmq.h": "c",
 		"init_rtv.h": "c",
-		"typedef_common.h": "c"
+		"typedef_common.h": "c",
+		"raytrace.h": "c",
+		"loop_sdl.h": "c",
+		"sdl_opengl.h": "c",
+		"sdl.h": "c",
+		"init_sdl.h": "c",
+		"sdl_defines.h": "c",
+		"cimgui_impl.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [
@@ -114,7 +122,6 @@
 		"~/.brew/opt/sdl2/include/SDL2",
 		"${workspaceFolder}/includes",
 		"${workspaceFolder}/lib/libft",
-		"${workspaceFolder}/lib/minilibx_mms_20210621",
 		"${workspaceFolder}/lib/cimgui",
 		"${workspaceFolder}/lib/cimgui/generator/output",
 	],

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_sdl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: secondfry <secondfry@gmail.com>            +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 13:56:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/04 20:39:41 by secondfry        ###   ########.fr       */
+/*   Updated: 2021/09/05 14:29:19 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,6 @@ t_byte	sdl_handle_event(t_sdl *sdl)
 	return (0);
 }
 
-void	sdl_draw(t_sdl *sdl)
-{
-	(void)sdl;
-}
-
 void	sdl_loop(t_rtv *rtv, t_sdl *sdl)
 {
 	while (1)
@@ -124,45 +119,4 @@ void	sdl_clear(t_sdl *sdl)
 		sdl->window = NULL;
 	}
 	SDL_Quit();
-}
-
-#if defined(__APPLE__)
-
-// GL 3.2 Core + GLSL 150
-static void	imgui_opengl_platform_init(void)
-{
-	const char	*glsl_version = "#version 150";
-
-	ImGui_ImplOpenGL3_Init(glsl_version);
-}
-
-#else
-
-// GL 3.0 + GLSL 130
-static void	imgui_opengl_platform_init(void)
-{
-	const char	*glsl_version = "#version 130";
-
-	ImGui_ImplOpenGL3_Init(glsl_version);
-}
-
-#endif
-
-void	imgui_init(t_sdl *sdl, t_imgui *imgui)
-{
-	igDebugCheckVersionAndDataLayout("1.84.1", \
-		sizeof(ImGuiIO), sizeof(ImGuiStyle), sizeof(ImVec2), sizeof(ImVec4), \
-		sizeof(ImDrawVert), sizeof(ImDrawIdx) \
-	);
-	imgui->ctx = igCreateContext(NULL);
-	igStyleColorsDark(igGetStyle());
-	ImGui_ImplSDL2_InitForOpenGL(sdl->window, sdl->gl_context);
-	imgui_opengl_platform_init();
-}
-
-void	imgui_clear(t_imgui *imgui)
-{
-	ImGui_ImplOpenGL3_Shutdown();
-	ImGui_ImplSDL2_Shutdown();
-	igDestroyContext(imgui->ctx);
 }

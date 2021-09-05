@@ -6,15 +6,14 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:03:47 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 21:51:46 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 14:48:33 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <czmq.h>
-#include "typedef_common.h"
-#include "init_rtv.h"
+#include "libft.h"
+#include "rtv.h"
 #include "loop_hook.h"
-#include "client/main.h"
 
 static t_byte	receive_color(zsock_t *requester, t_color *color)
 {

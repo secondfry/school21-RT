@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 14:59:41 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/04 20:44:18 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 14:45:12 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,36 +26,38 @@ static void	loop_movement(t_rtv *rtv, t_vector_4 direction)
 
 static void	loop_key_hook_movement(int keycode, t_rtv *rtv)
 {
-	double	angle;
+	// double	angle;
 
-	if (keycode == KEY_A)
-	{
-		angle = rtv->camera_angles.x + 45;
-		ft_memcpy((void *)&rtv->camera_angles.x, \
-			(void *)&angle, sizeof(double));
-		rtv->flags |= FLAG_INVALIDATE_ROTATION;
-	}
-	if (keycode == KEY_D)
-	{
-		angle = rtv->camera_angles.x - 45;
-		ft_memcpy((void *)&rtv->camera_angles.x, \
-			(void *)&angle, sizeof(double));
-		rtv->flags |= FLAG_INVALIDATE_ROTATION;
-	}
-	if (keycode == KEY_W)
-		loop_movement(rtv, (t_vector_4){0.0f, 0.0f, 1.0f, 0.0f});
-	if (keycode == KEY_S)
-		loop_movement(rtv, (t_vector_4){0.0f, 0.0f, -1.0f, 0.0f});
-	if (keycode == KEY_Q)
-		loop_movement(rtv, (t_vector_4){-1.0f, 0.0f, 0.0f, 0.0f});
-	if (keycode == KEY_E)
-		loop_movement(rtv, (t_vector_4){1.0f, 0.0f, 0.0f, 0.0f});
+	(void)keycode;
+	(void)rtv;
+	// if (keycode == KEY_A)
+	// {
+	// 	angle = rtv->camera_angles.x + 45;
+	// 	ft_memcpy((void *)&rtv->camera_angles.x, \
+	// 		(void *)&angle, sizeof(double));
+	// 	rtv->flags |= FLAG_INVALIDATE_ROTATION;
+	// }
+	// if (keycode == KEY_D)
+	// {
+	// 	angle = rtv->camera_angles.x - 45;
+	// 	ft_memcpy((void *)&rtv->camera_angles.x, \
+	// 		(void *)&angle, sizeof(double));
+	// 	rtv->flags |= FLAG_INVALIDATE_ROTATION;
+	// }
+	// if (keycode == KEY_W)
+	// 	loop_movement(rtv, (t_vector_4){0.0f, 0.0f, 1.0f, 0.0f});
+	// if (keycode == KEY_S)
+	// 	loop_movement(rtv, (t_vector_4){0.0f, 0.0f, -1.0f, 0.0f});
+	// if (keycode == KEY_Q)
+	// 	loop_movement(rtv, (t_vector_4){-1.0f, 0.0f, 0.0f, 0.0f});
+	// if (keycode == KEY_E)
+	// 	loop_movement(rtv, (t_vector_4){1.0f, 0.0f, 0.0f, 0.0f});
 }
 
 int	loop_key_hook(int keycode, t_rtv *rtv)
 {
-	if (keycode == KEY_R)
-		rtv->flags |= FLAG_REDRAW;
+	// if (keycode == KEY_R)
+	// 	rtv->flags |= FLAG_REDRAW;
 	loop_key_hook_movement(keycode, rtv);
 	return (0);
 }

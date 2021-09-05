@@ -6,14 +6,14 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:02:53 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 21:06:48 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/05 14:47:22 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "client/network_prepare.h"
+
 #include <czmq.h>
-#include "typedef_common.h"
-#include "init_rtv.h"
-#include "client/main.h"
+#include "client/network_render.h"
 
 static void	network_init(zsock_t **requester, int *status)
 {

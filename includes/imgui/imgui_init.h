@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   loop_hook_flow.c                                   :+:      :+:    :+:   */
+/*   imgui_init.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 17:49:39 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:18:21 by oadhesiv         ###   ########.fr       */
+/*   Created: 2021/09/05 14:30:32 by oadhesiv          #+#    #+#             */
+/*   Updated: 2021/09/05 14:31:26 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "loop_hook.h"
-#include "loop/loop_hook_invalidate.h"
-#include "loop/loop_sdl.h"
+#ifndef IMGUI_INIT_H
+# define IMGUI_INIT_H
 
-int	loop_hook(t_rtv *rtv)
-{
-	loop_invalidate_position(rtv);
-	loop_invalidate_rotation(rtv);
-	loop_redraw(rtv);
-	loop_render_debug(rtv);
-	loop_sdl(rtv);
-	loop_before_next_update(rtv);
-	return (0);
-}
+# include "sdl_defines.h"
 
-void	loop_before_next_update(t_rtv *rtv)
-{
-	(void)rtv;
-}
+void	imgui_init(t_sdl *sdl, t_imgui *imgui);
+void	imgui_clear(t_imgui *imgui);
+
+#endif
