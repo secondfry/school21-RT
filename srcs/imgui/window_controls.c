@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 16:37:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 16:49:34 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 17:36:32 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 static void	imgui_spheres_group(t_rtv *rtv)
 {
+	static bool	normal_sin = false;
+
 	if (!ig_group_top_default("Spheres"))
 		return ;
 	igPushID_Str("Spheres");
@@ -25,6 +27,14 @@ static void	imgui_spheres_group(t_rtv *rtv)
 		igPushID_Str("Sphere #0");
 		if (ig_drag_vector("vec_c", &rtv->spheres[0].vectors[VCTR_SPHERE_C].x))
 			invalidate_sphere_vectors(rtv, rtv->spheres[0]);
+		if (igCheckbox("normale disruption", &normal_sin))
+		{
+			if (normal_sin)
+				rtv->spheres[0].traits |= TRAIT_NORMAL_SIN;
+			else
+				rtv->spheres[0].traits -= TRAIT_NORMAL_SIN;
+			rtv->flags |= FLAG_REDRAW;
+		}
 		igPopID();
 	}
 	igPopID();

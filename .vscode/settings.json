@@ -116,7 +116,8 @@
 		"controls.h": "c",
 		"loop_hook_invalidate.h": "c",
 		"intersection_common.h": "c",
-		"windows.h": "c"
+		"windows.h": "c",
+		"actually_defines.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [

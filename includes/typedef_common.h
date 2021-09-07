@@ -19,8 +19,8 @@ typedef struct s_color
 }				t_color;
 
 typedef double			*t_matrix_4;
-typedef double			*t_quaterion;
+typedef double			*t_quaternion;
 typedef const double	*t_const_matrix_4;
-typedef const double	*t_const_quaterion;
+typedef const double	*t_const_quaternion;
 
 #endif

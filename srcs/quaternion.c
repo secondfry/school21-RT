@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/06 22:08:38 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/19 19:34:49 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 17:33:52 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 ** http://www.opengl-tutorial.org/assets/faq_quaternions/index.html
 */
 
-t_quaterion	quaternion_new(double angle_x, double angle_y, double angle_z)
+t_quaternion	quaternion_new(double angle_x, double angle_y, double angle_z)
 {
-	t_quaterion	ret;
-	double		h[8];
+	t_quaternion	ret;
+	double			h[8];
 
 	h[7] = sin(angle_x * 0.5F);
 	h[6] = cos(angle_x * 0.5F);
@@ -38,7 +38,7 @@ t_quaterion	quaternion_new(double angle_x, double angle_y, double angle_z)
 	return (ret);
 }
 
-t_matrix_4	quaternion_to_matrix(t_const_quaterion self)
+t_matrix_4	quaternion_to_matrix(t_const_quaternion self)
 {
 	t_matrix_4	ret;
 	double		h[9];
