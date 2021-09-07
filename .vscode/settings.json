@@ -115,7 +115,8 @@
 		"cimgui_impl.h": "c",
 		"controls.h": "c",
 		"loop_hook_invalidate.h": "c",
-		"intersection_common.h": "c"
+		"intersection_common.h": "c",
+		"windows.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [

@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 14:12:23 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 14:32:23 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 16:35:49 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,20 @@ bool	ig_drag_vector(const char *label, const double *v)
 			0
 		)
 	);
+}
+
+bool	ig_group_top_default(const char *label)
+{
+	return (igTreeNodeEx_Str(\
+		label, \
+		ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_CollapsingHeader \
+	));
+}
+
+bool	ig_group_default(const char *label)
+{
+	return (igTreeNodeEx_Str(\
+		label, \
+		ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_NoTreePushOnOpen \
+	));
 }
