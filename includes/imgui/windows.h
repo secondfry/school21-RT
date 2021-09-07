@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 15:03:46 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 15:08:15 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 16:38:10 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@
 
 void	imgui_window_texture(GLuint texture_id);
 void	imgui_window_debug(void);
-void	imgui_window_controls(t_rtv *rtv);
 
 #endif
