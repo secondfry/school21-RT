@@ -1,4 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raytrace.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/07 19:38:37 by oadhesiv          #+#    #+#             */
+/*   Updated: 2021/09/07 19:38:44 by oadhesiv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "raytrace.h"
+#include "raytrace/raytrace_texture.h"
 
 static t_light_params	get_light_params(t_rtv *rtv, t_intersection *intr)
 {
@@ -42,6 +55,7 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 		&params.vec_n, find_normal(rtv, intr, &params));
 	vector_set_by_value(&params.vec_v, vector_mult(data->vectors[VCTR_D], -1));
 	intensity = light(rtv, &params);
+	check_texture(rtv, &params, intr);
 	return (*color_mult((void *)&params.color, intensity));
 }
 

@@ -23,4 +23,13 @@ typedef double			*t_quaternion;
 typedef const double	*t_const_matrix_4;
 typedef const double	*t_const_quaternion;
 
+typedef struct s_texture
+{
+	t_byte		*data;
+	int			width;
+	int			height;
+	t_vector_4	offset;
+	t_vector_4	scale;
+}				t_texture;
+
 #endif
