@@ -39,6 +39,7 @@ typedef struct s_rtv
 	t_matrix_4		camera_rotation;
 	t_sphere		spheres[MAX_SPHERES];
 	t_plane			planes[MAX_PLANES];
+	t_plane			slice;
 	t_cylinder		cylinders[MAX_CYLINDERS];
 	t_cone			cones[MAX_CONES];
 	double			ambient;
