@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 16:37:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 19:31:29 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 21:04:55 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,7 @@
 #include "rtv.h"
 #include "imgui/controls.h"
 #include "loop/loop_hook_invalidate.h"
-
-static void	imgui_spheres_group(t_rtv *rtv)
-{
-	static bool	normal_sin = false;
-
-	if (!ig_group_top_default("Spheres"))
-		return ;
-	igPushID_Str("Spheres");
-	if (ig_group_default("Sphere #0"))
-	{
-		igPushID_Str("Sphere #0");
-		if (ig_drag_vector("vec_c", &rtv->spheres[0].vectors[VCTR_SPHERE_C].x))
-			invalidate_sphere_vectors(rtv, rtv->spheres[0]);
-		if (igCheckbox("normale disruption", &normal_sin))
-		{
-			if (normal_sin)
-				rtv->spheres[0].traits |= TRAIT_NORMAL_SIN;
-			else
-				rtv->spheres[0].traits -= TRAIT_NORMAL_SIN;
-			rtv->flags |= FLAG_REDRAW;
-		}
-		igPopID();
-	}
-	igPopID();
-}
+#include "imgui/window_controls_spheres.h"
 
 static void	imgui_planes_group(t_rtv *rtv)
 {
@@ -47,7 +23,7 @@ static void	imgui_planes_group(t_rtv *rtv)
 	if (!ig_group_top_default("Planes"))
 		return ;
 	igPushID_Str("Planes");
-	if (ig_group_default("Plane #0"))
+	if (ig_group_default("Plane #0", true))
 	{
 		igPushID_Str("Plane #0");
 		if (igCheckbox("textured", &textured))

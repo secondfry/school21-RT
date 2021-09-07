@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 14:12:23 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 16:35:49 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 21:15:38 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,24 @@ bool	ig_drag_vector(const char *label, const double *v)
 	);
 }
 
+bool	ig_drag_double(const char *label, const double *v)
+{
+	static double	min = 0.0;
+	static double	max = 1.0 / 0.0;
+
+	return (igDragScalar(
+			label,
+			ImGuiDataType_Double,
+			(void *)v,
+			0.05f,
+			&min,
+			&max,
+			"%.3f",
+			0
+		)
+	);
+}
+
 bool	ig_group_top_default(const char *label)
 {
 	return (igTreeNodeEx_Str(\
@@ -48,10 +66,16 @@ bool	ig_group_top_default(const char *label)
 	));
 }
 
-bool	ig_group_default(const char *label)
+bool	ig_group_default(const char *label, bool first)
 {
+	if (first)
+		return (igTreeNodeEx_Str(\
+			label, \
+			ImGuiTreeNodeFlags_DefaultOpen \
+				| ImGuiTreeNodeFlags_NoTreePushOnOpen \
+		));
 	return (igTreeNodeEx_Str(\
 		label, \
-		ImGuiTreeNodeFlags_DefaultOpen | ImGuiTreeNodeFlags_NoTreePushOnOpen \
+		ImGuiTreeNodeFlags_NoTreePushOnOpen \
 	));
 }

@@ -8,10 +8,10 @@ static void	init_rtv_spheres(t_rtv *rtv)
 	while (i < MAX_SPHERES)
 	{
 		ft_memcpy(rtv->spheres + i, &((t_sphere){
-			{{0, 0, 0, 0}, {0, 0, 0, 0}}, \
+			{{0, 0, 0, 1}, {0, 0, 0, 0}}, \
 			{0, 0, 0}, \
-			0, \
-			0, \
+			1.0, \
+			-1.0, \
 			0 \
 		}), sizeof(t_sphere));
 		i++;

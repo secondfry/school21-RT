@@ -10,7 +10,7 @@
 # include "figures.h"
 # include "lights.h"
 
-# define MAX_SPHERES	10
+# define MAX_SPHERES	5
 # define MAX_PLANES		10
 # define MAX_CYLINDERS	10
 # define MAX_CONES		10
