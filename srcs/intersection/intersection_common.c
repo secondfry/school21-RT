@@ -1,7 +1,7 @@
 #include "intersection_common.h"
 #include "vector.h"
 
-void	check_cropping_plane(
+static void	_check_cropping_plane(
 	t_rtv *rtv,
 	t_vector_4 vec_o,
 	t_vector_4 vec_d,
@@ -15,6 +15,18 @@ void	check_cropping_plane(
 
 	if (!ok)
 		*distance = 1.0 / 0.0;
+}
+
+void	check_cropping_plane(
+	t_rtv *rtv,
+	t_vector_4 vec_o,
+	t_vector_4 vec_d,
+	double *distance
+)
+{
+	if (!(rtv->slice.traits & TRAIT_EXISTS))
+		return ;
+	return (_check_cropping_plane(rtv, vec_o, vec_d, distance));
 }
 
 void	check_intersection(
