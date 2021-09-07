@@ -73,7 +73,9 @@ t_intersection	intersection_cylinder_closest(
 			continue ;
 		}
 		intersection_cylinder(rtv, params, i, t);
+		check_cropping_plane(rtv, params->vec_o, params->vec_d, t + 0);
 		check_intersection(&ret, params, t[0], i);
+		check_cropping_plane(rtv, params->vec_o, params->vec_d, t + 1);
 		check_intersection(&ret, params, t[1], i);
 		i++;
 	}
