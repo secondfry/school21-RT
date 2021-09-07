@@ -114,7 +114,8 @@
 		"sdl_defines.h": "c",
 		"cimgui_impl.h": "c",
 		"controls.h": "c",
-		"loop_hook_invalidate.h": "c"
+		"loop_hook_invalidate.h": "c",
+		"intersection_common.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [

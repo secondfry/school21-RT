@@ -1,4 +1,5 @@
 #include "intersection_plane.h"
+#include "intersection_common.h"
 
 // https://www.scratchapixel.com/
 // lessons/3d-basic-rendering/minimal-ray-tracer-rendering-simple-shapes/
@@ -51,6 +52,7 @@ t_intersection	intersection_plane_closest(
 			continue ;
 		}
 		t = intersection_plane(rtv, params, i);
+		check_cropping_plane(rtv, params->vec_o, params->vec_d, &t);
 		if (t > params->t_min && t < params->t_max && t < t_closest)
 		{
 			t_closest = t;
