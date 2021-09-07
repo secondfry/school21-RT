@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/07 16:39:17 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/07 19:39:11 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,10 @@ LIB_DIR = ./lib/libft
 IMGUI = cimgui.dylib
 IMGUI_DIR = ./lib/cimgui
 
-FILES_INIT := init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c
+STB_DIR = ./lib/stb
+
+FILES_INIT :=	init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c \
+				texture.c
 FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
 
 FILES_INTERSECTION :=	intersection.c intersection_common.c \
@@ -54,11 +57,11 @@ FILES_VALIDATOR :=	$(addprefix validator/, $(FILES_VALIDATOR))
 SRC_FILES =	main.c \
 			matrix_factory_1.c matrix_factory_2.c \
 			matrix_utils.c \
-			vector_1.c vector_2.c \
+			vector_1.c vector_2.c vector_3.c \
 			quaternion.c \
 			raytrace.c raytrace_light.c normal.c \
 			color.c \
-			graceful.c \
+			graceful.c raytrace/raytrace_texture.c \
 			$(FILES_INIT) $(FILES_INTERSECTION) $(FILES_LOOP) $(FILES_PARSER) \
 			$(FILES_VALIDATOR) $(FILES_SDL) $(FILES_IMGUI)
 
@@ -102,6 +105,8 @@ CFLAGS_INCLUDES += -I$(LIB_DIR)
 CFLAGS_INCLUDES += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/generator/output
 # ImGui SDL Backend
 CFLAGS_INCLUDES += `sdl2-config --cflags`
+# stb
+CFLAGS_INCLUDES += -I$(STB_DIR)
 
 CFLAGS_ASAN = -fsanitize=address
 

@@ -17,6 +17,7 @@
 
 # define MAX_PLIGHTS	5
 # define MAX_DLIGHTS	5
+# define MAX_TEXTURES	1
 
 # ifdef RT_SERVER
 
@@ -47,6 +48,7 @@ typedef struct s_rtv
 	t_dlight		dlights[MAX_DLIGHTS];
 	char			*filename;
 	t_sdl_window	*window;
+	t_texture		textures[MAX_TEXTURES];
 }					t_rtv;
 
 #endif

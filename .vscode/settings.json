@@ -129,5 +129,6 @@
 		"${workspaceFolder}/lib/libft",
 		"${workspaceFolder}/lib/cimgui",
 		"${workspaceFolder}/lib/cimgui/generator/output",
+		"${workspaceFolder}/lib/stb",
 	],
 }

@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 00:20:30 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/07/19 19:33:35 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 19:34:45 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ t_vector_4	vector_cross(t_vector_4 a, t_vector_4 b);
 
 void		vector_set(t_vector_4 *dst, t_vector_4 *src);
 void		vector_set_by_value(t_vector_4 *dst, t_vector_4 src);
+
+t_vector_4	vector_uv(t_rtv *rtv, t_vector_4 input);
 
 #endif

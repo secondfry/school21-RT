@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 16:37:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 17:36:32 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 19:31:29 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,33 @@ static void	imgui_spheres_group(t_rtv *rtv)
 				rtv->spheres[0].traits -= TRAIT_NORMAL_SIN;
 			rtv->flags |= FLAG_REDRAW;
 		}
+		igPopID();
+	}
+	igPopID();
+}
+
+static void	imgui_planes_group(t_rtv *rtv)
+{
+	static bool	textured = false;
+
+	if (!ig_group_top_default("Planes"))
+		return ;
+	igPushID_Str("Planes");
+	if (ig_group_default("Plane #0"))
+	{
+		igPushID_Str("Plane #0");
+		if (igCheckbox("textured", &textured))
+		{
+			if (textured)
+				rtv->planes[0].traits |= TRAIT_TEXTURED;
+			else
+				rtv->planes[0].traits -= TRAIT_TEXTURED;
+			rtv->flags |= FLAG_REDRAW;
+		}
+		if (ig_drag_vector("scale", &rtv->textures[0].scale.x))
+			rtv->flags |= FLAG_REDRAW;
+		if (ig_drag_vector("offset", &rtv->textures[0].offset.x))
+			rtv->flags |= FLAG_REDRAW;
 		igPopID();
 	}
 	igPopID();
@@ -84,6 +111,7 @@ void	imgui_window_controls(t_rtv *rtv)
 {
 	igBegin("RT controls", 0, ImGuiWindowFlags_NoMove);
 	imgui_spheres_group(rtv);
+	imgui_planes_group(rtv);
 	imgui_camera_group(rtv);
 	imgui_cropping_plane_group(rtv);
 	igEnd();
