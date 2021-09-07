@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 16:37:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 16:40:33 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 16:49:34 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void	imgui_cropping_plane_group(t_rtv *rtv)
 			rtv->slice.traits |= TRAIT_EXISTS;
 		else
 			rtv->slice.traits -= TRAIT_EXISTS;
+		rtv->flags |= FLAG_REDRAW;
 	}
 	if (ig_drag_vector("position", &rtv->slice.position.x))
 		rtv->flags |= FLAG_REDRAW;
