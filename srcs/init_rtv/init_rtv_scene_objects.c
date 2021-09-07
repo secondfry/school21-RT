@@ -26,14 +26,21 @@ static void	init_rtv_planes(t_rtv *rtv)
 	while (i < MAX_PLANES)
 	{
 		ft_memcpy(rtv->planes + i, &((t_plane){
-			{0, 0, 0, 0}, \
-			{0, 0, 0, 0}, \
+			{0, -1, 0, 1}, \
+			{0, 1, 0, 0}, \
 			{0, 0, 0}, \
-			0, \
+			-1, \
 			0 \
 		}), sizeof(t_plane));
 		i++;
 	}
+	ft_memcpy(&rtv->slice, &((t_plane){
+		{0.0, 0.0, 3.0, 1.0}, \
+		{0.0, 3.0, 2.0, 0.0}, \
+		{0, 0, 0}, \
+		-1, \
+		0 \
+	}), sizeof(t_plane));
 }
 
 static void	init_rtv_cylinders(t_rtv *rtv)
