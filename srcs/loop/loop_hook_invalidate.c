@@ -34,7 +34,7 @@ void	loop_invalidate_position(t_rtv *rtv)
 
 void	loop_invalidate_rotation(t_rtv *rtv)
 {
-	t_quaterion	rotator;
+	t_quaternion	rotator;
 
 	if (!(rtv->flags & FLAG_INVALIDATE_ROTATION))
 		return ;

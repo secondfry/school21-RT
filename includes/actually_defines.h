@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 14:34:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:38:40 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/07 17:26:55 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ enum	e_flags
 enum	e_traits
 {
 	TRAIT_EXISTS = (1u << 0u),
+	TRAIT_NORMAL_SIN = (1u << 1u),
 };
 
 #endif
