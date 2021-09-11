@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 21:19:03 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 22:11:14 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 23:08:32 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,27 @@ static void	imgui_sphere_textured(t_rtv *rtv, t_byte idx)
 		rtv->flags |= FLAG_REDRAW;
 }
 
-static void	imgui_sphere_color_checkerboard(t_rtv *rtv, t_byte idx)
+static void	imgui_sphere_color_checkerboard_and_perlin(t_rtv *rtv, t_byte idx)
 {
 	static bool	checkerboard[MAX_SPHERES];
+	static bool	perlin[MAX_SPHERES];
 
-	if (!(igCheckbox("color disruption: checkboard", checkerboard + idx)))
-		return ;
-	if (checkerboard[idx])
-		rtv->spheres[idx].traits |= TRAIT_CHECKERBOARD;
-	else
-		rtv->spheres[idx].traits -= TRAIT_CHECKERBOARD;
-	rtv->flags |= FLAG_REDRAW;
+	if (igCheckbox("color disruption: checkboard", checkerboard + idx))
+	{
+		if (checkerboard[idx])
+			rtv->spheres[idx].traits |= TRAIT_CHECKERBOARD;
+		else
+			rtv->spheres[idx].traits -= TRAIT_CHECKERBOARD;
+		rtv->flags |= FLAG_REDRAW;
+	}
+	if (igCheckbox("color disruption: perlin noise", perlin + idx))
+	{
+		if (perlin[idx])
+			rtv->spheres[idx].traits |= TRAIT_COLOR_PERLIN;
+		else
+			rtv->spheres[idx].traits -= TRAIT_COLOR_PERLIN;
+		rtv->flags |= FLAG_REDRAW;
+	}
 }
 
 static void	imgui_sphere_color_sin(t_rtv *rtv, t_byte idx)
@@ -77,6 +87,6 @@ void	imgui_sphere_local_checkboxes(t_rtv *rtv, t_byte idx)
 {
 	imgui_sphere_normale_disruption(rtv, idx);
 	imgui_sphere_textured(rtv, idx);
-	imgui_sphere_color_checkerboard(rtv, idx);
+	imgui_sphere_color_checkerboard_and_perlin(rtv, idx);
 	imgui_sphere_color_sin(rtv, idx);
 }

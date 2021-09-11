@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:24:25 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 22:11:17 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 23:06:11 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "rtv.h"
 #include "vector.h"
 #include "color.h"
+#include "raytrace/raytrace_perlin.h"
 
 static void	_get_uv_sphere(
 	t_rtv *rtv,
@@ -67,6 +68,29 @@ static void	check_sin_sphere(
 	}));
 }
 
+static void	check_perlin_sphere(
+	t_rtv *rtv,
+	const t_light_params *params,
+	t_intersection *intr,
+	double uv[2]
+)
+{
+	static bool	once;
+
+	(void)rtv;
+	(void)intr;
+	if (!once)
+	{
+		init_perlin();
+		once = true;
+	}
+	color_mult(\
+		(t_color *)&params->color, \
+		(perlin(uv[0] * PERLIN_SIZE, uv[1] * PERLIN_SIZE) + 1) / 2 \
+	);
+	return ;
+}
+
 static void	check_texture_sphere(
 	t_rtv *rtv,
 	const t_light_params *params,
@@ -109,6 +133,7 @@ void	check_color_sphere(
 	if (!(rtv->spheres[intr->idx].traits & TRAIT_TEXTURED) \
 		&& !(rtv->spheres[intr->idx].traits & TRAIT_CHECKERBOARD) \
 		&& !(rtv->spheres[intr->idx].traits & TRAIT_COLOR_COMPLICATED) \
+		&& !(rtv->spheres[intr->idx].traits & TRAIT_COLOR_PERLIN) \
 	)
 		return ;
 	_get_uv_sphere(rtv, params, intr, uv);
@@ -116,6 +141,8 @@ void	check_color_sphere(
 		check_texture_sphere(rtv, params, intr, uv);
 	if (rtv->spheres[intr->idx].traits & TRAIT_CHECKERBOARD)
 		check_checkerboard_sphere(rtv, params, intr, uv);
+	if (rtv->spheres[intr->idx].traits & TRAIT_COLOR_PERLIN)
+		check_perlin_sphere(rtv, params, intr, uv);
 	if (rtv->spheres[intr->idx].traits & TRAIT_COLOR_COMPLICATED)
 		check_sin_sphere(rtv, params, intr, uv);
 }
