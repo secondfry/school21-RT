@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 20:59:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 20:38:57 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 21:09:36 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,23 @@ static void	imgui_sphere_enabled(t_rtv *rtv, t_byte idx)
 	rtv->flags |= FLAG_REDRAW;
 }
 
-static void	imgui_sphere_local_checkboxes(t_rtv *rtv, t_byte idx)
+static void	imgui_sphere_normale_disruption(t_rtv *rtv, t_byte idx)
 {
 	static bool	normal_sin[MAX_SPHERES];
+
+	if (!(igCheckbox("normale disruption", normal_sin + idx)))
+		return ;
+	if (normal_sin[idx])
+		rtv->spheres[idx].traits |= TRAIT_NORMAL_SIN;
+	else
+		rtv->spheres[idx].traits -= TRAIT_NORMAL_SIN;
+	rtv->flags |= FLAG_REDRAW;
+}
+
+static void	imgui_sphere_textured(t_rtv *rtv, t_byte idx)
+{
 	static bool	textured[MAX_SPHERES];
 
-	if (igCheckbox("normale disruption", normal_sin + idx))
-	{
-		if (normal_sin[idx])
-			rtv->spheres[idx].traits |= TRAIT_NORMAL_SIN;
-		else
-			rtv->spheres[idx].traits -= TRAIT_NORMAL_SIN;
-		rtv->flags |= FLAG_REDRAW;
-	}
 	if (igCheckbox("textured", textured + idx))
 	{
 		if (textured[idx])
@@ -88,6 +92,26 @@ static void	imgui_sphere_local_checkboxes(t_rtv *rtv, t_byte idx)
 		&rtv->spheres[idx].texture_id, &g_tex_min, &g_tex_max, "%d", 0) \
 	)
 		rtv->flags |= FLAG_REDRAW;
+}
+
+static void	imgui_sphere_color_checkerboard(t_rtv *rtv, t_byte idx)
+{
+	static bool	checkerboard[MAX_SPHERES];
+
+	if (!(igCheckbox("color disruption: checkboard", checkerboard + idx)))
+		return ;
+	if (checkerboard[idx])
+		rtv->spheres[idx].traits |= TRAIT_CHECKERBOARD;
+	else
+		rtv->spheres[idx].traits -= TRAIT_CHECKERBOARD;
+	rtv->flags |= FLAG_REDRAW;
+}
+
+static void	imgui_sphere_local_checkboxes(t_rtv *rtv, t_byte idx)
+{
+	imgui_sphere_normale_disruption(rtv, idx);
+	imgui_sphere_textured(rtv, idx);
+	imgui_sphere_color_checkerboard(rtv, idx);
 }
 
 static void	imgui_sphere_group(t_rtv *rtv, t_byte idx)
