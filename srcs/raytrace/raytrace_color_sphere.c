@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:24:25 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 20:35:08 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:59:40 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,49 @@ static void	_get_uv_sphere(
 	uv[1] = 0.5 + asin(vec_pc.y) / M_PI;
 }
 
-static void	_check_texture_sphere(
+static void	check_checkerboard_sphere(
 	t_rtv *rtv,
 	const t_light_params *params,
 	t_intersection *intr,
 	double uv[2]
 )
 {
-	const t_byte		texture_id = rtv->spheres[intr->idx].texture_id;
-	const unsigned int	u = uv[0] * rtv->textures[texture_id].width;
-	const unsigned int	v = uv[1] * rtv->textures[texture_id].height;
-	const size_t		offset = 4 * (v * rtv->textures[texture_id].width + u);
-	const t_color		color = {
+	(void)rtv;
+	(void)params;
+	(void)intr;
+	(void)uv;
+}
+
+static void	check_texture_sphere(
+	t_rtv *rtv,
+	const t_light_params *params,
+	t_intersection *intr,
+	double uv[2]
+)
+{
+	t_byte			texture_id;
+	unsigned int	u;
+	unsigned int	v;
+	size_t			offset;
+	t_color			color;
+
+	if (!rtv->textures[rtv->spheres[intr->idx].texture_id].data)
+		return ;
+	texture_id = rtv->spheres[intr->idx].texture_id;
+	u = uv[0] * rtv->textures[texture_id].width;
+	v = uv[1] * rtv->textures[texture_id].height;
+	offset = 4 * (v * rtv->textures[texture_id].width + u);
+	if (rtv->textures[texture_id].data[offset + 3] == 0)
+		return ;
+	color = (t_color){
 		rtv->textures[texture_id].data[offset + 0],
 		rtv->textures[texture_id].data[offset + 1],
 		rtv->textures[texture_id].data[offset + 2],
 	};
-
-	if (rtv->textures[texture_id].data[offset + 3] == 0)
-		return ;
 	ft_memcpy((void *)&params->color, &color, sizeof(t_color));
 }
 
-void	check_texture_sphere(
+void	check_color_sphere(
 	t_rtv *rtv,
 	const t_light_params *params,
 	t_intersection *intr
@@ -63,10 +83,13 @@ void	check_texture_sphere(
 
 	if (intr->idx > MAX_SPHERES - 1)
 		return ;
-	if (!(rtv->spheres[intr->idx].traits & TRAIT_TEXTURED))
-		return ;
-	if (!rtv->textures[rtv->spheres[intr->idx].texture_id].data)
+	if (!(rtv->spheres[intr->idx].traits & TRAIT_TEXTURED) \
+		&& !(rtv->spheres[intr->idx].traits & TRAIT_CHECKERBOARD) \
+	)
 		return ;
 	_get_uv_sphere(rtv, params, intr, uv);
-	return (_check_texture_sphere(rtv, params, intr, uv));
+	if (rtv->spheres[intr->idx].traits & TRAIT_TEXTURED)
+		check_texture_sphere(rtv, params, intr, uv);
+	if (rtv->spheres[intr->idx].traits & TRAIT_CHECKERBOARD)
+		check_checkerboard_sphere(rtv, params, intr, uv);
 }

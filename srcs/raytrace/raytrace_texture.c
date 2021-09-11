@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 19:36:16 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 20:25:55 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:41:13 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	check_texture(
 	if (intr->type == IPLANE)
 		return (check_texture_plane(rtv, params, intr));
 	if (intr->type == ISPHERE)
-		return (check_texture_sphere(rtv, params, intr));
+		return (check_color_sphere(rtv, params, intr));
 }

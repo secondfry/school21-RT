@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:24:50 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 20:27:58 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:41:04 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "defines.h"
 # include "rtv.h"
 
-void	check_texture_sphere(\
+void	check_color_sphere(\
 	t_rtv *rtv, \
 	const t_light_params *params, \
 	t_intersection *intr \
