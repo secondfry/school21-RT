@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 14:34:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 18:38:49 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:42:24 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ enum	e_traits
 	TRAIT_EXISTS = (1u << 0u),
 	TRAIT_NORMAL_SIN = (1u << 1u),
 	TRAIT_TEXTURED = (1u << 2u),
+	TRAIT_CHECKERBOARD = (1u << 3u),
 };
 
 #endif
