@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raytrace_texture.c                                 :+:      :+:    :+:   */
+/*   raytrace_color_plane.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/07 19:36:16 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 20:25:55 by oadhesiv         ###   ########.fr       */
+/*   Created: 2021/09/11 20:23:22 by oadhesiv          #+#    #+#             */
+/*   Updated: 2021/09/11 20:27:53 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "raytrace/raytrace_texture.h"
-#include "raytrace/raytrace_color_plane.h"
-#include "raytrace/raytrace_color_sphere.h"
+#ifndef RAYTRACE_COLOR_PLANE_H
+# define RAYTRACE_COLOR_PLANE_H
 
-void	check_texture(
-	t_rtv *rtv,
-	const t_light_params *params,
-	t_intersection *intr
-)
-{
-	if (intr->type == IPLANE)
-		return (check_texture_plane(rtv, params, intr));
-	if (intr->type == ISPHERE)
-		return (check_texture_sphere(rtv, params, intr));
-}
+# include "defines.h"
+# include "rtv.h"
+
+void	check_texture_plane(\
+	t_rtv *rtv, \
+	const t_light_params *params, \
+	t_intersection *intr \
+);
+
+#endif

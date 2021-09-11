@@ -120,7 +120,9 @@
 		"actually_defines.h": "c",
 		"stb.h": "c",
 		"stb_image.h": "c",
-		"stb_image_write.h": "c"
+		"stb_image_write.h": "c",
+		"raytrace_texture.h": "c",
+		"raytrace_color_sphere.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [

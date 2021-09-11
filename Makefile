@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/11 17:44:55 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/11 20:26:55 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,10 @@ FILES_VALIDATOR :=	validator_1.c validator_2.c validator_light.c \
 					validator_sphere.c validator_camera.c
 FILES_VALIDATOR :=	$(addprefix validator/, $(FILES_VALIDATOR))
 
+FILES_RAYTRACE :=	raytrace_texture.c \
+					raytrace_color_plane.c raytrace_color_sphere.c
+FILES_RAYTRACE :=	$(addprefix raytrace/, $(FILES_RAYTRACE))
+
 SRC_FILES =	main.c \
 			matrix_factory_1.c matrix_factory_2.c \
 			matrix_utils.c \
@@ -62,9 +66,9 @@ SRC_FILES =	main.c \
 			quaternion.c \
 			raytrace.c raytrace_light.c normal.c \
 			color.c \
-			graceful.c raytrace/raytrace_texture.c \
+			graceful.c \
 			$(FILES_INIT) $(FILES_INTERSECTION) $(FILES_LOOP) $(FILES_PARSER) \
-			$(FILES_VALIDATOR) $(FILES_SDL) $(FILES_IMGUI)
+			$(FILES_VALIDATOR) $(FILES_SDL) $(FILES_IMGUI) $(FILES_RAYTRACE)
 
 SRC_DIRS = $(sort $(dir $(SRC_FILES)))
 OBJS_DIRS = $(addprefix $(OBJS_DIR)/, $(SRC_DIRS))

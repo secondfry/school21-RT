@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 22:08:37 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 19:30:11 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:21:59 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void	init_rtv_common(t_rtv *rtv)
 	vector_set_by_value(&rtv->textures[0].scale, vector_new(-10, 0, 10, 0));
 	vector_set_by_value(&rtv->textures[0].offset, vector_new(5, 0, 5, 0));
 	load_texture("textures/error_guy.png", rtv->textures + 0);
+	load_texture("textures/UVChecker_byValle_1K_8.png", rtv->textures + 1);
 }
 
 void	init_rtv(t_rtv *rtv)
