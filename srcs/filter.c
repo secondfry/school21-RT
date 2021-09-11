@@ -20,6 +20,12 @@ t_color	sepia(t_color color)
 	sepia_red = .393 * color.red + .769 * color.green + .189 * color.blue;
 	sepia_green = .349 * color.red + .686 * color.green + .168 * color.blue;
 	sepia_blue = .272 * color.red + .534 * color.green + .131 * color.blue;
+	if (sepia_red > 255)
+		sepia_red = 255;
+	if (sepia_green > 255)
+		sepia_green = 255;
+	if (sepia_blue > 255)
+		sepia_blue = 255;
 	color.red = sepia_red;
 	color.green = sepia_green;
 	color.blue = sepia_blue;
