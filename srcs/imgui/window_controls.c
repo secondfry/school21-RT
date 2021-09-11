@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 16:37:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 21:04:55 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 17:53:39 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "imgui/controls.h"
 #include "loop/loop_hook_invalidate.h"
 #include "imgui/window_controls_spheres.h"
+#include "stb_image_write.h"
 
 static void	imgui_planes_group(t_rtv *rtv)
 {
@@ -83,6 +84,21 @@ static void	imgui_cropping_plane_group(t_rtv *rtv)
 	igPopID();
 }
 
+static void	imgui_buttons_group(t_rtv *rtv)
+{
+	const time_t	now = time(NULL);
+	const struct tm	*time = localtime(&now);
+	static char		buffer[100];
+
+	if (!ig_group_top_default("BUTTONS bruh"))
+		return ;
+	igPushID_Str("BUTTONS bruh");
+	strftime(buffer, sizeof(buffer) - 1, "%Y%m%d%H%M%S.bmp", time);
+	if (igButton("Screenshot", (ImVec2){0, 0}))
+		stbi_write_bmp(buffer, WIDTH, HEIGHT, 4, rtv->sdl->buffer);
+	igPopID();
+}
+
 void	imgui_window_controls(t_rtv *rtv)
 {
 	igBegin("RT controls", 0, ImGuiWindowFlags_NoMove);
@@ -90,5 +106,6 @@ void	imgui_window_controls(t_rtv *rtv)
 	imgui_planes_group(rtv);
 	imgui_camera_group(rtv);
 	imgui_cropping_plane_group(rtv);
+	imgui_buttons_group(rtv);
 	igEnd();
 }

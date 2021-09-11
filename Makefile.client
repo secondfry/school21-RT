@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/07 21:06:06 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/11 17:45:14 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ ZMQ_DIR = $(BREW_DIR)/opt/zmq
 CZMQ_DIR = $(BREW_DIR)/opt/czmq
 
 FILES_INIT :=	init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c \
-				texture.c
+				texture.c stb.c
 FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
 
 FILES_LOOP :=	loop_hook_common.c loop_sdl.c

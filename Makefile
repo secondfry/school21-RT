@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/07 21:05:10 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/11 17:44:55 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ IMGUI_DIR = ./lib/cimgui
 STB_DIR = ./lib/stb
 
 FILES_INIT :=	init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c \
-				texture.c
+				texture.c stb.c
 FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
 
 FILES_INTERSECTION :=	intersection.c intersection_common.c \

@@ -117,7 +117,10 @@
 		"loop_hook_invalidate.h": "c",
 		"intersection_common.h": "c",
 		"windows.h": "c",
-		"actually_defines.h": "c"
+		"actually_defines.h": "c",
+		"stb.h": "c",
+		"stb_image.h": "c",
+		"stb_image_write.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [
