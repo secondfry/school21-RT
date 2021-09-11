@@ -122,7 +122,8 @@
 		"stb_image.h": "c",
 		"stb_image_write.h": "c",
 		"raytrace_texture.h": "c",
-		"raytrace_color_sphere.h": "c"
+		"raytrace_color_sphere.h": "c",
+		"window_controls_spheres_checkbox.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [
