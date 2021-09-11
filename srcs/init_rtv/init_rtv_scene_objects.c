@@ -12,7 +12,8 @@ static void	init_rtv_spheres(t_rtv *rtv)
 			{0, 0, 0}, \
 			1.0, \
 			-1.0, \
-			0 \
+			0, \
+			0, \
 		}), sizeof(t_sphere));
 		i++;
 	}
