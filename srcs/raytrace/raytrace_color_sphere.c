@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:24:25 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 21:12:17 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 22:11:17 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,22 @@ static void	check_checkerboard_sphere(
 	color_mult((t_color *)&params->color, 0.5);
 }
 
+static void	check_sin_sphere(
+	t_rtv *rtv,
+	const t_light_params *params,
+	t_intersection *intr,
+	double uv[2]
+)
+{
+	(void)rtv;
+	(void)intr;
+	color_add((t_color *)&params->color, &((t_color){\
+		(uv[0] - uv[1]) * (uv[0] - uv[1]) * 255, \
+		sin(uv[1] * M_PI / 2) * 255, \
+		cos(uv[1] * M_PI / 2) * 255, \
+	}));
+}
+
 static void	check_texture_sphere(
 	t_rtv *rtv,
 	const t_light_params *params,
@@ -92,6 +108,7 @@ void	check_color_sphere(
 		return ;
 	if (!(rtv->spheres[intr->idx].traits & TRAIT_TEXTURED) \
 		&& !(rtv->spheres[intr->idx].traits & TRAIT_CHECKERBOARD) \
+		&& !(rtv->spheres[intr->idx].traits & TRAIT_COLOR_COMPLICATED) \
 	)
 		return ;
 	_get_uv_sphere(rtv, params, intr, uv);
@@ -99,4 +116,6 @@ void	check_color_sphere(
 		check_texture_sphere(rtv, params, intr, uv);
 	if (rtv->spheres[intr->idx].traits & TRAIT_CHECKERBOARD)
 		check_checkerboard_sphere(rtv, params, intr, uv);
+	if (rtv->spheres[intr->idx].traits & TRAIT_COLOR_COMPLICATED)
+		check_sin_sphere(rtv, params, intr, uv);
 }

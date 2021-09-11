@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 21:19:03 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 21:22:28 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 22:11:14 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,23 @@ static void	imgui_sphere_color_checkerboard(t_rtv *rtv, t_byte idx)
 	rtv->flags |= FLAG_REDRAW;
 }
 
+static void	imgui_sphere_color_sin(t_rtv *rtv, t_byte idx)
+{
+	static bool	sin[MAX_SPHERES];
+
+	if (!(igCheckbox("color disruption: complicated", sin + idx)))
+		return ;
+	if (sin[idx])
+		rtv->spheres[idx].traits |= TRAIT_COLOR_COMPLICATED;
+	else
+		rtv->spheres[idx].traits -= TRAIT_COLOR_COMPLICATED;
+	rtv->flags |= FLAG_REDRAW;
+}
+
 void	imgui_sphere_local_checkboxes(t_rtv *rtv, t_byte idx)
 {
 	imgui_sphere_normale_disruption(rtv, idx);
 	imgui_sphere_textured(rtv, idx);
 	imgui_sphere_color_checkerboard(rtv, idx);
+	imgui_sphere_color_sin(rtv, idx);
 }
