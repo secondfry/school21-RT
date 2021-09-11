@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 16:37:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 17:53:39 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/12 00:23:57 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "loop/loop_hook_invalidate.h"
 #include "imgui/window_controls_spheres.h"
 #include "stb_image_write.h"
+#include "imgui/window_controls_filters.h"
 
 static void	imgui_planes_group(t_rtv *rtv)
 {
@@ -106,6 +107,7 @@ void	imgui_window_controls(t_rtv *rtv)
 	imgui_planes_group(rtv);
 	imgui_camera_group(rtv);
 	imgui_cropping_plane_group(rtv);
+	imgui_filters_group(rtv);
 	imgui_buttons_group(rtv);
 	igEnd();
 }

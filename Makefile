@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+         #
+#    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/11 23:38:17 by pcarolei         ###   ########.fr        #
+#    Updated: 2021/09/12 00:24:17 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ FILES_LOOP :=	loop_hook_flow.c loop_hook_invalidate.c \
 FILES_LOOP := $(addprefix loop/, $(FILES_LOOP))
 
 FILES_IMGUI :=	controls.c imgui_init.c windows.c window_controls.c \
-				window_controls_spheres.c window_controls_spheres_checkbox.c
+				window_controls_spheres.c window_controls_spheres_checkbox.c \
+				window_controls_filters.c
 FILES_IMGUI := $(addprefix imgui/, $(FILES_IMGUI))
 
 FILES_SDL :=	init_sdl.c sdl_events.c sdl_gl_attributes.c sdl_clear_texture.c

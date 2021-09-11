@@ -124,7 +124,8 @@
 		"raytrace_texture.h": "c",
 		"raytrace_color_sphere.h": "c",
 		"window_controls_spheres_checkbox.h": "c",
-		"raytrace_perlin.h": "c"
+		"raytrace_perlin.h": "c",
+		"window_controls_filters.h": "c"
 	},
 	"editor.formatOnSave": false,
 	"C_Cpp.default.includePath": [

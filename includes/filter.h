@@ -7,6 +7,7 @@
 # define SEPIA 2
 # define INVERSION 3
 # define CARTOON 4
+# define MAX_FILTER 5
 
 t_color	apply_filter(t_color color, t_byte filter_code);
 t_color	grayscale(t_color color);
