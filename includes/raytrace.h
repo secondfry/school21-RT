@@ -9,6 +9,7 @@
 # include "matrix_utils.h"
 # include "normal.h"
 # include "raytrace_light.h"
+# include "filter.h"
 
 // FIXME(secondfry): unused
 typedef struct s_pre_light

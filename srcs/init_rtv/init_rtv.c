@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rtv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 22:08:37 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 20:21:59 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 23:48:13 by pcarolei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	init_rtv_common(t_rtv *rtv)
 {
 	static t_byte	not_first;
 
+	rtv->filter = 0;
 	rtv->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
 	ft_memcpy(
