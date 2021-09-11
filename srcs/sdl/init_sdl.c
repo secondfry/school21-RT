@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 13:56:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 15:28:12 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 23:47:42 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "loop_hook.h"
 #include "sdl/sdl_events.h"
 #include "sdl/sdl_gl_attributes.h"
+#include "stb_image.h"
 
 int	sdl_init(t_sdl *sdl)
 {
@@ -42,6 +43,13 @@ int	sdl_init(t_sdl *sdl)
 	return (0);
 }
 
+inline void	cleanup(t_rtv *rtv)
+{
+	stbi_image_free(rtv->textures[0].data);
+	stbi_image_free(rtv->textures[1].data);
+	free(rtv->camera_rotation);
+}
+
 void	sdl_loop(t_rtv *rtv, t_sdl *sdl)
 {
 	while (1)
@@ -50,6 +58,7 @@ void	sdl_loop(t_rtv *rtv, t_sdl *sdl)
 			break ;
 		loop_hook(rtv);
 	}
+	cleanup(rtv);
 }
 
 void	sdl_clear(t_sdl *sdl)
