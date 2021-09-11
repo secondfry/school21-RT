@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 20:59:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 20:05:05 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:38:57 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "imgui/controls.h"
 #include "loop/loop_hook_invalidate.h"
 
-const char	*g_sphere_labels[10] = {
+const char		*g_sphere_labels[10] = {
 	"Sphere #0",
 	"Sphere #1",
 	"Sphere #2",
@@ -29,8 +29,10 @@ const char	*g_sphere_labels[10] = {
 	"Sphere #9",
 };
 
-float		g_color[MAX_SPHERES][3];
-bool		g_enabled[MAX_SPHERES];
+float			g_color[MAX_SPHERES][3];
+bool			g_enabled[MAX_SPHERES];
+const t_byte	g_tex_min = 0;
+const t_byte	g_tex_max = MAX_TEXTURES - 1;
 
 static void	imgui_init_sphere_globals(t_rtv *rtv)
 {
@@ -82,6 +84,10 @@ static void	imgui_sphere_local_checkboxes(t_rtv *rtv, t_byte idx)
 			rtv->spheres[idx].traits -= TRAIT_TEXTURED;
 		rtv->flags |= FLAG_REDRAW;
 	}
+	if (igSliderScalar("texture_id", ImGuiDataType_U8, \
+		&rtv->spheres[idx].texture_id, &g_tex_min, &g_tex_max, "%d", 0) \
+	)
+		rtv->flags |= FLAG_REDRAW;
 }
 
 static void	imgui_sphere_group(t_rtv *rtv, t_byte idx)

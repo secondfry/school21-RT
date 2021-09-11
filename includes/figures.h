@@ -16,6 +16,7 @@ typedef struct s_sphere
 	t_color		color;
 	double		radius_squared;
 	double		specular;
+	t_byte		texture_id;
 	t_byte		traits;
 }				t_sphere;
 
