@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:24:25 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 21:10:47 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 21:12:17 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	check_checkerboard_sphere(
 	double uv[2]
 )
 {
-	const double	u = uv[0];
-	const double	v = uv[1];
+	const double	u = fmod(uv[0] * 4, 1);
+	const double	v = fmod(uv[1] * 2, 1);
 
 	(void)rtv;
 	(void)intr;
