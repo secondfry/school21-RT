@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:24:25 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 23:06:11 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 23:29:15 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,7 @@
 #include "vector.h"
 #include "color.h"
 #include "raytrace/raytrace_perlin.h"
-
-static void	_get_uv_sphere(
-	t_rtv *rtv,
-	const t_light_params *params,
-	t_intersection *intr,
-	double uv[2]
-)
-{
-	const t_sphere		sphere = rtv->spheres[intr->idx];
-	const t_vector_4	vec_pc = vector_normalize(
-		vector_sub(sphere.vectors[VCTR_SPHERE_C], params->vec_p)
-	);
-
-	uv[0] = 0.5 - atan2(vec_pc.x, vec_pc.z) / M_PI / 2;
-	uv[1] = 0.5 + asin(vec_pc.y) / M_PI;
-}
+#include "raytrace/raytrace_sphere_uv.h"
 
 static void	check_checkerboard_sphere(
 	t_rtv *rtv,
@@ -64,7 +49,7 @@ static void	check_sin_sphere(
 	color_add((t_color *)&params->color, &((t_color){\
 		(uv[0] - uv[1]) * (uv[0] - uv[1]) * 255, \
 		sin(uv[1] * M_PI / 2) * 255, \
-		cos(uv[1] * M_PI / 2) * 255, \
+		cos(uv[0] * M_PI / 2) * 255, \
 	}));
 }
 
@@ -136,7 +121,7 @@ void	check_color_sphere(
 		&& !(rtv->spheres[intr->idx].traits & TRAIT_COLOR_PERLIN) \
 	)
 		return ;
-	_get_uv_sphere(rtv, params, intr, uv);
+	get_uv_sphere(rtv, params, intr, uv);
 	if (rtv->spheres[intr->idx].traits & TRAIT_TEXTURED)
 		check_texture_sphere(rtv, params, intr, uv);
 	if (rtv->spheres[intr->idx].traits & TRAIT_CHECKERBOARD)

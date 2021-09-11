@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/11 23:00:30 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/11 23:29:34 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ FILES_VALIDATOR :=	$(addprefix validator/, $(FILES_VALIDATOR))
 
 FILES_RAYTRACE :=	raytrace_texture.c \
 					raytrace_color_plane.c raytrace_color_sphere.c \
-					raytrace_perlin.c
+					raytrace_perlin.c raytrace_sphere_uv.c
 FILES_RAYTRACE :=	$(addprefix raytrace/, $(FILES_RAYTRACE))
 
 SRC_FILES =	main.c \
