@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 20:59:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 21:36:35 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 20:05:05 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,27 @@ static void	imgui_sphere_enabled(t_rtv *rtv, t_byte idx)
 	rtv->flags |= FLAG_REDRAW;
 }
 
-static void	imgui_sphere_normal_sin(t_rtv *rtv, t_byte idx)
+static void	imgui_sphere_local_checkboxes(t_rtv *rtv, t_byte idx)
 {
-	static bool		normal_sin[MAX_SPHERES];
+	static bool	normal_sin[MAX_SPHERES];
+	static bool	textured[MAX_SPHERES];
 
-	if (!igCheckbox("normale disruption", normal_sin + idx))
-		return ;
-	if (normal_sin[idx])
-		rtv->spheres[idx].traits |= TRAIT_NORMAL_SIN;
-	else
-		rtv->spheres[idx].traits -= TRAIT_NORMAL_SIN;
-	rtv->flags |= FLAG_REDRAW;
+	if (igCheckbox("normale disruption", normal_sin + idx))
+	{
+		if (normal_sin[idx])
+			rtv->spheres[idx].traits |= TRAIT_NORMAL_SIN;
+		else
+			rtv->spheres[idx].traits -= TRAIT_NORMAL_SIN;
+		rtv->flags |= FLAG_REDRAW;
+	}
+	if (igCheckbox("textured", textured + idx))
+	{
+		if (textured[idx])
+			rtv->spheres[idx].traits |= TRAIT_TEXTURED;
+		else
+			rtv->spheres[idx].traits -= TRAIT_TEXTURED;
+		rtv->flags |= FLAG_REDRAW;
+	}
 }
 
 static void	imgui_sphere_group(t_rtv *rtv, t_byte idx)
@@ -92,7 +102,7 @@ static void	imgui_sphere_group(t_rtv *rtv, t_byte idx)
 		rtv->flags |= FLAG_REDRAW;
 	}
 	imgui_sphere_enabled(rtv, idx);
-	imgui_sphere_normal_sin(rtv, idx);
+	imgui_sphere_local_checkboxes(rtv, idx);
 	igPopID();
 }
 

@@ -17,7 +17,7 @@
 
 # define MAX_PLIGHTS	5
 # define MAX_DLIGHTS	5
-# define MAX_TEXTURES	1
+# define MAX_TEXTURES	2
 
 # ifdef RT_SERVER
 
