@@ -49,6 +49,7 @@ typedef struct s_rtv
 	char			*filename;
 	t_sdl_window	*window;
 	t_texture		textures[MAX_TEXTURES];
+	t_byte			filter;
 }					t_rtv;
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
+#    By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/11 23:29:34 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/11 23:38:17 by pcarolei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ FILES_INIT := $(addprefix init_rtv/, $(FILES_INIT))
 
 FILES_INTERSECTION :=	intersection.c intersection_common.c \
 						intersection_sphere.c intersection_plane.c \
-						intersection_cylinder.c intersection_cone.c 
+						intersection_cylinder.c intersection_cone.c
 FILES_INTERSECTION :=	$(addprefix intersection/, $(FILES_INTERSECTION))
 
 FILES_LOOP :=	loop_hook_flow.c loop_hook_invalidate.c \
@@ -68,6 +68,8 @@ SRC_FILES =	main.c \
 			raytrace.c raytrace_light.c normal.c \
 			color.c \
 			graceful.c \
+			filter.c \
+			hsv.c \
 			$(FILES_INIT) $(FILES_INTERSECTION) $(FILES_LOOP) $(FILES_PARSER) \
 			$(FILES_VALIDATOR) $(FILES_SDL) $(FILES_IMGUI) $(FILES_RAYTRACE)
 
