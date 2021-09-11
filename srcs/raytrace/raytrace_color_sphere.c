@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 20:24:25 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 20:59:40 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/11 21:10:47 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "defines.h"
 #include "rtv.h"
 #include "vector.h"
+#include "color.h"
 
 static void	_get_uv_sphere(
 	t_rtv *rtv,
@@ -38,10 +39,16 @@ static void	check_checkerboard_sphere(
 	double uv[2]
 )
 {
+	const double	u = uv[0];
+	const double	v = uv[1];
+
 	(void)rtv;
-	(void)params;
 	(void)intr;
-	(void)uv;
+	if (u < 0.5 && v < 0.5)
+		return ;
+	if (u >= 0.5 && v >= 0.5)
+		return ;
+	color_mult((t_color *)&params->color, 0.5);
 }
 
 static void	check_texture_sphere(
