@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile.server                                    :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+         #
+#    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/11 23:38:36 by pcarolei         ###   ########.fr        #
+#    Updated: 2021/09/12 13:44:33 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ LIB_DIR = ./lib/libft
 BREW_DIR = $(shell brew --prefix)
 ZMQ_DIR = $(BREW_DIR)/opt/zmq
 CZMQ_DIR = $(BREW_DIR)/opt/czmq
+
+STB_DIR = ./lib/stb
 
 FILES_INIT :=	init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c \
 				texture.c stb.c
@@ -93,7 +95,16 @@ else
 endif
 
 CFLAGS_DEPENDENCIES = -MMD -MP
-CFLAGS_INCLUDES = -I$(INCLUDES_DIR) -I$(LIB_DIR) -I$(ZMQ_DIR)/include -I$(CZMQ_DIR)/include
+
+# Project
+CFLAGS_INCLUDES += -I$(INCLUDES_DIR)
+# libft
+CFLAGS_INCLUDES += -I$(LIB_DIR)
+# czmq
+CFLAGS_INCLUDES += -I$(ZMQ_DIR)/include -I$(CZMQ_DIR)/include
+# stb
+CFLAGS_INCLUDES += -I$(STB_DIR)
+
 CFLAGS_PLATFORM = -D RT_SERVER
 CFLAGS_ASAN = -fsanitize=address
 

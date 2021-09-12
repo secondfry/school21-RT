@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:17:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/08/17 22:33:56 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/12 13:44:55 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "init_rtv.h"
 #include "parser.h"
 #include "server/main.h"
+#include "stb_image.h"
 
 static t_byte	handle_init(t_rtv *rtv)
 {
@@ -68,6 +69,15 @@ static t_byte	handle_parse(t_rtv *rtv)
 	return (1);
 }
 
+t_byte	handle_cleanup(t_rtv *rtv)
+{
+	stbi_image_free(rtv->textures[0].data);
+	stbi_image_free(rtv->textures[1].data);
+	ft_memdel((void **)&rtv->camera_rotation);
+	ft_memdel((void **)&rtv->filename);
+	return (1);
+}
+
 t_byte	handle_typed_message(zsock_t *reader, t_rtv *rtv, char *id)
 {
 	ft_printf("Received: %s\n", id);
@@ -79,5 +89,7 @@ t_byte	handle_typed_message(zsock_t *reader, t_rtv *rtv, char *id)
 		return (handle_parse(rtv));
 	if (!ft_strcmp(id, "RENDER"))
 		return (handle_render(rtv, reader));
+	if (!ft_strcmp(id, "CLEANUP"))
+		return (handle_cleanup(rtv));
 	return (1);
 }

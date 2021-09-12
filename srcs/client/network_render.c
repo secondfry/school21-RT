@@ -6,10 +6,11 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:03:47 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:48:33 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/12 13:40:00 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "client/network_render.h"
 #include <czmq.h>
 #include "libft.h"
 #include "rtv.h"
@@ -60,4 +61,14 @@ void	network_request_render(zsock_t *requester, t_rtv *rtv)
 		parts++;
 	}
 	ft_printf("Received %zu parts.\n", parts);
+}
+
+void	network_request_cleanup(zsock_t *requester)
+{
+	char	*data;
+
+	zstr_send(requester, "CLEANUP");
+	data = zstr_recv(requester);
+	ft_printf("Received: %s\n", data);
+	zstr_free(&data);
 }

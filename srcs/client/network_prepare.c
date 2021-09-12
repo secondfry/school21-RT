@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:02:53 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/05 14:47:22 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/12 13:37:24 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ void	cluster_request(t_rtv *rtv)
 	network_send_scene(requester);
 	network_request_parse(requester);
 	network_request_render(requester, rtv);
+	network_request_cleanup(requester);
 	zsock_destroy(&requester);
 }
