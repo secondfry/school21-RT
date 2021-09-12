@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:31:14 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:35:53 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 /**
@@ -84,21 +96,4 @@ double	validate_reflection(t_level *root)
 	else if (reflection > 100)
 		reflection = 100;
 	return (reflection / 100.0);
-}
-
-/**
- *	Функция для валидации коэффициента преломления
- */
-double	validate_refraction(t_level *root)
-{
-	int	refraction;
-
-	refraction = 0;
-	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "refraction"))
-		refraction = ft_atoi(root->value);
-	if (refraction < 0)
-		refraction = 0;
-	else if (refraction > 100)
-		refraction = 100;
-	return (refraction / 100.0);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
+#    By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/11 21:22:18 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/12 14:02:43 by hdean            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ FILES_PARSER :=	$(addprefix parser/, $(FILES_PARSER))
 FILES_VALIDATOR :=	validator_1.c validator_2.c validator_light.c \
 					validator_light_directional.c validator_light_point.c \
 					validator_cone.c validator_cylinder.c validator_plane.c \
-					validator_sphere.c validator_camera.c
+					validator_sphere.c validator_camera.c validator_reflection.c
 FILES_VALIDATOR :=	$(addprefix validator/, $(FILES_VALIDATOR))
 
 FILES_RAYTRACE :=	raytrace_texture.c \
@@ -65,7 +65,7 @@ SRC_FILES =	main.c \
 			vector_1.c vector_2.c vector_3.c \
 			quaternion.c \
 			raytrace.c raytrace_light.c normal.c \
-			color.c \
+			color.c reflection.c \
 			graceful.c \
 			$(FILES_INIT) $(FILES_INTERSECTION) $(FILES_LOOP) $(FILES_PARSER) \
 			$(FILES_VALIDATOR) $(FILES_SDL) $(FILES_IMGUI) $(FILES_RAYTRACE)

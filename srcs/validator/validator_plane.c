@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_plane.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:37:02 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:41:11 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_byte	try_process_position(t_rtv *rtv, t_byte idx, t_level *level)
@@ -39,15 +51,6 @@ static t_byte	try_process_specular(t_rtv *rtv, t_byte idx, t_level *level)
 	rtv->planes[idx].specular = validate_specular(level);
 	return (1);
 }
-
-static t_byte	try_process_reflection(t_rtv *rtv, t_byte idx, t_level *level)
-{
-	if (level->type != LTYPE_LEAF || ft_strcmp(level->key, "reflection"))
-		return (0);
-	rtv->planes[idx].reflection = validate_reflection(level);
-	return (1);
-}
-
 
 /**
  *	Функция для валидации параметров плоскости

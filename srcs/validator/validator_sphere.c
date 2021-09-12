@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_sphere.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:44:22 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:44:24 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_byte	try_process_position(t_rtv *rtv, t_byte idx, t_level *level)
@@ -35,22 +47,6 @@ static t_byte	try_process_specular(t_rtv *rtv, t_byte idx, t_level *level)
 	return (1);
 }
 
-static t_byte	try_process_reflection(t_rtv *rtv, t_byte idx, t_level *level)
-{
-	if (level->type != LTYPE_LEAF || ft_strcmp(level->key, "reflection"))
-		return (0);
-	rtv->spheres[idx].reflection = validate_reflection(level);
-	return (1);
-}
-
-static t_byte	try_process_refraction(t_rtv *rtv, t_byte idx, t_level *level)
-{
-	if (level->type != LTYPE_LEAF || ft_strcmp(level->key, "refraction"))
-		return (0);
-	rtv->spheres[idx].refraction = validate_refraction(level);
-	return (1);
-}
-
 /**
  *	Функция для валидации параметров сферы
  */
@@ -70,10 +66,9 @@ t_byte	validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_radius(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
 		res += try_process_reflection(rtv, idx, level);
-		res += try_process_refraction(rtv, idx, level);
 		i++;
 	}
-	check(res != 6, 1, "[ERR] SPHERE IS INVALID\n");
+	check(res != 5, 1, "[ERR] SPHERE IS INVALID\n");
 	rtv->spheres[idx].traits = TRAIT_EXISTS;
 	return (1);
 }

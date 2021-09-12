@@ -40,7 +40,6 @@ sphere:
     radius: 1
     specular: 500
     reflection: 0
-    refraction: 3
 
   - position:
       x: -2
@@ -52,9 +51,7 @@ sphere:
       blue: 250
     radius: 1
     specular: 500
-    reflection: 2
-    refraction: 3
-
+    reflection: 50
 
   - position:
       x: 2
@@ -67,7 +64,6 @@ sphere:
     radius: 1
     specular: 10
     reflection: 20
-    refraction: 3
 
   - position:
       x: 0
@@ -80,4 +76,3 @@ sphere:
     radius: 5000
     specular: 100
     reflection: 20
-    refraction: 3

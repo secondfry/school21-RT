@@ -28,3 +28,4 @@ cylinder:
       blue: 255
     radius: 5
     specular: 2000
+    reflection: 0

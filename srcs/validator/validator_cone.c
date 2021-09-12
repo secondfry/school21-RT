@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_cone.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:36:27 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:39:40 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_byte	try_process_vector(
@@ -39,14 +51,6 @@ static t_byte	try_process_specular(t_rtv *rtv, t_byte idx, t_level *level)
 	if (level->type != LTYPE_LEAF || ft_strcmp(level->key, "specular"))
 		return (0);
 	rtv->cones[idx].specular = validate_specular(level);
-	return (1);
-}
-
-static t_byte	try_process_reflection(t_rtv *rtv, t_byte idx, t_level *level)
-{
-	if (level->type != LTYPE_LEAF || ft_strcmp(level->key, "reflection"))
-		return (0);
-	rtv->cones[idx].reflection = validate_reflection(level);
 	return (1);
 }
 

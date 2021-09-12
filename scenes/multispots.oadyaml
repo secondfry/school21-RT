@@ -40,7 +40,7 @@ sphere:
     radius: 1
     specular: 100
     reflection: 100
-    refraction: 0
+
   - position:
       x: -2
       y: 0
@@ -52,7 +52,7 @@ sphere:
     radius: 1
     specular: 10
     reflection: 1
-    refraction: 0
+
   - position:
       x: 2
       y: 0
@@ -64,7 +64,6 @@ sphere:
     radius: 1
     specular: 1000
     reflection: 50
-    refraction: 0
 
 plane:
   - position:
