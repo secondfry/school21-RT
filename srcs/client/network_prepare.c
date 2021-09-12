@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 21:02:53 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/12 13:37:24 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/12 15:10:04 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	network_send_init(zsock_t *requester)
 
 static void	network_send_scene(zsock_t *requester)
 {
-	const int	fd = open("tests/scenes/full.oadyaml", O_RDONLY);
+	const int	fd = open("scenes/clustering.oadyaml", O_RDONLY);
 	char		*data;
 	char		buffer[BUFFER_SIZE + 1];
 	int			len;
