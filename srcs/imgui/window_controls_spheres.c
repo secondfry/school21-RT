@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_controls_spheres.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 20:59:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/12 13:15:56 by hdean            ###   ########.fr       */
+/*   Updated: 2021/09/12 14:22:35 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,11 @@ static void	imgui_sphere_group(t_rtv *rtv, t_byte idx)
 	igPushID_Str(g_sphere_labels[idx]);
 	if (ig_drag_vector("vec_c", &rtv->spheres[idx].vectors[VCTR_SPHERE_C].x))
 		invalidate_sphere_vectors(rtv, rtv->spheres[idx]);
-	if (ig_drag_double("radius^2", &rtv->spheres[idx].radius_squared))
+	if (ig_drag_double("radius^2", &rtv->spheres[idx].radius_squared, 1. / 0.))
 		rtv->flags |= FLAG_REDRAW;
-	if (ig_drag_double("specular", &rtv->spheres[idx].specular))
+	if (ig_drag_double("specular", &rtv->spheres[idx].specular, 1. / 0.))
 		rtv->flags |= FLAG_REDRAW;
-	if (ig_drag_double("reflection", &rtv->spheres[idx].reflection))
+	if (ig_drag_double("reflection", &rtv->spheres[idx].reflection, 1.0))
 		rtv->flags |= FLAG_REDRAW;
 	if (igColorEdit3("color", g_color[idx], 0))
 	{

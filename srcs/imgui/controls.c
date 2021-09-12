@@ -6,7 +6,7 @@
 /*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/05 14:12:23 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/07 21:15:38 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/12 14:22:12 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ bool	ig_drag_vector(const char *label, const double *v)
 	);
 }
 
-bool	ig_drag_double(const char *label, const double *v)
+bool	ig_drag_double(const char *label, const double *v, const double max)
 {
 	static double	min = 0.0;
-	static double	max = 1.0 / 0.0;
 
 	return (igDragScalar(
 			label,
