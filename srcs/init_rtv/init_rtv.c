@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_rtv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcarolei <pcarolei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 22:08:37 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 23:48:13 by pcarolei         ###   ########.fr       */
+/*   Updated: 2021/09/12 13:31:58 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static void	init_rtv_common(t_rtv *rtv)
 	if (!not_first)
 	{
 		rtv->camera_rotation = matrix_new_identity();
+		load_texture("textures/error_guy.png", rtv->textures + 0);
+		load_texture("textures/UVChecker_byValle_1K_8.png", rtv->textures + 1);
 		not_first = 1;
 	}
 	rtv->filename = (void *)0;
 	vector_set_by_value(&rtv->textures[0].scale, vector_new(-10, 0, 10, 0));
 	vector_set_by_value(&rtv->textures[0].offset, vector_new(5, 0, 5, 0));
-	load_texture("textures/error_guy.png", rtv->textures + 0);
-	load_texture("textures/UVChecker_byValle_1K_8.png", rtv->textures + 1);
 }
 
 void	init_rtv(t_rtv *rtv)
