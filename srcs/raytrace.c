@@ -53,7 +53,7 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 {
 	const t_light_params	params = get_light_params(rtv, intr);
 	double					intensity;
-	t_color                 diffuse_color;
+	t_color                 color;
 	t_color                 reflection_color;
 	t_color                 refraction_color;
 
@@ -66,16 +66,21 @@ static t_color	pre_light(t_rtv *rtv, t_worker_data *data, t_intersection *intr)
 	vector_set_by_value(&params.vec_v, vector_mult(data->vectors[VCTR_D], -1));
 	intensity = light(rtv, &params);
 	check_texture(rtv, &params, intr);
-	diffuse_color = *color_mult((void *)&params.color, intensity);
-	if (params.reflection <= 0 || data->depth <= 0)
-		return (diffuse_color);
-	reflection_color = find_reflection(rtv, params, *data);
-	diffuse_color = *color_add(color_mult(&diffuse_color, 1.0 - params.reflection - params.refraction), \
-	color_mult(&reflection_color,params.reflection));
-	if (params.refraction <= 0 || params.reflection == 1)
-		return (diffuse_color);
-	refraction_color = find_refraction(rtv, params, *data);
-	return (*color_add(&diffuse_color, color_mult(&reflection_color,params.refraction)));
+	color = *color_mult((void *)&params.color, intensity);
+	if (data->depth <= 0)
+		return (color);
+	if (params.reflection > 0)
+	{
+		reflection_color = find_reflection(rtv, params, *data);
+		color = *color_add(color_mult(&color, 1.0 - params.reflection), \
+						   color_mult(&reflection_color,params.reflection));
+	}
+	if (params.refraction > 0)
+	{
+		refraction_color = find_refraction(rtv, params, *data);
+		color = *color_add(&color, color_mult(&refraction_color,params.refraction));
+	}
+	return (color);
 }
 
 t_vector_4 find_reflect_ray(t_vector_4 ray, t_vector_4 normal)
@@ -85,21 +90,25 @@ t_vector_4 find_reflect_ray(t_vector_4 ray, t_vector_4 normal)
 
 t_vector_4 find_refract_ray(t_vector_4 ray, t_vector_4 normal, double refr_coef)
 {
-	float cosi = vector_dot(ray, normal)/vector_length(ray);
+	double cosi = -1 * vector_dot(ray, normal)/vector_length(ray);
     double eta;
-	double k;
+	// double k;
 
-	eta = 1 / refr_coef;
-    if (cosi < 0) 
-	{
-        cosi = -cosi;
-		eta = 1 / eta;
-		vector_set_by_value(&normal, vector_mult(normal, -1));
-    }
-    k = 1 - eta*eta*(1 - cosi*cosi);
-	if (k < 0)
-		return ((t_vector_4){0, 0, 0 ,0});
-    return vector_add(vector_mult(ray, eta), vector_mult(normal, eta * cosi - sqrt(k)));
+	// eta = 1 / refr_coef;
+    // if (cosi < 0) 
+	// {
+    //     cosi = -cosi;
+	// 	eta = 1 / eta;
+	// 	vector_set_by_value(&normal, vector_mult(normal, -1));
+    // }
+    // k = 1 - eta*eta*(1 - cosi*cosi);
+	// if (k < 0)
+	// 	return ((t_vector_4){0, 0, 0 ,0});
+
+	eta = 2.0 - refr_coef;
+    cosi = vector_dot(normal, ray);
+    return vector_sub(vector_mult(ray, eta), vector_mult(normal, (-cosi + eta * cosi)));
+    // return vector_add(vector_mult(ray, eta), vector_mult(normal, eta * cosi - sqrt(k)));
 }
 
 
@@ -120,12 +129,12 @@ t_color  find_reflection(t_rtv *rtv, t_light_params params, t_worker_data data)
 
 t_color  find_refraction(t_rtv *rtv, t_light_params params, t_worker_data data)
 {
-	t_vector_4 reflect_ray;
+	t_vector_4 refract_ray;
 
-	vector_set_by_value(&reflect_ray, find_refract_ray(params.vec_v, params.vec_n, \
+	vector_set_by_value(&refract_ray, find_refract_ray(params.vec_v, params.vec_n, \
 													params.refraction));
 	vector_set(data.vectors + VCTR_O, &params.vec_p);
-	vector_set(data.vectors + VCTR_D, &reflect_ray);
+	vector_set(data.vectors + VCTR_D, &refract_ray);
 	data.doubles[D_DOT_D] = vector_dot(\
 		data.vectors[VCTR_D], \
 		data.vectors[VCTR_D] \
