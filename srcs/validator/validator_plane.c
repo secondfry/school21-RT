@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validator_plane.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:37:02 by hdean             #+#    #+#             */
-/*   Updated: 2021/09/12 13:41:11 by hdean            ###   ########.fr       */
+/*   Updated: 2021/09/12 14:52:04 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_byte	validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_normal(rtv, idx, level);
 		res += try_process_color(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
-		res += try_process_reflection(rtv, idx, level);
+		res += try_process_reflection(rtv, IPLANE, idx, level);
 		i++;
 	}
 	check(res != 5, 1, "[ERR] PLANE IS INVALID\n");

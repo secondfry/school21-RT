@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validator_cone.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:36:27 by hdean             #+#    #+#             */
-/*   Updated: 2021/09/12 13:39:40 by hdean            ###   ########.fr       */
+/*   Updated: 2021/09/12 14:51:57 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_byte	validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_angle(rtv, idx, level);
 		res += try_process_color(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
-		res += try_process_reflection(rtv, idx, level);
+		res += try_process_reflection(rtv, ICONE, idx, level);
 		i++;
 	}
 	vector_set_by_value(&rtv->cones[idx].vectors[VCTR_CONE_C0C1], \

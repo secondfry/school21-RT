@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:49:38 by hdean             #+#    #+#             */
-/*   Updated: 2021/09/12 13:49:39 by hdean            ###   ########.fr       */
+/*   Updated: 2021/09/12 14:53:26 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,12 @@ t_byte		validate_plane(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_cone(t_rtv *rtv, t_level *root, t_byte idx);
 t_byte		validate_vector(t_vector_4 *dest, t_level *root);
-t_byte		try_process_reflection(t_rtv *rtv, t_byte idx, t_level *level);
+t_byte		try_process_reflection(\
+	t_rtv *rtv, \
+	t_byte type, \
+	t_byte idx, \
+	t_level *level \
+);
 t_color		validate_color(t_level *root);
 double		validate_radius(t_level *root);
 double		validate_specular(t_level *root);

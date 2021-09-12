@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validator_cylinder.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:36:33 by hdean             #+#    #+#             */
-/*   Updated: 2021/09/12 13:44:03 by hdean            ###   ########.fr       */
+/*   Updated: 2021/09/12 14:52:01 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_byte	validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_radius(rtv, idx, level);
 		res += try_process_color(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
-		res += try_process_reflection(rtv, idx, level);
+		res += try_process_reflection(rtv, ICYLINDER, idx, level);
 	}
 	vector_set_by_value(&rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0C1], \
 		vector_normalize(vector_sub(\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validator_sphere.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 13:44:22 by hdean             #+#    #+#             */
-/*   Updated: 2021/09/12 13:44:24 by hdean            ###   ########.fr       */
+/*   Updated: 2021/09/12 14:52:09 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_byte	validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_color(rtv, idx, level);
 		res += try_process_radius(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
-		res += try_process_reflection(rtv, idx, level);
+		res += try_process_reflection(rtv, ISPHERE, idx, level);
 		i++;
 	}
 	check(res != 5, 1, "[ERR] SPHERE IS INVALID\n");
