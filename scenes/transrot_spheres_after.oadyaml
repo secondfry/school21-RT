@@ -24,6 +24,7 @@ sphere:
       blue: 0
     radius: 5
     specular: 1000
+    reflection: 0
   - position:
       x: 0
       y: 20
@@ -34,3 +35,4 @@ sphere:
       blue: 255
     radius: 10
     specular: 100
+    reflection: 0

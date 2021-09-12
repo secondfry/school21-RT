@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_controls_spheres.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+        */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 20:59:42 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/09/11 21:21:56 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/09/12 13:15:56 by hdean            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static void	imgui_sphere_group(t_rtv *rtv, t_byte idx)
 	if (ig_drag_double("radius^2", &rtv->spheres[idx].radius_squared))
 		rtv->flags |= FLAG_REDRAW;
 	if (ig_drag_double("specular", &rtv->spheres[idx].specular))
+		rtv->flags |= FLAG_REDRAW;
+	if (ig_drag_double("reflection", &rtv->spheres[idx].reflection))
 		rtv->flags |= FLAG_REDRAW;
 	if (igColorEdit3("color", g_color[idx], 0))
 	{

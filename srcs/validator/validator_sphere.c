@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_sphere.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:44:22 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:44:24 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_byte	try_process_position(t_rtv *rtv, t_byte idx, t_level *level)
@@ -53,9 +65,10 @@ t_byte	validate_sphere(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_color(rtv, idx, level);
 		res += try_process_radius(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
+		res += try_process_reflection(rtv, idx, level);
 		i++;
 	}
-	check(res != 4, 1, "[ERR] SPHERE IS INVALID\n");
+	check(res != 5, 1, "[ERR] SPHERE IS INVALID\n");
 	rtv->spheres[idx].traits = TRAIT_EXISTS;
 	return (1);
 }

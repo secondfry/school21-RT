@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_cone.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:36:27 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:39:40 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_byte	try_process_vector(
@@ -63,12 +75,13 @@ t_byte	validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_angle(rtv, idx, level);
 		res += try_process_color(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
+		res += try_process_reflection(rtv, idx, level);
 		i++;
 	}
 	vector_set_by_value(&rtv->cones[idx].vectors[VCTR_CONE_C0C1], \
 		vector_normalize(vector_sub(rtv->cones[idx].vectors[VCTR_CONE_C1], \
 		rtv->cones[idx].vectors[VCTR_CONE_C0])));
-	check(res != 5, 1, "[ERR] CONE IS INVALID\n");
+	check(res != 6, 1, "[ERR] CONE IS INVALID\n");
 	rtv->cones[idx].traits = TRAIT_EXISTS;
 	return (1);
 }

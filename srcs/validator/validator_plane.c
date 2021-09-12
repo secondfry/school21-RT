@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_plane.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:37:02 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:41:11 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_byte	try_process_position(t_rtv *rtv, t_byte idx, t_level *level)
@@ -58,9 +70,10 @@ t_byte	validate_plane(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_normal(rtv, idx, level);
 		res += try_process_color(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
+		res += try_process_reflection(rtv, idx, level);
 		i++;
 	}
-	check(res != 4, 1, "[ERR] PLANE IS INVALID\n");
+	check(res != 5, 1, "[ERR] PLANE IS INVALID\n");
 	rtv->planes[idx].traits = TRAIT_EXISTS;
 	return (1);
 }

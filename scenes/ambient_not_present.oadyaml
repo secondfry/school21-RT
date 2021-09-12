@@ -9,3 +9,4 @@ sphere:
       blue: 0
     radius: 1
     specular: 100
+    reflection: 0

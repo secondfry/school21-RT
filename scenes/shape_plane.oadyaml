@@ -37,3 +37,4 @@ plane:
       green: 255
       blue: 0
     specular: 1
+    reflection: 0
