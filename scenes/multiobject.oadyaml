@@ -34,6 +34,7 @@ sphere:
       blue: 0
     radius: 1
     specular: 100
+    reflection: 0
   - position:
       x: -2
       y: 0
@@ -44,6 +45,7 @@ sphere:
       blue: 0
     radius: 1
     specular: 10
+    reflection: 0
   - position:
       x: 2
       y: 0
@@ -54,6 +56,7 @@ sphere:
       blue: 255
     radius: 1
     specular: 1000
+    reflection: 0
 
 plane:
   - position:
@@ -69,6 +72,7 @@ plane:
       green: 255
       blue: 0
     specular: 1
+    reflection: 0
   - position:
       x: 2
       y: 10
@@ -82,6 +86,7 @@ plane:
       green: 127
       blue: 255
     specular: 1
+    reflection: 0
 
 
 cylinder:
@@ -99,6 +104,7 @@ cylinder:
       blue: 255
     radius: 1
     specular: 1000
+    reflection: 0
   - position:
       x: -1
       y: 0
@@ -113,6 +119,7 @@ cylinder:
       blue: 255
     radius: 1
     specular: 1000
+    reflection: 0
 
 cone:
   - position:
@@ -129,3 +136,4 @@ cone:
       blue: 255
     angle: 10
     specular: 1000
+    reflection: 0

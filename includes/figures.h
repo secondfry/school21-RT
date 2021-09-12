@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   figures.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:46:23 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:47:01 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FIGURES_H
 # define FIGURES_H
 
@@ -16,6 +28,7 @@ typedef struct s_sphere
 	t_color		color;
 	double		radius_squared;
 	double		specular;
+	double		reflection;
 	t_byte		texture_id;
 	t_byte		traits;
 }				t_sphere;
@@ -26,6 +39,7 @@ typedef struct s_plane
 	t_vector_4	normal;
 	t_color		color;
 	double		specular;
+	double		reflection;
 	t_byte		traits;
 }				t_plane;
 
@@ -41,6 +55,7 @@ typedef struct s_cylinder
 	t_color		color;
 	double		radius2;
 	double		specular;
+	double		reflection;
 	t_byte		traits;
 }				t_cylinder;
 
@@ -58,6 +73,7 @@ typedef struct s_cone
 	double		cos;
 	double		cos2;
 	double		specular;
+	double		reflection;
 	t_byte		traits;
 }				t_cone;
 

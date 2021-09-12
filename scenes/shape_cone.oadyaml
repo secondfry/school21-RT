@@ -28,3 +28,4 @@ cone:
       blue: 255
     angle: 10
     specular: 1000
+    reflection: 0

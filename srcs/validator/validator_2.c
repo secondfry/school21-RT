@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:31:14 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:35:53 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 /**
@@ -67,4 +79,21 @@ double	validate_specular(t_level *root)
 	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "specular"))
 		specular = ft_atoi(root->value);
 	return (specular);
+}
+
+/**
+ *	Функция для валидации коэффициента отражения
+ */
+double	validate_reflection(t_level *root)
+{
+	int	reflection;
+
+	reflection = 0;
+	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "reflection"))
+		reflection = ft_atoi(root->value);
+	if (reflection < 0)
+		reflection = 0;
+	else if (reflection > 100)
+		reflection = 100;
+	return (reflection / 100.0);
 }

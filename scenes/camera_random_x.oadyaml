@@ -19,6 +19,7 @@ sphere:
       green: 0
       blue: 0
     specular: 1000
+    reflection: 0
 
 plane:
   - position:
@@ -30,6 +31,7 @@ plane:
       y: 1
       z: 0
     specular: 10
+    reflection: 0
     color:
       red: 255
       green: 255

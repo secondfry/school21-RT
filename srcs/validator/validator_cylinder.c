@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator_cylinder.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hdean <hdean@student.21-school.ru>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/12 13:36:33 by hdean             #+#    #+#             */
+/*   Updated: 2021/09/12 13:44:03 by hdean            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser.h"
 
 static t_byte	try_process_vector(
@@ -50,8 +62,8 @@ t_byte	validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 	t_level				*level;
 
 	res = 0;
-	i = 0;
-	while (i < root->data->used)
+	i = -1;
+	while (++i < root->data->used)
 	{
 		level = root->data->data[i];
 		res += try_process_vector(&rtv->cylinders[idx], level, \
@@ -61,13 +73,13 @@ t_byte	validate_cylinder(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_radius(rtv, idx, level);
 		res += try_process_color(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
-		i++;
+		res += try_process_reflection(rtv, idx, level);
 	}
 	vector_set_by_value(&rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0C1], \
 		vector_normalize(vector_sub(\
 		rtv->cylinders[idx].vectors[VCTR_CYLINDER_C1], \
 		rtv->cylinders[idx].vectors[VCTR_CYLINDER_C0])));
-	check(res != 5, 1, "[ERR] CYLINDER IS INVALID\n");
+	check(res != 6, 1, "[ERR] CYLINDER IS INVALID\n");
 	rtv->cylinders[idx].traits = TRAIT_EXISTS;
 	return (1);
 }

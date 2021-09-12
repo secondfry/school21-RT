@@ -33,6 +33,7 @@ plane:
       green: 255
       blue: 0
     specular: 1
+    reflection: 0
 
 sphere:
   - position:
@@ -45,3 +46,4 @@ sphere:
       blue: 0
     radius: 3
     specular: 100
+    reflection: 0
