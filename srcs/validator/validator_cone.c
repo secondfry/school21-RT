@@ -42,6 +42,14 @@ static t_byte	try_process_specular(t_rtv *rtv, t_byte idx, t_level *level)
 	return (1);
 }
 
+static t_byte	try_process_reflection(t_rtv *rtv, t_byte idx, t_level *level)
+{
+	if (level->type != LTYPE_LEAF || ft_strcmp(level->key, "reflection"))
+		return (0);
+	rtv->cones[idx].reflection = validate_reflection(level);
+	return (1);
+}
+
 /**
  *	Функция для валидации параметров конуса
  */
@@ -63,12 +71,13 @@ t_byte	validate_cone(t_rtv *rtv, t_level *root, t_byte idx)
 		res += try_process_angle(rtv, idx, level);
 		res += try_process_color(rtv, idx, level);
 		res += try_process_specular(rtv, idx, level);
+		res += try_process_reflection(rtv, idx, level);
 		i++;
 	}
 	vector_set_by_value(&rtv->cones[idx].vectors[VCTR_CONE_C0C1], \
 		vector_normalize(vector_sub(rtv->cones[idx].vectors[VCTR_CONE_C1], \
 		rtv->cones[idx].vectors[VCTR_CONE_C0])));
-	check(res != 5, 1, "[ERR] CONE IS INVALID\n");
+	check(res != 6, 1, "[ERR] CONE IS INVALID\n");
 	rtv->cones[idx].traits = TRAIT_EXISTS;
 	return (1);
 }

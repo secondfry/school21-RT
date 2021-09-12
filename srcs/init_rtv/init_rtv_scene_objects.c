@@ -12,6 +12,8 @@ static void	init_rtv_spheres(t_rtv *rtv)
 			{0, 0, 0}, \
 			1.0, \
 			-1.0, \
+			-1.0, \
+			-1.0, \
 			0, \
 			0, \
 		}), sizeof(t_sphere));
@@ -31,6 +33,7 @@ static void	init_rtv_planes(t_rtv *rtv)
 			{0, 1, 0, 0}, \
 			{0, 0, 0}, \
 			-1, \
+			0, \
 			0 \
 		}), sizeof(t_plane));
 		i++;
@@ -40,6 +43,7 @@ static void	init_rtv_planes(t_rtv *rtv)
 		{0.0, 3.0, 2.0, 0.0}, \
 		{0, 0, 0}, \
 		-1, \
+		0, \
 		0 \
 	}), sizeof(t_plane));
 }
@@ -54,6 +58,7 @@ static void	init_rtv_cylinders(t_rtv *rtv)
 		ft_memcpy(rtv->cylinders + i, &((t_cylinder){
 			{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, \
 			{0, 0, 0}, \
+			0, \
 			0, \
 			0, \
 			0 \
@@ -72,6 +77,7 @@ static void	init_rtv_cones(t_rtv *rtv)
 		ft_memcpy(rtv->cones + i, &((t_cone){
 			{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, \
 			{0, 0, 0}, \
+			0, \
 			0, \
 			0, \
 			0, \

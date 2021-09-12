@@ -68,3 +68,37 @@ double	validate_specular(t_level *root)
 		specular = ft_atoi(root->value);
 	return (specular);
 }
+
+/**
+ *	Функция для валидации коэффициента отражения
+ */
+double	validate_reflection(t_level *root)
+{
+	int	reflection;
+
+	reflection = 0;
+	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "reflection"))
+		reflection = ft_atoi(root->value);
+	if (reflection < 0)
+		reflection = 0;
+	else if (reflection > 100)
+		reflection = 100;
+	return (reflection / 100.0);
+}
+
+/**
+ *	Функция для валидации коэффициента преломления
+ */
+double	validate_refraction(t_level *root)
+{
+	int	refraction;
+
+	refraction = 0;
+	if (root->type == LTYPE_LEAF && !ft_strcmp(root->key, "refraction"))
+		refraction = ft_atoi(root->value);
+	if (refraction < 0)
+		refraction = 0;
+	else if (refraction > 100)
+		refraction = 100;
+	return (refraction / 100.0);
+}

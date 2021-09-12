@@ -1,0 +1,83 @@
+light:
+  point:
+    - position:
+        x: 2
+        y: 1
+        z: 0
+      intensity: 60
+    - position:
+        x: 6
+        y: 6
+        z: 6
+      intensity: 130
+  directional:
+    - direction:
+        x: -1
+        y: 4
+        z: -4
+      intensity: 20
+  ambient: 20
+
+camera:
+  position:
+    x: 0
+    y: 0
+    z: 0
+  rotation:
+    x: 0
+    y: 0
+    z: 0
+
+sphere:
+  - position:
+      x: 0
+      y: -1
+      z: 3
+    color:
+      red: 255
+      green: 0
+      blue: 0
+    radius: 1
+    specular: 500
+    reflection: 0
+    refraction: 3
+
+  - position:
+      x: -2
+      y: 0
+      z: 4
+    color:
+      red: 0
+      green: 0
+      blue: 250
+    radius: 1
+    specular: 500
+    reflection: 2
+    refraction: 3
+
+
+  - position:
+      x: 2
+      y: 0
+      z: 4
+    color:
+      red: 0
+      green: 255
+      blue: 0
+    radius: 1
+    specular: 10
+    reflection: 20
+    refraction: 3
+
+  - position:
+      x: 0
+      y: -5001
+      z: 0
+    color:
+      red: 255
+      green: 255
+      blue: 0
+    radius: 5000
+    specular: 100
+    reflection: 20
+    refraction: 3

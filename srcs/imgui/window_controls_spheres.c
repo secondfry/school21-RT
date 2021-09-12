@@ -73,6 +73,10 @@ static void	imgui_sphere_group(t_rtv *rtv, t_byte idx)
 		rtv->flags |= FLAG_REDRAW;
 	if (ig_drag_double("specular", &rtv->spheres[idx].specular))
 		rtv->flags |= FLAG_REDRAW;
+	if (ig_drag_double("reflection", &rtv->spheres[idx].reflection))
+		rtv->flags |= FLAG_REDRAW;
+	if (ig_drag_double("refraction", &rtv->spheres[idx].refraction))
+		rtv->flags |= FLAG_REDRAW;
 	if (igColorEdit3("color", g_color[idx], 0))
 	{
 		rtv->spheres[idx].color = (t_color){g_color[idx][0] * 255, \

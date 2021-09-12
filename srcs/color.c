@@ -12,15 +12,15 @@ t_color	*color_add(t_color *a, t_color *b)
 {
 	t_color	ret;
 
-	if (255 - a->red > b->red)
+	if (255 - a->red < b->red)
 		ret.red = 255;
 	else
 		ret.red = a->red + b->red;
-	if (255 - a->green > b->green)
+	if (255 - a->green < b->green)
 		ret.green = 255;
 	else
 		ret.green = a->green + b->green;
-	if (255 - a->blue > b->blue)
+	if (255 - a->blue < b->blue)
 		ret.blue = 255;
 	else
 		ret.blue = a->blue + b->blue;

@@ -54,10 +54,13 @@ typedef struct s_intersection
 
 # define D_DOT_D 0
 
+# define DEPTH 3
+
 typedef struct s_worker_data
 {
 	t_vector_4	vectors[MAX_VECTORS_WORKER];
 	double		doubles[MAX_DOUBLES_WORKER];
+	int         depth;
 }				t_worker_data;
 
 typedef struct s_intersect_params
@@ -73,6 +76,8 @@ typedef struct s_light_params
 	t_vector_4		vec_c;
 	t_color			color;
 	double			specular;
+	double          reflection;
+	double          refraction;
 	t_vector_4		vec_p;
 	t_vector_4		vec_n;
 	t_vector_4		vec_v;

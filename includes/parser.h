@@ -94,6 +94,8 @@ t_byte		validate_vector(t_vector_4 *dest, t_level *root);
 t_color		validate_color(t_level *root);
 double		validate_radius(t_level *root);
 double		validate_specular(t_level *root);
+double		validate_reflection(t_level *root);
+double      validate_refraction(t_level *root);
 double		validate_angle(t_level *root);
 t_byte		validate_camera(t_rtv *rtv, t_level *root);
 

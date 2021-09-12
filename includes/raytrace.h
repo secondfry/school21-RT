@@ -21,5 +21,8 @@ typedef struct s_pre_light
 }				t_pre_light;
 
 t_color	process_pixel(t_rtv *rtv, short xc, short yc);
+t_color	raytrace(t_rtv *rtv, t_worker_data *data, double t_min, double t_max);
+t_color find_reflection(t_rtv *rtv, t_light_params params, t_worker_data data);
+t_color find_refraction(t_rtv *rtv, t_light_params params, t_worker_data data);
 
 #endif
