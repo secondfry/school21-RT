@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/12 14:13:53 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/22 10:22:41 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,6 @@ OBJS_DIR = ./objs
 
 LIB = libft.a
 LIB_DIR = ./lib/libft
-
-IMGUI = cimgui.dylib
-IMGUI_DIR = ./lib/cimgui
 
 STB_DIR = ./lib/stb
 
@@ -106,6 +103,25 @@ endif
 
 CFLAGS_DEPENDENCIES = -MMD -MP
 
+ifeq ($(OS),Windows_NT)
+# huh lol
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+		IMGUI = cimgui.so
+		IMGUI_DIR = ./lib/cimgui
+
+		LDFLAGS += -lm -lpthread -lGL
+	endif
+	ifeq ($(UNAME_S),Darwin)
+		IMGUI = cimgui.dylib
+		IMGUI_DIR = ./lib/cimgui
+
+		# ImGui OpenGL3 Backend
+		LDFLAGS += -framework OpenGL
+	endif
+endif
+
 # Project
 CFLAGS_INCLUDES += -I$(INCLUDES_DIR)
 # libft
@@ -127,11 +143,9 @@ CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 # libft
 LDFLAGS += -L$(LIB_DIR) -lft
 # ImGui
-LDFLAGS += cimgui.dylib
+LDFLAGS += $(IMGUI)
 # ImGui SDL Backend
 LDFLAGS += `sdl2-config --libs`
-# ImGui OpenGL3 Backend
-LDFLAGS += -framework OpenGL
 
 LDFLAGS_ASAN = -fsanitize=address
 
