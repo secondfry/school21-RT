@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/22 10:22:41 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/22 10:33:00 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,17 +108,26 @@ ifeq ($(OS),Windows_NT)
 else
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)
-		IMGUI = cimgui.so
+		IMGUI = libcimgui.a
 		IMGUI_DIR = ./lib/cimgui
+		IMGUI_MAKEFLAGS = static
 
-		LDFLAGS += -lm -lpthread -lGL
+		# ImGui OpenGL3 Backend
+		LDFLAGS += -lGL
+		# ImGui
+		LDFLAGS += -L$(IMGUI_DIR) -lcimgui
+		# math, pthread
+		LDFLAGS += -lm -lpthread
 	endif
 	ifeq ($(UNAME_S),Darwin)
 		IMGUI = cimgui.dylib
 		IMGUI_DIR = ./lib/cimgui
+		IMGUI_MAKEFLAGS = all
 
 		# ImGui OpenGL3 Backend
 		LDFLAGS += -framework OpenGL
+		# ImGui
+		LDFLAGS += $(IMGUI)
 	endif
 endif
 
@@ -142,8 +151,6 @@ CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 
 # libft
 LDFLAGS += -L$(LIB_DIR) -lft
-# ImGui
-LDFLAGS += $(IMGUI)
 # ImGui SDL Backend
 LDFLAGS += `sdl2-config --libs`
 
@@ -165,7 +172,7 @@ all:
 
 	@echo $(CYAN) "Making ImGui" $(DEFAULT)
 	@echo -n $(BLUE)
-	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(IMGUI_DIR)
+	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(IMGUI_DIR) $(IMGUI_MAKEFLAGS)
 	cp $(IMGUI_DIR)/$(IMGUI) $(IMGUI)
 	@echo -n $(DEFAULT)
 
