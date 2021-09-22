@@ -17,6 +17,7 @@
 #include "imgui/window_controls_spheres.h"
 #include "stb_image_write.h"
 #include "imgui/window_controls_filters.h"
+#include <time.h>
 
 static void	imgui_planes_group(t_rtv *rtv)
 {
