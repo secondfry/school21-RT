@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/12 14:21:11 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/22 10:48:22 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,6 @@ OBJS_DIR = ./objs
 
 LIB = libft.a
 LIB_DIR = ./lib/libft
-
-BREW_DIR = $(shell brew --prefix)
-ZMQ_DIR = $(BREW_DIR)/opt/zmq
-CZMQ_DIR = $(BREW_DIR)/opt/czmq
 
 STB_DIR = ./lib/stb
 
@@ -97,12 +93,31 @@ endif
 
 CFLAGS_DEPENDENCIES = -MMD -MP
 
+ifeq ($(OS),Windows_NT)
+# huh lol
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+		# math, pthread
+		LDFLAGS += -lm -lpthread
+	endif
+	ifeq ($(UNAME_S),Darwin)
+		BREW_DIR = $(shell brew --prefix)
+		ZMQ_DIR = $(BREW_DIR)/opt/zmq
+		CZMQ_DIR = $(BREW_DIR)/opt/czmq
+
+		# zeromq, czmq
+		CFLAGS_INCLUDES += -I$(ZMQ_DIR)/include -I$(CZMQ_DIR)/include
+
+		# zeromq, czmq
+		LDFLAGS += -L$(ZMQ_DIR)/lib -L$(CZMQ_DIR)/lib
+	endif
+endif
+
 # Project
 CFLAGS_INCLUDES += -I$(INCLUDES_DIR)
 # libft
 CFLAGS_INCLUDES += -I$(LIB_DIR)
-# czmq
-CFLAGS_INCLUDES += -I$(ZMQ_DIR)/include -I$(CZMQ_DIR)/include
 # stb
 CFLAGS_INCLUDES += -I$(STB_DIR)
 
@@ -114,7 +129,10 @@ CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 				$(CFLAGS_PLATFORM) $(CFLAGS_DEBUG) $(CFLAGS_INTERNAL) \
 				$(CFLAGS)
 
-LDFLAGS += -L$(LIB_DIR) -lft -L$(ZMQ_DIR)/lib -lzmq -L$(CZMQ_DIR)/lib -lczmq
+# libft
+LDFLAGS += -L$(LIB_DIR) -lft
+# czmq
+LDFLAGS += -lzmq -lczmq
 
 LDFLAGS_ASAN = -fsanitize=address
 

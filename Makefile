@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/22 10:33:00 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/22 10:39:11 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ OBJS_DIR = ./objs
 
 LIB = libft.a
 LIB_DIR = ./lib/libft
+
+IMGUI = libcimgui.a
+IMGUI_DIR = ./lib/cimgui
 
 STB_DIR = ./lib/stb
 
@@ -103,34 +106,6 @@ endif
 
 CFLAGS_DEPENDENCIES = -MMD -MP
 
-ifeq ($(OS),Windows_NT)
-# huh lol
-else
-	UNAME_S := $(shell uname -s)
-	ifeq ($(UNAME_S),Linux)
-		IMGUI = libcimgui.a
-		IMGUI_DIR = ./lib/cimgui
-		IMGUI_MAKEFLAGS = static
-
-		# ImGui OpenGL3 Backend
-		LDFLAGS += -lGL
-		# ImGui
-		LDFLAGS += -L$(IMGUI_DIR) -lcimgui
-		# math, pthread
-		LDFLAGS += -lm -lpthread
-	endif
-	ifeq ($(UNAME_S),Darwin)
-		IMGUI = cimgui.dylib
-		IMGUI_DIR = ./lib/cimgui
-		IMGUI_MAKEFLAGS = all
-
-		# ImGui OpenGL3 Backend
-		LDFLAGS += -framework OpenGL
-		# ImGui
-		LDFLAGS += $(IMGUI)
-	endif
-endif
-
 # Project
 CFLAGS_INCLUDES += -I$(INCLUDES_DIR)
 # libft
@@ -149,10 +124,28 @@ CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 				$(CFLAGS_PLATFORM) $(CFLAGS_DEBUG) $(CFLAGS_INTERNAL) \
 				$(CFLAGS)
 
+ifeq ($(OS),Windows_NT)
+# huh lol
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+		# ImGui OpenGL3 Backend
+		LDFLAGS += -lGL
+		# math, pthread
+		LDFLAGS += -lm -lpthread -ldl
+	endif
+	ifeq ($(UNAME_S),Darwin)
+		# ImGui OpenGL3 Backend
+		LDFLAGS += -framework OpenGL
+	endif
+endif
+
 # libft
 LDFLAGS += -L$(LIB_DIR) -lft
 # ImGui SDL Backend
 LDFLAGS += `sdl2-config --libs`
+# ImGui
+LDFLAGS += -L$(IMGUI_DIR) -lcimgui
 
 LDFLAGS_ASAN = -fsanitize=address
 
@@ -192,7 +185,7 @@ $(OBJS_DIRS):
 	mkdir -p $@
 
 $(NAME): $(OBJS) $(LIB_DIR)/$(LIB) $(MLX_DIR)/$(MLX) $(IMGUI_DIR)/$(IMGUI)
-	$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
+	$(CXX) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 clean: clean_libs clean_self
 	$(MAKE) -f Makefile.server clean

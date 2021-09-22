@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/12 00:24:21 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/22 10:59:31 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,8 @@ OBJS_DIR = ./objs
 LIB = libft.a
 LIB_DIR = ./lib/libft
 
-IMGUI = cimgui.dylib
+IMGUI = libcimgui.a
 IMGUI_DIR = ./lib/cimgui
-
-BREW_DIR = $(shell brew --prefix)
-ZMQ_DIR = $(BREW_DIR)/opt/zmq
-CZMQ_DIR = $(BREW_DIR)/opt/czmq
 
 FILES_INIT :=	init_rtv.c init_rtv_scene_lights.c init_rtv_scene_objects.c \
 				texture.c stb.c
@@ -80,6 +76,31 @@ endif
 
 CFLAGS_DEPENDENCIES = -MMD -MP
 
+ifeq ($(OS),Windows_NT)
+# huh lol
+else
+	UNAME_S := $(shell uname -s)
+	ifeq ($(UNAME_S),Linux)
+		# ImGui OpenGL3 Backend
+		LDFLAGS += -lGL
+		# math, pthread
+		LDFLAGS += -lm -lpthread -ldl
+	endif
+	ifeq ($(UNAME_S),Darwin)
+		BREW_DIR = $(shell brew --prefix)
+		ZMQ_DIR = $(BREW_DIR)/opt/zmq
+		CZMQ_DIR = $(BREW_DIR)/opt/czmq
+
+		# zeromq
+		CFLAGS_INCLUDES += -I$(ZMQ_DIR)/include -I$(CZMQ_DIR)/include
+
+		# ImGui OpenGL3 Backend
+		LDFLAGS += -framework OpenGL
+		# zeromq, czmq
+		LDFLAGS += -L$(ZMQ_DIR)/lib -L$(CZMQ_DIR)/lib
+	endif
+endif
+
 # Project
 CFLAGS_INCLUDES += -I$(INCLUDES_DIR)
 # libft
@@ -88,8 +109,6 @@ CFLAGS_INCLUDES += -I$(LIB_DIR)
 CFLAGS_INCLUDES += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/generator/output
 # ImGui SDL Backend
 CFLAGS_INCLUDES += `sdl2-config --cflags`
-# zeromq
-CFLAGS_INCLUDES += -I$(ZMQ_DIR)/include -I$(CZMQ_DIR)/include
 
 CFLAGS_PLATFORM = -D RT_CLIENT
 
@@ -102,14 +121,12 @@ CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 
 # libft
 LDFLAGS += -L$(LIB_DIR) -lft
-# ImGui
-LDFLAGS += cimgui.dylib
 # ImGui SDL Backend
 LDFLAGS += `sdl2-config --libs`
-# ImGui OpenGL3 Backend
-LDFLAGS += -framework OpenGL
-# zeromq
-LDFLAGS += -L$(ZMQ_DIR)/lib -lzmq -L$(CZMQ_DIR)/lib -lczmq
+# ImGui
+LDFLAGS += -L$(IMGUI_DIR) -lcimgui
+# zeromq, czmq
+LDFLAGS += -lzmq -lczmq
 
 LDFLAGS_ASAN = -fsanitize=address
 
@@ -140,7 +157,7 @@ $(OBJS_DIRS):
 	mkdir -p $@
 
 $(NAME): $(OBJS) $(LIB_DIR)/$(LIB)
-	$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
+	$(CXX) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 clean: clean_libs clean_self
 
