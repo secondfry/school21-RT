@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/22 10:48:22 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/22 11:03:38 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,11 +145,6 @@ CYAN = "\033[0;36m"
 .PHONY: all clean clean_libs clean_self fclean fclean_libs fclean_self debug debug_all asan asan_all re prepare_ubuntu
 
 all:
-	@echo $(CYAN) "Making libft" $(DEFAULT)
-	@echo -n $(BLUE)
-	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(LIB_DIR)
-	@echo -n $(DEFAULT)
-
 	@echo $(CYAN) "Making RT.server" $(DEFAULT)
 	@echo -n $(GREEN)
 	$(MAKE) -f Makefile.server $(NAME)
@@ -165,13 +160,7 @@ $(OBJS_DIRS):
 $(NAME): $(OBJS) $(LIB_DIR)/$(LIB)
 	$(CC) -o $(NAME) $(OBJS) $(LDFLAGS)
 
-clean: clean_libs clean_self
-
-clean_libs:
-	@echo $(CYAN) "Cleaning libft" $(DEFAULT)
-	@echo -n $(BLUE)
-	$(MAKE) -C $(LIB_DIR) clean
-	@echo -n $(DEFAULT)
+clean: clean_self
 
 clean_self:
 	@echo $(CYAN) "Cleaning RT.server" $(DEFAULT)
@@ -179,13 +168,7 @@ clean_self:
 	rm -rfv $(OBJS_DIR)
 	@echo -n $(DEFAULT)
 
-fclean: fclean_libs fclean_self
-
-fclean_libs: clean_libs
-	@echo $(CYAN) "Purging libft" $(DEFAULT)
-	@echo -n $(BLUE)
-	$(MAKE) -C $(LIB_DIR) fclean
-	@echo -n $(DEFAULT)
+fclean: fclean_self
 
 fclean_self: clean_self
 	@echo $(CYAN) "Purging RT.server" $(DEFAULT)

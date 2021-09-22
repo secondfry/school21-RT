@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/22 10:39:11 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/22 11:02:59 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -165,7 +165,7 @@ all:
 
 	@echo $(CYAN) "Making ImGui" $(DEFAULT)
 	@echo -n $(BLUE)
-	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(IMGUI_DIR) $(IMGUI_MAKEFLAGS)
+	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(IMGUI_DIR) static
 	cp $(IMGUI_DIR)/$(IMGUI) $(IMGUI)
 	@echo -n $(DEFAULT)
 

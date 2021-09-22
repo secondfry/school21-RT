@@ -6,7 +6,7 @@
 #    By: oadhesiv <secondfry+school21@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/09/22 10:59:31 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/09/22 11:04:17 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -136,14 +136,9 @@ GREEN = "\033[0;32m"
 BLUE = "\033[0;34m"
 CYAN = "\033[0;36m"
 
-.PHONY: all clean clean_libs clean_self fclean fclean_libs fclean_self debug debug_all asan asan_all re prepare_ubuntu
+.PHONY: all clean clean_self fclean fclean_self debug debug_all asan asan_all re prepare_ubuntu
 
 all:
-	@echo $(CYAN) "Making libft" $(DEFAULT)
-	@echo -n $(BLUE)
-	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(LIB_DIR)
-	@echo -n $(DEFAULT)
-
 	@echo $(CYAN) "Making RT.client" $(DEFAULT)
 	@echo -n $(GREEN)
 	$(MAKE) -f Makefile.client $(NAME)
@@ -159,13 +154,7 @@ $(OBJS_DIRS):
 $(NAME): $(OBJS) $(LIB_DIR)/$(LIB)
 	$(CXX) -o $(NAME) $(OBJS) $(LDFLAGS)
 
-clean: clean_libs clean_self
-
-clean_libs:
-	@echo $(CYAN) "Cleaning libft" $(DEFAULT)
-	@echo -n $(BLUE)
-	$(MAKE) -C $(LIB_DIR) clean
-	@echo -n $(DEFAULT)
+clean: clean_self
 
 clean_self:
 	@echo $(CYAN) "Cleaning RT.client" $(DEFAULT)
@@ -173,13 +162,7 @@ clean_self:
 	rm -rfv $(OBJS_DIR)
 	@echo -n $(DEFAULT)
 
-fclean: fclean_libs fclean_self
-
-fclean_libs: clean_libs
-	@echo $(CYAN) "Purging libft" $(DEFAULT)
-	@echo -n $(BLUE)
-	$(MAKE) -C $(LIB_DIR) fclean
-	@echo -n $(DEFAULT)
+fclean: fclean_self
 
 fclean_self: clean_self
 	@echo $(CYAN) "Purging RT.client" $(DEFAULT)
@@ -197,14 +180,14 @@ debug_wsl:
 	@read
 	$(MAKE) -f Makefile.client debug
 
-debug_all: clean_self clean_libs
+debug_all: clean_self
 	DEBUG="1" $(MAKE) -f Makefile.client all
 
 asan: clean_self
 	DEBUG="1" CFLAGS_INTERNAL="$(CFLAGS_ASAN)" LDFLAGS="$(LDFLAGS_ASAN)" \
 	$(MAKE) -f Makefile.client all
 
-asan_all: clean_self clean_libs
+asan_all: clean_self
 	DEBUG="1" CFLAGS_INTERNAL="$(CFLAGS_ASAN)" LDFLAGS="$(LDFLAGS_ASAN)" \
 	$(MAKE) -f Makefile.client all
 
